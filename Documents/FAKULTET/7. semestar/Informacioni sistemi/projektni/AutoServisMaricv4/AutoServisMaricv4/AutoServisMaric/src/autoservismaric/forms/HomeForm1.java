@@ -27,6 +27,7 @@ public class HomeForm1 extends javax.swing.JFrame {
      * Creates new form HomeForm1
      */
     public HomeForm1() {
+         //NEKI RANDOM KOMENTAR
         initComponents();
          Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
