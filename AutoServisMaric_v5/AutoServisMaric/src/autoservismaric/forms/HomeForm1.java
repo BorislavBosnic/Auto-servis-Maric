@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -47,7 +48,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         setSize(screenSize.width,screenSize.height);*/
         
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        
+        setIconImage(new ImageIcon(getClass().getResource("/autoservismaric/images/ikona.png")).getImage());
         datumLabel.setText("Aktivnosti planirane za danas, " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
         //jTable1.setRowHeight(35);
         
@@ -357,6 +358,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jTextField25 = new javax.swing.JTextField();
         jTextField26 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel148 = new javax.swing.JLabel();
         jLabel149 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
@@ -742,6 +745,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu8jPanel.setBounds(10, 340, 260, 50);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(8);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         parentPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -3170,6 +3174,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel119.setForeground(new java.awt.Color(255, 255, 255));
         jLabel119.setText("Do datuma:");
 
+        jTable11.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jTable11.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -3305,11 +3310,14 @@ public class HomeForm1 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel28Layout.createSequentialGroup()
-                                .addComponent(jLabel122)
-                                .addGap(130, 130, 130)
+                                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel122)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
                                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel28Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel28Layout.createSequentialGroup()
                                         .addComponent(jLabel119)
@@ -3339,7 +3347,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel119, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel122))
-                                .addGap(26, 26, 26))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jButton5))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator26, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3357,9 +3368,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jLabel149.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/User_20px_1.png"))); // NOI18N
 
+        jTable12.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jTable12.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
+                {"BMW", "X5", null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -3389,15 +3401,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             new String [] {
                 "Marka", "Model", "Registracija", "Datum popravka", "Cijena troskova", "Cijena naplate", "Profit"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane13.setViewportView(jTable12);
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
@@ -3934,6 +3938,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
