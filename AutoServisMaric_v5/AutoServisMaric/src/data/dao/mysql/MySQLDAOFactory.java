@@ -4,6 +4,7 @@ import data.dao.DAOFactory;
 import data.dao.KupacDAO;
 import data.dao.ModelVozilaDAO;
 import data.dao.VoziloDAO;
+import data.dao.ZaposleniDAO;
 
 public class MySQLDAOFactory extends DAOFactory {
 
@@ -20,5 +21,10 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public ModelVozilaDAO getModelVozilaDAO() {
         return new MySQLModelVozilaDAO();
+    }
+    
+    @Override
+    public ZaposleniDAO getZaposleniDAO(){
+        return new MySQLZaposleniDAO();
     }
 }

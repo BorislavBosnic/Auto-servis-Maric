@@ -9,7 +9,10 @@ public abstract class DAOFactory {
     
     public abstract ModelVozilaDAO getModelVozilaDAO();
     
+    public abstract ZaposleniDAO getZaposleniDAO();
+    
     public static DAOFactory getDAOFactory() {
 		return new MySQLDAOFactory();
 	}
+   
 }
