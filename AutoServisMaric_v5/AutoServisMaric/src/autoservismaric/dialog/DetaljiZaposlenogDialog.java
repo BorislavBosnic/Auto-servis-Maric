@@ -5,6 +5,11 @@
  */
 package autoservismaric.dialog;
 
+import data.dao.DAOFactory;
+import data.dto.ZaposleniDTO;
+import javax.swing.JOptionPane;
+import poslovnalogika.ZaposleniLogika;
+
 /**
  *
  * @author haker
@@ -14,13 +19,25 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
     /**
      * Creates new form DetaljiZaposlenogDialog
      */
-    public DetaljiZaposlenogDialog(java.awt.Frame parent, boolean modal,boolean izmjena) {
+    public DetaljiZaposlenogDialog(java.awt.Frame parent, boolean modal,boolean izmjena,ZaposleniDTO zaposleni) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         if(!izmjena){
             buttonIzmjeni.setVisible(false);
+            textFieldIme.setEditable(false);
+            textFieldPrezime.setEditable(false);
+            textFieldAdresa.setEditable(false);
+            textFieldTelefon.setEditable(false);
+            textFieldImeOca.setEditable(false);
+            textFieldBrojLicneKarte.setEditable(false);
+            textFieldFunkcija.setEditable(false);
+            dateChooserDatumOd.setEnabled(false);
+            dateChooserDatumDo.setEnabled(false);
+            dateChooserDatumRodjenja.setEnabled(false);
         }
-        
+        this.zaposleni=zaposleni;
+        popuniPolja();
     }
 
     /**
@@ -50,8 +67,14 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
         textFieldAdresa = new javax.swing.JTextField();
         jLabel153 = new javax.swing.JLabel();
         textFieldStrucnaSprema = new javax.swing.JTextField();
-        textFieldStrucnaSprema1 = new javax.swing.JTextField();
         buttonIzmjeni = new javax.swing.JButton();
+        jLabel154 = new javax.swing.JLabel();
+        jLabel155 = new javax.swing.JLabel();
+        jLabel156 = new javax.swing.JLabel();
+        textFieldFunkcija = new javax.swing.JTextField();
+        dateChooserDatumRodjenja = new com.toedter.calendar.JDateChooser();
+        dateChooserDatumOd = new com.toedter.calendar.JDateChooser();
+        dateChooserDatumDo = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Detalji o zaposlenom");
@@ -62,88 +85,184 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
 
         jPanel29.setBackground(new java.awt.Color(102, 153, 255));
         jPanel29.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel124.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel124.setForeground(new java.awt.Color(255, 255, 255));
         jLabel124.setText("Pregled zaposlenog:");
-        jPanel29.add(jLabel124, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, -1, -1));
 
         jLabel129.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel129.setForeground(new java.awt.Color(255, 255, 255));
         jLabel129.setText("Ime:");
-        jPanel29.add(jLabel129, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 30, -1, -1));
 
         jLabel137.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel137.setForeground(new java.awt.Color(255, 255, 255));
         jLabel137.setText("Prezime:");
-        jPanel29.add(jLabel137, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 56, -1, -1));
 
         jLabel146.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel146.setForeground(new java.awt.Color(255, 255, 255));
         jLabel146.setText("Telefon:");
-        jPanel29.add(jLabel146, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 139, -1, -1));
 
         jLabel147.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel147.setForeground(new java.awt.Color(255, 255, 255));
         jLabel147.setText("Strucna sprema:");
-        jPanel29.add(jLabel147, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 201, -1, -1));
-
-        textFieldIme.setEditable(false);
-        jPanel29.add(textFieldIme, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 30, 170, -1));
-
-        textFieldPrezime.setEditable(false);
-        jPanel29.add(textFieldPrezime, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 56, 170, -1));
-
-        textFieldTelefon.setEditable(false);
-        jPanel29.add(textFieldTelefon, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 139, 170, -1));
-
-        textFieldBrojLicneKarte.setEditable(false);
-        jPanel29.add(textFieldBrojLicneKarte, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 170, 170, -1));
 
         jLabel150.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel150.setForeground(new java.awt.Color(255, 255, 255));
         jLabel150.setText("Ime oca:");
-        jPanel29.add(jLabel150, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 82, -1, -1));
-
-        textFieldImeOca.setEditable(false);
-        jPanel29.add(textFieldImeOca, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 82, 170, -1));
 
         jLabel151.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel151.setForeground(new java.awt.Color(255, 255, 255));
         jLabel151.setText("Adresa:");
-        jPanel29.add(jLabel151, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 108, -1, -1));
 
         jLabel152.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel152.setForeground(new java.awt.Color(255, 255, 255));
         jLabel152.setText("Broj licne karte:");
-        jPanel29.add(jLabel152, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 170, -1, -1));
-
-        textFieldAdresa.setEditable(false);
-        jPanel29.add(textFieldAdresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 108, 170, -1));
 
         jLabel153.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel153.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel153.setText("Datum rodjenja:");
-        jPanel29.add(jLabel153, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 232, -1, -1));
-
-        textFieldStrucnaSprema.setEditable(false);
-        jPanel29.add(textFieldStrucnaSprema, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 201, 170, -1));
-
-        textFieldStrucnaSprema1.setEditable(false);
-        jPanel29.add(textFieldStrucnaSprema1, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 232, 170, -1));
+        jLabel153.setText("Funkcija:");
 
         buttonIzmjeni.setText("Izmjeni");
-        jPanel29.add(buttonIzmjeni, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+        buttonIzmjeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonIzmjeniActionPerformed(evt);
+            }
+        });
+
+        jLabel154.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel154.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel154.setText("Datum rodjenja:");
+
+        jLabel155.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel155.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel155.setText("Datum zaposlenja:");
+
+        jLabel156.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel156.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel156.setText("Datum završetka rada:");
+
+        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
+        jPanel29.setLayout(jPanel29Layout);
+        jPanel29Layout.setHorizontalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel124)
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel129))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel137))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel150))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel146))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel152))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel147))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel153))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel154)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel151)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addComponent(textFieldAdresa, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel155)
+                            .addComponent(jLabel156))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateChooserDatumDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateChooserDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textFieldImeOca, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(buttonIzmjeni, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textFieldFunkcija, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textFieldBrojLicneKarte, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textFieldStrucnaSprema, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textFieldTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textFieldPrezime, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(textFieldIme, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(dateChooserDatumOd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(43, 43, 43))
+        );
+        jPanel29Layout.setVerticalGroup(
+            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel29Layout.createSequentialGroup()
+                .addComponent(jLabel124)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel129)
+                            .addComponent(textFieldIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel137)
+                            .addComponent(textFieldPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel150)
+                            .addComponent(textFieldImeOca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel151)
+                            .addComponent(textFieldAdresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel146)
+                            .addComponent(textFieldTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel152)
+                            .addComponent(textFieldBrojLicneKarte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel147)
+                            .addComponent(textFieldStrucnaSprema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel29Layout.createSequentialGroup()
+                                .addComponent(jLabel154)
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel153)
+                                    .addComponent(textFieldFunkcija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dateChooserDatumRodjenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel155)
+                            .addComponent(dateChooserDatumOd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel156))
+                    .addComponent(dateChooserDatumDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(buttonIzmjeni)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,15 +276,39 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonIzmjeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonIzmjeniActionPerformed
+        if("".equals(textFieldIme.getText()) || "".equals(textFieldPrezime.getText())){
+            JOptionPane.showMessageDialog(null,"Ime i prezime zaposlenog moraju biti uneseni!", "Problem", JOptionPane.ERROR_MESSAGE);
+        }else{
+            zaposleni.setIme(textFieldIme.getText()==null?"":zaposleni.getIme());
+            zaposleni.setPrezime(textFieldPrezime.getText()==null?"":zaposleni.getPrezime());
+            zaposleni.setImeOca(textFieldImeOca.getText()==null?"":zaposleni.getImeOca());
+            zaposleni.setAdresa(textFieldAdresa.getText()==null?"":zaposleni.getAdresa());
+            zaposleni.setTelefon(textFieldTelefon.getText()==null?"":zaposleni.getTelefon());
+            zaposleni.setStrucnaSprema(textFieldStrucnaSprema.getText()==null?"":zaposleni.getStrucnaSprema());
+            zaposleni.setFunkcija(textFieldFunkcija.getText()==null?"":zaposleni.getFunkcija());
+            zaposleni.setBrojLicneKarte(textFieldBrojLicneKarte.getText()==null?"":zaposleni.getBrojLicneKarte());
+            zaposleni.setDatumOd(dateChooserDatumOd.getDate()==null?null:new java.sql.Date(dateChooserDatumOd.getDate().getTime()));
+            zaposleni.setDatumDo(dateChooserDatumDo.getDate()==null?null:new java.sql.Date(dateChooserDatumDo.getDate().getTime()));
+            zaposleni.setDatumRodjenja(new java.sql.Date(dateChooserDatumRodjenja.getDate().getTime()));
+            if(DAOFactory.getDAOFactory().getZaposleniDAO().azurirajZaposlenog(zaposleni)){
+                JOptionPane.showMessageDialog(this, "Uspješno ažuriranje radnika "+zaposleni.getIme()+".", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                 new ZaposleniLogika("svi").run();
+            }else{
+                JOptionPane.showConfirmDialog(this, "Neuspješno ažuriranje radnika "+zaposleni.getIme()+".", "Problem", JOptionPane.ERROR);
+            }
+        }
+    }//GEN-LAST:event_buttonIzmjeniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,9 +351,26 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
             }
         });*/
     }
-
+    private void popuniPolja(){
+        textFieldIme.setText(zaposleni.getIme()==null?"":zaposleni.getIme());
+        textFieldPrezime.setText(zaposleni.getPrezime()==null?"":zaposleni.getPrezime());
+        textFieldImeOca.setText(zaposleni.getImeOca()==null?"":zaposleni.getImeOca());
+        textFieldTelefon.setText(zaposleni.getTelefon()==null?"":zaposleni.getTelefon());
+        textFieldAdresa.setText(zaposleni.getAdresa()==null?"":zaposleni.getAdresa());
+        textFieldBrojLicneKarte.setText(zaposleni.getBrojLicneKarte()==null?"":zaposleni.getBrojLicneKarte());
+        textFieldStrucnaSprema.setText(zaposleni.getStrucnaSprema()==null?"":zaposleni.getStrucnaSprema());
+        dateChooserDatumRodjenja.setDate(zaposleni.getDatumRodjenja());
+        textFieldFunkcija.setText(zaposleni.getFunkcija()==null?"":zaposleni.getFunkcija());
+        dateChooserDatumOd.setDate(zaposleni.getDatumOd());
+        dateChooserDatumDo.setDate(zaposleni.getDatumDo());
+    }
+    //moja polja
+    private ZaposleniDTO zaposleni;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonIzmjeni;
+    private com.toedter.calendar.JDateChooser dateChooserDatumDo;
+    private com.toedter.calendar.JDateChooser dateChooserDatumOd;
+    private com.toedter.calendar.JDateChooser dateChooserDatumRodjenja;
     private javax.swing.JLabel jLabel124;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel137;
@@ -220,15 +380,18 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel151;
     private javax.swing.JLabel jLabel152;
     private javax.swing.JLabel jLabel153;
+    private javax.swing.JLabel jLabel154;
+    private javax.swing.JLabel jLabel155;
+    private javax.swing.JLabel jLabel156;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JTextField textFieldAdresa;
     private javax.swing.JTextField textFieldBrojLicneKarte;
+    private javax.swing.JTextField textFieldFunkcija;
     private javax.swing.JTextField textFieldIme;
     private javax.swing.JTextField textFieldImeOca;
     private javax.swing.JTextField textFieldPrezime;
     private javax.swing.JTextField textFieldStrucnaSprema;
-    private javax.swing.JTextField textFieldStrucnaSprema1;
     private javax.swing.JTextField textFieldTelefon;
     // End of variables declaration//GEN-END:variables
 }
