@@ -20,6 +20,7 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
         if(!izmjena){
             buttonIzmjeni.setVisible(false);
         }
+        
     }
 
     /**

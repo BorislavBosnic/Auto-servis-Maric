@@ -36,6 +36,7 @@ public class ZaposleniLogika extends Thread{
         this.DatumRodjenja = DatumRodjenja;
     }
    
+    
         
    
    @Override
