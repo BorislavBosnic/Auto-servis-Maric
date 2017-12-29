@@ -13,8 +13,8 @@ import java.util.List;
 public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 
     @Override
-    public List<ModelVozilaDTO> sviModeli() {
-        List<ModelVozilaDTO> retVal = new ArrayList<ModelVozilaDTO>();
+    public ArrayList<ModelVozilaDTO> sviModeli() {
+        ArrayList<ModelVozilaDTO> retVal = new ArrayList<ModelVozilaDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;

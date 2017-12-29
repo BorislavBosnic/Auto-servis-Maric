@@ -4546,7 +4546,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="panelAkcijeNaFormi" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="887" max="32767" attributes="0"/>
+                          <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4578,7 +4578,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="2008" max="32767" attributes="0"/>
+                              <EmptySpace pref="33" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4702,10 +4702,10 @@
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="jTextField14" alignment="0" pref="167" max="32767" attributes="0"/>
-                                                  <Component id="jTextField13" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextField12" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="jTextField15" max="32767" attributes="0"/>
+                                                  <Component id="tfModelTrazi" alignment="0" pref="167" max="32767" attributes="0"/>
+                                                  <Component id="tfGodisteTrazi" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="tfRegistracijaTrazi" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="tfVlasnikTrazi" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -4719,22 +4719,22 @@
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel105" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfRegistracijaTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel106" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField13" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfGodisteTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfModelTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfVlasnikTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnPronadji" min="-2" max="-2" attributes="0"/>
@@ -4788,13 +4788,13 @@
                                 <Property name="text" type="java.lang.String" value="Vlasnik:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField12">
+                            <Component class="javax.swing.JTextField" name="tfRegistracijaTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField13">
+                            <Component class="javax.swing.JTextField" name="tfGodisteTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField14">
+                            <Component class="javax.swing.JTextField" name="tfModelTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="jTextField15">
+                            <Component class="javax.swing.JTextField" name="tfVlasnikTrazi">
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPronadji">
                               <Properties>
@@ -5174,9 +5174,9 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="rbPrivatnoTrazi" min="-2" max="-2" attributes="0"/>
                                                   <Component id="rbPravnoTrazi" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -5202,7 +5202,8 @@
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="btnPrikaziSve" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="btnTrazi" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -5231,7 +5232,10 @@
                                           <Component id="tfNazivTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="btnTrazi" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="btnTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnPrikaziSve" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -5271,6 +5275,9 @@
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Tra&#x17e;i"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziActionPerformed"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel27">
                               <Properties>
@@ -5284,6 +5291,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfNazivTrazi">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rbPrivatnoTrazi">
                               <Properties>
@@ -5300,6 +5310,17 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPravnoTraziActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnPrikaziSve">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="1"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Prika&#x17e;i sve"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrikaziSveActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -5496,6 +5517,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfNazivDodaj">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rbPrivatno">
                               <Properties>

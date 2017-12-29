@@ -1,11 +1,12 @@
 package data.dao;
 
 import data.dto.VoziloDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface VoziloDAO {
        
-        public List<VoziloDTO> svaVozila();
+        public ArrayList<VoziloDTO> svaVozila();
 
 	public boolean dodajVozilo(VoziloDTO vozilo);
 

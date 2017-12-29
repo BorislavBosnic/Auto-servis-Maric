@@ -311,6 +311,16 @@ public class AutoSuggestor {
 
         for (String word : dictionary) {//get words in the dictionary which we added
             boolean fullymatches = true;
+            
+            boolean flag = false;
+            String[] niz = word.split(" ");
+            for(int j = 0; j < niz.length; j++){
+                if(niz[j].toLowerCase().startsWith(typedWord.toLowerCase())){
+                    flag = true;
+                }
+            }
+            
+            if(flag == false){
             for (int i = 0; i < typedWord.length(); i++) {//each string in the word
                 if ((word.length()>i) && !typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {//check for match
                     fullymatches = false;
@@ -318,6 +328,12 @@ public class AutoSuggestor {
                 }
             }
             if (fullymatches) {
+                addWordToSuggestions(word);
+                suggestionAdded = true;
+            }
+            }
+            else
+            {
                 addWordToSuggestions(word);
                 suggestionAdded = true;
             }

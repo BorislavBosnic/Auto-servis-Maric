@@ -2,15 +2,24 @@
 package data.dao;
 
 import data.dto.KupacDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface KupacDAO {
 
-	public List<KupacDTO> kupci(String ime, String prezime);
+	public ArrayList<KupacDTO> kupciPrivatni(String ime, String prezime);
         
-        public List<KupacDTO> kupci(String naziv);
+        public ArrayList<KupacDTO> kupciIme(String ime);
         
-        public List<KupacDTO> sviKupci();
+        public ArrayList<KupacDTO> sviPrivatni();
+        
+        public ArrayList<KupacDTO> sviPravni();
+        
+        public ArrayList<KupacDTO> kupciPrezime(String prezime);
+        
+        public ArrayList<KupacDTO> kupciPravni(String naziv);
+        
+        public ArrayList<KupacDTO> sviKupci();
 
 	public boolean dodajKupca(KupacDTO kupac);
 
