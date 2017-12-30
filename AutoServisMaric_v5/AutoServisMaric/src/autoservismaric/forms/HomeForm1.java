@@ -4361,6 +4361,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void menuItemDetaljniOpisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDetaljniOpisActionPerformed
         int redniBroj=jTableZaposleni.getSelectedRow();
         if(redniBroj!=-1){
+             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
             new DetaljiZaposlenogDialog(this,true,false,selektovanRadnik).show();
         }else{
@@ -4371,6 +4372,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void menuItemIzmjeniRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIzmjeniRadnikaActionPerformed
         int redniBroj=jTableZaposleni.getSelectedRow();
         if(redniBroj!=-1){
+             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
             new DetaljiZaposlenogDialog(this,true,true,selektovanRadnik).show();
         }else{
@@ -4381,6 +4383,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void menuItemOtpustiRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOtpustiRadnikaActionPerformed
         int redniBroj=jTableZaposleni.getSelectedRow();
         if(redniBroj!=-1){
+             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
             new OtpustiRadnikaDialog(this,true,selektovanRadnik).show();
         }else{
@@ -4944,8 +4947,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         
     }
     
-    //polja za prozor ZAPOSLENI
-    private ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;

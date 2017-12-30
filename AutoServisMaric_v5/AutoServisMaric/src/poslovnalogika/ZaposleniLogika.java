@@ -35,8 +35,6 @@ public class ZaposleniLogika extends Thread{
     private java.util.Date datumPrimanja;
     private String funkcija;
 
-    private ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
-
     private java.sql.Date datumOd;
     private java.sql.Date datumDo;
     
@@ -102,6 +100,7 @@ public class ZaposleniLogika extends Thread{
    private void popuniTabeluRadnihNaloga(){  
         int redniBroj=jTableZaposleni.getSelectedRow();
         if(redniBroj!=-1){
+             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
             DefaultTableModel table=(DefaultTableModel)tableRadniNalozi.getModel();
             List<ZaposleniPomocniDTO> lista=DAOFactory.getDAOFactory().getZaposleniDAO().sviRadniNaloziZaposlenog(selektovanRadnik,datumOd,datumDo);

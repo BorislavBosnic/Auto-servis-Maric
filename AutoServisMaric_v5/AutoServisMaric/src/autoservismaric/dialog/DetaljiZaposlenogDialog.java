@@ -290,17 +290,18 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
         if("".equals(textFieldIme.getText()) || "".equals(textFieldPrezime.getText())){
             JOptionPane.showMessageDialog(null,"Ime i prezime zaposlenog moraju biti uneseni!", "Problem", JOptionPane.ERROR_MESSAGE);
         }else{
-            zaposleni.setIme(textFieldIme.getText()==null?"":zaposleni.getIme());
-            zaposleni.setPrezime(textFieldPrezime.getText()==null?"":zaposleni.getPrezime());
-            zaposleni.setImeOca(textFieldImeOca.getText()==null?"":zaposleni.getImeOca());
-            zaposleni.setAdresa(textFieldAdresa.getText()==null?"":zaposleni.getAdresa());
-            zaposleni.setTelefon(textFieldTelefon.getText()==null?"":zaposleni.getTelefon());
-            zaposleni.setStrucnaSprema(textFieldStrucnaSprema.getText()==null?"":zaposleni.getStrucnaSprema());
-            zaposleni.setFunkcija(textFieldFunkcija.getText()==null?"":zaposleni.getFunkcija());
-            zaposleni.setBrojLicneKarte(textFieldBrojLicneKarte.getText()==null?"":zaposleni.getBrojLicneKarte());
+            zaposleni.setIme("".equals(textFieldIme.getText())?null:textFieldIme.getText());
+            zaposleni.setPrezime("".equals(textFieldPrezime.getText())?null:textFieldPrezime.getText());
+            zaposleni.setImeOca("".equals(textFieldImeOca.getText())?null:textFieldImeOca.getText());
+            zaposleni.setAdresa("".equals(textFieldAdresa.getText())?null:textFieldAdresa.getText());
+            zaposleni.setTelefon("".equals(textFieldTelefon.getText())?null:textFieldTelefon.getText());
+            zaposleni.setStrucnaSprema("".equals(textFieldStrucnaSprema.getText())?null:textFieldStrucnaSprema.getText());
+            zaposleni.setFunkcija("".equals(textFieldFunkcija.getText())?null:textFieldFunkcija.getText());
+            zaposleni.setBrojLicneKarte("".equals(textFieldBrojLicneKarte.getText())?null:textFieldBrojLicneKarte.getText());
             zaposleni.setDatumOd(dateChooserDatumOd.getDate()==null?null:new java.sql.Date(dateChooserDatumOd.getDate().getTime()));
             zaposleni.setDatumDo(dateChooserDatumDo.getDate()==null?null:new java.sql.Date(dateChooserDatumDo.getDate().getTime()));
-            zaposleni.setDatumRodjenja(new java.sql.Date(dateChooserDatumRodjenja.getDate().getTime()));
+            zaposleni.setDatumRodjenja(dateChooserDatumRodjenja.getDate()==null?null:new java.sql.Date(dateChooserDatumRodjenja.getDate().getTime()));
+            System.out.println(dateChooserDatumDo.getDate()==null);
             if(DAOFactory.getDAOFactory().getZaposleniDAO().azurirajZaposlenog(zaposleni)){
                 JOptionPane.showMessageDialog(this, "Uspješno ažuriranje radnika "+zaposleni.getIme()+".", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                  new ZaposleniLogika("svi").run();

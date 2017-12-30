@@ -140,6 +140,7 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
        int redniBroj=tableBivsiZaposleni.getSelectedRow();
         if(redniBroj!=-1){
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
+            selektovanRadnik.setDatumOd(new java.sql.Date(dateChooserDatumVracanja.getDate().getTime()));
             boolean flag=DAOFactory.getDAOFactory().getZaposleniDAO().ponistiOtkaz(selektovanRadnik);
             if(flag){
                 JOptionPane.showMessageDialog(null,"Uspjesno ponistavanja otkaza!","Obavjestenje",JOptionPane.INFORMATION_MESSAGE);
