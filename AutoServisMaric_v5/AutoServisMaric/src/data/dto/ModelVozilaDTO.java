@@ -58,7 +58,7 @@ public class ModelVozilaDTO {
             return false;
         }
         final ModelVozilaDTO other = (ModelVozilaDTO) obj;
-        if (!Objects.equals(this.IdModelVozila, other.IdModelVozila)) {
+        if (!Objects.equals(this.marka, other.marka) && !Objects.equals(this.model, other.model)) {
             return false;
         }
         return true;

@@ -13,4 +13,6 @@ public interface VoziloDAO {
 	public boolean azurirajVozilo(VoziloDTO vozilo);
 
 	public boolean obrisiVozilo(VoziloDTO vozilo);
+        
+        public VoziloDTO vozilo(int id);
 }

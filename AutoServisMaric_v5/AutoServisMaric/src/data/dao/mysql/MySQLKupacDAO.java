@@ -106,7 +106,7 @@ public class MySQLKupacDAO implements KupacDAO{
 		Connection conn = null;
 		PreparedStatement ps = null;
 
-		String query = "INSERT INTO kupac VALUES "
+		String query = "INSERT INTO kupac(Naziv, Telefon, Adresa, Grad, Ime, Prezime) VALUES "
 				+ "(?, ?, ?, ?, ?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -137,11 +137,11 @@ public class MySQLKupacDAO implements KupacDAO{
 		PreparedStatement ps = null;
 
 		String query = "UPDATE kupac SET "
-				+ "Naziv=? "
-                                + "Telefon=? "
-                                + "Adresa=? "
-                                + "Grad=? "
-                                + "Ime=? "
+				+ "Naziv=?, "
+                                + "Telefon=?, "
+                                + "Adresa=?, "
+                                + "Grad=?, "
+                                + "Ime=?, "
                                 + "Prezime=? "
 				+ "WHERE IdKupac=? ";
 		try {
@@ -167,8 +167,51 @@ public class MySQLKupacDAO implements KupacDAO{
     }
 
     @Override
-    public boolean obrisiKupca(String kupac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean obrisiKupca(KupacDTO kupac) {
+         boolean retVal = false;
+	Connection conn = null;
+	PreparedStatement ps = null;
+        
+        if(kupac.getNaziv() == null){
+            String query = "DELETE FROM kupac "
+                     + "WHERE Ime=? "
+                     + "AND Prezime=? ";
+            
+            try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, kupac.getIme());
+                        ps.setString(2, kupac.getPrezime());
+
+			retVal = ps.executeUpdate() == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+        }
+        else{
+             String query = "DELETE FROM kupac "
+                     + "WHERE Naziv=? ";
+             
+             try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+                        ps.setString(1, kupac.getNaziv());
+
+			retVal = ps.executeUpdate() == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+        }
     }
 
     @Override
@@ -266,7 +309,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "AND Naziv IS NOT NULL "
+                                + "WHERE Naziv IS NOT NULL "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -275,6 +318,34 @@ public class MySQLKupacDAO implements KupacDAO{
 
 			while (rs.next())
 				retVal.add(new KupacDTO(rs.getInt("IdKupac"), rs.getString("Ime"), rs.getString("Prezime"), rs.getString("Naziv"), rs.getString("Telefon"), rs.getString("Adresa"), rs.getString("Grad")));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
+
+    @Override
+    public KupacDTO kupac(int id) {
+               KupacDTO retVal = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT IdKupac, Naziv, Telefon, Adresa, Grad, Ime, Prezime "
+				+ "FROM kupac "
+				+ "WHERE IdKupac=? ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal = new KupacDTO(rs.getInt("IdKupac"), rs.getString("Ime"), rs.getString("Prezime"), rs.getString("Naziv"), rs.getString("Telefon"), rs.getString("Adresa"), rs.getString("Grad"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

@@ -12,7 +12,7 @@ public class VoziloDTO {
     private Integer idModelVozila;
     private String vrstaGoriva;
 
-    private VoziloDTO(){}
+    public VoziloDTO(){}
     
     public VoziloDTO(Integer idVozilo, String brojRegistracije, Integer kilovat, Double kubikaza, Integer godiste, Integer idKupac, Integer idModelVozila, String vrstaGoriva) {
         this.idVozilo = idVozilo;

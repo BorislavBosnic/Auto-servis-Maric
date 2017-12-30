@@ -71,7 +71,7 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 		PreparedStatement ps = null;
 
 		String query = "UPDATE model_vozila SET "
-				+ "Marka=? "
+				+ "Marka=?, "
                                 + "Model=? "
 				+ "WHERE IdModelVozila=? ";
 		try {
@@ -94,7 +94,86 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 
     @Override
     public boolean obrisiModel(ModelVozilaDTO model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean retVal = false;
+	Connection conn = null;
+	PreparedStatement ps = null;
+
+	String query = "DELETE FROM model_vozila "
+                     + "WHERE Marka=? "
+                     + "AND Model=? ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, model.getMarka());
+                        ps.setString(2, model.getModel());
+
+			retVal = ps.executeUpdate() == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+    }
+
+    @Override
+    public ModelVozilaDTO model(String marka, String model) {
+                ModelVozilaDTO retVal = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT IdModelVozila, Marka, Model "
+				+ "FROM model_vozila "
+				+ "WHERE Marka LIKE ? "
+                                + "AND Model LIKE ? ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setString(1, marka);
+                        ps.setString(2, model);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal = new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka"), rs.getString("Model"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
+
+    @Override
+    public ModelVozilaDTO model(int id) {
+        ModelVozilaDTO retVal = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT IdModelVozila, Marka, Model "
+				+ "FROM model_vozila "
+				+ "WHERE IdModelVozila=? ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal = new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka"), rs.getString("Model"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
     }
     
 }

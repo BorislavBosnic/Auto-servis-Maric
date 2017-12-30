@@ -20,11 +20,13 @@ public interface KupacDAO {
         public ArrayList<KupacDTO> kupciPravni(String naziv);
         
         public ArrayList<KupacDTO> sviKupci();
+        
+        public KupacDTO kupac(int id);
 
 	public boolean dodajKupca(KupacDTO kupac);
 
 	public boolean azurirajKupca(KupacDTO kupac);
 
-	public boolean obrisiKupca(String kupac);
+	public boolean obrisiKupca(KupacDTO kupac);
 
 }

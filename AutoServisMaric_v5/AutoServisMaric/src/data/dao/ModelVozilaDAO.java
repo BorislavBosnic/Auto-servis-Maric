@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface ModelVozilaDAO {
     public ArrayList<ModelVozilaDTO> sviModeli();
+    
+    public ModelVozilaDTO model(String marka, String model);
+    
+    public ModelVozilaDTO model(int id);
 
     public boolean dodajModel(ModelVozilaDTO model);
 
