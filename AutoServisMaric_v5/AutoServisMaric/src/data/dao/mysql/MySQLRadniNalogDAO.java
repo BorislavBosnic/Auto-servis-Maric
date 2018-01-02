@@ -26,7 +26,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
 
 		String query = "select sum(CijenaUsluge) as suma from faktura inner join radni_nalog " +
                         "using (idRadniNalog)"+
-                        "where DatumIzdavanja > ? and DatumIzdavanja <  ? ";
+                        "where DatumIzdavanja >= ? and DatumIzdavanja <=  ? ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -57,7 +57,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
                 ResultSet rs = null;
 
 		String query = "select * from prodan_dio inner join dio using (idDio)"+
-                        "where Datum > ? and Datum < ?";
+                        "where Datum >= ? and Datum <= ?";
                        
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

@@ -76,48 +76,48 @@ import poslovnalogika.ZaposleniLogika;
  */
 public class HomeForm1 extends javax.swing.JFrame {
 
-     static int numberOfItems = 8;
-     
-     //Sve moje, ne diraj!
-     ButtonGroup bGTraziVozilo;
-     ButtonGroup bGTraziVlasnika;
-     AutoSuggestor modelAU, markeAU, vlasnikAU, registracijeAU, pravniNazivAU;
-     static boolean voziloPanelPrviPut = true; ///flag koji se koristi za ucitavanje za suggestor u vozilo panelu
-     JPopupMenu popupMenu = new JPopupMenu(); // za popup u tabeli
-     JPopupMenu popupMenuVlasnik = new JPopupMenu();
-     public int idVlasnika = -1;
-      public static int selektovanRed; //za popup
-     public static int idVozila = -1; //za popup
-     
-     
-    public void izbrisiPopupZaVozila(){
+    static int numberOfItems = 8;
+    static String [] mjeseci = { "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" };
+
+    //Sve moje, ne diraj!
+    ButtonGroup bGTraziVozilo;
+    ButtonGroup bGTraziVlasnika;
+    AutoSuggestor modelAU, markeAU, vlasnikAU, registracijeAU, pravniNazivAU;
+    static boolean voziloPanelPrviPut = true; ///flag koji se koristi za ucitavanje za suggestor u vozilo panelu
+    JPopupMenu popupMenu = new JPopupMenu(); // za popup u tabeli
+    JPopupMenu popupMenuVlasnik = new JPopupMenu();
+    public int idVlasnika = -1;
+    public static int selektovanRed; //za popup
+    public static int idVozila = -1; //za popup
+
+    public void izbrisiPopupZaVozila() {
         popupMenu.removeAll();
         tableVozila.setComponentPopupMenu(popupMenu);
-    } 
-    
-     public void izbrisiPopupZaVlasnike(){
+    }
+
+    public void izbrisiPopupZaVlasnike() {
         popupMenuVlasnik.removeAll();
         tableVozila.setComponentPopupMenu(popupMenuVlasnik);
     }
-    
-    public void ucitajPopupZaVlasnike(){
-        
+
+    public void ucitajPopupZaVlasnike() {
+
         popupMenuVlasnik = new JPopupMenu();
         JMenuItem izmijeniVlasnika = new JMenuItem("Izmijeni vlasnika");
-        
-         izmijeniVlasnika.addActionListener(new ActionListener() {
+
+        izmijeniVlasnika.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, idVlasnika);
-              // System.out.println("eeeeeee" + idVlasnika);
-               //iv.idVlasnika = idVlasnika;
-               iv.setVisible(true);
+                IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, idVlasnika);
+                // System.out.println("eeeeeee" + idVlasnika);
+                //iv.idVlasnika = idVlasnika;
+                iv.setVisible(true);
             }
         });
         popupMenuVlasnik.add(izmijeniVlasnika);
         tableVozila.setComponentPopupMenu(popupMenuVlasnik);
-        
+
         popupMenuVlasnik.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
@@ -130,15 +130,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                         int column = 0;
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tableVozila.getModel().getColumnName(0);
-                        
-                        System.out.println("E"+selektovanRed);
-                        
-                        if(selektovanRed >= 0){
-                        
-                        if("ID".equals(imeKolone)){
-                            idVlasnika = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
-                            System.out.println("D"+idVlasnika);
-                        }
+
+                        System.out.println("E" + selektovanRed);
+
+                        if (selektovanRed >= 0) {
+
+                            if ("ID".equals(imeKolone)) {
+                                idVlasnika = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
+                                System.out.println("D" + idVlasnika);
+                            }
                         }
                         if (rowAtPoint > -1) {
                             tableVozila.setRowSelectionInterval(rowAtPoint, rowAtPoint);
@@ -159,18 +159,17 @@ public class HomeForm1 extends javax.swing.JFrame {
 
             }
         });
-        
-        
+
     }
-     
-     public void ucitajPopupZaVozila(){
+
+    public void ucitajPopupZaVozila() {
         popupMenu = new JPopupMenu();
         JMenuItem deleteItem = new JMenuItem("Izbrisi vozilo");
         JMenuItem editItem = new JMenuItem("Izmijeni vozilo");
         JMenuItem noviRadniNalog = new JMenuItem("Dodaj nov radni nalog");
         JMenuItem pogledajIstorijuPopravki = new JMenuItem("Pogledaj istoriju popravki");
-        
-         pogledajIstorijuPopravki.addActionListener(new ActionListener() {
+
+        pogledajIstorijuPopravki.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -178,8 +177,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
         popupMenu.add(pogledajIstorijuPopravki);
-        
-         noviRadniNalog.addActionListener(new ActionListener() {
+
+        noviRadniNalog.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -187,8 +186,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
         popupMenu.add(noviRadniNalog);
-        
-        
+
         editItem.addActionListener(new ActionListener() {
 
             @Override
@@ -197,8 +195,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
         popupMenu.add(editItem);
-        
-        
+
         deleteItem.addActionListener(new ActionListener() {
 
             @Override
@@ -206,11 +203,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JFrame(), "Right-click performed on table and choose DELETE");
             }
         });
-        
-        
+
         popupMenu.add(deleteItem);
         tableVozila.setComponentPopupMenu(popupMenu);
-        
+
         popupMenu.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
@@ -223,11 +219,11 @@ public class HomeForm1 extends javax.swing.JFrame {
                         int column = 0;
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tableVozila.getModel().getColumnName(0);
-                        
-                        if(selektovanRed >= 0){
-                        if("ID".equals(imeKolone)){
-                            idVozila = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
-                        }
+
+                        if (selektovanRed >= 0) {
+                            if ("ID".equals(imeKolone)) {
+                                idVozila = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
+                            }
                         }
                         if (rowAtPoint > -1) {
                             tableVozila.setRowSelectionInterval(rowAtPoint, rowAtPoint);
@@ -248,13 +244,13 @@ public class HomeForm1 extends javax.swing.JFrame {
 
             }
         });
-        
-     }
-     
-     
-   public static boolean menu[] = new boolean[numberOfItems];
-  // public static JPanel employeePanel=new EmployeesForm().getPanel();
-  // public static JPanel partsPanel=new PartsForm().getPanel();
+
+    }
+
+    public static boolean menu[] = new boolean[numberOfItems];
+    // public static JPanel employeePanel=new EmployeesForm().getPanel();
+    // public static JPanel partsPanel=new PartsForm().getPanel();
+
     /**
      * Creates new form HomeForm1
      */
@@ -263,42 +259,36 @@ public class HomeForm1 extends javax.swing.JFrame {
         /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
         setSize(screenSize.width,screenSize.height);*/
-     
+
         //tableVozila.addMouseListener(new PopClickListener());
-        
-       ucitajPopupZaVozila();
-        
-        
-        
+        ucitajPopupZaVozila();
+
         //za autosuggestor zovila
 //        VozilaLogika vl1 = new VozilaLogika(VozilaLogika.UCITAJ_MODELE);
 //        VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
 //        VozilaLogika vl3 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
-        
         tfNazivTrazi.setBackground(Color.gray);
         tfNazivVozilo.setBackground(Color.gray);
         tfNazivVozilo.setEditable(false);
         tfNazivTrazi.setEditable(false);
-        
-        
-        
+
         bGTraziVlasnika = new ButtonGroup();
         bGTraziVlasnika.add(rbPrivatnoTrazi);
         bGTraziVlasnika.add(rbPravnoTrazi);
-        
+
         bGTraziVozilo = new ButtonGroup();
         bGTraziVozilo.add(rbPravnoLiceVozilo);
         bGTraziVozilo.add(rbPrivatnoLiceVozilo);
-        
+
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(getClass().getResource("/autoservismaric/images/ikona2.png")).getImage());
         datumLabel.setText("Aktivnosti planirane za danas, " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
-        
+
         inicijalizujZaposleniPanel();
     }
-    
-    public AutoSuggestor ucitajPreporukeMarke(){
-        
+
+    public AutoSuggestor ucitajPreporukeMarke() {
+
         AutoSuggestor autoSuggestorMarke = new AutoSuggestor(tfMarkaTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
@@ -306,10 +296,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> modeli = new ArrayList<>();
 
-                for(ModelVozilaDTO mv : VozilaLogika.modeli){
+                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
                     modeli.add(mv.getMarka());
                 }
-                
+
                 setDictionary(modeli);
                 //addToDictionary("bye");//adds a single word
 
@@ -317,30 +307,29 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         };
         return autoSuggestorMarke;
-   }
-    
-     public AutoSuggestor ucitajPreporukeModel(){
-        
+    }
+
+    public AutoSuggestor ucitajPreporukeModel() {
+
         AutoSuggestor autoSuggestorModel = new AutoSuggestor(tfModelTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
                 String marka = tfMarkaTrazi.getText();
-                
+
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> modeli = new ArrayList<>();
 
-                for(ModelVozilaDTO mv : VozilaLogika.modeli){
-                    if(tfModelTrazi.getText() != null && !"".equals(tfModelTrazi.getText())){
-                        if(mv.getMarka().equals(marka.trim())){
+                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
+                    if (tfModelTrazi.getText() != null && !"".equals(tfModelTrazi.getText())) {
+                        if (mv.getMarka().equals(marka.trim())) {
                             modeli.add(mv.getModel());
                         }
-                    }
-                    else if(tfModelTrazi.getText() == null || "".equals(tfModelTrazi.getText())){
+                    } else if (tfModelTrazi.getText() == null || "".equals(tfModelTrazi.getText())) {
                         modeli.add(mv.getModel());
                     }
                 }
-                
+
                 setDictionary(modeli);
                 //addToDictionary("bye");//adds a single word
 
@@ -348,11 +337,10 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         };
         return autoSuggestorModel;
-   }
-    
-    
-     public AutoSuggestor ucitajPreporukeRegistracija(){
-        
+    }
+
+    public AutoSuggestor ucitajPreporukeRegistracija() {
+
         AutoSuggestor autoSuggestorRegistracija = new AutoSuggestor(tfRegistracijaTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
@@ -360,22 +348,22 @@ public class HomeForm1 extends javax.swing.JFrame {
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> registracije = new ArrayList<>();
 
-                for(VoziloDTO v : VozilaLogika.vozila){
+                for (VoziloDTO v : VozilaLogika.vozila) {
                     registracije.add(v.getBrojRegistracije());
                 }
-                
+
                 setDictionary(registracije);
                 //addToDictionary("bye");//adds a single word
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
         };
-        
+
         return autoSuggestorRegistracija;
-   }
-     
-     public AutoSuggestor ucitajPreporukeVlasnik(){
-        
+    }
+
+    public AutoSuggestor ucitajPreporukeVlasnik() {
+
         AutoSuggestor autoSuggestorVlasnik = new AutoSuggestor(tfPrezimeVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
@@ -383,24 +371,24 @@ public class HomeForm1 extends javax.swing.JFrame {
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> vlasnici = new ArrayList<>();
 
-                for(KupacDTO v : VozilaLogika.vlasnici){
-                    if(v.getNaziv() == null){
+                for (KupacDTO v : VozilaLogika.vlasnici) {
+                    if (v.getNaziv() == null) {
                         vlasnici.add(v.getIme() + " " + v.getPrezime());
                     }
                 }
-                
+
                 setDictionary(vlasnici);
                 //addToDictionary("bye");//adds a single word
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
         };
-        
+
         return autoSuggestorVlasnik;
-   }
-     
-     public AutoSuggestor ucitajPreporukePravniNaziv(){
-        
+    }
+
+    public AutoSuggestor ucitajPreporukePravniNaziv() {
+
         AutoSuggestor autoSuggestorPravniNaziv = new AutoSuggestor(tfNazivVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
@@ -408,23 +396,21 @@ public class HomeForm1 extends javax.swing.JFrame {
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> vlasnici = new ArrayList<>();
 
-                for(KupacDTO v : VozilaLogika.vlasnici){
-                    if(v.getPrezime() == null && v.getIme() == null){
+                for (KupacDTO v : VozilaLogika.vlasnici) {
+                    if (v.getPrezime() == null && v.getIme() == null) {
                         vlasnici.add(v.getNaziv());
                     }
                 }
-                
+
                 setDictionary(vlasnici);
                 //addToDictionary("bye");//adds a single word
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
         };
-        
+
         return autoSuggestorPravniNaziv;
-   }
-     
-   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -4178,9 +4164,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu2jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2jPanelMouseClicked
         setColor(menu2jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[1]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[1] = true;
         resetColor(menu7jPanel);
         resetColor(menu3jPanel);
         resetColor(menu4jPanel);
@@ -4189,7 +4176,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu1jPanel);
         resetColor(menu8jPanel);
 
-        
         parentPanel.removeAll();
         parentPanel.add(radniNaloziPanel);
         parentPanel.repaint();
@@ -4204,19 +4190,21 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu2jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2jPanelMouseExited
         // TODO add your handling code here:
-        if(!menu[1])
-        resetColor(menu2jPanel);
+        if (!menu[1]) {
+            resetColor(menu2jPanel);
+        }
     }//GEN-LAST:event_menu2jPanelMouseExited
 
     private void menu2jPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2jPanelMousePressed
-        
+
     }//GEN-LAST:event_menu2jPanelMousePressed
 
     private void menu3jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3jPanelMouseClicked
         setColor(menu3jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[2]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[2] = true;
         resetColor(menu7jPanel);
         resetColor(menu2jPanel);
         resetColor(menu4jPanel);
@@ -4224,13 +4212,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu6jPanel);
         resetColor(menu1jPanel);
         resetColor(menu8jPanel);
-        
+
         VozilaLogika vl = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
         VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
         VozilaLogika vl3 = new VozilaLogika((VozilaLogika.UCITAJ_MODELE));
-        
+
         //ucitavanje autosuggestora
-        if(voziloPanelPrviPut == true){
+        if (voziloPanelPrviPut == true) {
             voziloPanelPrviPut = false;
             markeAU = ucitajPreporukeMarke();
             registracijeAU = ucitajPreporukeRegistracija();
@@ -4238,13 +4226,12 @@ public class HomeForm1 extends javax.swing.JFrame {
             pravniNazivAU = ucitajPreporukePravniNaziv();
             modelAU = ucitajPreporukeModel();
         }
-        
 
         parentPanel.removeAll();
         parentPanel.add(vozilaPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
+
     }//GEN-LAST:event_menu3jPanelMouseClicked
 
     private void menu3jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3jPanelMouseEntered
@@ -4253,15 +4240,17 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu3jPanelMouseEntered
 
     private void menu3jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3jPanelMouseExited
-        if(!menu[2])
-        resetColor(menu3jPanel);
+        if (!menu[2]) {
+            resetColor(menu3jPanel);
+        }
     }//GEN-LAST:event_menu3jPanelMouseExited
 
     private void menu4jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4jPanelMouseClicked
         setColor(menu4jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[3]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[3] = true;
         resetColor(menu7jPanel);
         resetColor(menu2jPanel);
         resetColor(menu3jPanel);
@@ -4269,7 +4258,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu6jPanel);
         resetColor(menu1jPanel);
         resetColor(menu8jPanel);
-        
+
         parentPanel.removeAll();
         parentPanel.add(knjigovodstvoPanel);
         parentPanel.repaint();
@@ -4282,16 +4271,18 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu4jPanelMouseEntered
 
     private void menu4jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4jPanelMouseExited
-        if(!menu[3])
-        resetColor(menu4jPanel);
+        if (!menu[3]) {
+            resetColor(menu4jPanel);
+        }
     }//GEN-LAST:event_menu4jPanelMouseExited
 
     private void menu7jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMouseClicked
         // TODO add your handling code here:
         setColor(menu7jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[6]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[6] = true;
         resetColor(menu1jPanel);
         resetColor(menu2jPanel);
         resetColor(menu3jPanel);
@@ -4304,7 +4295,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         parentPanel.add(statistikajPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
+
     }//GEN-LAST:event_menu7jPanelMouseClicked
 
     private void menu7jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMouseEntered
@@ -4313,8 +4304,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu7jPanelMouseEntered
 
     private void menu7jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMouseExited
-        if(!menu[6])
-        resetColor(menu7jPanel);
+        if (!menu[6]) {
+            resetColor(menu7jPanel);
+        }
     }//GEN-LAST:event_menu7jPanelMouseExited
 
     private void menu7jPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMousePressed
@@ -4323,9 +4315,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu5jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseClicked
         setColor(menu5jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[4]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[4] = true;
         resetColor(menu7jPanel);
         resetColor(menu3jPanel);
         resetColor(menu4jPanel);
@@ -4334,13 +4327,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu1jPanel);
         resetColor(menu8jPanel);
 
-       
-        
         parentPanel.removeAll();
         parentPanel.add(zaposleniPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
-        
+
         //   new EmployeesForm().setVisible(true);
         // this.dispose();
 
@@ -4357,8 +4348,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu5jPanelMouseEntered
 
     private void menu5jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseExited
-        if(!menu[4])
-        resetColor(menu5jPanel);
+        if (!menu[4]) {
+            resetColor(menu5jPanel);
+        }
     }//GEN-LAST:event_menu5jPanelMouseExited
 
     private void menu5jPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMousePressed
@@ -4367,9 +4359,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu6jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6jPanelMouseClicked
         setColor(menu6jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[5]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[5] = true;
         resetColor(menu7jPanel);
         resetColor(menu3jPanel);
         resetColor(menu4jPanel);
@@ -4380,9 +4373,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         //   new EmployeesForm().setVisible(true);
         // this.dispose();
-
         //     jPanel1.setVisible(false);
-
         parentPanel.removeAll();
         parentPanel.add(jPanel12);
         parentPanel.repaint();
@@ -4394,8 +4385,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu6jPanelMouseEntered
 
     private void menu6jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6jPanelMouseExited
-         if(!menu[5])
-        resetColor(menu6jPanel);
+        if (!menu[5]) {
+            resetColor(menu6jPanel);
+        }
     }//GEN-LAST:event_menu6jPanelMouseExited
 
     private void jLabel4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel4PropertyChange
@@ -4404,9 +4396,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu1jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseClicked
         setColor(menu1jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[0]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[0] = true;
         resetColor(menu7jPanel);
         resetColor(menu2jPanel);
         resetColor(menu3jPanel);
@@ -4414,7 +4407,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu5jPanel);
         resetColor(menu6jPanel);
         resetColor(menu8jPanel);
-        
+
         parentPanel.removeAll();
         parentPanel.add(pocetnajPanel);
         parentPanel.repaint();
@@ -4426,8 +4419,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1jPanelMouseEntered
 
     private void menu1jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseExited
-        if(!menu[0])
-        resetColor(menu1jPanel);
+        if (!menu[0]) {
+            resetColor(menu1jPanel);
+        }
     }//GEN-LAST:event_menu1jPanelMouseExited
 
     private void menu1jPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMousePressed
@@ -4451,9 +4445,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu8jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMouseClicked
         setColor(menu8jPanel);
-        for(int i=0; i<numberOfItems; i++)
-        menu[i]=false;
-        menu[7]=true;
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        menu[7] = true;
         resetColor(menu7jPanel);
         resetColor(menu2jPanel);
         resetColor(menu3jPanel);
@@ -4461,7 +4456,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu5jPanel);
         resetColor(menu6jPanel);
         resetColor(menu1jPanel);
-        
+
         parentPanel.removeAll();
         parentPanel.add(zakazivanjaPanel);
         parentPanel.repaint();
@@ -4473,7 +4468,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu8jPanelMouseEntered
 
     private void menu8jPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMouseExited
-        if(!menu[7])
+        if (!menu[7])
         resetColor(menu8jPanel);    }//GEN-LAST:event_menu8jPanelMouseExited
 
     private void menu8jPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMousePressed
@@ -4481,18 +4476,18 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu8jPanelMousePressed
 
     private void buttonDodajZaposlenogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDodajZaposlenogActionPerformed
-        new ZaposleniLogika("insert", textFieldIme.getText(), textFieldPrezime.getText(), textFieldTelefon.getText()
-                , textFieldAdresa.getText(), textFieldStrucnaSprema.getText(),textFieldImeOca.getText(),
-                textFieldBrojLicneKarte.getText(), dateChooserDatumRodjenja.getDate(),dateChooserDatumPrimanjaURadniOdnos.getDate()
-        ,textFieldFunkcijaRadnika.getText()).start();
+        new ZaposleniLogika("insert", textFieldIme.getText(), textFieldPrezime.getText(), textFieldTelefon.getText(),
+                 textFieldAdresa.getText(), textFieldStrucnaSprema.getText(), textFieldImeOca.getText(),
+                textFieldBrojLicneKarte.getText(), dateChooserDatumRodjenja.getDate(), dateChooserDatumPrimanjaURadniOdnos.getDate(),
+                 textFieldFunkcijaRadnika.getText()).start();
     }//GEN-LAST:event_buttonDodajZaposlenogActionPerformed
 
     private void checkBoxSviZaposleniStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkBoxSviZaposleniStateChanged
-       if(checkBoxSviZaposleni.isSelected()){
-           jTableZaposleni.selectAll();
-       }else{
-           jTableZaposleni.clearSelection();
-       }
+        if (checkBoxSviZaposleni.isSelected()) {
+            jTableZaposleni.selectAll();
+        } else {
+            jTableZaposleni.clearSelection();
+        }
     }//GEN-LAST:event_checkBoxSviZaposleniStateChanged
 
     private void jTableZaposleniMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableZaposleniMouseReleased
@@ -4504,56 +4499,57 @@ public class HomeForm1 extends javax.swing.JFrame {
         }
 
         int rowindex = jTableZaposleni.getSelectedRow();
-        if (rowindex < 0)
+        if (rowindex < 0) {
             return;
+        }
         if (evt.isPopupTrigger()) {
-           popupMenuZaposleni.show(evt.getComponent(),evt.getX(),evt.getY());
+            popupMenuZaposleni.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_jTableZaposleniMouseReleased
 
     private void menuItemDetaljniOpisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDetaljniOpisActionPerformed
-        int redniBroj=jTableZaposleni.getSelectedRow();
-        if(redniBroj!=-1){
-             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
-            ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
-            new DetaljiZaposlenogDialog(this,true,false,selektovanRadnik).show();
-        }else{
-            JOptionPane.showMessageDialog(null,"Niste odabrali zaposlenog!","Problem",JOptionPane.ERROR_MESSAGE);
+        int redniBroj = jTableZaposleni.getSelectedRow();
+        if (redniBroj != -1) {
+            ArrayList<ZaposleniDTO> zaposleni = new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
+            ZaposleniDTO selektovanRadnik = zaposleni.get(redniBroj);
+            new DetaljiZaposlenogDialog(this, true, false, selektovanRadnik).show();
+        } else {
+            JOptionPane.showMessageDialog(null, "Niste odabrali zaposlenog!", "Problem", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_menuItemDetaljniOpisActionPerformed
 
     private void menuItemIzmjeniRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIzmjeniRadnikaActionPerformed
-        int redniBroj=jTableZaposleni.getSelectedRow();
-        if(redniBroj!=-1){
-             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
-            ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
-            new DetaljiZaposlenogDialog(this,true,true,selektovanRadnik).show();
-        }else{
-            JOptionPane.showMessageDialog(null,"Niste odabrali zaposlenog!","Problem",JOptionPane.ERROR_MESSAGE);
+        int redniBroj = jTableZaposleni.getSelectedRow();
+        if (redniBroj != -1) {
+            ArrayList<ZaposleniDTO> zaposleni = new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
+            ZaposleniDTO selektovanRadnik = zaposleni.get(redniBroj);
+            new DetaljiZaposlenogDialog(this, true, true, selektovanRadnik).show();
+        } else {
+            JOptionPane.showMessageDialog(null, "Niste odabrali zaposlenog!", "Problem", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_menuItemIzmjeniRadnikaActionPerformed
 
     private void menuItemOtpustiRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOtpustiRadnikaActionPerformed
-        int redniBroj=jTableZaposleni.getSelectedRow();
-        if(redniBroj!=-1){
-             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
-            ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
-            new OtpustiRadnikaDialog(this,true,selektovanRadnik).show();
-        }else{
-            JOptionPane.showMessageDialog(null,"Niste odabrali zaposlenog!","Problem",JOptionPane.ERROR_MESSAGE);
+        int redniBroj = jTableZaposleni.getSelectedRow();
+        if (redniBroj != -1) {
+            ArrayList<ZaposleniDTO> zaposleni = new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
+            ZaposleniDTO selektovanRadnik = zaposleni.get(redniBroj);
+            new OtpustiRadnikaDialog(this, true, selektovanRadnik).show();
+        } else {
+            JOptionPane.showMessageDialog(null, "Niste odabrali zaposlenog!", "Problem", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_menuItemOtpustiRadnikaActionPerformed
 
     private void buttonPrikazSvihBivsihRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPrikazSvihBivsihRadnikaActionPerformed
-        new SviBivsiZaposleniDialog(this,true).show();
+        new SviBivsiZaposleniDialog(this, true).show();
     }//GEN-LAST:event_buttonPrikazSvihBivsihRadnikaActionPerformed
 
     private void menuItemObrisiRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemObrisiRadnikaActionPerformed
-        
+
     }//GEN-LAST:event_menuItemObrisiRadnikaActionPerformed
 
     private void buttonTraziRadneNalogeRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTraziRadneNalogeRadnikaActionPerformed
-        new ZaposleniLogika("statistika",new java.sql.Date(dateChooserDatumOdZaposlenog.getDate().getTime()),new java.sql.Date(dateChooserDatumDoZaposlenog.getDate().getTime())).run();
+        new ZaposleniLogika("statistika", new java.sql.Date(dateChooserDatumOdZaposlenog.getDate().getTime()), new java.sql.Date(dateChooserDatumDoZaposlenog.getDate().getTime())).run();
     }//GEN-LAST:event_buttonTraziRadneNalogeRadnikaActionPerformed
 
     private void rbPravnoTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoTraziActionPerformed
@@ -4568,38 +4564,38 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPravnoTraziActionPerformed
 
     private void rbPrivatnoTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoTraziActionPerformed
-        
+
         tfNazivTrazi.setText("");
         tfNazivTrazi.setEditable(false);
-         tfNazivTrazi.setBackground(Color.gray);
-         tfImeTrazi.setBackground(Color.white);
-         tfPrezimeTrazi.setBackground(Color.white);
+        tfNazivTrazi.setBackground(Color.gray);
+        tfImeTrazi.setBackground(Color.white);
+        tfPrezimeTrazi.setBackground(Color.white);
         tfImeTrazi.setEditable(true);
         tfPrezimeTrazi.setEditable(true);
         rbPrivatnoTrazi.setSelected(true);
-        
+
         rbPravnoTrazi.setSelected(false);
-        
+
         rbPrivatnoTrazi.setSelected(false);
-        
+
     }//GEN-LAST:event_rbPrivatnoTraziActionPerformed
 
-    public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci){
-        String[] columns = {"ID","Ime","Prezime", "Telefon", "Adresa", "Grad"};
-                    DefaultTableModel model = new DefaultTableModel(columns, 0);
-                    tableVozila.setModel(model);
-                for(KupacDTO k : kupci){
-                    Object[] rowData = { k.getIdKupac(), k.getIme(),k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-                    model.addRow(rowData);
-                }
-                tableVozila.setModel(model);
+    public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci) {
+        String[] columns = {"ID", "Ime", "Prezime", "Telefon", "Adresa", "Grad"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        tableVozila.setModel(model);
+        for (KupacDTO k : kupci) {
+            Object[] rowData = {k.getIdKupac(), k.getIme(), k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
+            model.addRow(rowData);
+        }
+        tableVozila.setModel(model);
     }
-    
+
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
         izbrisiPopupZaVozila();
         ucitajPopupZaVlasnike();
         String izabrano = "";
-        
+
         for (Enumeration<AbstractButton> buttons = bGTraziVlasnika.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
 
@@ -4607,53 +4603,44 @@ public class HomeForm1 extends javax.swing.JFrame {
                 izabrano = button.getText();
             }
         }
-        
-        if("Privatno lice".equals(izabrano)){
+
+        if ("Privatno lice".equals(izabrano)) {
             String ime = tfImeTrazi.getText();
             String prezime = tfPrezimeTrazi.getText();
-            
-            if((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime)))
-            {
+
+            if ((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime))) {
                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPrivatni();
-                
+
                 prikaziKupceUTabeli(kupci);
-               
-            }
-            else if(prezime == null || "".equals(prezime))
-            {
+
+            } else if (prezime == null || "".equals(prezime)) {
                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciIme(ime);
-                
+
                 prikaziKupceUTabeli(kupci);
-            }
-            else if (ime == null || "".equals(ime))
-            {
-                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
-                
+            } else if (ime == null || "".equals(ime)) {
+                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
+
                 prikaziKupceUTabeli(kupci);
-            }
-            else
-            {
+            } else {
                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrivatni(ime, prezime);
-                
+
                 prikaziKupceUTabeli(kupci);
             }
-        }
-        else if("Pravno lice".equals(izabrano)){
+        } else if ("Pravno lice".equals(izabrano)) {
             String naziv = tfNazivTrazi.getText();
-            
-            if(naziv == null || "".equals(naziv)){
+
+            if (naziv == null || "".equals(naziv)) {
                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPravni();
-                
+
                 prikaziKupcePravneUTabeli(kupci);
-            }
-            else{
+            } else {
                 ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
-                
+
                 prikaziKupcePravneUTabeli(kupci);
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
@@ -4666,137 +4653,143 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
         izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
-        
+
         String registracija = tfRegistracijaTrazi.getText();
         Integer godiste = 0;
-        
-        if(tfGodisteTrazi.getText() != null && !"".equals(tfGodisteTrazi.getText())){
-        try{
-            godiste = Integer.parseInt(tfGodisteTrazi.getText());
+
+        if (tfGodisteTrazi.getText() != null && !"".equals(tfGodisteTrazi.getText())) {
+            try {
+                godiste = Integer.parseInt(tfGodisteTrazi.getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Pogresno godiste.", "Obavjestenje", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Pogresno godiste.", "Obavjestenje", JOptionPane.ERROR_MESSAGE);
-        }
-        }
-        
+
         String marka = tfMarkaTrazi.getText();
         String model = tfModelTrazi.getText();
         boolean svi = cbSvi.isSelected();
-        
-        if(svi){
-            
-            String[] columns = {"ID","Registracija","Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza" };
+
+        if (svi) {
+
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             tableVozila.setModel(modell);
-            
+
             ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-            for(VoziloDTO v: vozila){
-       
+            for (VoziloDTO v : vozila) {
+
                 KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
                 ModelVozilaDTO mod = new ModelVozilaDTO();
-                for(ModelVozilaDTO m : VozilaLogika.modeli){
-                    if(m.getIdModelVozila() == v.getIdModelVozila())
+                for (ModelVozilaDTO m : VozilaLogika.modeli) {
+                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
                         mod = m;
+                    }
                 }
-            
-            boolean dodati = true;
-            //System.out.println(registracija + " " + v.getBrojRegistracije());
-            if(registracija != null && !"".equals(registracija)){
-                if(!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase()))
-                    dodati = false;
-            }
-            if(godiste != 0){
-                System.out.println(v.getGodiste() + " " + godiste);
-                if(!Objects.equals(v.getGodiste(), godiste))
-                    dodati = false;
-            }
-            if(marka != null && !"".equals(marka)){
-                if(!mod.getMarka().toLowerCase().equals(marka.toLowerCase()))
-                    dodati = false;
-            }
-            if(model != null && !"".equals(model)){
-                if(!mod.getModel().toLowerCase().equals(model.toLowerCase()))
-                    dodati = false;
-            }
-            if(dodati == true){
-            Object[] rowData = { v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
-            modell.addRow(rowData);
-            tableVozila.setModel(modell);
-            }
-         }
-        }
-        else{
-            
-            String[] columns = {"ID","Registracija","Marka", "Model", "Godiste", "Prezime", "Ime", "Gorivo", "Kilovat", "Kubikaza" };
-            DefaultTableModel modell = new DefaultTableModel(columns, 0);
-            tableVozila.setModel(modell);
-            
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-            for(VoziloDTO v: vozila){
-       
-                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-                ModelVozilaDTO mod = new ModelVozilaDTO();
-                for(ModelVozilaDTO m : VozilaLogika.modeli){
-                    if(m.getIdModelVozila() == v.getIdModelVozila())
-                        mod = m;
-                }
-            
-            boolean dodati = true;
-            //System.out.println(registracija + " " + v.getBrojRegistracije());
-            if(registracija != null && !"".equals(registracija)){
-                if(!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase()))
-                    dodati = false;
-            }
-            if(godiste != 0){
-                System.out.println(v.getGodiste() + " " + godiste);
-                if(!Objects.equals(v.getGodiste(), godiste))
-                    dodati = false;
-            }
-            if(marka != null && !"".equals(marka)){
-                if(!mod.getMarka().toLowerCase().equals(marka.toLowerCase()))
-                    dodati = false;
-            }
-            if(model != null && !"".equals(model)){
-                if(!mod.getModel().toLowerCase().equals(model.toLowerCase()))
-                    dodati = false;
-            }
-            if(dodati == true){
-                
-            if(rbPrivatnoLiceVozilo.isSelected()){
-                String ime = tfImeVozilo.getText();
-                String prezime = tfPrezimeVozilo.getText();
-                
-                if(ime != null && !"".equals(ime)){
-                    if(!ime.equals(kupac.getIme()))
-                        dodati = false;
-                }
-                if(prezime != null && !"".equals(prezime)){
-                    if(!prezime.equals(kupac.getPrezime())){
+
+                boolean dodati = true;
+                //System.out.println(registracija + " " + v.getBrojRegistracije());
+                if (registracija != null && !"".equals(registracija)) {
+                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
                         dodati = false;
                     }
                 }
-            }   
-            else if(rbPravnoLiceVozilo.isSelected()){
-                String naziv = tfNazivVozilo.getText();
-                if(naziv != null && !"".equals(naziv)){
-                    if(!naziv.equals(kupac.getNaziv())){
+                if (godiste != 0) {
+                    System.out.println(v.getGodiste() + " " + godiste);
+                    if (!Objects.equals(v.getGodiste(), godiste)) {
                         dodati = false;
                     }
                 }
+                if (marka != null && !"".equals(marka)) {
+                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (model != null && !"".equals(model)) {
+                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (dodati == true) {
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
+                    modell.addRow(rowData);
+                    tableVozila.setModel(modell);
+                }
             }
-                
-            Object[] rowData = { v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
-            modell.addRow(rowData);
+        } else {
+
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Gorivo", "Kilovat", "Kubikaza"};
+            DefaultTableModel modell = new DefaultTableModel(columns, 0);
             tableVozila.setModel(modell);
-            
-            
+
+            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
+            for (VoziloDTO v : vozila) {
+
+                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+                ModelVozilaDTO mod = new ModelVozilaDTO();
+                for (ModelVozilaDTO m : VozilaLogika.modeli) {
+                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
+                        mod = m;
+                    }
+                }
+
+                boolean dodati = true;
+                //System.out.println(registracija + " " + v.getBrojRegistracije());
+                if (registracija != null && !"".equals(registracija)) {
+                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (godiste != 0) {
+                    System.out.println(v.getGodiste() + " " + godiste);
+                    if (!Objects.equals(v.getGodiste(), godiste)) {
+                        dodati = false;
+                    }
+                }
+                if (marka != null && !"".equals(marka)) {
+                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (model != null && !"".equals(model)) {
+                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (dodati == true) {
+
+                    if (rbPrivatnoLiceVozilo.isSelected()) {
+                        String ime = tfImeVozilo.getText();
+                        String prezime = tfPrezimeVozilo.getText();
+
+                        if (ime != null && !"".equals(ime)) {
+                            if (!ime.equals(kupac.getIme())) {
+                                dodati = false;
+                            }
+                        }
+                        if (prezime != null && !"".equals(prezime)) {
+                            if (!prezime.equals(kupac.getPrezime())) {
+                                dodati = false;
+                            }
+                        }
+                    } else if (rbPravnoLiceVozilo.isSelected()) {
+                        String naziv = tfNazivVozilo.getText();
+                        if (naziv != null && !"".equals(naziv)) {
+                            if (!naziv.equals(kupac.getNaziv())) {
+                                dodati = false;
+                            }
+                        }
+                    }
+
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
+                    modell.addRow(rowData);
+                    tableVozila.setModel(modell);
+
+                }
             }
-         }
-            
+
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnPronadjiActionPerformed
 
     private void tfModelTraziFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfModelTraziFocusGained
@@ -4845,27 +4838,28 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
-        
+
         ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-        
-        String[] columns = {"ID", "Registracija","Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza" };
+
+        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         tableVozila.setModel(model);
 
-        for(VoziloDTO v : vozila){
+        for (VoziloDTO v : vozila) {
             KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
             ModelVozilaDTO mod = new ModelVozilaDTO();
-            for(ModelVozilaDTO m : VozilaLogika.modeli){
-                if(m.getIdModelVozila() == v.getIdModelVozila())
+            for (ModelVozilaDTO m : VozilaLogika.modeli) {
+                if (m.getIdModelVozila() == v.getIdModelVozila()) {
                     mod = m;
+                }
             }
-            
-            Object[] rowData = { v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
+
+            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
             model.addRow(rowData);
         }
-        
+
         tableVozila.setModel(model);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiActionPerformed
@@ -4883,7 +4877,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPonistiActionPerformed
 
     private void cbSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSviActionPerformed
-        if(cbSvi.isSelected()){
+        if (cbSvi.isSelected()) {
             bGTraziVozilo.clearSelection();
             tfImeVozilo.setEditable(false);
             tfImeVozilo.setBackground(Color.gray);
@@ -4894,9 +4888,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             tfNazivVozilo.setEditable(false);
             tfNazivVozilo.setBackground(Color.gray);
             tfNazivVozilo.setText("");
-        }
-        else
-        {
+        } else {
             rbPrivatnoLiceVozilo.setSelected(true);
             rbPravnoLiceVozilo.setSelected(false);
             tfImeVozilo.setEditable(true);
@@ -4925,20 +4917,20 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()),new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
+        new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
         String datum1 = "01-10-2017";
         String datum2 = "20-11-2017";
-        java.util.Date inputDate1=null;
-        java.util.Date inputDate2=null;
+        java.util.Date inputDate1 = null;
+        java.util.Date inputDate2 = null;
 
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-         try {
-             inputDate1 = dateFormat.parse(datum1);
-             inputDate2 = dateFormat.parse(datum2);
+        try {
+            inputDate1 = dateFormat.parse(datum1);
+            inputDate2 = dateFormat.parse(datum2);
 
-         } catch (ParseException ex) {
-             Logger.getLogger(HomeForm1.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        } catch (ParseException ex) {
+            Logger.getLogger(HomeForm1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(inputDate1, inputDate2));
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -4947,145 +4939,189 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxMjesecActionPerformed
 
     private void buttonPregledGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledGrafikActionPerformed
-        new StatistikaLogika(new Date(jDateChooserDatumOd.getDate().getTime()),new Date(jDateChooserDatumDo.getDate().getTime())).run();
+        loadGraph();
     }//GEN-LAST:event_buttonPregledGrafikActionPerformed
 
-    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci){
+    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-                    DefaultTableModel model = new DefaultTableModel(columns, 0);
-                    tableVozila.setModel(model);
-                for(KupacDTO k : kupci){
-                    Object[] rowData = { k.getIdKupac(), (k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), (k.getNaziv() == null) ? "---" : k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-                    model.addRow(rowData);
-                }
-                
-                tableVozila.setModel(model);
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        tableVozila.setModel(model);
+        for (KupacDTO k : kupci) {
+            Object[] rowData = {k.getIdKupac(), (k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), (k.getNaziv() == null) ? "---" : k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
+            model.addRow(rowData);
+        }
+
+        tableVozila.setModel(model);
     }
-    
-    public void prikaziKupcePravneUTabeli(ArrayList<KupacDTO> kupci){
-        String[] columns = {"ID","Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-                    DefaultTableModel model = new DefaultTableModel(columns, 0);
-                    tableVozila.setModel(model);
-                for(KupacDTO k : kupci){
-                    Object[] rowData = { k.getIdKupac(), k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-                    model.addRow(rowData);
-                }
-                tableVozila.setModel(model);
+
+    public void prikaziKupcePravneUTabeli(ArrayList<KupacDTO> kupci) {
+        String[] columns = {"ID", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        tableVozila.setModel(model);
+        for (KupacDTO k : kupci) {
+            Object[] rowData = {k.getIdKupac(), k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
+            model.addRow(rowData);
+        }
+        tableVozila.setModel(model);
     }
-    
-    
-    public void setColor(JPanel panel){
-        panel.setBackground(new Color(51,102,255));
+
+    public void setColor(JPanel panel) {
+        panel.setBackground(new Color(51, 102, 255));
 
     }
-    
-    public void resetColor(JPanel panel){
-        panel.setBackground(new Color(51,51,255));
+
+    public void resetColor(JPanel panel) {
+        panel.setBackground(new Color(51, 51, 255));
 
     }
-    
-    public void loadGraph(){
+
+    public void loadGraph() {
         DefaultCategoryDataset prihodiBarChart = new DefaultCategoryDataset();
-        
-       //if(comboBoxMjesec) 
-        
-        
-        prihodiBarChart.setValue(500, "Prihodi", "Januar");
-        prihodiBarChart.setValue(1200, "Prihodi", "Februar");
-        prihodiBarChart.setValue(800, "Prihodi", "Mart");
-        prihodiBarChart.setValue(700, "Prihodi", "April");
-        prihodiBarChart.setValue(900, "Prihodi", "Maj");
-        prihodiBarChart.setValue(1100, "Prihodi", "Jun");
-        prihodiBarChart.setValue(600, "Prihodi", "Jul");
-        prihodiBarChart.setValue(800, "Prihodi", "Avgust");
-        prihodiBarChart.setValue(1000, "Prihodi", "Septembar");
-        prihodiBarChart.setValue(800, "Prihodi", "Oktobar");
-        prihodiBarChart.setValue(900, "Prihodi", "Novembar");
-        prihodiBarChart.setValue(500, "Prihodi", "Decembar");
-        
-       
-       
         DefaultPieDataset pieChart = new DefaultPieDataset();
-        pieChart.setValue("Placene", 10);
-        pieChart.setValue("Neplacene", 5);
-        
-          
         DefaultPieDataset autaPieChart = new DefaultPieDataset();
-        autaPieChart.setValue("Popravljena", 7);
-        autaPieChart.setValue("Nepopravljena", 5);
-        
         DefaultCategoryDataset popravkeBarChart = new DefaultCategoryDataset();
-        popravkeBarChart.setValue(25, "Prihodi", "Januar");
-        popravkeBarChart.setValue(20, "Prihodi", "Februar");
-        popravkeBarChart.setValue(31, "Prihodi", "Mart");
-        popravkeBarChart.setValue(28, "Prihodi", "April");
-        popravkeBarChart.setValue(25, "Prihodi", "Maj");
-        popravkeBarChart.setValue(22, "Prihodi", "Jun");
-        popravkeBarChart.setValue(29, "Prihodi", "Jul");
-        popravkeBarChart.setValue(30, "Prihodi", "Avgust");
-        popravkeBarChart.setValue(28, "Prihodi", "Septembar");
-        popravkeBarChart.setValue(23, "Prihodi", "Oktobar");
-        popravkeBarChart.setValue(34, "Prihodi", "Novembar");
-        popravkeBarChart.setValue(28, "Prihodi", "Decembar");
-       // prihodiBarChart.incrementValue(200, "Prihodi", "Decembar");
 
 
+
+        int mjesecIndex = comboBoxMjesec.getSelectedIndex();
+        int godinaIndex = comboBoxGodina.getSelectedIndex();
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+        if (mjesecIndex == 0 && godinaIndex != 0) {
+
+           
+            
+            for(int i=0; i<12; i++){
+
+            calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 1);
+            calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 31);
+            prihodiBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())) +
+                     DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()),new Date(calendar2.getTimeInMillis())), "Prihodi", mjeseci[i]);
+            }
+            
+            
+           /* prihodiBarChart.setValue(1200, "Prihodi", "Februar");
+            prihodiBarChart.setValue(800, "Prihodi", "Mart");
+            prihodiBarChart.setValue(700, "Prihodi", "April");
+            prihodiBarChart.setValue(900, "Prihodi", "Maj");
+            prihodiBarChart.setValue(1100, "Prihodi", "Jun");
+            prihodiBarChart.setValue(600, "Prihodi", "Jul");
+            prihodiBarChart.setValue(800, "Prihodi", "Avgust");
+            prihodiBarChart.setValue(1000, "Prihodi", "Septembar");
+            prihodiBarChart.setValue(800, "Prihodi", "Oktobar");
+            prihodiBarChart.setValue(900, "Prihodi", "Novembar");
+            prihodiBarChart.setValue(500, "Prihodi", "Decembar");
+            
+            */
+           
+           
+
+            pieChart.setValue("Placene", 10);
+            pieChart.setValue("Neplacene", 5);
+
+            autaPieChart.setValue("Popravljena", 7);
+            autaPieChart.setValue("Nepopravljena", 5);
+
+            popravkeBarChart.setValue(25, "Prihodi", "Januar");
+            popravkeBarChart.setValue(20, "Prihodi", "Februar");
+            popravkeBarChart.setValue(31, "Prihodi", "Mart");
+            popravkeBarChart.setValue(28, "Prihodi", "April");
+            popravkeBarChart.setValue(25, "Prihodi", "Maj");
+            popravkeBarChart.setValue(22, "Prihodi", "Jun");
+            popravkeBarChart.setValue(29, "Prihodi", "Jul");
+            popravkeBarChart.setValue(30, "Prihodi", "Avgust");
+            popravkeBarChart.setValue(28, "Prihodi", "Septembar");
+            popravkeBarChart.setValue(23, "Prihodi", "Oktobar");
+            popravkeBarChart.setValue(34, "Prihodi", "Novembar");
+            popravkeBarChart.setValue(28, "Prihodi", "Decembar");
+            // prihodiBarChart.incrementValue(200, "Prihodi", "Decembar");
+
+            
+        } else if (mjesecIndex != 0 && godinaIndex != 0 ){
+            
+            int kraj=0;
+            if ( mjesecIndex==1 || mjesecIndex == 3 || mjesecIndex==5 || mjesecIndex == 7 || mjesecIndex==8 || mjesecIndex == 10 || mjesecIndex == 12 ){
+                kraj = 31;
+            }
+            else if (mjesecIndex == 2){
+                    if(Integer.parseInt((String)comboBoxGodina.getSelectedItem()) % 4 == 0 ){
+                        kraj = 29;
+                    }
+                        else {
+                    kraj = 28;
+                    }
+                    }
+                    else {
+                    kraj =30;
+                    }
+            
+                    
+    
+                for(int i=1; i<=kraj; i++){
+
+            calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex()-1, i);
+            calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex()-1, i);
+            prihodiBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())) +
+                    DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", ""+i);
+            
+            }
+            
+        }
         
         //JFreeChart myChart= ChartFactory.createBarChart("Prihodi u 2017. godini","Mjesecno","Prihodi", barChart,PlotOrientation.VERTICAL,false,true,false);
-        JFreeChart prihodiChart= ChartFactory.createLineChart("Prihodi u 2017. godini","Mjesecno","Prihodi", prihodiBarChart,PlotOrientation.VERTICAL,false,true,false);
-        JFreeChart autaChart= ChartFactory.createPieChart("Auta na stanju",autaPieChart);
-        JFreeChart faktureChart= ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
-        JFreeChart popravkeChart= ChartFactory.createBarChart("Popravke u 2017. godini","Mjesecno","Broj popravljenih auta", popravkeBarChart,PlotOrientation.VERTICAL,false,true,false);
+            JFreeChart prihodiChart = ChartFactory.createLineChart("Prihodi u 2017. godini", "Mjesecno", "Prihodi", prihodiBarChart, PlotOrientation.VERTICAL, false, true, false);
+            JFreeChart autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
+            JFreeChart faktureChart = ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
+            JFreeChart popravkeChart = ChartFactory.createBarChart("Popravke u 2017. godini", "Mjesecno", "Broj popravljenih auta", popravkeBarChart, PlotOrientation.VERTICAL, false, true, false);
 
-        
-        CategoryPlot plot = (CategoryPlot)popravkeChart.getPlot();
-        plot.setRangeGridlinePaint(Color.BLUE);
-        plot.setBackgroundPaint(new Color(207,229,235));
-        
-        CategoryPlot plot2 = (CategoryPlot)prihodiChart.getPlot();
-        plot2.setRangeGridlinePaint(Color.BLUE);
-        plot2.setBackgroundPaint(new Color(207,229,235));
-        
-         RingPlot plot3 = (RingPlot)faktureChart.getPlot();
-        plot3.setBackgroundPaint(new Color(207,229,235));
-        
-        PiePlot plot4 = (PiePlot)autaChart.getPlot();
-        plot4.setBackgroundPaint(new Color(207,229,235));
-        
-        
-        BarRenderer renderer = (BarRenderer) plot.getRenderer();
-        renderer.setSeriesPaint(0, new Color(40,106,155));
-        
-        LineAndShapeRenderer renderer2 = (LineAndShapeRenderer) plot2.getRenderer();
-        renderer2.setSeriesPaint(0, new Color(40,106,155));
-        renderer2.setSeriesStroke(0, new BasicStroke(3.5f));
-        
-        ChartPanel prihodiBarPanel= new ChartPanel(prihodiChart);
-        ChartPanel autaBarPanel= new ChartPanel(autaChart);        
-        ChartPanel faktureBarPanel= new ChartPanel(faktureChart);
-        ChartPanel popravkeBarPanel= new ChartPanel(popravkeChart);
+            CategoryPlot plot = (CategoryPlot) popravkeChart.getPlot();
+            plot.setRangeGridlinePaint(Color.BLUE);
+            plot.setBackgroundPaint(new Color(207, 229, 235));
 
+            CategoryPlot plot2 = (CategoryPlot) prihodiChart.getPlot();
+            plot2.setRangeGridlinePaint(Color.BLUE);
+            plot2.setBackgroundPaint(new Color(207, 229, 235));
 
-        grafikPanel.setLayout(new java.awt.BorderLayout());
-        grafikPanel.removeAll();
-        grafikPanel.add(autaBarPanel,BorderLayout.CENTER);
-        grafikPanel.validate();
+            RingPlot plot3 = (RingPlot) faktureChart.getPlot();
+            plot3.setBackgroundPaint(new Color(207, 229, 235));
+
+            PiePlot plot4 = (PiePlot) autaChart.getPlot();
+            plot4.setBackgroundPaint(new Color(207, 229, 235));
+
+            BarRenderer renderer = (BarRenderer) plot.getRenderer();
+            renderer.setSeriesPaint(0, new Color(40, 106, 155));
+
+            LineAndShapeRenderer renderer2 = (LineAndShapeRenderer) plot2.getRenderer();
+            renderer2.setSeriesPaint(0, new Color(40, 106, 155));
+            renderer2.setSeriesStroke(0, new BasicStroke(3.5f));
+
+            ChartPanel prihodiBarPanel = new ChartPanel(prihodiChart);
+            ChartPanel autaBarPanel = new ChartPanel(autaChart);
+            ChartPanel faktureBarPanel = new ChartPanel(faktureChart);
+            ChartPanel popravkeBarPanel = new ChartPanel(popravkeChart);
+
+            grafikPanel.setLayout(new java.awt.BorderLayout());
+            grafikPanel.removeAll();
+            grafikPanel.add(autaBarPanel, BorderLayout.CENTER);
+            grafikPanel.validate();
+
+            grafik2Panel.setLayout(new java.awt.BorderLayout());
+            grafik2Panel.removeAll();
+            grafik2Panel.add(prihodiBarPanel, BorderLayout.CENTER);
+            grafik2Panel.validate();
+
+            grafik3Panel.setLayout(new java.awt.BorderLayout());
+            grafik3Panel.removeAll();
+            grafik3Panel.add(faktureBarPanel, BorderLayout.CENTER);
+            grafik3Panel.validate();
+
+            grafik4Panel.setLayout(new java.awt.BorderLayout());
+            grafik4Panel.removeAll();
+            grafik4Panel.add(popravkeBarPanel, BorderLayout.CENTER);
+            grafik4Panel.validate();
         
-        grafik2Panel.setLayout(new java.awt.BorderLayout());
-        grafik2Panel.removeAll();
-        grafik2Panel.add(prihodiBarPanel,BorderLayout.CENTER);
-        grafik2Panel.validate();
-        
-        grafik3Panel.setLayout(new java.awt.BorderLayout());
-        grafik3Panel.removeAll();
-        grafik3Panel.add(faktureBarPanel,BorderLayout.CENTER);
-        grafik3Panel.validate();
-        
-        grafik4Panel.setLayout(new java.awt.BorderLayout());
-        grafik4Panel.removeAll();
-        grafik4Panel.add(popravkeBarPanel,BorderLayout.CENTER);
-        grafik4Panel.validate();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -5121,16 +5157,15 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
     }
 
-    void inicijalizujZaposleniPanel(){
+    void inicijalizujZaposleniPanel() {
         dateChooserDatumDoZaposlenog.setCalendar(Calendar.getInstance());
         dateChooserDatumOdZaposlenog.setCalendar(Calendar.getInstance());
         dateChooserDatumRodjenja.setCalendar(Calendar.getInstance());
         dateChooserDatumPrimanjaURadniOdnos.setCalendar(Calendar.getInstance());
         new ZaposleniLogika("svi").run();
-        
-        
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;
