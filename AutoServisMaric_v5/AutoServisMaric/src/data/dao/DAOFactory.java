@@ -11,6 +11,11 @@ public abstract class DAOFactory {
     
     public abstract ZaposleniDAO getZaposleniDAO();
     
+    public abstract StatistikaDAO getStatistikaDAO();
+    
+        public abstract StatistikaDAO getRadniNalogDAO();
+
+    
     public static DAOFactory getDAOFactory() {
 		return new MySQLDAOFactory();
 	}
