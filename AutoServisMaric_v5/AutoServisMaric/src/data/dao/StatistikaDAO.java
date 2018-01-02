@@ -11,4 +11,5 @@ package data.dao;
  */
 public interface StatistikaDAO {
     
+    
 }

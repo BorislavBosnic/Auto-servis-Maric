@@ -13,7 +13,7 @@ public abstract class DAOFactory {
     
     public abstract StatistikaDAO getStatistikaDAO();
     
-        public abstract StatistikaDAO getRadniNalogDAO();
+    public abstract RadniNalogDAO getRadniNalogDAO();
 
     
     public static DAOFactory getDAOFactory() {

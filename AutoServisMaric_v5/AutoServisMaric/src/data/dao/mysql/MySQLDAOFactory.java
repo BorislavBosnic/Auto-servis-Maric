@@ -3,6 +3,7 @@ package data.dao.mysql;
 import data.dao.DAOFactory;
 import data.dao.KupacDAO;
 import data.dao.ModelVozilaDAO;
+import data.dao.RadniNalogDAO;
 import data.dao.StatistikaDAO;
 import data.dao.VoziloDAO;
 import data.dao.ZaposleniDAO;
@@ -35,7 +36,7 @@ public class MySQLDAOFactory extends DAOFactory {
     }
     
     @Override
-    public StatistikaDAO getRadniNalogDAO(){
-        return new MySQLStatistikaDAO();
+    public RadniNalogDAO getRadniNalogDAO(){
+        return new MySQLRadniNalogDAO();
     }
 }

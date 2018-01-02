@@ -14,4 +14,5 @@ import data.dao.StatistikaDAO;
 public class MySQLStatistikaDAO implements StatistikaDAO {
     
     
+    
 }

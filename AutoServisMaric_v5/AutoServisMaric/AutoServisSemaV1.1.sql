@@ -248,8 +248,8 @@ INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOt
 INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('2', '1', '2017-10-09', '2017-10-14', '70');
 INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `CijenaUsluge`) VALUES ('3', '0', '2017-12-30', '30');
 
-INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('1', '2017-10-15', '1');
-INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('2', '2017-11-16', '2');
+INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('1', '2017-07-15', '1');
+INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('2', '2017-10-16', '2');
 
 
 

@@ -31,12 +31,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -61,6 +66,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import poslovnalogika.StatistikaLogika;
 import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
 
@@ -613,7 +619,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         statistikajPanel = new javax.swing.JPanel();
         statistikaHeaderjPanel = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
-        jLabel56 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
         jLabel58 = new javax.swing.JLabel();
@@ -621,6 +626,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel66 = new javax.swing.JLabel();
         jLabel67 = new javax.swing.JLabel();
         jLabel68 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
@@ -628,6 +634,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel72 = new javax.swing.JLabel();
         jLabel78 = new javax.swing.JLabel();
         jLabel79 = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
@@ -635,6 +642,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
         jLabel85 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jDateChooserDatumOd = new com.toedter.calendar.JDateChooser();
+        jDateChooserDatumDo = new com.toedter.calendar.JDateChooser();
+        jLabel31 = new javax.swing.JLabel();
         jLabel86 = new javax.swing.JLabel();
         jLabel87 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -642,6 +656,12 @@ public class HomeForm1 extends javax.swing.JFrame {
         grafik2Panel = new javax.swing.JPanel();
         grafik3Panel = new javax.swing.JPanel();
         grafik4Panel = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        comboBoxMjesec = new javax.swing.JComboBox<>();
+        comboBoxGodina = new javax.swing.JComboBox<>();
+        buttonPregledGrafik = new javax.swing.JButton();
         vozilaPanel = new javax.swing.JPanel();
         panelAkcijeNaFormi = new javax.swing.JPanel();
         jLabel92 = new javax.swing.JLabel();
@@ -2675,15 +2695,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel18.setBackground(new java.awt.Color(102, 153, 255));
         jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jLabel56.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel56.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel56.setText("Statistika:");
-        jLabel56.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jLabel56PropertyChange(evt);
-            }
-        });
-
         jPanel19.setBackground(new java.awt.Color(102, 153, 255));
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Zarada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16), new java.awt.Color(255, 255, 255))); // NOI18N
 
@@ -2711,6 +2722,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel68.setForeground(new java.awt.Color(255, 255, 255));
         jLabel68.setText("12238 KM");
 
+        jLabel88.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel88.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel88.setText("Interval:");
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -2718,14 +2733,17 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel57)
-                    .addComponent(jLabel65)
-                    .addComponent(jLabel58))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel68)
-                    .addComponent(jLabel67)
-                    .addComponent(jLabel66))
+                    .addComponent(jLabel88)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel57)
+                            .addComponent(jLabel65)
+                            .addComponent(jLabel58))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel68)
+                            .addComponent(jLabel67)
+                            .addComponent(jLabel66))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
@@ -2743,6 +2761,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel65)
                     .addComponent(jLabel67))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel88)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2773,6 +2793,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel79.setForeground(new java.awt.Color(255, 255, 255));
         jLabel79.setText("220");
 
+        jLabel89.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel89.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel89.setText("Interval:");
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
@@ -2780,6 +2804,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel89)
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel71)
@@ -2809,6 +2834,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel71)
                     .addComponent(jLabel78))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel89)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2839,6 +2866,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel85.setForeground(new java.awt.Color(255, 255, 255));
         jLabel85.setText("5");
 
+        jLabel90.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel90.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel90.setText("Interval:");
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -2846,14 +2877,17 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel80)
-                    .addComponent(jLabel82)
-                    .addComponent(jLabel81))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel85)
-                    .addComponent(jLabel84)
-                    .addComponent(jLabel83))
+                    .addComponent(jLabel90)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel80)
+                            .addComponent(jLabel82)
+                            .addComponent(jLabel81))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel85)
+                            .addComponent(jLabel84)
+                            .addComponent(jLabel83))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
@@ -2871,7 +2905,67 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel82)
                     .addComponent(jLabel84))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel90)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel8.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir vremenskog intervala:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 16), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("Do:");
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton11.setText("Pregled");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Od:");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDateChooserDatumDo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDateChooserDatumOd, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jButton11)))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDateChooserDatumOd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jDateChooserDatumDo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jButton11)
+                .addGap(94, 94, 94))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -2879,30 +2973,27 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel56))
-                .addContainerGap(2172, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel56)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel86.setBackground(new java.awt.Color(255, 255, 255));
@@ -2917,15 +3008,15 @@ public class HomeForm1 extends javax.swing.JFrame {
         statistikaHeaderjPanelLayout.setHorizontalGroup(
             statistikaHeaderjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statistikaHeaderjPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(statistikaHeaderjPanelLayout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel87, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel86)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(2917, Short.MAX_VALUE))
+            .addGroup(statistikaHeaderjPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         statistikaHeaderjPanelLayout.setVerticalGroup(
             statistikaHeaderjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2993,6 +3084,65 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Popravljeni auti na godisnjem nivou", grafik4Panel);
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel30.setText("Odaberite mjesec:");
+
+        jLabel33.setText("Odaberite godinu:");
+
+        comboBoxMjesec.setMaximumRowCount(13);
+        comboBoxMjesec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" }));
+        comboBoxMjesec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMjesecActionPerformed(evt);
+            }
+        });
+
+        comboBoxGodina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "2017", "2018" }));
+
+        buttonPregledGrafik.setText("Pregled");
+        buttonPregledGrafik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPregledGrafikActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel33))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboBoxGodina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxMjesec, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(buttonPregledGrafik)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(comboBoxMjesec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(comboBoxGodina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonPregledGrafik)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout statistikajPanelLayout = new javax.swing.GroupLayout(statistikajPanel);
         statistikajPanel.setLayout(statistikajPanelLayout);
         statistikajPanelLayout.setHorizontalGroup(
@@ -3000,15 +3150,22 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addComponent(statistikaHeaderjPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(statistikajPanelLayout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         statistikajPanelLayout.setVerticalGroup(
             statistikajPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statistikajPanelLayout.createSequentialGroup()
                 .addComponent(statistikaHeaderjPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 738, Short.MAX_VALUE))
+                .addGroup(statistikajPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(statistikajPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(statistikajPanelLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 725, Short.MAX_VALUE))
         );
 
         parentPanel.add(statistikajPanel, "card5");
@@ -3524,7 +3681,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             vozilaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vozilaPanelLayout.createSequentialGroup()
                 .addComponent(panelAkcijeNaFormi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(855, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         parentPanel.add(vozilaPanel, "card6");
@@ -4277,10 +4434,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menu1jPanelMousePressed
 
-    private void jLabel56PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel56PropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel56PropertyChange
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton6ActionPerformed
     {//GEN-HEADEREND:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -4771,6 +4924,32 @@ public class HomeForm1 extends javax.swing.JFrame {
         new IzmijeniIzbrisiModelDialog(new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()),new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
+        String datum1 = "01-10-2017";
+        String datum2 = "20-11-2017";
+        java.util.Date inputDate1=null;
+        java.util.Date inputDate2=null;
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+         try {
+             inputDate1 = dateFormat.parse(datum1);
+             inputDate2 = dateFormat.parse(datum2);
+
+         } catch (ParseException ex) {
+             Logger.getLogger(HomeForm1.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        System.out.println(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(inputDate1, inputDate2));
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void comboBoxMjesecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMjesecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxMjesecActionPerformed
+
+    private void buttonPregledGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledGrafikActionPerformed
+        new StatistikaLogika(new Date(jDateChooserDatumOd.getDate().getTime()),new Date(jDateChooserDatumDo.getDate().getTime())).run();
+    }//GEN-LAST:event_buttonPregledGrafikActionPerformed
+
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci){
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
                     DefaultTableModel model = new DefaultTableModel(columns, 0);
@@ -4807,6 +4986,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     
     public void loadGraph(){
         DefaultCategoryDataset prihodiBarChart = new DefaultCategoryDataset();
+        
+       //if(comboBoxMjesec) 
+        
+        
         prihodiBarChart.setValue(500, "Prihodi", "Januar");
         prihodiBarChart.setValue(1200, "Prihodi", "Februar");
         prihodiBarChart.setValue(800, "Prihodi", "Mart");
@@ -4819,8 +5002,9 @@ public class HomeForm1 extends javax.swing.JFrame {
         prihodiBarChart.setValue(800, "Prihodi", "Oktobar");
         prihodiBarChart.setValue(900, "Prihodi", "Novembar");
         prihodiBarChart.setValue(500, "Prihodi", "Decembar");
-       // prihodiBarChart.incrementValue(200, "Prihodi", "Decembar");
         
+       
+       
         DefaultPieDataset pieChart = new DefaultPieDataset();
         pieChart.setValue("Placene", 10);
         pieChart.setValue("Neplacene", 5);
@@ -4956,10 +5140,13 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnPronadji;
     private javax.swing.JButton btnTrazi;
     private javax.swing.JButton buttonDodajZaposlenog;
+    private javax.swing.JButton buttonPregledGrafik;
     private javax.swing.JButton buttonPrikazSvihBivsihRadnika;
     private javax.swing.JButton buttonTraziRadneNalogeRadnika;
     private javax.swing.JCheckBox cbSvi;
     private javax.swing.JCheckBox checkBoxSviZaposleni;
+    private javax.swing.JComboBox<String> comboBoxGodina;
+    private javax.swing.JComboBox<String> comboBoxMjesec;
     private javax.swing.JPanel danasnjeAktivnostiPanel;
     private com.toedter.calendar.JDateChooser dateChooserDatumDoZaposlenog;
     private com.toedter.calendar.JDateChooser dateChooserDatumOdZaposlenog;
@@ -4972,6 +5159,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JPanel grafikPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -4988,6 +5176,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
+    private com.toedter.calendar.JDateChooser jDateChooserDatumDo;
+    private com.toedter.calendar.JDateChooser jDateChooserDatumOd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel105;
@@ -5057,6 +5247,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
@@ -5074,7 +5268,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
@@ -5109,13 +5302,17 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel95;
     private javax.swing.JLabel jLabel96;
     private javax.swing.JLabel jLabel97;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -5140,6 +5337,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
