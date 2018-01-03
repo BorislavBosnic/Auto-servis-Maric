@@ -638,10 +638,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel86 = new javax.swing.JLabel();
         jLabel87 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        grafikPanel = new javax.swing.JPanel();
-        grafik2Panel = new javax.swing.JPanel();
-        grafik3Panel = new javax.swing.JPanel();
-        grafik4Panel = new javax.swing.JPanel();
+        panelGrafikPrihodiUkupno = new javax.swing.JPanel();
+        PanelGrafikPrihodiDijelovi = new javax.swing.JPanel();
+        panelGrafikAuta = new javax.swing.JPanel();
+        panelGrafikFakture = new javax.swing.JPanel();
+        panelGrafikPopravke = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -3016,59 +3017,80 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout grafikPanelLayout = new javax.swing.GroupLayout(grafikPanel);
-        grafikPanel.setLayout(grafikPanelLayout);
-        grafikPanelLayout.setHorizontalGroup(
-            grafikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGrafikPrihodiUkupno.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelGrafikPrihodiUkupnoLayout = new javax.swing.GroupLayout(panelGrafikPrihodiUkupno);
+        panelGrafikPrihodiUkupno.setLayout(panelGrafikPrihodiUkupnoLayout);
+        panelGrafikPrihodiUkupnoLayout.setHorizontalGroup(
+            panelGrafikPrihodiUkupnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 977, Short.MAX_VALUE)
         );
-        grafikPanelLayout.setVerticalGroup(
-            grafikPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGrafikPrihodiUkupnoLayout.setVerticalGroup(
+            panelGrafikPrihodiUkupnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Auta na stanju", grafikPanel);
+        jTabbedPane1.addTab("Ukupni prihodi", panelGrafikPrihodiUkupno);
 
-        javax.swing.GroupLayout grafik2PanelLayout = new javax.swing.GroupLayout(grafik2Panel);
-        grafik2Panel.setLayout(grafik2PanelLayout);
-        grafik2PanelLayout.setHorizontalGroup(
-            grafik2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelGrafikPrihodiDijelovi.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout PanelGrafikPrihodiDijeloviLayout = new javax.swing.GroupLayout(PanelGrafikPrihodiDijelovi);
+        PanelGrafikPrihodiDijelovi.setLayout(PanelGrafikPrihodiDijeloviLayout);
+        PanelGrafikPrihodiDijeloviLayout.setHorizontalGroup(
+            PanelGrafikPrihodiDijeloviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 977, Short.MAX_VALUE)
         );
-        grafik2PanelLayout.setVerticalGroup(
-            grafik2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelGrafikPrihodiDijeloviLayout.setVerticalGroup(
+            PanelGrafikPrihodiDijeloviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Prihodi na godisnjem nivou", grafik2Panel);
+        jTabbedPane1.addTab("Prihodi od dijelova", PanelGrafikPrihodiDijelovi);
 
-        javax.swing.GroupLayout grafik3PanelLayout = new javax.swing.GroupLayout(grafik3Panel);
-        grafik3Panel.setLayout(grafik3PanelLayout);
-        grafik3PanelLayout.setHorizontalGroup(
-            grafik3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGrafikAuta.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelGrafikAutaLayout = new javax.swing.GroupLayout(panelGrafikAuta);
+        panelGrafikAuta.setLayout(panelGrafikAutaLayout);
+        panelGrafikAutaLayout.setHorizontalGroup(
+            panelGrafikAutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 977, Short.MAX_VALUE)
         );
-        grafik3PanelLayout.setVerticalGroup(
-            grafik3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGrafikAutaLayout.setVerticalGroup(
+            panelGrafikAutaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Fakture", grafik3Panel);
+        jTabbedPane1.addTab("Auta na stanju", panelGrafikAuta);
 
-        grafik4Panel.setBackground(new java.awt.Color(255, 255, 255));
+        panelGrafikFakture.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout grafik4PanelLayout = new javax.swing.GroupLayout(grafik4Panel);
-        grafik4Panel.setLayout(grafik4PanelLayout);
-        grafik4PanelLayout.setHorizontalGroup(
-            grafik4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelGrafikFaktureLayout = new javax.swing.GroupLayout(panelGrafikFakture);
+        panelGrafikFakture.setLayout(panelGrafikFaktureLayout);
+        panelGrafikFaktureLayout.setHorizontalGroup(
+            panelGrafikFaktureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 977, Short.MAX_VALUE)
         );
-        grafik4PanelLayout.setVerticalGroup(
-            grafik4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelGrafikFaktureLayout.setVerticalGroup(
+            panelGrafikFaktureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 518, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Popravljeni auti na godisnjem nivou", grafik4Panel);
+        jTabbedPane1.addTab("Fakture", panelGrafikFakture);
+
+        panelGrafikPopravke.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelGrafikPopravkeLayout = new javax.swing.GroupLayout(panelGrafikPopravke);
+        panelGrafikPopravke.setLayout(panelGrafikPopravkeLayout);
+        panelGrafikPopravkeLayout.setHorizontalGroup(
+            panelGrafikPopravkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 977, Short.MAX_VALUE)
+        );
+        panelGrafikPopravkeLayout.setVerticalGroup(
+            panelGrafikPopravkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 518, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Popravljeni auti na godisnjem nivou", panelGrafikPopravke);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -3153,6 +3175,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 725, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Ukupni prihodi");
 
         parentPanel.add(statistikajPanel, "card5");
 
@@ -4981,12 +5005,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         int godinaIndex = comboBoxGodina.getSelectedIndex();
         if(godinaIndex != 0) {
         
-        DefaultCategoryDataset prihodiBarChart = new DefaultCategoryDataset();
+        DefaultCategoryDataset prihodiUkupnoBarChart = new DefaultCategoryDataset();
+        DefaultCategoryDataset prihodiDijeloviBarChart = new DefaultCategoryDataset();
         DefaultPieDataset pieChart = new DefaultPieDataset();
         DefaultPieDataset autaPieChart = new DefaultPieDataset();
         DefaultCategoryDataset popravkeBarChart = new DefaultCategoryDataset();
 
-        JFreeChart prihodiChart = null;
+        JFreeChart prihodiUkupnoChart = null;
+        JFreeChart prihodiDijeloviChart = null;
         JFreeChart autaChart = null;
         JFreeChart faktureChart = null;
         JFreeChart popravkeChart = null;
@@ -4996,8 +5022,9 @@ public class HomeForm1 extends javax.swing.JFrame {
         Calendar calendar2 = Calendar.getInstance();
         if (mjesecIndex == 0 && godinaIndex != 0) {
 
-            prihodiChart = ChartFactory.createLineChart("Prihodi u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Prihodi", prihodiBarChart, PlotOrientation.VERTICAL, false, true, false);
-
+            prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
+            prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Prihodi od dijelova", prihodiDijeloviBarChart);
+            
             // OVO OVDJE MODIFIKOVATI I RASPOREDITI NA ODGOVARAJUCA MJESTA U KODU ZA SVAKI GRAFIK POSEBNO
             autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
             faktureChart = ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
@@ -5007,8 +5034,12 @@ public class HomeForm1 extends javax.swing.JFrame {
 
                 calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 1);
                 calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 31);
-                prihodiBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
+                prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
                         + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", mjeseci[i]);
+                
+                prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", mjeseci[i]);
+            
+                
             }
 
             /* prihodiBarChart.setValue(1200, "Prihodi", "Februar");
@@ -5059,7 +5090,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                 kraj = 30;
             }
 
-            prihodiChart = ChartFactory.createLineChart("Prihodi za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Prihodi", prihodiBarChart, PlotOrientation.VERTICAL, false, true, false);
+            prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
+            prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Prihodi od dijelova", prihodiDijeloviBarChart);
 
             autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
             faktureChart = ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
@@ -5069,59 +5101,80 @@ public class HomeForm1 extends javax.swing.JFrame {
 
                 calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex() - 1, i);
                 calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex() - 1, i);
-                prihodiBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
+                prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
                         + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", "" + i);
+                prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", "" + i);
 
             }
 
         }
 
         //JFreeChart myChart= ChartFactory.createBarChart("Prihodi u 2017. godini","Mjesecno","Prihodi", barChart,PlotOrientation.VERTICAL,false,true,false);
-        CategoryPlot plot = (CategoryPlot) popravkeChart.getPlot();
-        plot.setRangeGridlinePaint(Color.BLUE);
-        plot.setBackgroundPaint(new Color(207, 229, 235));
+        
+        CategoryPlot prihodiUkupnoPlot = (CategoryPlot) prihodiUkupnoChart.getPlot();
+        prihodiUkupnoPlot.setRangeGridlinePaint(Color.BLUE);
+        prihodiUkupnoPlot.setBackgroundPaint(new Color(207, 229, 235));
+        
+        CategoryPlot prihodiDijeloviPlot = (CategoryPlot) prihodiDijeloviChart.getPlot();
+        prihodiDijeloviPlot.setRangeGridlinePaint(Color.BLUE);
+        prihodiDijeloviPlot.setBackgroundPaint(new Color(207, 229, 235));
+        
+        CategoryPlot popravkePlot = (CategoryPlot) popravkeChart.getPlot();
+        popravkePlot.setRangeGridlinePaint(Color.BLUE);
+        popravkePlot.setBackgroundPaint(new Color(207, 229, 235));
+        
+        RingPlot fakturePlot = (RingPlot) faktureChart.getPlot();
+        fakturePlot.setBackgroundPaint(new Color(207, 229, 235));
 
-        CategoryPlot plot2 = (CategoryPlot) prihodiChart.getPlot();
-        plot2.setRangeGridlinePaint(Color.BLUE);
-        plot2.setBackgroundPaint(new Color(207, 229, 235));
+        PiePlot autaPlot = (PiePlot) autaChart.getPlot();
+        autaPlot.setBackgroundPaint(new Color(207, 229, 235));
+        
+        
 
-        RingPlot plot3 = (RingPlot) faktureChart.getPlot();
-        plot3.setBackgroundPaint(new Color(207, 229, 235));
+        LineAndShapeRenderer prihodiUkupnoRenderer = (LineAndShapeRenderer) prihodiUkupnoPlot.getRenderer();
+        prihodiUkupnoRenderer.setSeriesPaint(0, new Color(40, 106, 155));
+        prihodiUkupnoRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
 
-        PiePlot plot4 = (PiePlot) autaChart.getPlot();
-        plot4.setBackgroundPaint(new Color(207, 229, 235));
+        LineAndShapeRenderer prihodiDijeloviRenderer = (LineAndShapeRenderer) prihodiDijeloviPlot.getRenderer();
+        prihodiDijeloviRenderer.setSeriesPaint(0, new Color(40, 106, 155));
+        prihodiDijeloviRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
 
-        BarRenderer renderer = (BarRenderer) plot.getRenderer();
-        renderer.setSeriesPaint(0, new Color(40, 106, 155));
-
-        LineAndShapeRenderer renderer2 = (LineAndShapeRenderer) plot2.getRenderer();
-        renderer2.setSeriesPaint(0, new Color(40, 106, 155));
-        renderer2.setSeriesStroke(0, new BasicStroke(3.5f));
-
-        ChartPanel prihodiBarPanel = new ChartPanel(prihodiChart);
+        
+        BarRenderer popravkeRenderer = (BarRenderer) popravkePlot.getRenderer();
+        popravkeRenderer.setSeriesPaint(0, new Color(40, 106, 155));
+        
+        
+        ChartPanel prihodiukupnoBarPanel = new ChartPanel(prihodiUkupnoChart);
+        ChartPanel prihodiDijeloviBarPanel = new ChartPanel(prihodiDijeloviChart);
         ChartPanel autaBarPanel = new ChartPanel(autaChart);
         ChartPanel faktureBarPanel = new ChartPanel(faktureChart);
         ChartPanel popravkeBarPanel = new ChartPanel(popravkeChart);
 
-        grafikPanel.setLayout(new java.awt.BorderLayout());
-        grafikPanel.removeAll();
-        grafikPanel.add(autaBarPanel, BorderLayout.CENTER);
-        grafikPanel.validate();
+        
+        panelGrafikPrihodiUkupno.setLayout(new java.awt.BorderLayout());
+        panelGrafikPrihodiUkupno.removeAll();
+        panelGrafikPrihodiUkupno.add(prihodiukupnoBarPanel, BorderLayout.CENTER);
+        panelGrafikPrihodiUkupno.validate();
+        
+        PanelGrafikPrihodiDijelovi.setLayout(new java.awt.BorderLayout());
+        PanelGrafikPrihodiDijelovi.removeAll();
+        PanelGrafikPrihodiDijelovi.add(prihodiDijeloviBarPanel, BorderLayout.CENTER);
+        PanelGrafikPrihodiDijelovi.validate();
+        
+        panelGrafikAuta.setLayout(new java.awt.BorderLayout());
+        panelGrafikAuta.removeAll();
+        panelGrafikAuta.add(autaBarPanel, BorderLayout.CENTER);
+        panelGrafikAuta.validate();
 
-        grafik2Panel.setLayout(new java.awt.BorderLayout());
-        grafik2Panel.removeAll();
-        grafik2Panel.add(prihodiBarPanel, BorderLayout.CENTER);
-        grafik2Panel.validate();
+        panelGrafikFakture.setLayout(new java.awt.BorderLayout());
+        panelGrafikFakture.removeAll();
+        panelGrafikFakture.add(faktureBarPanel, BorderLayout.CENTER);
+        panelGrafikFakture.validate();
 
-        grafik3Panel.setLayout(new java.awt.BorderLayout());
-        grafik3Panel.removeAll();
-        grafik3Panel.add(faktureBarPanel, BorderLayout.CENTER);
-        grafik3Panel.validate();
-
-        grafik4Panel.setLayout(new java.awt.BorderLayout());
-        grafik4Panel.removeAll();
-        grafik4Panel.add(popravkeBarPanel, BorderLayout.CENTER);
-        grafik4Panel.validate();
+        panelGrafikPopravke.setLayout(new java.awt.BorderLayout());
+        panelGrafikPopravke.removeAll();
+        panelGrafikPopravke.add(popravkeBarPanel, BorderLayout.CENTER);
+        panelGrafikPopravke.validate();
         }
     }
 
@@ -5172,6 +5225,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;
+    private javax.swing.JPanel PanelGrafikPrihodiDijelovi;
     private javax.swing.JButton btnPonisti;
     private javax.swing.JButton btnPonistiSve;
     private javax.swing.JButton btnPrikaziSve;
@@ -5191,10 +5245,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateChooserDatumPrimanjaURadniOdnos;
     private com.toedter.calendar.JDateChooser dateChooserDatumRodjenja;
     private javax.swing.JLabel datumLabel;
-    private javax.swing.JPanel grafik2Panel;
-    private javax.swing.JPanel grafik3Panel;
-    private javax.swing.JPanel grafik4Panel;
-    private javax.swing.JPanel grafikPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -5458,6 +5508,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemOtpustiRadnika;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel panelAkcijeNaFormi;
+    private javax.swing.JPanel panelGrafikAuta;
+    private javax.swing.JPanel panelGrafikFakture;
+    private javax.swing.JPanel panelGrafikPopravke;
+    private javax.swing.JPanel panelGrafikPrihodiUkupno;
     private javax.swing.JPanel panelPronadjiVlasnika;
     private javax.swing.JPanel panelPronadjiVozilo;
     private javax.swing.JPanel panelVozilo;
