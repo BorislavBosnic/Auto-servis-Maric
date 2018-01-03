@@ -243,13 +243,18 @@ INSERT INTO `autoservismaric`.`vozilo` (`idVozilo`, `BrojRegistracije`) VALUES (
 INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('1', '70', '1', '2017-11-10');
 INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('2', '130', '1', '2017-11-21');
 INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('3', '40', '2', '2017-10-10');
+INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('4', '30', '2', '2018-01-01');
+
 
 INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('1', '1', '2017-07-09', '2017-07-10', '50');
 INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('2', '1', '2017-10-09', '2017-10-14', '70');
 INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `CijenaUsluge`) VALUES ('3', '0', '2017-12-30', '30');
+INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('4', '1', '2017-12-29', '2018-01-02', '60');
+
 
 INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('1', '2017-07-15', '1');
 INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('2', '2017-10-16', '2');
+INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('3', '2018-01-03', '4');
 
 
 
