@@ -16,6 +16,13 @@ public interface RadniNalogDAO {
     public double getSumaCijenaUsluga(Date datumOd, Date datumDo);
     
     public double getSumaCijenaDijelova(Date datumOd, Date datumDo);
+    
+    public int getBrojPopravki(Date datumOd,Date datumDo);
+        
+    public int getBrojAutaNaStanju();
+    
+    public int getBrojAutaKojaCekajuPopravku();
+
         
     
     
