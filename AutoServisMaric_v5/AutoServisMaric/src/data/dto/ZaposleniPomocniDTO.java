@@ -17,13 +17,15 @@ public class ZaposleniPomocniDTO {
     private String brojRegistracije;
     private java.sql.Date datumZatvaranjaNaloga;
     private String opis;
-    private double troskovi;
-    private double cijenaUsluge;
+    private Double troskovi;
+    private Double cijenaUsluge;
+    private Double profit;
+    private Integer brojRadnihnaloga;
 
     public ZaposleniPomocniDTO() {
     }
 
-    public ZaposleniPomocniDTO(String marka, String model, String brojRegistracije, Date datumZatvaranjaNaloga, String opis, double troskovi, double cijenaUsluge) {
+    public ZaposleniPomocniDTO(String marka, String model, String brojRegistracije, Date datumZatvaranjaNaloga, String opis, Double troskovi, Double cijenaUsluge, Double profit, Integer brojRadnihnaloga) {
         this.marka = marka;
         this.model = model;
         this.brojRegistracije = brojRegistracije;
@@ -31,6 +33,8 @@ public class ZaposleniPomocniDTO {
         this.opis = opis;
         this.troskovi = troskovi;
         this.cijenaUsluge = cijenaUsluge;
+        this.profit = profit;
+        this.brojRadnihnaloga = brojRadnihnaloga;
     }
 
     public String getMarka() {
@@ -73,22 +77,37 @@ public class ZaposleniPomocniDTO {
         this.opis = opis;
     }
 
-    public double getTroskovi() {
+    public Double getTroskovi() {
         return troskovi;
     }
 
-    public void setTroskovi(double troskovi) {
+    public void setTroskovi(Double troskovi) {
         this.troskovi = troskovi;
     }
 
-    public double getCijenaUsluge() {
+    public Double getCijenaUsluge() {
         return cijenaUsluge;
     }
 
-    public void setCijenaUsluge(double cijenaUsluge) {
+    public void setCijenaUsluge(Double cijenaUsluge) {
         this.cijenaUsluge = cijenaUsluge;
     }
 
+    public Double getProfit() {
+        return profit;
+    }
 
-   
+    public void setProfit(Double profit) {
+        this.profit = profit;
+    }
+
+    public Integer getBrojRadnihnaloga() {
+        return brojRadnihnaloga;
+    }
+
+    public void setBrojRadnihnaloga(Integer brojRadnihnaloga) {
+        this.brojRadnihnaloga = brojRadnihnaloga;
+    }
+
+    
 }

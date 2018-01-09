@@ -201,12 +201,13 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String query ="SELECT Marka,Model,BrojRegistracije,DatumZatvaranjaNaloga,Opis " +
-                "Troskovi,CijenaUsluge FROM radnik r INNER JOIN radni_nalog_radnik rnr on r.IdRadnik=rnr.IdRadnik " +
-                "INNER JOIN radni_nalog rn on rnr.IdRadniNalog=rn.IdRadniNalog " +
-                "INNER JOIN vozilo v on v.IdVozilo=rn.IdVozilo " +
-                "INNER JOIN model_vozila mv on v.IdModelVozila=mv.IdModelVozila WHERE r.IdRadnik=?"
-                + " AND DatumZatvaranjaNaloga BETWEEN ? AND ?;";
+		String query ="SELECT DatumZatvaranjaNaloga,Troskovi,CijenaUsluge,Marka,Model,BrojRegistracije,COUNT(*) AS 'Broj radnih naloga',\n" +
+                                "SUM(CijenaUsluge) AS 'Profit',Opis\n" +
+                                "FROM radnik r INNER JOIN radni_nalog_radnik rnr ON r.IdRadnik=rnr.IdRadnik\n" +
+                                "INNER JOIN radni_nalog rn ON rnr.IdRadniNalog=rn.IdRadniNalog\n" +
+                                "INNER JOIN vozilo v ON rn.IdVozilo=v.IdVozilo\n" +
+                                "INNER JOIN model_vozila mv ON v.IdModelVozila=mv.IdModelVozila\n" +
+                                "WHERE r.IdRadnik=? AND rn.DatumZatvaranjaNaloga BETWEEN ? AND ?;";
 		try{
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -219,7 +220,7 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
                             retVal.add(new ZaposleniPomocniDTO(rs.getString("Marka")
                             ,rs.getString("Model"),rs.getString("BrojRegistracije"),
                             rs.getDate("DatumZatvaranjaNaloga")
-                            ,rs.getString("Opis"),rs.getDouble("Troskovi"),rs.getDouble("CijenaUsluge")));
+                            ,rs.getString("Opis"),rs.getDouble("Troskovi"),rs.getDouble("CijenaUsluge"),rs.getDouble("Profit"),rs.getInt("Broj radnih naloga")));
                         }
 		} catch (SQLException e) {
 			e.printStackTrace();

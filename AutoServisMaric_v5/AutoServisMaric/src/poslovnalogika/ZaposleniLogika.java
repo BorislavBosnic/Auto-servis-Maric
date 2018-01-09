@@ -16,6 +16,8 @@ import static autoservismaric.forms.HomeForm1.jTableZaposleni;
 import static autoservismaric.forms.HomeForm1.tableRadniNalozi;
 import data.dto.ZaposleniPomocniDTO;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 
 /**
  *
@@ -35,17 +37,23 @@ public class ZaposleniLogika extends Thread{
     private java.util.Date datumPrimanja;
     private String funkcija;
 
+    //zbog statistike
     private java.sql.Date datumOd;
     private java.sql.Date datumDo;
+    private JLabel labelRadniNalog;
+    private JLabel labelProfit;
     
     public ZaposleniLogika(String opcija){
         this.opcija=opcija;
     }
 
-    public ZaposleniLogika(String opcija, java.sql.Date datumOd, java.sql.Date datumDo) {
+    //zbog statistike
+    public ZaposleniLogika(String opcija, java.sql.Date datumOd, java.sql.Date datumDo,JLabel labelaRadniNalozi,JLabel labelaProfit) {
         this.opcija = opcija;
         this.datumOd = datumOd;
         this.datumDo = datumDo;
+        this.labelRadniNalog=labelaRadniNalozi;
+        this.labelProfit=labelaProfit;
     }
     
     
@@ -69,23 +77,21 @@ public class ZaposleniLogika extends Thread{
        if("select".equals(opcija)){
            
        }else if("insert".equals(opcija)){
-           dodajZaposlenog();
-           
+           dodajZaposlenog();           
        }else if("delete".equals(opcija)){
            
        }else if("svi".equals(opcija)){
            popuniTabeluRadnika();
        }else if("statistika".equals(opcija)){
            popuniTabeluRadnihNaloga();
-           izracunajProfit();
        }else{
            System.out.println("ERROR");
        }
    }
    
    private void popuniTabeluRadnika(){
-        DefaultTableModel table=(DefaultTableModel)jTableZaposleni.getModel();
-        List<ZaposleniDTO> lista=DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
+       DefaultTableModel table=(DefaultTableModel)jTableZaposleni.getModel();
+       List<ZaposleniDTO> lista=DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
        Iterator<ZaposleniDTO> i=lista.iterator();
        table.setRowCount(0);//brise sadrzaj tabele
        ZaposleniDTO rez=new ZaposleniDTO();
@@ -94,13 +100,12 @@ public class ZaposleniLogika extends Thread{
            table.addRow(new Object[]{rez.getIme(),rez.getPrezime(),rez.getImeOca(),rez.getAdresa(),rez.getTelefon()
            ,rez.getBrojLicneKarte(),rez.getStrucnaSprema(),rez.getDatumRodjenja(),rez.getDatumOd(),rez.getDatumDo(),rez.getFunkcija()});
        }
-        //table.setRowCount(10);
    }
    
    private void popuniTabeluRadnihNaloga(){  
         int redniBroj=jTableZaposleni.getSelectedRow();
         if(redniBroj!=-1){
-             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
+            ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
             DefaultTableModel table=(DefaultTableModel)tableRadniNalozi.getModel();
             List<ZaposleniPomocniDTO> lista=DAOFactory.getDAOFactory().getZaposleniDAO().sviRadniNaloziZaposlenog(selektovanRadnik,datumOd,datumDo);
@@ -112,15 +117,13 @@ public class ZaposleniLogika extends Thread{
                table.addRow(new Object[]{rez.getMarka()
                             ,rez.getModel(),rez.getBrojRegistracije(),
                             rez.getDatumZatvaranjaNaloga()
-                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge()});
+                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge(),rez.getProfit()});
            }
+            labelRadniNalog.setText("Radni nalozi: "+rez.getBrojRadnihnaloga());
+            labelProfit.setText("Ostvareni profit radnika: "+rez.getProfit()+" KM");
         }else{
             JOptionPane.showMessageDialog(null, "Niste odabrali zaposlenog.", "Problem", JOptionPane.ERROR_MESSAGE);
         }
-   }
-   
-   private void izracunajProfit(){
-       
    }
    
    private void dodajZaposlenog(){
