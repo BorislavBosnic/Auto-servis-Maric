@@ -5,6 +5,8 @@
  */
 package data.dao;
 
+import data.dto.RadniNalogDTO;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,7 +25,11 @@ public interface RadniNalogDAO {
     
     public int getBrojAutaKojaCekajuPopravku();
 
-        
+    public ArrayList<RadniNalogDTO> getRadniNalozi(int id);
+
+    public boolean dodajRadniNalog(RadniNalogDTO nalog);
     
+    public boolean azurirajRadniNalog(RadniNalogDTO nalog); 
     
+    public RadniNalogDTO getRadniNalog(int id);
 }

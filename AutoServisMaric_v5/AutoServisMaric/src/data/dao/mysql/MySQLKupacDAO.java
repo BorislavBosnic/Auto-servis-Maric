@@ -195,12 +195,15 @@ public class MySQLKupacDAO implements KupacDAO{
         }
         else{
              String query = "DELETE FROM kupac "
-                     + "WHERE Naziv=? ";
+                     + "WHERE Naziv=? AND Telefon=? AND Adresa=? AND Grad=? ";
              
              try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
                         ps.setString(1, kupac.getNaziv());
+                        ps.setString(2, kupac.getTelefon());
+                        ps.setString(3, kupac.getAdresa());
+                        ps.setString(4, kupac.getGrad());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {
@@ -223,7 +226,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Ime LIKE ? "
+                                + "WHERE Ime LIKE CONCAT(?,'%') "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -252,7 +255,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Prezime LIKE ? "
+                                + "WHERE Prezime LIKE CONCAT(?,'%') "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

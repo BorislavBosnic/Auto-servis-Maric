@@ -312,6 +312,8 @@ public class AutoSuggestor {
         for (String word : dictionary) {//get words in the dictionary which we added
             boolean fullymatches = true;
             
+            //word = word.toLowerCase();
+            
             boolean flag = false;
             String[] niz = word.split(" ");
             for(int j = 0; j < niz.length; j++){
@@ -328,13 +330,13 @@ public class AutoSuggestor {
                 }
             }
             if (fullymatches) {
-                addWordToSuggestions(word);
+                addWordToSuggestions(word.toLowerCase());
                 suggestionAdded = true;
             }
             }
             else
             {
-                addWordToSuggestions(word);
+                addWordToSuggestions(word.toLowerCase());
                 suggestionAdded = true;
             }
         }

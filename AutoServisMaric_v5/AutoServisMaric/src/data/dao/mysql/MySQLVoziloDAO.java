@@ -28,9 +28,12 @@ public class MySQLVoziloDAO implements VoziloDAO {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 
-			while (rs.next())
+                       
+                        
+			while (rs.next()){
 				retVal.add(new VoziloDTO(rs.getInt("IdVozilo"), rs.getString("BrojRegistracije"), rs.getInt("Kilovat"), rs.getDouble("Kubikaza"), rs.getInt("Godiste"), rs.getInt("IdKupac"), rs.getInt("IdModelVozila"), rs.getString("VrstaGoriva")));
-		} catch (SQLException e) {
+                        }
+                        } catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
 		} finally {
@@ -51,13 +54,23 @@ public class MySQLVoziloDAO implements VoziloDAO {
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, vozilo.getBrojRegistracije());
-                        ps.setInt(2, vozilo.getKilovat());
-                        ps.setDouble(3, vozilo.getKubikaza());
-                        ps.setInt(4, vozilo.getGodiste());
+			ps.setObject(1, vozilo.getBrojRegistracije());
+                        
+                        ps.setObject(2, vozilo.getKilovat());
+                        
+                        
+                            ps.setObject(3, vozilo.getKubikaza());
+                        
+                        ps.setObject(4, vozilo.getGodiste());
+//                        if(vozilo.getGodiste() != null){
+//                        ps.setInt(4, vozilo.getGodiste());
+//                        }
+//                        else{
+//                            ps.setNull(4, java.sql.Types.INTEGER);
+//                        }
                         ps.setInt(5, vozilo.getIdKupac());
                         ps.setInt(6, vozilo.getIdModelVozila());
-                        ps.setString(7, vozilo.getVrstaGoriva().toString());
+                        ps.setObject(7, vozilo.getVrstaGoriva());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {

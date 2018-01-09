@@ -114,8 +114,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, idVlasnika);
-                // System.out.println("eeeeeee" + idVlasnika);
-                //iv.idVlasnika = idVlasnika;
+                
                 iv.setVisible(true);
             }
         });
@@ -135,13 +134,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tableVozila.getModel().getColumnName(0);
 
-                        System.out.println("E" + selektovanRed);
-
                         if (selektovanRed >= 0) {
 
                             if ("ID".equals(imeKolone)) {
                                 idVlasnika = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
-                                System.out.println("D" + idVlasnika);
                             }
                         }
                         if (rowAtPoint > -1) {
@@ -3089,8 +3085,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel19.getAccessibleContext().setAccessibleName("Ukupna zarada");
-
         jLabel86.setBackground(new java.awt.Color(255, 255, 255));
         jLabel86.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel86.setForeground(new java.awt.Color(229, 229, 229));
@@ -3331,6 +3325,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         tfPrezimeVozilo.setEditable(false);
 
         btnPronadji.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPronadji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPronadji.setText("Traži");
         btnPronadji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3444,18 +3439,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                                     .addComponent(rbPravnoLiceVozilo)))
                             .addComponent(tfRegistracijaTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPronadjiVoziloLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPronadjiVoziloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbSvi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78))
         );
-
-        panelPronadjiVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnPonistiSve, btnPronadji, jButton1});
-
         panelPronadjiVoziloLayout.setVerticalGroup(
             panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
@@ -3473,7 +3465,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(tfModelTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28)
                     .addComponent(tfMarkaTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbSvi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -3493,15 +3485,14 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(tfNazivVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(9, 9, 9)
-                .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPonistiSve)
-                    .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPonistiSve, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPronadji))
                 .addContainerGap())
         );
-
-        panelPronadjiVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnPonistiSve, btnPronadji, jButton1});
 
         jLabel96.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel96.setForeground(new java.awt.Color(255, 255, 255));
@@ -3523,6 +3514,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel110.setText("Prezime:");
 
         btnTrazi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTrazi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnTrazi.setText("Traži");
         btnTrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3668,6 +3660,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         panelPronadjiVlasnikaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnPonisti, btnPrikaziSve, btnTrazi});
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/racing (1).png"))); // NOI18N
         jButton2.setText("Dodaj Vozilo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3676,6 +3669,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (2).png"))); // NOI18N
         jButton4.setText("Dodaj Vlasnika");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3684,6 +3678,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cube.png"))); // NOI18N
         jButton5.setText("Dodaj Model");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3736,15 +3731,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(panelPronadjiVozilo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPronadjiVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelVoziloLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(5, 5, 5))
         );
 
         panelVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton4, jButton5});
@@ -3764,17 +3759,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         panelAkcijeNaFormiLayout.setHorizontalGroup(
             panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAkcijeNaFormiLayout.createSequentialGroup()
-                .addGroup(panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(spVoziloPretraga, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAkcijeNaFormiLayout.createSequentialGroup()
+                .addGroup(panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAkcijeNaFormiLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelAkcijeNaFormiLayout.createSequentialGroup()
-                                .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel92))
-                            .addComponent(panelVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 1045, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel92))
+                    .addGroup(panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(spVoziloPretraga, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAkcijeNaFormiLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(panelVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(2000, Short.MAX_VALUE))
         );
         panelAkcijeNaFormiLayout.setVerticalGroup(
             panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3784,7 +3780,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(spVoziloPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3799,7 +3795,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             vozilaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vozilaPanelLayout.createSequentialGroup()
                 .addComponent(panelAkcijeNaFormi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(862, Short.MAX_VALUE))
         );
 
         parentPanel.add(vozilaPanel, "card6");
@@ -4783,6 +4779,145 @@ public class HomeForm1 extends javax.swing.JFrame {
         prikaziKupceSveUTabeli(kupci);
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
 
+    private void btnPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiActionPerformed
+        tfPrezimeTrazi.setText("");
+        tfImeTrazi.setText("");
+        tfNazivTrazi.setText("");
+        rbPrivatnoTrazi.setSelected(true);
+        rbPravnoTrazi.setSelected(true);
+        tfNazivTrazi.setEditable(false);
+        tfNazivTrazi.setBackground(Color.gray);
+        tfImeTrazi.setBackground(Color.white);
+        tfPrezimeTrazi.setBackground(Color.white);
+        rbPravnoTrazi.setSelected(false);
+        rbPrivatnoTrazi.setSelected(true);
+    }//GEN-LAST:event_btnPonistiActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        new DodajModel(this, true).setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new DodajVlasnikaDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new DodajVoziloDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        new IzmijeniIzbrisiModelDialog(new JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void buttonPregledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledActionPerformed
+        // new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        labelIntervalZarada.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime()))
+                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime()))) + " KM");
+
+        labelIntervalZaradaDijelovi.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime()))) + " KM");
+
+        labelPopravkeInterval.setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime())) + "");
+
+    }//GEN-LAST:event_buttonPregledActionPerformed
+
+    private void comboBoxMjesecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMjesecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxMjesecActionPerformed
+
+    private void buttonPregledGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledGrafikActionPerformed
+        loadGraph();
+    }//GEN-LAST:event_buttonPregledGrafikActionPerformed
+
+    private void cbSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSviActionPerformed
+        if (cbSvi.isSelected()) {
+            bGTraziVozilo.clearSelection();
+            tfImeVozilo.setEditable(false);
+            tfImeVozilo.setBackground(Color.gray);
+            tfImeVozilo.setText("");
+            tfPrezimeVozilo.setEditable(false);
+            tfPrezimeVozilo.setBackground(Color.gray);
+            tfPrezimeVozilo.setText("");
+            tfNazivVozilo.setEditable(false);
+            tfNazivVozilo.setBackground(Color.gray);
+            tfNazivVozilo.setText("");
+        } else {
+            rbPrivatnoLiceVozilo.setSelected(true);
+            rbPravnoLiceVozilo.setSelected(false);
+            tfImeVozilo.setEditable(true);
+            tfImeVozilo.setText("");
+            tfImeVozilo.setBackground(Color.white);
+            tfPrezimeVozilo.setEditable(true);
+            tfPrezimeVozilo.setText("");
+            tfPrezimeVozilo.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_cbSviActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        izbrisiPopupZaVlasnike();
+        ucitajPopupZaVozila();
+
+        ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
+
+        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        tableVozila.setModel(model);
+
+        for (VoziloDTO v : vozila) {
+            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+            ModelVozilaDTO mod = new ModelVozilaDTO();
+            for (ModelVozilaDTO m : VozilaLogika.modeli) {
+                if (m.getIdModelVozila() == v.getIdModelVozila()) {
+                    mod = m;
+                }
+            }
+
+            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getVrstaGoriva()};
+            model.addRow(rowData);
+        }
+
+        tableVozila.setModel(model);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rbPravnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoLiceVoziloActionPerformed
+        tfNazivVozilo.setEditable(true);
+        tfImeVozilo.setEditable(false);
+        tfPrezimeVozilo.setEditable(false);
+        tfImeVozilo.setText("");
+        tfPrezimeVozilo.setText("");
+        tfImeVozilo.setBackground(Color.gray);
+        tfPrezimeVozilo.setBackground(Color.gray);
+        tfNazivVozilo.setBackground(Color.white);
+        rbPrivatnoLiceVozilo.setSelected(false);
+    }//GEN-LAST:event_rbPravnoLiceVoziloActionPerformed
+
+    private void rbPrivatnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoLiceVoziloActionPerformed
+
+        tfNazivVozilo.setEditable(false);
+        tfNazivVozilo.setText("");
+        tfImeVozilo.setEditable(true);
+        tfPrezimeVozilo.setEditable(true);
+        tfNazivVozilo.setBackground(Color.gray);
+        rbPravnoLiceVozilo.setSelected(false);
+        tfImeVozilo.setBackground(Color.white);
+        tfPrezimeVozilo.setBackground(Color.white);
+    }//GEN-LAST:event_rbPrivatnoLiceVoziloActionPerformed
+
+    private void btnPonistiSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiSveActionPerformed
+        tfRegistracijaTrazi.setText("");
+        tfGodisteTrazi.setText("");
+        tfMarkaTrazi.setText("");
+        tfModelTrazi.setText("");
+        tfPrezimeVozilo.setText("");
+        tfImeVozilo.setText("");
+        tfNazivVozilo.setText("");
+        rbPrivatnoLiceVozilo.setSelected(true);
+        rbPravnoLiceVozilo.setSelected(false);
+        tfNazivVozilo.setEditable(false);
+        tfNazivVozilo.setBackground(Color.gray);
+    }//GEN-LAST:event_btnPonistiSveActionPerformed
+
     private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
         izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
@@ -4808,7 +4943,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             tableVozila.setModel(modell);
 
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
+            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
             for (VoziloDTO v : vozila) {
 
                 KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
@@ -4827,7 +4962,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                     }
                 }
                 if (godiste != 0) {
-                    System.out.println(v.getGodiste() + " " + godiste);
                     if (!Objects.equals(v.getGodiste(), godiste)) {
                         dodati = false;
                     }
@@ -4843,7 +4977,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     }
                 }
                 if (dodati == true) {
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
                     modell.addRow(rowData);
                     tableVozila.setModel(modell);
                 }
@@ -4873,7 +5007,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                     }
                 }
                 if (godiste != 0) {
-                    System.out.println(v.getGodiste() + " " + godiste);
                     if (!Objects.equals(v.getGodiste(), godiste)) {
                         dodati = false;
                     }
@@ -4913,7 +5046,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         }
                     }
 
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
                     modell.addRow(rowData);
                     tableVozila.setModel(modell);
 
@@ -4922,153 +5055,11 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         }
 
-
     }//GEN-LAST:event_btnPronadjiActionPerformed
 
     private void tfModelTraziFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfModelTraziFocusGained
         ucitajPreporukeModel();
-        System.out.println("ovdje");
     }//GEN-LAST:event_tfModelTraziFocusGained
-
-    private void btnPonistiSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiSveActionPerformed
-        tfRegistracijaTrazi.setText("");
-        tfGodisteTrazi.setText("");
-        tfMarkaTrazi.setText("");
-        tfModelTrazi.setText("");
-        tfPrezimeVozilo.setText("");
-        tfImeVozilo.setText("");
-        tfNazivVozilo.setText("");
-        rbPrivatnoLiceVozilo.setSelected(true);
-        rbPravnoLiceVozilo.setSelected(false);
-        tfNazivVozilo.setEditable(false);
-        tfNazivVozilo.setBackground(Color.gray);
-    }//GEN-LAST:event_btnPonistiSveActionPerformed
-
-    private void rbPrivatnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoLiceVoziloActionPerformed
-
-        tfNazivVozilo.setEditable(false);
-        tfNazivVozilo.setText("");
-        tfImeVozilo.setEditable(true);
-        tfPrezimeVozilo.setEditable(true);
-        tfNazivVozilo.setBackground(Color.gray);
-        rbPravnoLiceVozilo.setSelected(false);
-        tfImeVozilo.setBackground(Color.white);
-        tfPrezimeVozilo.setBackground(Color.white);
-    }//GEN-LAST:event_rbPrivatnoLiceVoziloActionPerformed
-
-    private void rbPravnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoLiceVoziloActionPerformed
-        tfNazivVozilo.setEditable(true);
-        tfImeVozilo.setEditable(false);
-        tfPrezimeVozilo.setEditable(false);
-        tfImeVozilo.setText("");
-        tfPrezimeVozilo.setText("");
-        tfImeVozilo.setBackground(Color.gray);
-        tfPrezimeVozilo.setBackground(Color.gray);
-        tfNazivVozilo.setBackground(Color.white);
-        rbPrivatnoLiceVozilo.setSelected(false);
-    }//GEN-LAST:event_rbPravnoLiceVoziloActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        izbrisiPopupZaVlasnike();
-        ucitajPopupZaVozila();
-
-        ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-
-        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tableVozila.setModel(model);
-
-        for (VoziloDTO v : vozila) {
-            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-            ModelVozilaDTO mod = new ModelVozilaDTO();
-            for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                    mod = m;
-                }
-            }
-
-            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva(), v.getKilovat(), v.getKubikaza()};
-            model.addRow(rowData);
-        }
-
-        tableVozila.setModel(model);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiActionPerformed
-        tfPrezimeTrazi.setText("");
-        tfImeTrazi.setText("");
-        tfNazivTrazi.setText("");
-        rbPrivatnoTrazi.setSelected(true);
-        rbPravnoTrazi.setSelected(true);
-        tfNazivTrazi.setEditable(false);
-        tfNazivTrazi.setBackground(Color.gray);
-        tfImeTrazi.setBackground(Color.white);
-        tfPrezimeTrazi.setBackground(Color.white);
-        rbPravnoTrazi.setSelected(false);
-        rbPrivatnoTrazi.setSelected(true);
-    }//GEN-LAST:event_btnPonistiActionPerformed
-
-    private void cbSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSviActionPerformed
-        if (cbSvi.isSelected()) {
-            bGTraziVozilo.clearSelection();
-            tfImeVozilo.setEditable(false);
-            tfImeVozilo.setBackground(Color.gray);
-            tfImeVozilo.setText("");
-            tfPrezimeVozilo.setEditable(false);
-            tfPrezimeVozilo.setBackground(Color.gray);
-            tfPrezimeVozilo.setText("");
-            tfNazivVozilo.setEditable(false);
-            tfNazivVozilo.setBackground(Color.gray);
-            tfNazivVozilo.setText("");
-        } else {
-            rbPrivatnoLiceVozilo.setSelected(true);
-            rbPravnoLiceVozilo.setSelected(false);
-            tfImeVozilo.setEditable(true);
-            tfImeVozilo.setText("");
-            tfImeVozilo.setBackground(Color.white);
-            tfPrezimeVozilo.setEditable(true);
-            tfPrezimeVozilo.setText("");
-            tfPrezimeVozilo.setBackground(Color.white);
-        }
-    }//GEN-LAST:event_cbSviActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new DodajModel(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new DodajVlasnikaDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new DodajVoziloDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        new IzmijeniIzbrisiModelDialog(new JFrame(), true).setVisible(true);
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void buttonPregledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledActionPerformed
-        // new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
-        NumberFormat formatter = new DecimalFormat("#0.00");
-
-        labelIntervalZarada.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime()))
-                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime()))) + " KM");
-
-        labelIntervalZaradaDijelovi.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime()))) + " KM");
-
-        labelPopravkeInterval.setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(jDateChooserDatumOd.getDate().getTime()), new Date(jDateChooserDatumDo.getDate().getTime())) + "");
-
-    }//GEN-LAST:event_buttonPregledActionPerformed
-
-    private void comboBoxMjesecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMjesecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxMjesecActionPerformed
-
-    private void buttonPregledGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledGrafikActionPerformed
-        loadGraph();
-    }//GEN-LAST:event_buttonPregledGrafikActionPerformed
 
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};

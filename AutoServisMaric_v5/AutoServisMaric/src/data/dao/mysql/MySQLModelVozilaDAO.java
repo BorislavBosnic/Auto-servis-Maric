@@ -14,13 +14,13 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 
     @Override
     public ArrayList<ModelVozilaDTO> sviModeli() {
-        ArrayList<ModelVozilaDTO> retVal = new ArrayList<ModelVozilaDTO>();
+       ArrayList<ModelVozilaDTO> retVal = new ArrayList<ModelVozilaDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		String query = "SELECT IdModelVozila, Marka, Model "
-				+ "FROM model_vozila "
+				+  "FROM model_vozila "
 				+ "ORDER BY IdModelVozila ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -28,7 +28,7 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka"), rs.getString("Model")));
+				retVal.add(new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka").toLowerCase(), rs.getString("Model").toLowerCase()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
