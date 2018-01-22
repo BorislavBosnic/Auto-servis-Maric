@@ -32,6 +32,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         this.dtm = dtm;
         this.red = red;
         this.pdv = pdv;
+        System.out.println("");
         jtfPDV.setText(String.format("%.2f", pdv));
         try {
             tfId.setText(((Integer) dtm.getValueAt(red, 0)).toString());
