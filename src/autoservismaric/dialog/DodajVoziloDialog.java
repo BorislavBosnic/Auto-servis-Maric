@@ -42,6 +42,12 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         
         marka = ucitajPreporukeMarke();
         model = ucitajPreporukeModel();
+        
+        tabela.setAutoCreateRowSorter(true);
+        tfVlasnikNaziv.setBackground(Color.gray);
+        tfVlasnikNaziv.setEditable(false);
+        
+        tabela.setDefaultEditor(Object.class, null);
     }
 
     
@@ -50,8 +56,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         AutoSuggestor autoSuggestorMarke = new AutoSuggestor(tfMarka, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
-                
-
+               
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> modeli = new ArrayList<>();
                 
@@ -107,11 +112,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         };
                 
         return autoSuggestorModel;
-   }
-    
-    
-    
-    
+   }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -249,6 +250,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         jLabel3.setText("Dodavanje vozila:");
 
         btnDodaj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDodaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,6 +259,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         });
 
         btnOdustani.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cancel (1).png"))); // NOI18N
         btnOdustani.setText("Odustani");
         btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +274,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         tfVlasnikNaziv.setEditable(false);
 
         btnPrikaziSve.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btnPrikaziSve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/list.png"))); // NOI18N
         btnPrikaziSve.setText("Prikaži sve vlasnike");
         btnPrikaziSve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,6 +298,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         jLabel6.setText("Model:");
 
         btnTraziVlasnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTraziVlasnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (3).png"))); // NOI18N
         btnTraziVlasnika.setText("Traži vlasnika");
         btnTraziVlasnika.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,9 +314,11 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
 
             }
         ));
+        tabela.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabela);
 
         btnDodajVlasnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDodajVlasnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (4).png"))); // NOI18N
         btnDodajVlasnika.setText("Dodaj vlasnika");
         btnDodajVlasnika.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,7 +361,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                                 .addGap(94, 94, 94)
                                 .addComponent(btnOdustani)
                                 .addGap(34, 34, 34)
-                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
@@ -367,8 +374,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                                             .addComponent(tfMarka, javax.swing.GroupLayout.Alignment.TRAILING)))
                                     .addComponent(tfRegistracija, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAddModel)
-                                .addGap(18, 18, 18)
+                                .addComponent(btnAddModel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                                         .addComponent(jLabel23)
@@ -386,20 +393,21 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfKubikaza, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                             .addComponent(tfKilovat, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)))))
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfVlasnikNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfVlasnikIme, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfVlasnikPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTraziVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDodajVlasnika))
-                            .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                    .addGap(94, 94, 94)
-                                    .addComponent(btnPrikaziSve))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDodajVoziloLayout.createSequentialGroup()
+                                    .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfVlasnikNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfVlasnikIme, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfVlasnikPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnTraziVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnDodajVlasnika))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panelDodajVoziloLayout.createSequentialGroup()
+                                        .addGap(94, 94, 94)
+                                        .addComponent(btnPrikaziSve))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton4)
                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
@@ -470,8 +478,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                                     .addComponent(jLabel22)
                                     .addComponent(tfKubikaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel102)
@@ -484,7 +491,9 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfVlasnikNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)))
-                            .addComponent(btnTraziVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnTraziVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
@@ -613,15 +622,12 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
 
-        ArrayList<KupacDTO> kupci = VozilaLogika.vlasnici;
-
-        System.out.println(kupci.size());
+        ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
 
         String[] columns = {"ID","Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         tabela.setModel(model);
         for(KupacDTO k : kupci){
-            System.out.println(k.getIme() + k.getNaziv());
             Object[] rowData = { k.getIdKupac(), (k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), (k.getNaziv() == null) ? "---" : k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
             model.addRow(rowData);
         }
@@ -635,16 +641,23 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         String registracija = tfRegistracija.getText();
+        
+        if(registracija == null || "".equals(registracija))
+        {
+            JOptionPane.showMessageDialog(rootPane, "Morate unijeti broj registracije vozila!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+        
         String marka = tfMarka.getText();
         String model = tfModel.getText();
         
         if(model == null || "".equals(model)){
-            JOptionPane.showMessageDialog(rootPane, "Morate uneti model vozila", "Greška", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(rootPane, "Morate unnijei model vozila!", "Greška", JOptionPane.OK_OPTION);
             return;
         }
         
         if(marka == null || "".equals(marka)){
-            JOptionPane.showMessageDialog(rootPane, "Morate uneti marku vozila", "Greška", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(rootPane, "Morate unijeti marku vozila!", "Greška", JOptionPane.OK_OPTION);
             return;
         }
         
@@ -660,12 +673,10 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane, "Nevalidan format godišta. Mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-            //lbPoruka.setText("Nevalidno godiste.");
-            //lbPoruka.setBackground(Color.red);
             return;
         }
         catch(Exception ex){
-              JOptionPane.showMessageDialog(rootPane, "Proverite unesenu vrednost godista", "Greška", JOptionPane.OK_OPTION);
+              JOptionPane.showMessageDialog(rootPane, "Provjerite unesenu vrijednost godišta!", "Greška", JOptionPane.OK_OPTION);
               return;
             }
         }
@@ -676,8 +687,6 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(rootPane, "Nevalidan format kilovata. Mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-            //lbPoruka.setText("Nevalidni kilovati.");
-            //lbPoruka.setBackground(Color.red);
             return;
         }
         }
@@ -689,16 +698,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         catch(NumberFormatException e){
 
             JOptionPane.showMessageDialog(rootPane, "Nevalidan format kubikaže. Mora biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-            //lbPoruka.setBackground(Color.red);
             return;
         }
-        }
-
-        if(registracija == null){
-            JOptionPane.showMessageDialog(rootPane, "Morate unijeti registraciju", "Greška", JOptionPane.OK_OPTION);
-            //lbPoruka.setText("Morate unijeti registraciju.");
-            //lbPoruka.setBackground(Color.red);
-            return;
         }
 
         int column = 0;
@@ -720,27 +721,20 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
             vozilo.setIdKupac(idVlasnik);
 
             if(DAOFactory.getDAOFactory().getVoziloDAO().dodajVozilo(vozilo)){
-               JOptionPane.showMessageDialog(rootPane, "Uspješno dodato vozilo", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                //lbPoruka.setText("Uspješno");
-                //lbPoruka.setForeground(Color.green);
+               JOptionPane.showMessageDialog(rootPane, "Uspješno dodato vozilo!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
             }
             else{           
                 JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-
-                //lbPoruka.setText("Neuspješno. Greška pri upisu u bazu.");
-                //lbPoruka.setBackground(Color.red);
                 return;
             }
         }
         else{
             JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-            //lbPoruka.setText("Greška sa modelom.");
-            //lbPoruka.setBackground(Color.red);
             return;
         }
         }
         else{
-             JOptionPane.showMessageDialog(rootPane, "Morate odabra vlasnika u tabeli.", "Greška", JOptionPane.OK_OPTION);
+             JOptionPane.showMessageDialog(rootPane, "Morate odabrati vlasnika u tabeli!", "Greška", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_btnDodajActionPerformed
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface VoziloDAO {
        
+        public ArrayList<VoziloDTO> dobijVozila(String query);
+        
         public ArrayList<VoziloDTO> svaVozila();
 
 	public boolean dodajVozilo(VoziloDTO vozilo);

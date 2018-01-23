@@ -5094,9 +5094,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfPrezimeVozilo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPronadji">
                               <Properties>
@@ -5153,9 +5150,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfImeVozilo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rbPrivatnoLiceVozilo">
                               <Properties>

@@ -105,11 +105,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         tableVozila.setComponentPopupMenu(popupMenu);
     }
 
-    public void izbrisiPopupZaVlasnike() {
-        popupMenuVlasnik.removeAll();
-        tableVozila.setComponentPopupMenu(popupMenuVlasnik);
-    }
-
     public void ucitajPopupZaVlasnike() {
 
         popupMenuVlasnik = new JPopupMenu();
@@ -358,6 +353,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         ucitajPopupZaVozila();
         ucitajPopupZaDijelove();
         
+         tableVozila.setDefaultEditor(Object.class, null);
+         tableVozila.setAutoCreateRowSorter(true);
+
+
+        
 
         //za autosuggestor zovila
 //        VozilaLogika vl1 = new VozilaLogika(VozilaLogika.UCITAJ_MODELE);
@@ -393,7 +393,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                 ArrayList<String> modeli = new ArrayList<>();
 
                 for (ModelVozilaDTO mv : VozilaLogika.modeli) {
-                    modeli.add(mv.getMarka());
+                    if(!modeli.contains(mv.getMarka()))
+                        modeli.add(mv.getMarka());
                 }
 
                 setDictionary(modeli);
@@ -458,31 +459,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         return autoSuggestorRegistracija;
     }
 
-    public AutoSuggestor ucitajPreporukeVlasnik() {
-
-        AutoSuggestor autoSuggestorVlasnik = new AutoSuggestor(tfPrezimeVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> vlasnici = new ArrayList<>();
-
-                for (KupacDTO v : VozilaLogika.vlasnici) {
-                    if (v.getNaziv() == null) {
-                        vlasnici.add(v.getIme() + " " + v.getPrezime());
-                    }
-                }
-
-                setDictionary(vlasnici);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorVlasnik;
-    }
-
     public AutoSuggestor ucitajPreporukePravniNaziv() {
 
         AutoSuggestor autoSuggestorPravniNaziv = new AutoSuggestor(tfNazivVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
@@ -515,8 +491,7 @@ public class HomeForm1 extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel59 = new javax.swing.JLabel();
         popupMenuZaposleni = new javax.swing.JPopupMenu();
@@ -861,10 +836,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         menuItemDetaljniOpis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuItemDetaljniOpis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
         menuItemDetaljniOpis.setText("Detaljan opis");
-        menuItemDetaljniOpis.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuItemDetaljniOpis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemDetaljniOpisActionPerformed(evt);
             }
         });
@@ -872,10 +845,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         menuItemIzmjeniRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Settings_32px_3.png"))); // NOI18N
         menuItemIzmjeniRadnika.setText("Izmjeni radnika");
-        menuItemIzmjeniRadnika.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuItemIzmjeniRadnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemIzmjeniRadnikaActionPerformed(evt);
             }
         });
@@ -883,10 +854,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         menuItemOtpustiRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/icon.png"))); // NOI18N
         menuItemOtpustiRadnika.setText("Otpusti radnika");
-        menuItemOtpustiRadnika.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuItemOtpustiRadnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemOtpustiRadnikaActionPerformed(evt);
             }
         });
@@ -902,22 +871,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel1.setBounds(10, 408, 0, 33);
 
         menu2jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu2jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu2jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu2jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu2jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu2jPanelMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu2jPanelMousePressed(evt);
             }
         });
@@ -974,18 +938,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel3.setBounds(-1, -1, 257, 113);
 
         menu3jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu3jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu3jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu3jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu3jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu3jPanelMouseExited(evt);
             }
         });
@@ -1018,18 +978,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu3jPanel.setBounds(10, 390, 260, 50);
 
         menu4jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu4jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu4jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu4jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu4jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu4jPanelMouseExited(evt);
             }
         });
@@ -1062,22 +1018,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu4jPanel.setBounds(10, 490, 260, 50);
 
         menu7jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu7jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu7jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu7jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu7jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu7jPanelMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu7jPanelMousePressed(evt);
             }
         });
@@ -1116,22 +1067,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel2.setBounds(40, 810, 160, 30);
 
         menu5jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu5jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu5jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu5jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu5jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu5jPanelMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu5jPanelMousePressed(evt);
             }
         });
@@ -1164,18 +1110,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu5jPanel.setBounds(10, 540, 261, 50);
 
         menu6jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu6jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu6jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu6jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu6jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu6jPanelMouseExited(evt);
             }
         });
@@ -1189,10 +1131,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel36.setMaximumSize(new java.awt.Dimension(68, 50));
         jLabel36.setMinimumSize(new java.awt.Dimension(68, 50));
         jLabel36.setPreferredSize(new java.awt.Dimension(68, 50));
-        jLabel36.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        jLabel36.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 jLabel36KeyPressed(evt);
             }
         });
@@ -1218,22 +1158,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu6jPanel.setBounds(10, 440, 260, 50);
 
         menu1jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu1jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu1jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu1jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu1jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu1jPanelMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu1jPanelMousePressed(evt);
             }
         });
@@ -1266,22 +1201,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         menu1jPanel.setBounds(10, 240, 260, 50);
 
         menu8jPanel.setBackground(new java.awt.Color(51, 51, 255));
-        menu8jPanel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        menu8jPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu8jPanelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt)
-            {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
                 menu8jPanelMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt)
-            {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
                 menu8jPanelMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 menu8jPanelMousePressed(evt);
             }
         });
@@ -1336,10 +1266,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton6.setText("Fakturiši");
-        jButton6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
@@ -1351,8 +1279,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane9.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -1374,8 +1301,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID naloga", "Ime", "Prezime", "Marka", "Model", "Datum dolaska", "Vrijeme dolaska"
             }
         ));
@@ -1405,8 +1331,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -1428,8 +1353,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null},
                 {null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID naloga", "Datum fakturisanja", "Vrijeme rada"
             }
         ));
@@ -1484,8 +1408,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1517,8 +1440,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "ID", "Naziv", "Količina", "Osnovica", "Cijena sa PDV"
             }
         ));
@@ -1695,19 +1617,15 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel136.setText("Datum termina:");
 
         jButton9.setText("Pronađi termin");
-        jButton9.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
 
         jButton11.setText("Poništi unose");
-        jButton11.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
@@ -1806,10 +1724,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel142.setText("Broj telefona:");
 
         jButton7.setText("Dodaj termin");
-        jButton7.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
@@ -1837,10 +1753,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel157.setToolTipText("");
 
         jButton12.setText("Poništi unose");
-        jButton12.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
             }
         });
@@ -1943,8 +1857,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane10.setPreferredSize(new java.awt.Dimension(920, 800));
 
         jTable9.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -1976,19 +1889,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Datum termina", "Vrijeme termina", "Datum zakazivanja", "Marka", "Model", "Ime", "Prezime", "Broj telefona"
             }
-        )
-        {
-            boolean[] canEdit = new boolean []
-            {
+        ) {
+            boolean[] canEdit = new boolean [] {
                 false, true, true, true, true, true, true, true
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
@@ -2165,10 +2074,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Pregled aktivnosti:");
-        jLabel4.addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {
-            public void propertyChange(java.beans.PropertyChangeEvent evt)
-            {
+        jLabel4.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jLabel4PropertyChange(evt);
             }
         });
@@ -2237,8 +2144,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         datumLabel.setText("  ");
 
         jTable10.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2257,19 +2163,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Rok", "Opis", "Vlasnik", "Auto"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
@@ -2299,8 +2201,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         Napomene2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Neplaćene fakture:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -2319,8 +2220,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null},
                 {null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Id fakture", "Datum", "Iznos"
             }
         ));
@@ -2478,30 +2378,24 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPretrazi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnPretrazi.setText("Pretraži");
-        btnPretrazi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPretraziActionPerformed(evt);
             }
         });
 
         btnSviDijelovi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSviDijelovi.setText("Prikaži sve");
-        btnSviDijelovi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSviDijelovi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSviDijeloviActionPerformed(evt);
             }
         });
 
         btnProdani.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnProdani.setText("Prodani dijelovi");
-        btnProdani.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnProdani.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProdaniActionPerformed(evt);
             }
         });
@@ -2704,10 +2598,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnDodaj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnDodaj.setText("DODAJ");
-        btnDodaj.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDodajActionPerformed(evt);
             }
         });
@@ -2892,39 +2784,30 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
                 "Id", "Šifra", "Naziv", "Marka", "Model", "Godište", "Vrsta goriva", "Cijena", "Količina", "Novo"
             }
-        )
-        {
-            Class[] types = new Class []
-            {
+        ) {
+            Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean []
-            {
+            boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex)
-            {
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex)
-            {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableMouseClicked(evt);
             }
         });
@@ -3195,10 +3078,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         buttonPregled.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonPregled.setText("Pregled");
-        buttonPregled.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonPregled.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPregledActionPerformed(evt);
             }
         });
@@ -3469,10 +3350,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         comboBoxMjesec.setMaximumRowCount(13);
         comboBoxMjesec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" }));
-        comboBoxMjesec.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        comboBoxMjesec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxMjesecActionPerformed(evt);
             }
         });
@@ -3480,10 +3359,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         comboBoxGodina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "2017", "2018" }));
 
         buttonPregledGrafik.setText("Pregled");
-        buttonPregledGrafik.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonPregledGrafik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPregledGrafikActionPerformed(evt);
             }
         });
@@ -3587,23 +3464,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel108.setForeground(new java.awt.Color(255, 255, 255));
         jLabel108.setText("Prezime:");
 
-        tfModelTrazi.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
+        tfModelTrazi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
                 tfModelTraziFocusGained(evt);
             }
         });
 
-        tfPrezimeVozilo.setEditable(false);
-
         btnPronadji.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPronadji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPronadji.setText("Traži");
-        btnPronadji.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPronadji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPronadjiActionPerformed(evt);
             }
         });
@@ -3620,25 +3491,19 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPonistiSve.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPonistiSve.setText("Poništi unose");
-        btnPonistiSve.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPonistiSve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPonistiSveActionPerformed(evt);
             }
         });
-
-        tfImeVozilo.setEditable(false);
 
         rbPrivatnoLiceVozilo.setBackground(new java.awt.Color(102, 153, 255));
         rbPrivatnoLiceVozilo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPrivatnoLiceVozilo.setForeground(new java.awt.Color(255, 255, 255));
         rbPrivatnoLiceVozilo.setSelected(true);
         rbPrivatnoLiceVozilo.setText("Privatno lice");
-        rbPrivatnoLiceVozilo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        rbPrivatnoLiceVozilo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPrivatnoLiceVoziloActionPerformed(evt);
             }
         });
@@ -3647,10 +3512,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoLiceVozilo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPravnoLiceVozilo.setForeground(new java.awt.Color(255, 255, 255));
         rbPravnoLiceVozilo.setText("Pravno lice");
-        rbPravnoLiceVozilo.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        rbPravnoLiceVozilo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPravnoLiceVoziloActionPerformed(evt);
             }
         });
@@ -3665,10 +3528,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Prikaži sve");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -3677,10 +3538,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbSvi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbSvi.setForeground(new java.awt.Color(240, 240, 240));
         cbSvi.setText("Svi");
-        cbSvi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cbSvi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSviActionPerformed(evt);
             }
         });
@@ -3801,10 +3660,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnTrazi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTrazi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnTrazi.setText("Traži");
-        btnTrazi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTraziActionPerformed(evt);
             }
         });
@@ -3820,10 +3677,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoTrazi.setForeground(new java.awt.Color(255, 255, 255));
         rbPrivatnoTrazi.setSelected(true);
         rbPrivatnoTrazi.setText("Privatno lice");
-        rbPrivatnoTrazi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        rbPrivatnoTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPrivatnoTraziActionPerformed(evt);
             }
         });
@@ -3832,20 +3687,16 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoTrazi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPravnoTrazi.setForeground(new java.awt.Color(255, 255, 255));
         rbPravnoTrazi.setText("Pravno lice");
-        rbPravnoTrazi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        rbPravnoTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPravnoTraziActionPerformed(evt);
             }
         });
 
         btnPrikaziSve.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrikaziSve.setText("Prikaži sve");
-        btnPrikaziSve.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPrikaziSve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrikaziSveActionPerformed(evt);
             }
         });
@@ -3856,10 +3707,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPonisti.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPonisti.setText("Poništi unose");
-        btnPonisti.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPonisti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPonistiActionPerformed(evt);
             }
         });
@@ -3957,10 +3806,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/racing (1).png"))); // NOI18N
         jButton2.setText("Dodaj Vozilo");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -3968,10 +3815,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (2).png"))); // NOI18N
         jButton4.setText("Dodaj Vlasnika");
-        jButton4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
@@ -3979,19 +3824,15 @@ public class HomeForm1 extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cube.png"))); // NOI18N
         jButton5.setText("Dodaj Model");
-        jButton5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
         jButton10.setText("Izmijeni/Izbriši model");
-        jButton10.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
@@ -4048,12 +3889,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         panelVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton4, jButton5});
 
         tableVozila.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
 
             },
-            new String []
-            {
+            new String [] {
 
             }
         ));
@@ -4187,8 +4026,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jTableZaposleni.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jTableZaposleni.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"", null, "", ""},
                 {"", null, null, ""},
                 {null, null, null, null},
@@ -4206,21 +4044,17 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Ime", "Ime oca", "Prezime", "Telefon"
             }
         ));
-        jTableZaposleni.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
+        jTableZaposleni.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jTableZaposleniMouseReleased(evt);
             }
         });
         jScrollPane12.setViewportView(jTableZaposleni);
-        if (jTableZaposleni.getColumnModel().getColumnCount() > 0)
-        {
+        if (jTableZaposleni.getColumnModel().getColumnCount() > 0) {
             jTableZaposleni.getColumnModel().getColumn(1).setResizable(false);
         }
 
@@ -4238,10 +4072,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         buttonTraziRadneNalogeRadnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonTraziRadneNalogeRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         buttonTraziRadneNalogeRadnika.setText("Traži");
-        buttonTraziRadneNalogeRadnika.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonTraziRadneNalogeRadnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTraziRadneNalogeRadnikaActionPerformed(evt);
             }
         });
@@ -4276,10 +4108,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         buttonDodajZaposlenog.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonDodajZaposlenog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/noviZaposleni.png"))); // NOI18N
         buttonDodajZaposlenog.setText("Dodaj zaposlenog");
-        buttonDodajZaposlenog.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonDodajZaposlenog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDodajZaposlenogActionPerformed(evt);
             }
         });
@@ -4412,10 +4242,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         buttonPrikazSvihBivsihRadnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonPrikazSvihBivsihRadnika.setText("Prikaz svih bivših zaposlenih");
-        buttonPrikazSvihBivsihRadnika.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        buttonPrikazSvihBivsihRadnika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPrikazSvihBivsihRadnikaActionPerformed(evt);
             }
         });
@@ -4496,8 +4324,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         tableRadniNalozi.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         tableRadniNalozi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
+            new Object [][] {
                 {"", "", null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -4524,8 +4351,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
-            new String []
-            {
+            new String [] {
                 "Marka", "Model", "Registracija", "Datum popravka", "Opis popravke", "Cijena troskova", "Cijena naplate", "Profit"
             }
         ));
@@ -4659,11 +4485,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         //ucitavanje autosuggestora
         if (voziloPanelPrviPut == true) {
             voziloPanelPrviPut = false;
-            markeAU = ucitajPreporukeMarke();
-            registracijeAU = ucitajPreporukeRegistracija();
-            vlasnikAU = ucitajPreporukeVlasnik();
+           // markeAU = ucitajPreporukeMarke();
+            //registracijeAU = ucitajPreporukeRegistracija();
             pravniNazivAU = ucitajPreporukePravniNaziv();
-            modelAU = ucitajPreporukeModel();
+            //modelAU = ucitajPreporukeModel();
         }
 
         parentPanel.removeAll();
@@ -5048,7 +4873,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-        izbrisiPopupZaVozila();
+        //izbrisiPopupZaVozila();
         ucitajPopupZaVlasnike();
         String izabrano = "";
 
@@ -5100,7 +4925,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
-        izbrisiPopupZaVozila();
+        //izbrisiPopupZaVozila();
         ucitajPopupZaVlasnike();
         ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
         prikaziKupceSveUTabeli(kupci);
@@ -5110,6 +4935,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         tfPrezimeTrazi.setText("");
         tfImeTrazi.setText("");
         tfNazivTrazi.setText("");
+        tfImeTrazi.setEditable(true);
+        tfPrezimeTrazi.setEditable(true);
         rbPrivatnoTrazi.setSelected(true);
         rbPravnoTrazi.setSelected(true);
         tfNazivTrazi.setEditable(false);
@@ -5182,7 +5009,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSviActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
 
         ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
@@ -5208,6 +5034,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rbPravnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoLiceVoziloActionPerformed
+        cbSvi.setSelected(false);
         tfNazivVozilo.setEditable(true);
         tfImeVozilo.setEditable(false);
         tfPrezimeVozilo.setEditable(false);
@@ -5220,7 +5047,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPravnoLiceVoziloActionPerformed
 
     private void rbPrivatnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoLiceVoziloActionPerformed
-
+        cbSvi.setSelected(false);
         tfNazivVozilo.setEditable(false);
         tfNazivVozilo.setText("");
         tfImeVozilo.setEditable(true);
@@ -5237,155 +5064,190 @@ public class HomeForm1 extends javax.swing.JFrame {
         tfMarkaTrazi.setText("");
         tfModelTrazi.setText("");
         tfPrezimeVozilo.setText("");
+        cbSvi.setSelected(false);
         tfImeVozilo.setText("");
         tfNazivVozilo.setText("");
         rbPrivatnoLiceVozilo.setSelected(true);
         rbPravnoLiceVozilo.setSelected(false);
         tfNazivVozilo.setEditable(false);
         tfNazivVozilo.setBackground(Color.gray);
+        tfImeVozilo.setEditable(true);
+        tfPrezimeVozilo.setEditable(true);
+        tfImeVozilo.setBackground(Color.white);
+        tfPrezimeVozilo.setBackground(Color.white);
     }//GEN-LAST:event_btnPonistiSveActionPerformed
 
+    //registracija,godiste,marka,model,(svi,privatno,pravno),prezime,ime,naziv
+    public ArrayList<VoziloDTO> kreirajString(String[] niz){
+        
+        String osnovni =   "SELECT * FROM vozilo v INNER JOIN model_vozila m on v.IdModelVozila INNER JOIN kupac k where v.IdKupac=k.IdKupac AND v.IdModelVozila=m.IdModelVozila ";
+         
+         String dodatni=" AND ";
+         
+         if(niz[1] != null){
+             dodatni += "Godiste=" + Integer.parseInt(niz[1]) + " AND ";
+         }
+         if(niz[0] != null){
+             dodatni += "BrojRegistracije LIKE '" + niz[0] + "' AND ";
+         }
+         if(niz[2] != null){
+             dodatni += "Marka LIKE '" + niz[2] + "' AND ";
+         }
+         if(niz[3] != null){
+             dodatni += "Model LIKE '" + niz[3] + "' AND ";
+         }
+         if(Integer.parseInt(niz[4]) == 0){
+             //nista
+         }
+         else if(Integer.parseInt(niz[4]) == 1){
+             dodatni += "Naziv is null AND ";
+             if(niz[5] != null){
+                 dodatni += "Prezime LIKE '" + niz[5] + "' AND ";
+             }
+             if(niz[6] != null){
+                 dodatni += "Ime LIKE '" + niz[6] + "' AND ";
+             } 
+         }
+         else if(Integer.parseInt(niz[4]) == 2){
+             dodatni += "Ime is null AND Prezime is null AND ";
+             if(niz[7] != null){
+                 dodatni += "Naziv LIKE '" + niz[7]+"' AND ";
+             }
+         }
+         
+         int duzina = dodatni.length();
+         System.out.println(duzina);
+         dodatni = dodatni.substring(0, duzina-5);
+         
+         osnovni = osnovni + dodatni;
+                  
+         return DAOFactory.getDAOFactory().getVoziloDAO().dobijVozila(osnovni);
+         
+    }
+    
     private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
-        izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
 
+        String[] parametri = new String[8];
+        for(int i = 0; i < 8; i++)
+            parametri[i] = null;
+        
+        String godiste = tfGodisteTrazi.getText();
+        if(godiste != null && !"".equals(godiste)){
+        try{
+            int god = Integer.parseInt(godiste);
+            parametri[1] = godiste;
+        }
+        catch(Exception ex){
+           JOptionPane.showMessageDialog(rootPane, "Godište mora biti cijeli broj!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+        }
+    
+        String marka = tfMarkaTrazi.getText();
+        if(marka != null && !"".equals(marka)){
+        parametri[2] = marka;
+        }
+        
+        String model = tfModelTrazi.getText();
+        if(model != null && !"".equals(model))
+               parametri[3] = model;
+        
         String registracija = tfRegistracijaTrazi.getText();
-        Integer godiste = 0;
+        if(registracija != null && !"".equals(registracija)){
+                 parametri[0] = registracija;
+        }
+        
+        parametri[4] = "0";
+        
+        if(rbPrivatnoLiceVozilo.isSelected() == true){
+            parametri[4] = "1";
 
-        if (tfGodisteTrazi.getText() != null && !"".equals(tfGodisteTrazi.getText())) {
-            try {
-                godiste = Integer.parseInt(tfGodisteTrazi.getText());
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Pogresno godiste.", "Obavjestenje", JOptionPane.ERROR_MESSAGE);
+        }
+        if(rbPravnoLiceVozilo.isSelected() == true){
+            parametri[4] = "2";
+        }
+        if(cbSvi.isSelected() == true){
+            parametri[4] = "0";
+        }
+        
+        String prezime = tfPrezimeVozilo.getText();
+        if(prezime != null && !prezime.equals("")){
+            parametri[4] = "1";
+            parametri[5] = prezime;
+        }
+        
+        String ime = tfImeVozilo.getText();
+        if(ime != null && !ime.equals("")){
+            parametri[4] = "1";
+            parametri[6] = ime;
+        }
+        
+        String naziv = tfNazivVozilo.getText();
+        if(naziv != null && !naziv.equals("")){
+            parametri[4]="2";
+            parametri[7] = naziv;
+        }
+       
+        
+        for(String s : parametri){
+            System.out.println(s);
+        }
+        
+        ArrayList<VoziloDTO> lista = kreirajString(parametri);
+       
+        if("0".equals(parametri[4])){
+            
+            
+         String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
+         DefaultTableModel modell = new DefaultTableModel(columns, 0);
+         tableVozila.setModel(modell);
+            
+        for(VoziloDTO v : lista){
+             KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+             ModelVozilaDTO mod = DAOFactory.getDAOFactory().getModelVozilaDAO().model(v.getIdModelVozila());
+              Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
+               modell.addRow(rowData);
+                tableVozila.setModel(modell);
+        }
+        }
+        else if("1".equals(parametri[4])){
+            
+             String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Gorivo", "Kilovat", "Kubikaza"};
+                DefaultTableModel modell = new DefaultTableModel(columns, 0);
+            tableVozila.setModel(modell);
+            
+            for(VoziloDTO v : lista){
+            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+             ModelVozilaDTO mod = DAOFactory.getDAOFactory().getModelVozilaDAO().model(v.getIdModelVozila());
+            
+              Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
+              modell.addRow(rowData);
+              tableVozila.setModel(modell);
             }
         }
-
-        String marka = tfMarkaTrazi.getText();
-        String model = tfModelTrazi.getText();
-        boolean svi = cbSvi.isSelected();
-
-        if (svi) {
-
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
-            DefaultTableModel modell = new DefaultTableModel(columns, 0);
+        else if("2".equals(parametri[4])){
+            
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
+                DefaultTableModel modell = new DefaultTableModel(columns, 0);
             tableVozila.setModel(modell);
-
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
-            for (VoziloDTO v : vozila) {
-
-                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-                ModelVozilaDTO mod = new ModelVozilaDTO();
-                for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                        mod = m;
-                    }
-                }
-
-                boolean dodati = true;
-                //System.out.println(registracija + " " + v.getBrojRegistracije());
-                if (registracija != null && !"".equals(registracija)) {
-                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (godiste != 0) {
-                    if (!Objects.equals(v.getGodiste(), godiste)) {
-                        dodati = false;
-                    }
-                }
-                if (marka != null && !"".equals(marka)) {
-                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (model != null && !"".equals(model)) {
-                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (dodati == true) {
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
-                    modell.addRow(rowData);
-                    tableVozila.setModel(modell);
-                }
+            
+            for(VoziloDTO v : lista){
+            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+             ModelVozilaDTO mod = DAOFactory.getDAOFactory().getModelVozilaDAO().model(v.getIdModelVozila());
+            
+              Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "":v.getGodiste(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
+              modell.addRow(rowData);
+              tableVozila.setModel(modell);
             }
-        } else {
-
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Gorivo", "Kilovat", "Kubikaza"};
-            DefaultTableModel modell = new DefaultTableModel(columns, 0);
-            tableVozila.setModel(modell);
-
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-            for (VoziloDTO v : vozila) {
-
-                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-                ModelVozilaDTO mod = new ModelVozilaDTO();
-                for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                        mod = m;
-                    }
-                }
-
-                boolean dodati = true;
-                //System.out.println(registracija + " " + v.getBrojRegistracije());
-                if (registracija != null && !"".equals(registracija)) {
-                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (godiste != 0) {
-                    if (!Objects.equals(v.getGodiste(), godiste)) {
-                        dodati = false;
-                    }
-                }
-                if (marka != null && !"".equals(marka)) {
-                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (model != null && !"".equals(model)) {
-                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (dodati == true) {
-
-                    if (rbPrivatnoLiceVozilo.isSelected()) {
-                        String ime = tfImeVozilo.getText();
-                        String prezime = tfPrezimeVozilo.getText();
-
-                        if (ime != null && !"".equals(ime)) {
-                            if (!ime.equals(kupac.getIme())) {
-                                dodati = false;
-                            }
-                        }
-                        if (prezime != null && !"".equals(prezime)) {
-                            if (!prezime.equals(kupac.getPrezime())) {
-                                dodati = false;
-                            }
-                        }
-                    } else if (rbPravnoLiceVozilo.isSelected()) {
-                        String naziv = tfNazivVozilo.getText();
-                        if (naziv != null && !"".equals(naziv)) {
-                            if (!naziv.equals(kupac.getNaziv())) {
-                                dodati = false;
-                            }
-                        }
-                    }
-
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
-                    modell.addRow(rowData);
-                    tableVozila.setModel(modell);
-
-                }
-            }
-
+            
+            
         }
 
     }//GEN-LAST:event_btnPronadjiActionPerformed
 
     private void tfModelTraziFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfModelTraziFocusGained
-        ucitajPreporukeModel();
+        //ucitajPreporukeModel();
     }//GEN-LAST:event_tfModelTraziFocusGained
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
