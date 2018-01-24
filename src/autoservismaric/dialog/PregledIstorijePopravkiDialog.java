@@ -33,11 +33,17 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        tabela.setDefaultEditor(Object.class, null);
+         tabela.setAutoCreateRowSorter(true);
     }
     
     public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal, int idVozila) {
         this(parent, modal);
         this.idVozila = idVozila;
+        
+        tabela.setDefaultEditor(Object.class, null);
+         tabela.setAutoCreateRowSorter(true);
         
         VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
         ModelVozilaDTO model = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdKupac());
@@ -369,11 +375,12 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                     .addComponent(lbKubikaza)
                     .addComponent(lbTelefon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                .addGroup(panelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(lbVrstaGoriva)
-                    .addComponent(lbAdresa))
+                    .addGroup(panelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(lbVrstaGoriva)
+                        .addComponent(lbAdresa)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)

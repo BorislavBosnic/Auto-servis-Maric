@@ -37,7 +37,6 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
        DefaultListModel<String> model = new DefaultListModel<>();
        
        List<ZaposleniDTO> lista = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
-       //System.out.println(lista.size());
        
        for(ZaposleniDTO z: lista){
            model.addElement(z.getIme() + " (" + z.getImeOca()+ ") " + z.getPrezime());

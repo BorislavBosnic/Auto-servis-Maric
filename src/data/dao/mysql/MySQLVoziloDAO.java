@@ -12,6 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLVoziloDAO implements VoziloDAO {
+    
+    public ArrayList<VoziloDTO> dobijVozila(String query){
+        ArrayList<VoziloDTO> retVal = new ArrayList<VoziloDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+
+                       
+                        
+			while (rs.next()){
+				retVal.add(new VoziloDTO(rs.getInt("IdVozilo"), rs.getString("BrojRegistracije"), rs.getInt("Kilovat"), rs.getDouble("Kubikaza"), rs.getInt("Godiste"), rs.getInt("IdKupac"), rs.getInt("IdModelVozila"), rs.getString("VrstaGoriva")));
+                        }
+                        } catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
 
     @Override
     public ArrayList<VoziloDTO> svaVozila() {

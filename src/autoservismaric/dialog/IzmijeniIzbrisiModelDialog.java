@@ -23,23 +23,24 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     /**
      * Creates new form IzmijeniIzbrisiModelDialog
      */
-    
-    ArrayList<ModelVozilaDTO> modeli =null;
+    ArrayList<ModelVozilaDTO> modeli = null;
     String marka;
     String model;
-    
+
     public IzmijeniIzbrisiModelDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        for(ModelVozilaDTO m: modeli){
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        for (ModelVozilaDTO m : modeli) {
             Object[] objekat = {m.getMarka(), m.getModel()};
             model.addRow(objekat);
         }
-        
+
         tabela.setModel(model);
+        tabela.setAutoCreateRowSorter(true);
+        tabela.setDefaultEditor(Object.class, null);
     }
 
     /**
@@ -58,15 +59,18 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         tfMarka = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         tfModel = new javax.swing.JTextField();
-        tfMarkaAzuriraj = new javax.swing.JTextField();
-        tfModelAzuriraj = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnAzuriraj = new javax.swing.JButton();
-        btnOdustani = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         btnIzbrisi = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        tfMarkaAzuriraj = new javax.swing.JTextField();
+        tfModelAzuriraj = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnOdustani = new javax.swing.JButton();
+        btnAzuriraj = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Izmijeni/Izbrisi model");
@@ -76,6 +80,8 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        btnIzmijeni.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnIzmijeni.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/refresh-button (1).png"))); // NOI18N
         btnIzmijeni.setText("Izmijeni");
         btnIzmijeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,34 +120,6 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
             }
         });
 
-        tfMarkaAzuriraj.setEditable(false);
-
-        tfModelAzuriraj.setEditable(false);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("Marka:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel4.setText("Model:");
-
-        btnAzuriraj.setText("Azuriraj");
-        btnAzuriraj.setEnabled(false);
-        btnAzuriraj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAzurirajActionPerformed(evt);
-            }
-        });
-
-        btnOdustani.setText("Odustani");
-        btnOdustani.setEnabled(false);
-        btnOdustani.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOdustaniActionPerformed(evt);
-            }
-        });
-
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -150,51 +128,45 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
                 "Marka", "Model"
             }
         ));
+        tabela.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabela);
 
-        btnIzbrisi.setText("Izbrisi");
+        btnIzbrisi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnIzbrisi.setIcon(new javax.swing.ImageIcon("C:\\Users\\DulleX\\Desktop\\rubbish-bin (1).png")); // NOI18N
+        btnIzbrisi.setText("Izbriši");
+        btnIzbrisi.setToolTipText("");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Pronađi:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(btnIzbrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIzmijeni, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnOdustani)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAzuriraj))
+                        .addComponent(btnIzmijeni, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(jLabel6)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(5, 5, 5)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfModelAzuriraj, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                            .addComponent(tfMarkaAzuriraj))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfMarka, tfModel});
@@ -202,40 +174,113 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfMarkaAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfModelAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAzuriraj)
-                            .addComponent(btnOdustani))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnIzbrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnIzmijeni, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))))
+                    .addComponent(btnIzmijeni, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIzbrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfMarka, tfModel});
+
+        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tfMarkaAzuriraj.setEditable(false);
+
+        tfModelAzuriraj.setEditable(false);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel4.setText("Model:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel3.setText("Marka:");
+
+        btnOdustani.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/rubbish-bin (2).png"))); // NOI18N
+        btnOdustani.setText("Odustani");
+        btnOdustani.setEnabled(false);
+        btnOdustani.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOdustaniActionPerformed(evt);
+            }
+        });
+
+        btnAzuriraj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAzuriraj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/refresh-button (2).png"))); // NOI18N
+        btnAzuriraj.setText("Ažuriraj");
+        btnAzuriraj.setEnabled(false);
+        btnAzuriraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAzurirajActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Ažuriraj:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfMarkaAzuriraj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfModelAzuriraj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnOdustani, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAzuriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(35, 35, 35))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfMarkaAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfModelAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(btnAzuriraj)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOdustani)
+                .addGap(6, 6, 6))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,6 +289,8 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,6 +299,10 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,48 +321,43 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfMarkaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMarkaKeyPressed
-        
+
     }//GEN-LAST:event_tfMarkaKeyPressed
 
     private void tfMarkaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMarkaKeyTyped
         String marka = tfMarka.getText();
         String mod = tfModel.getText();
-        
-        
-        if((evt.getKeyChar() >= KeyEvent.VK_0 && evt.getKeyChar() <= KeyEvent.VK_9) || (evt.getKeyChar() > 64 && evt.getKeyChar() < 91) || (evt.getKeyChar() > 96 && evt.getKeyChar() < 123) || evt.getKeyChar() == 8){
-                   
+
+        if ((evt.getKeyChar() >= KeyEvent.VK_0 && evt.getKeyChar() <= KeyEvent.VK_9) || (evt.getKeyChar() > 64 && evt.getKeyChar() < 91) || (evt.getKeyChar() > 96 && evt.getKeyChar() < 123) || evt.getKeyChar() == 8) {
+
             Object[] kolone = {"Marka", "Model"};
             DefaultTableModel model = new DefaultTableModel(kolone, 0);
-        for(ModelVozilaDTO m : modeli){
-            //System.out.println(m.getMarka().toLowerCase() + marka.toLowerCase());
-            if((mod == null || "".equals(mod)) && m.getMarka().toLowerCase().startsWith(marka.toLowerCase())){
-                Object[] rowData = {m.getMarka(), m.getModel()};
-                model.addRow(rowData);
-                System.out.println(m.getMarka().toLowerCase() + " DDD " + marka.toLowerCase());
-            }
-            else if((marka == null || "".equals(marka)) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())){
-                Object[] rowData = {m.getMarka(), m.getModel()};
-                model.addRow(rowData);
-            }
-            else{
-                if(m.getMarka().toLowerCase().startsWith(marka.toLowerCase()) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())){
+            for (ModelVozilaDTO m : modeli) {
+                if ((mod == null || "".equals(mod)) && m.getMarka().toLowerCase().startsWith(marka.toLowerCase())) {
                     Object[] rowData = {m.getMarka(), m.getModel()};
                     model.addRow(rowData);
+                } else if ((marka == null || "".equals(marka)) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())) {
+                    Object[] rowData = {m.getMarka(), m.getModel()};
+                    model.addRow(rowData);
+                } else {
+                    if (m.getMarka().toLowerCase().startsWith(marka.toLowerCase()) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())) {
+                        Object[] rowData = {m.getMarka(), m.getModel()};
+                        model.addRow(rowData);
+                    }
                 }
             }
+
+            tabela.setModel(model);
+
         }
-        
-        tabela.setModel(model);
-        
-        }
-        
-        
+
+
     }//GEN-LAST:event_tfMarkaKeyTyped
 
     private void btnIzmijeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniActionPerformed
         int column = 0;
         int row = tabela.getSelectedRow();
-        if(row != -1){
+        if (row != -1) {
             String marka = tabela.getModel().getValueAt(row, 0).toString();
             String model = tabela.getModel().getValueAt(row, 1).toString();
             this.marka = marka;
@@ -324,7 +370,7 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
             tfModelAzuriraj.setBackground(Color.white);
             btnOdustani.setEnabled(true);
             btnAzuriraj.setEnabled(true);
-            
+
             tabela.setEnabled(false);
             tfMarka.setEditable(false);
             tfModel.setEditable(false);
@@ -334,9 +380,8 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
             tfModel.setBackground(Color.gray);
             btnIzmijeni.setEnabled(false);
             btnIzbrisi.setEnabled(false);
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Morate izabrati red u tabeli", "Greška", JOptionPane.OK_OPTION);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Morate izabrati red u tabeli!", "Greška", JOptionPane.OK_OPTION);
             return;
         }
     }//GEN-LAST:event_btnIzmijeniActionPerformed
@@ -345,26 +390,30 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         String marka = tfMarkaAzuriraj.getText();
         String model = tfModelAzuriraj.getText();
         
+        if(DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model) != null){
+             JOptionPane.showMessageDialog(rootPane, "Već postoji takav tip vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+             return;
+        }
+
         ModelVozilaDTO m = DAOFactory.getDAOFactory().getModelVozilaDAO().model(this.marka, this.model);
         m.setMarka(marka);
         m.setModel(model);
-        if(DAOFactory.getDAOFactory().getModelVozilaDAO().azurirajModel(m)){
-            JOptionPane.showMessageDialog(rootPane, "Uspješno ažuriranje", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+        if (DAOFactory.getDAOFactory().getModelVozilaDAO().azurirajModel(m)) {
+            JOptionPane.showMessageDialog(rootPane, "Uspješno ažuriranje!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Neuspješno ažuriranje!", "Greška", JOptionPane.OK_OPTION);
         }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Neuspješno ažuriranje", "Greška", JOptionPane.OK_OPTION);
+
+        this.modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+        Object[] columns = {"Marka", "Model"};
+        DefaultTableModel dtm = new DefaultTableModel(columns, 0);
+        for (ModelVozilaDTO mmmm : this.modeli) {
+            Object[] row = {mmmm.getMarka(), mmmm.getModel()};
+            dtm.addRow(row);
         }
-        
-       this.modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-       Object[] columns = {"Marka", "Model"};
-       DefaultTableModel dtm = new DefaultTableModel(columns,0);
-       for(ModelVozilaDTO mmmm : this.modeli){
-           Object[] row = {mmmm.getMarka(), mmmm.getModel()};
-           dtm.addRow(row);
-       }
-       tabela.setModel(dtm);
-       
-       tfMarkaAzuriraj.setEditable(false);
+        tabela.setModel(dtm);
+
+        tfMarkaAzuriraj.setEditable(false);
         tfModelAzuriraj.setEditable(false);
         tfMarkaAzuriraj.setText("");
         tfModelAzuriraj.setText("");
@@ -375,14 +424,14 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         tabela.setEnabled(true);
         btnIzmijeni.setEnabled(true);
         btnIzbrisi.setEnabled(true);
-        
+
         tfMarka.setEditable(true);
         tfModel.setEditable(true);
         tfMarka.setBackground(Color.white);
         tfModel.setBackground(Color.white);
         tfMarka.setText("");
         tfModel.setText("");
-       
+
     }//GEN-LAST:event_btnAzurirajActionPerformed
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
@@ -397,7 +446,7 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         btnAzuriraj.setEnabled(false);
         btnIzmijeni.setEnabled(true);
         btnIzbrisi.setEnabled(true);
-        
+
         tfMarka.setEditable(true);
         tfModel.setEditable(true);
         tfMarka.setBackground(Color.white);
@@ -407,49 +456,42 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void tfModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelActionPerformed
-        
+
     }//GEN-LAST:event_tfModelActionPerformed
 
     private void tfModelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfModelKeyTyped
-         String marka = tfMarka.getText();
+        String marka = tfMarka.getText();
         String mod = tfModel.getText();
-        
-        
-        if((evt.getKeyChar() >= KeyEvent.VK_0 && evt.getKeyChar() <= KeyEvent.VK_9) || (evt.getKeyChar() > 64 && evt.getKeyChar() < 91) || (evt.getKeyChar() > 96 && evt.getKeyChar() < 123) || evt.getKeyChar() == 8){
-                
-            System.out.println("DAAA");
+
+        if ((evt.getKeyChar() >= KeyEvent.VK_0 && evt.getKeyChar() <= KeyEvent.VK_9) || (evt.getKeyChar() > 64 && evt.getKeyChar() < 91) || (evt.getKeyChar() > 96 && evt.getKeyChar() < 123) || evt.getKeyChar() == 8) {
+
             Object[] kolone = {"Marka", "Model"};
             DefaultTableModel model = new DefaultTableModel(kolone, 0);
-        for(ModelVozilaDTO m : modeli){
-            //System.out.println(m.getMarka().toLowerCase() + marka.toLowerCase());
-            if((mod == null || "".equals(mod)) && m.getMarka().toLowerCase().startsWith(marka.toLowerCase())){
-                Object[] rowData = {m.getMarka(), m.getModel()};
-                model.addRow(rowData);
-            }
-            else if((marka == null || "".equals(marka)) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())){
-                Object[] rowData = {m.getMarka(), m.getModel()};
-                model.addRow(rowData);
-            }
-            else{
-                if(m.getMarka().toLowerCase().startsWith(marka.toLowerCase()) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())){
+            for (ModelVozilaDTO m : modeli) {
+                if ((mod == null || "".equals(mod)) && m.getMarka().toLowerCase().startsWith(marka.toLowerCase())) {
                     Object[] rowData = {m.getMarka(), m.getModel()};
                     model.addRow(rowData);
+                } else if ((marka == null || "".equals(marka)) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())) {
+                    Object[] rowData = {m.getMarka(), m.getModel()};
+                    model.addRow(rowData);
+                } else {
+                    if (m.getMarka().toLowerCase().startsWith(marka.toLowerCase()) && m.getModel().toLowerCase().startsWith(mod.toLowerCase())) {
+                        Object[] rowData = {m.getMarka(), m.getModel()};
+                        model.addRow(rowData);
+                    }
                 }
             }
-        }
-        
-        tabela.setModel(model);
-        
+
+            tabela.setModel(model);
+
         }
 
     }//GEN-LAST:event_tfModelKeyTyped
 
     private void tfModelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfModelKeyPressed
-      
+
     }//GEN-LAST:event_tfModelKeyPressed
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -501,8 +543,11 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField tfMarka;

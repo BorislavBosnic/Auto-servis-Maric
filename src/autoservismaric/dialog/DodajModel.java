@@ -27,6 +27,7 @@ public class DodajModel extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.dvd = dvd;
+        
     }
     
     public DodajModel(IzmijeniVoziloDialog ivd, java.awt.Frame parent, boolean modal) {
@@ -60,7 +61,6 @@ public class DodajModel extends javax.swing.JDialog {
         btnDodaj = new javax.swing.JButton();
         btnOdustani = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        btnPonisti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje tipa vozila");
@@ -92,6 +92,7 @@ public class DodajModel extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Model:");
 
+        btnDodaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +100,7 @@ public class DodajModel extends javax.swing.JDialog {
             }
         });
 
+        btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cancel (1).png"))); // NOI18N
         btnOdustani.setText("Odustani");
         btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,13 +113,6 @@ public class DodajModel extends javax.swing.JDialog {
         jLabel3.setText("Dodavanje modela vozila:");
         jLabel3.setToolTipText("");
 
-        btnPonisti.setText("Poništi poslednje dodavanje");
-        btnPonisti.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPonistiActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -125,21 +120,21 @@ public class DodajModel extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(42, 42, 42)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfMarkaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(btnOdustani)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnDodaj))
-                                .addComponent(btnPonisti, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGap(0, 60, Short.MAX_VALUE))
+                            .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 82, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(btnOdustani)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDodaj)
+                        .addGap(0, 64, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -160,13 +155,11 @@ public class DodajModel extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnOdustani, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPonisti, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDodaj)
+                    .addComponent(btnOdustani))
+                .addContainerGap())
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfMarkaDodaj, tfModel});
@@ -241,7 +234,11 @@ public class DodajModel extends javax.swing.JDialog {
                     
                     m = mv;
                     if(VozilaLogika.modeli == null){
-                        VozilaLogika.modeli.add(mv);
+                        try{
+                            VozilaLogika.modeli.add(mv);
+                        }catch(NullPointerException ex){
+                            //ex.printStackTrace();
+                        }
                     }
                 }
                 else{
@@ -260,28 +257,6 @@ public class DodajModel extends javax.swing.JDialog {
             return;
         }
     }//GEN-LAST:event_btnDodajActionPerformed
-
-    private void btnPonistiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPonistiActionPerformed
-        if(m != null){
-            if(DAOFactory.getDAOFactory().getModelVozilaDAO().obrisiModel(m)){
-                JOptionPane.showMessageDialog(rootPane, "Uspješno obrisano \n" + m.getMarka() + " " + m.getModel(), "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                 
-                m = null;
-                if(VozilaLogika.modeli != null){
-                    VozilaLogika.modeli.remove(m);
-                }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-                 return;
-            }
-        }
-        else
-        {
-             JOptionPane.showMessageDialog(rootPane, "Ne postoji akcija za poništiti", "Greška", JOptionPane.OK_OPTION);
-        }
-    }//GEN-LAST:event_btnPonistiActionPerformed
 
     private void tfModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelActionPerformed
         // TODO add your handling code here:
@@ -338,7 +313,6 @@ public class DodajModel extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnOdustani;
-    private javax.swing.JButton btnPonisti;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
