@@ -234,7 +234,11 @@ public class DodajModel extends javax.swing.JDialog {
                     
                     m = mv;
                     if(VozilaLogika.modeli == null){
-                        VozilaLogika.modeli.add(mv);
+                        try{
+                            VozilaLogika.modeli.add(mv);
+                        }catch(NullPointerException ex){
+                            //ex.printStackTrace();
+                        }
                     }
                 }
                 else{
