@@ -21,6 +21,10 @@ public abstract class DAOFactory {
     
     public abstract ProdanDioDAO getProdanDioDAO();
     
+    public abstract FakturaDAO getFakturaDAO();
+    
+    public abstract TerminDAO getTerminDAO();
+    
     public static DAOFactory getDAOFactory() {
 		return new MySQLDAOFactory();
 	}
