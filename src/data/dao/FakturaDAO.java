@@ -17,6 +17,7 @@ public interface FakturaDAO
 {
     public ArrayList<FakturaDTO> sveFakture();
     public FakturaDTO faktura(int idFaktura);
+    public FakturaDTO fakturaRadniNalog(int idRadnogNaloga);
     public FakturaDTO fakturaDatum(Date datumFakturisanja);
     public boolean dodajFakturu(FakturaDTO faktura);
     public boolean azurirajFakturu(FakturaDTO faktura);
