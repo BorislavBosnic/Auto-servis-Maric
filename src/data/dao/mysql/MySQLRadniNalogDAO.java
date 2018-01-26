@@ -177,7 +177,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
     }
 
     @Override
-    public ArrayList<RadniNalogDTO> getRadniNalozi(int id) {
+    public ArrayList<RadniNalogDTO> getRadniNalozi() {
         ArrayList<RadniNalogDTO> retVal = new ArrayList<RadniNalogDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;

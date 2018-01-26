@@ -171,7 +171,7 @@ public class MySQLVoziloDAO implements VoziloDAO {
                            // public VoziloDTO(Integer idVozilo, String brojRegistracije, Integer kilovat, Double kubikaza, Integer godiste, Integer idKupac, Integer idModelVozila, String vrstaGoriva) {
                         
 			if (rs.next())
-				retVal = new VoziloDTO(new Integer(rs.getInt("IdVozilo")), rs.getString("BrojRegistracije"), Integer.parseInt(rs.getString("Kilovat")), Double.parseDouble(rs.getString("Kubikaza")), Integer.parseInt(rs.getString("Godiste")), Integer.parseInt(rs.getString("IdKupac")), Integer.parseInt(rs.getString("IdModelVozila")), rs.getString("vrstaGoriva"));
+				retVal = new VoziloDTO(new Integer(rs.getInt("IdVozilo")), rs.getString("BrojRegistracije"), new Integer(rs.getInt("Kilovat")), new Double(rs.getDouble("Kubikaza")), new Integer(rs.getInt("Godiste")), new Integer(rs.getInt("IdKupac")), new Integer(rs.getInt("IdModelVozila")), rs.getString("vrstaGoriva"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

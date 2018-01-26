@@ -3,11 +3,14 @@ package data.dao.mysql;
 import data.dao.DAOFactory;
 import data.dao.DioDAO;
 import data.dao.DioModelVozilaDAO;
+import data.dao.FakturaDAO;
 import data.dao.KupacDAO;
 import data.dao.ModelVozilaDAO;
 import data.dao.ProdanDioDAO;
 import data.dao.RadniNalogDAO;
+import data.dao.RadniNalogDioDAO;
 import data.dao.StatistikaDAO;
+import data.dao.TerminDAO;
 import data.dao.VoziloDAO;
 import data.dao.ZaposleniDAO;
 
@@ -56,5 +59,23 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public ProdanDioDAO getProdanDioDAO(){
         return new MySQLProdanDioDAO();
+    }
+    
+    @Override
+    public FakturaDAO getFakturaDAO()
+    {
+        return new MySQLFakturaDAO();
+    }
+    
+    @Override
+    public TerminDAO getTerminDAO()
+    {
+        return new MySQLTerminDAO();
+    }
+    
+    @Override
+    public RadniNalogDioDAO getRadniNalogDioDAO()
+    {
+        return new MySQLRadniNalogDioDAO();
     }
 }
