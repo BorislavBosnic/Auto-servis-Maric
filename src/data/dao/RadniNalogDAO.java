@@ -25,7 +25,7 @@ public interface RadniNalogDAO {
     
     public int getBrojAutaKojaCekajuPopravku();
 
-    public ArrayList<RadniNalogDTO> getRadniNalozi(int id);
+    public ArrayList<RadniNalogDTO> getRadniNalozi();
 
     public boolean dodajRadniNalog(RadniNalogDTO nalog);
     
