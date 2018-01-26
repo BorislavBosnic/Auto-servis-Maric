@@ -25,6 +25,8 @@ public abstract class DAOFactory {
     
     public abstract TerminDAO getTerminDAO();
     
+    public abstract RadniNalogDioDAO getRadniNalogDioDAO();
+    
     public static DAOFactory getDAOFactory() {
 		return new MySQLDAOFactory();
 	}
