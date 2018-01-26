@@ -983,6 +983,9 @@
                                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                                     </Property>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable8MouseClicked"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1043,7 +1046,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Ra&#x10d;un-&#x160;tampaj"/>
+                            <Property name="text" type="java.lang.String" value="Ra&#x10d;un"/>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                           <Events>

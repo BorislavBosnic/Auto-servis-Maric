@@ -22,6 +22,7 @@ import data.dto.DioDTO;
 import data.dto.DioModelVozilaDTO;
 import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
+import data.dto.RadniNalogDTO;
 import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
 import java.awt.BasicStroke;
@@ -65,6 +66,8 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
+import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
 
@@ -72,8 +75,35 @@ import poslovnalogika.ZaposleniLogika;
  *
  * @author HP BOOK
  */
-public class HomeForm1 extends javax.swing.JFrame {
 
+public class HomeForm1 extends javax.swing.JFrame {
+    /**Karpin kod**/
+    private static HomeForm1 homeForm;
+    private void inicijalisuciKod()
+    {
+        homeForm=this;
+        uslugeKnjigovodstva();
+        uslugeZakazivanja(); 
+    }
+    /**Poziva se prilikom klikanja bilo kojeg dugmeta unutar Knjigovodstva**/
+    private void uslugeKnjigovodstva()
+    {
+        inicijalizacijaTabeleRadnihNaloga();
+    }
+    /**Poziva se prilikom klikanja bilo kojeg dugmeta unutar Zakazivanja**/
+    private void uslugeZakazivanja()
+    {
+        
+    }
+    private void inicijalizacijaTabeleRadnihNaloga()
+    {
+        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        radniNaloziZaTabelu(lista,jTable8);
+        stavkeSaNalogaZaTabelu(jTable1, jTable8);
+    }
+    /*****Kraj*****/
+    
+    
     static int numberOfItems = 8;
     static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
 
@@ -373,6 +403,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         datumLabel.setText("Aktivnosti planirane za danas, " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
 
         inicijalizujZaposleniPanel();
+        
+        /**Karpin kod**/
+        inicijalisuciKod();
+        /*****Kraj*****/
     }
 
     public AutoSuggestor ucitajPreporukeMarke() {
@@ -1391,6 +1425,13 @@ public class HomeForm1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable8.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTable8MouseClicked(evt);
+            }
+        });
         jScrollPane9.setViewportView(jTable8);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1476,7 +1517,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton13.setText("Račun-Štampaj");
+        jButton13.setText("Račun");
         jButton13.setEnabled(false);
         jButton13.addActionListener(new java.awt.event.ActionListener()
         {
@@ -4694,6 +4735,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         parentPanel.add(knjigovodstvoPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
+        
+        uslugeKnjigovodstva();
 
     }//GEN-LAST:event_menu4jPanelMouseClicked
 
@@ -4904,6 +4947,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu1jPanelMousePressed
 
     private void menu8jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMouseClicked
+        
+        
         setColor(menu8jPanel);
         for (int i = 0; i < numberOfItems; i++) {
             menu[i] = false;
@@ -4921,6 +4966,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         parentPanel.add(zakazivanjaPanel);
         parentPanel.repaint();
         parentPanel.revalidate();
+        
+        uslugeZakazivanja();
     }//GEN-LAST:event_menu8jPanelMouseClicked
 
     private void menu8jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMouseEntered
@@ -5641,6 +5688,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jTable8MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTable8MouseClicked
+    {//GEN-HEADEREND:event_jTable8MouseClicked
+        stavkeSaNalogaZaTabelu(jTable1, jTable8);
+    }//GEN-LAST:event_jTable8MouseClicked
+
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
@@ -5856,6 +5908,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                /*try
+                {
+                    double pdv=0.17;
+                    FileOutputStream fileOut =
+                    new FileOutputStream("PDV.data");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeDouble(pdv);
+                    out.close();
+                    fileOut.close();
+                }
+                catch(Exception e)
+                {
+                    
+                }*/
                 new HomeForm1().setVisible(true);
             }
         });
