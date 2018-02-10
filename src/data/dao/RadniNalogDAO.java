@@ -27,6 +27,8 @@ public interface RadniNalogDAO {
 
     public ArrayList<RadniNalogDTO> getRadniNalozi();
 
+    public ArrayList<RadniNalogDTO> getRadniNalozi(int id);
+
     public boolean dodajRadniNalog(RadniNalogDTO nalog);
     
     public boolean azurirajRadniNalog(RadniNalogDTO nalog); 

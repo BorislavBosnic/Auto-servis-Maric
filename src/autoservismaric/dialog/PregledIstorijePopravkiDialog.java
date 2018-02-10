@@ -70,6 +70,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         lbModelVozila.setText(model.getMarka() + " " + model.getModel());
         
         ArrayList<RadniNalogDTO> rn = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi(this.idVozila);
+       
         
         String[] columns = {"ID", "Datum otvaranja naloga", "Datum zatvaranja naloga", "Datum potrebnog završetka", "Plaćeno"};
         DefaultTableModel modell = new DefaultTableModel(columns, 0);
