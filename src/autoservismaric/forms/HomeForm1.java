@@ -4479,23 +4479,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu2jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2jPanelMouseClicked
-        setColor(menu2jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[1] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu1jPanel);
-        resetColor(menu8jPanel);
-
-        parentPanel.removeAll();
-        parentPanel.add(radniNaloziPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+        
+        menuItemClick(menu2jPanel, 1, radniNaloziPanel);
+        
 
     }//GEN-LAST:event_menu2jPanelMouseClicked
 
@@ -4516,37 +4502,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu2jPanelMousePressed
 
     private void menu3jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3jPanelMouseClicked
-        setColor(menu3jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[2] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu1jPanel);
-        resetColor(menu8jPanel);
-
-        VozilaLogika vl = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
-        VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
-        VozilaLogika vl3 = new VozilaLogika((VozilaLogika.UCITAJ_MODELE));
-
-        //ucitavanje autosuggestora
-        if (voziloPanelPrviPut == true) {
-            voziloPanelPrviPut = false;
-            markeAU = ucitajPreporukeMarke();
-            registracijeAU = ucitajPreporukeRegistracija();
-            vlasnikAU = ucitajPreporukeVlasnik();
-            pravniNazivAU = ucitajPreporukePravniNaziv();
-            modelAU = ucitajPreporukeModel();
-        }
-
-        parentPanel.removeAll();
-        parentPanel.add(vozilaPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+        
+        menuItemClick(menu3jPanel, 2, vozilaPanel);
+        loadAutosuggester();
 
     }//GEN-LAST:event_menu3jPanelMouseClicked
 
@@ -4562,23 +4520,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu3jPanelMouseExited
 
     private void menu4jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4jPanelMouseClicked
-        setColor(menu4jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[3] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu1jPanel);
-        resetColor(menu8jPanel);
+        
+        menuItemClick(menu4jPanel, 3, knjigovodstvoPanel);
 
-        parentPanel.removeAll();
-        parentPanel.add(knjigovodstvoPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+    
         
         //uslugeKnjigovodstva();
 
@@ -4595,25 +4540,12 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu4jPanelMouseExited
 
     private void menu7jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMouseClicked
-        // TODO add your handling code here:
-        setColor(menu7jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[6] = true;
-        resetColor(menu1jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu8jPanel);
+        
+        menuItemClick(menu7jPanel, 6, statistikajPanel);
         statistikaLogika.loadGraph(this);
         statistikaLogika.loadStatistics(this);
-        parentPanel.removeAll();
-        parentPanel.add(statistikajPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+        
+    
 
     }//GEN-LAST:event_menu7jPanelMouseClicked
 
@@ -4633,33 +4565,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu7jPanelMousePressed
 
     private void menu5jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseClicked
-        setColor(menu5jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[4] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu1jPanel);
-        resetColor(menu8jPanel);
+       
+        menuItemClick(menu5jPanel, 4, zaposleniPanel);
 
-        parentPanel.removeAll();
-        parentPanel.add(zaposleniPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-
-        //   new EmployeesForm().setVisible(true);
-        // this.dispose();
-
-        /*jPanel1.setVisible(false);
-
-        this.getContentPane().removeAll();
-        this.getContentPane().add(employeePanel);*/
-        //employeePanel.setVisible(true);
-
+       
     }//GEN-LAST:event_menu5jPanelMouseClicked
 
     private void menu5jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseEntered
@@ -4677,68 +4586,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu5jPanelMousePressed
 
     private void menu6jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6jPanelMouseClicked
-        setColor(menu6jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[5] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu1jPanel);
-        resetColor(menu8jPanel);
-
-        //   new EmployeesForm().setVisible(true);
-        // this.dispose();
-        //     jPanel1.setVisible(false);
-        parentPanel.removeAll();
-        parentPanel.add(dijeloviPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        
-        ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
-        dtm.setRowCount(0);
-        
-        int i = 0;
-        if(dijelovi != null)
-        while(i < dijelovi.size()){
-            DioDTO d = dijelovi.get(i);
-            dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
-                d.getVrstaGoriva(), d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da":"Ne"});
-            i++;
-        }
-        int size = cbModel.getItemCount();
-        for(int j = 0; i < size; i++){
-            cbModel.removeItemAt(0);
-        }
-        size = cbMarka.getItemCount();
-        for(int j = 0; i < size; i++){
-            cbMarka.removeItemAt(0);
-        }
-        ArrayList<DioDTO> nazivi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        ArrayList<String> naz = new ArrayList<String>();
-        cbModel.removeAllItems();
-        //cbModel.addItem("Svi");
-        for(DioDTO d : nazivi){
-            if(!naz.contains(d.getModel())){
-                naz.add(d.getModel());
-                cbModel.addItem(d.getModel());
-            }
-        }
-        
-        //ArrayList<DioDTO> marke = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        ArrayList<String> mar = new ArrayList<String>();
-        cbMarka.removeAllItems();
-       //cbMarka.addItem("Svi");
-        for(DioDTO d : nazivi){
-            if(!mar.contains(d.getMarka())){
-                mar.add(d.getMarka());
-                cbMarka.addItem(d.getMarka());
-            }
-        }
+       
+       menuItemClick(menu6jPanel, 5, dijeloviPanel);
+       loadDijeloviForm();
         
     }//GEN-LAST:event_menu6jPanelMouseClicked
 
@@ -4757,23 +4607,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4PropertyChange
 
     private void menu1jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseClicked
-        setColor(menu1jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[0] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu8jPanel);
-
-        parentPanel.removeAll();
-        parentPanel.add(pocetnajPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
+       
+        menuItemClick(menu1jPanel, 0, pocetnajPanel);
+        
+      
     }//GEN-LAST:event_menu1jPanelMouseClicked
 
     private void menu1jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseEntered
@@ -4792,24 +4629,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void menu8jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu8jPanelMouseClicked
         
+        menuItemClick(menu8jPanel, 7, zakazivanjaPanel);
         
-        setColor(menu8jPanel);
-        for (int i = 0; i < numberOfItems; i++) {
-            menu[i] = false;
-        }
-        menu[7] = true;
-        resetColor(menu7jPanel);
-        resetColor(menu2jPanel);
-        resetColor(menu3jPanel);
-        resetColor(menu4jPanel);
-        resetColor(menu5jPanel);
-        resetColor(menu6jPanel);
-        resetColor(menu1jPanel);
-
-        parentPanel.removeAll();
-        parentPanel.add(zakazivanjaPanel);
-        parentPanel.repaint();
-        parentPanel.revalidate();
         
         //uslugeZakazivanja();
     }//GEN-LAST:event_menu8jPanelMouseClicked
@@ -5564,6 +5385,101 @@ public class HomeForm1 extends javax.swing.JFrame {
     public void resetColor(JPanel panel) {
         panel.setBackground(new Color(51, 51, 255));
 
+    }
+    
+    public void resetAllColors(JPanel panel){
+        resetColor(menu1jPanel);
+        resetColor(menu2jPanel);
+        resetColor(menu3jPanel);
+        resetColor(menu4jPanel);
+        resetColor(menu5jPanel);
+        resetColor(menu6jPanel);
+        resetColor(menu7jPanel);
+        resetColor(menu8jPanel);
+        
+        setColor(panel);
+       
+    }
+    
+    public void menuItemClick(JPanel menuItem,int index, JPanel newPanel){
+        setColor(menuItem);
+        for (int i = 0; i < numberOfItems; i++) {
+            menu[i] = false;
+        }
+        
+        menu[index] = true;
+        
+        resetAllColors(menuItem);
+
+
+        parentPanel.removeAll();
+        parentPanel.add(newPanel);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+
+    }
+    
+    private void loadAutosuggester(){
+        VozilaLogika vl = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
+        VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
+        VozilaLogika vl3 = new VozilaLogika((VozilaLogika.UCITAJ_MODELE));
+
+        //ucitavanje autosuggestora
+        if (voziloPanelPrviPut == true) {
+            voziloPanelPrviPut = false;
+            markeAU = ucitajPreporukeMarke();
+            registracijeAU = ucitajPreporukeRegistracija();
+            vlasnikAU = ucitajPreporukeVlasnik();
+            pravniNazivAU = ucitajPreporukePravniNaziv();
+            modelAU = ucitajPreporukeModel();
+        }
+    }
+    
+    private void loadDijeloviForm(){
+        
+        ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
+        DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
+        dtm.setRowCount(0);
+        
+        int i = 0;
+        if(dijelovi != null)
+        while(i < dijelovi.size()){
+            DioDTO d = dijelovi.get(i);
+            dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
+                d.getVrstaGoriva(), d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da":"Ne"});
+            i++;
+        }
+        int size = cbModel.getItemCount();
+        for(int j = 0; i < size; i++){
+            cbModel.removeItemAt(0);
+        }
+        size = cbMarka.getItemCount();
+        for(int j = 0; i < size; i++){
+            cbMarka.removeItemAt(0);
+        }
+        ArrayList<DioDTO> nazivi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
+        ArrayList<String> naz = new ArrayList<String>();
+        cbModel.removeAllItems();
+        //cbModel.addItem("Svi");
+        for(DioDTO d : nazivi){
+            if(!naz.contains(d.getModel())){
+                naz.add(d.getModel());
+                cbModel.addItem(d.getModel());
+            }
+        }
+        
+        //ArrayList<DioDTO> marke = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
+        ArrayList<String> mar = new ArrayList<String>();
+        cbMarka.removeAllItems();
+       //cbMarka.addItem("Svi");
+        for(DioDTO d : nazivi){
+            if(!mar.contains(d.getMarka())){
+                mar.add(d.getMarka());
+                cbMarka.addItem(d.getMarka());
+            }
+        }
+        
+        
     }
 
     
