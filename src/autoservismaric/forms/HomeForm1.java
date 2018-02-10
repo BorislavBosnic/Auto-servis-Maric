@@ -54,6 +54,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+        
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -379,6 +382,18 @@ public class HomeForm1 extends javax.swing.JFrame {
     public HomeForm1() {
         initComponents();
         statistikaLogika = new StatistikaLogika();
+        
+        jTabbedPane1.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+            System.out.println("Tab: " + jTabbedPane1.getSelectedIndex());
+            if(jTabbedPane1.getSelectedIndex() == 2 || jTabbedPane1.getSelectedIndex() == 3){
+                odabirMjesecaStatistikaPanel.setVisible(false);
+            } else {
+               odabirMjesecaStatistikaPanel.setVisible(true);
+
+            }
+        }
+    });
         /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
         setSize(screenSize.width,screenSize.height);*/
@@ -786,7 +801,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         panelGrafikAuta = new javax.swing.JPanel();
         panelGrafikFakture = new javax.swing.JPanel();
         panelGrafikPopravke = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
+        odabirMjesecaStatistikaPanel = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         comboBoxMjesec = new javax.swing.JComboBox<>();
@@ -3392,9 +3407,9 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGap(0, 518, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Popravljeni auti na godisnjem nivou", panelGrafikPopravke);
+        jTabbedPane1.addTab("Broj popravljenih auta", panelGrafikPopravke);
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        odabirMjesecaStatistikaPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel30.setText("Odaberite mjesec:");
 
@@ -3412,35 +3427,35 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
+        javax.swing.GroupLayout odabirMjesecaStatistikaPanelLayout = new javax.swing.GroupLayout(odabirMjesecaStatistikaPanel);
+        odabirMjesecaStatistikaPanel.setLayout(odabirMjesecaStatistikaPanelLayout);
+        odabirMjesecaStatistikaPanelLayout.setHorizontalGroup(
+            odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odabirMjesecaStatistikaPanelLayout.createSequentialGroup()
+                .addGroup(odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(odabirMjesecaStatistikaPanelLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
                             .addComponent(jLabel33))
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboBoxGodina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboBoxMjesec, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
+                    .addGroup(odabirMjesecaStatistikaPanelLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(buttonPregledGrafik)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
+        odabirMjesecaStatistikaPanelLayout.setVerticalGroup(
+            odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(odabirMjesecaStatistikaPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(comboBoxMjesec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(odabirMjesecaStatistikaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(comboBoxGodina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -3456,7 +3471,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(statistikajPanelLayout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(odabirMjesecaStatistikaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         statistikajPanelLayout.setVerticalGroup(
@@ -3469,7 +3484,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(statistikajPanelLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(odabirMjesecaStatistikaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 988, Short.MAX_VALUE))
         );
 
@@ -5885,7 +5900,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
@@ -5991,6 +6005,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemIzmjeniRadnika;
     private javax.swing.JMenuItem menuItemOtpustiRadnika;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JPanel odabirMjesecaStatistikaPanel;
     private javax.swing.JPanel panelAkcijeNaFormi;
     private javax.swing.JPanel panelGrafikAuta;
     private javax.swing.JPanel panelGrafikFakture;
