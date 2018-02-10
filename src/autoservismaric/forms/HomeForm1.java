@@ -43,7 +43,9 @@ import java.util.Objects;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -70,6 +72,7 @@ import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
 import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
+import poslovnalogika.StatistikaLogika;
 
 /**
  *
@@ -363,8 +366,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     static int numberOfItems = 8;
-    static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
+    public static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     public static boolean menu[] = new boolean[numberOfItems];
+    public StatistikaLogika statistikaLogika;
     
     // public static JPanel employeePanel=new EmployeesForm().getPanel();
     // public static JPanel partsPanel=new PartsForm().getPanel();
@@ -374,6 +378,7 @@ public class HomeForm1 extends javax.swing.JFrame {
      */
     public HomeForm1() {
         initComponents();
+        statistikaLogika = new StatistikaLogika();
         /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
         setSize(screenSize.width,screenSize.height);*/
@@ -3397,11 +3402,6 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         comboBoxMjesec.setMaximumRowCount(13);
         comboBoxMjesec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" }));
-        comboBoxMjesec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxMjesecActionPerformed(evt);
-            }
-        });
 
         comboBoxGodina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "2017", "2018" }));
 
@@ -4608,8 +4608,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu5jPanel);
         resetColor(menu6jPanel);
         resetColor(menu8jPanel);
-        loadGraph();
-        loadStatistics();
+        statistikaLogika.loadGraph(this);
+        statistikaLogika.loadStatistics(this);
         parentPanel.removeAll();
         parentPanel.add(statistikajPanel);
         parentPanel.repaint();
@@ -5032,12 +5032,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonPregledActionPerformed
 
-    private void comboBoxMjesecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMjesecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxMjesecActionPerformed
-
     private void buttonPregledGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledGrafikActionPerformed
-        loadGraph();
+        statistikaLogika.loadGraph(this);
     }//GEN-LAST:event_buttonPregledGrafikActionPerformed
 
     private void cbSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSviActionPerformed
@@ -5570,158 +5566,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     }
 
-    public void loadGraph() {
-
-        loadGraphAutaNaStanju();
-        loadGraphFakture();
-        int mjesecIndex = comboBoxMjesec.getSelectedIndex();
-        int godinaIndex = comboBoxGodina.getSelectedIndex();
-        if (godinaIndex != 0) {
-
-            DefaultCategoryDataset prihodiUkupnoBarChart = new DefaultCategoryDataset();
-            DefaultCategoryDataset prihodiDijeloviBarChart = new DefaultCategoryDataset();
-            DefaultCategoryDataset popravkeBarChart = new DefaultCategoryDataset();
-
-            JFreeChart prihodiUkupnoChart = null;
-            JFreeChart prihodiDijeloviChart = null;
-            JFreeChart popravkeChart = null;
-
-            Calendar calendar1 = Calendar.getInstance();
-            Calendar calendar2 = Calendar.getInstance();
-            if (mjesecIndex == 0 && godinaIndex != 0) {
-
-                prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
-                prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Prihodi od dijelova", prihodiDijeloviBarChart);
-                popravkeChart = ChartFactory.createBarChart("Popravke u " + (String) comboBoxGodina.getSelectedItem() + ". godini", "Mjesecno", "Broj popravljenih auta", popravkeBarChart, PlotOrientation.VERTICAL, false, true, false);
-
-                for (int i = 0; i < 12; i++) {
-
-                    calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 1);
-                    calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), i, 31);
-                    prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
-                            + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", mjeseci[i]);
-
-                    prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", mjeseci[i]);
-
-                    popravkeBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", mjeseci[i]);
-
-                }
-
-                /* prihodiBarChart.setValue(1200, "Prihodi", "Februar");
-            prihodiBarChart.setValue(800, "Prihodi", "Mart");
-            prihodiBarChart.setValue(700, "Prihodi", "April");
-            prihodiBarChart.setValue(900, "Prihodi", "Maj");
-            prihodiBarChart.setValue(1100, "Prihodi", "Jun");
-            prihodiBarChart.setValue(600, "Prihodi", "Jul");
-            prihodiBarChart.setValue(800, "Prihodi", "Avgust");
-            prihodiBarChart.setValue(1000, "Prihodi", "Septembar");
-            prihodiBarChart.setValue(800, "Prihodi", "Oktobar");
-            prihodiBarChart.setValue(900, "Prihodi", "Novembar");
-            prihodiBarChart.setValue(500, "Prihodi", "Decembar");
-            
-             
-            pieChart.setValue("Placene", 10);
-            pieChart.setValue("Neplacene", 5);
-
-            autaPieChart.setValue("Popravljena", 7);
-            autaPieChart.setValue("Nepopravljena", 5);
-
-            
-            popravkeBarChart.setValue(25, "Prihodi", "Januar");
-            popravkeBarChart.setValue(20, "Prihodi", "Februar");
-            popravkeBarChart.setValue(31, "Prihodi", "Mart");
-            popravkeBarChart.setValue(28, "Prihodi", "April");
-            popravkeBarChart.setValue(25, "Prihodi", "Maj");
-            popravkeBarChart.setValue(22, "Prihodi", "Jun");
-            popravkeBarChart.setValue(29, "Prihodi", "Jul");
-            popravkeBarChart.setValue(30, "Prihodi", "Avgust");
-            popravkeBarChart.setValue(28, "Prihodi", "Septembar");
-            popravkeBarChart.setValue(23, "Prihodi", "Oktobar");
-            popravkeBarChart.setValue(34, "Prihodi", "Novembar");
-            popravkeBarChart.setValue(28, "Prihodi", "Decembar");
-            // prihodiBarChart.incrementValue(200, "Prihodi", "Decembar");
-            
-                 */
-            } else if (mjesecIndex != 0 && godinaIndex != 0) {
-
-                int kraj = 0;
-                if (mjesecIndex == 1 || mjesecIndex == 3 || mjesecIndex == 5 || mjesecIndex == 7 || mjesecIndex == 8 || mjesecIndex == 10 || mjesecIndex == 12) {
-                    kraj = 31;
-                } else if (mjesecIndex == 2) {
-                    if (Integer.parseInt((String) comboBoxGodina.getSelectedItem()) % 4 == 0) {
-                        kraj = 29;
-                    } else {
-                        kraj = 28;
-                    }
-                } else {
-                    kraj = 30;
-                }
-
-                prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
-                prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Prihodi od dijelova", prihodiDijeloviBarChart);
-                popravkeChart = ChartFactory.createBarChart("Popravke za mjesec: " + (String) comboBoxMjesec.getSelectedItem(), "Dnevno", "Broj popravljenih auta", popravkeBarChart, PlotOrientation.VERTICAL, false, true, false);
-
-                for (int i = 1; i <= kraj; i++) {
-
-                    calendar1.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex() - 1, i);
-                    calendar2.set(Integer.parseInt((String) comboBoxGodina.getSelectedItem()), comboBoxMjesec.getSelectedIndex() - 1, i);
-                    prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
-                            + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", "" + i);
-
-                    prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", "" + i);
-
-                    popravkeBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", "" + i);
-
-                }
-
-            }
-
-            //JFreeChart myChart= ChartFactory.createBarChart("Prihodi u 2017. godini","Mjesecno","Prihodi", barChart,PlotOrientation.VERTICAL,false,true,false);
-            CategoryPlot prihodiUkupnoPlot = (CategoryPlot) prihodiUkupnoChart.getPlot();
-            prihodiUkupnoPlot.setRangeGridlinePaint(Color.BLUE);
-            prihodiUkupnoPlot.setBackgroundPaint(new Color(207, 229, 235));
-
-            CategoryPlot prihodiDijeloviPlot = (CategoryPlot) prihodiDijeloviChart.getPlot();
-            prihodiDijeloviPlot.setRangeGridlinePaint(Color.BLUE);
-            prihodiDijeloviPlot.setBackgroundPaint(new Color(207, 229, 235));
-
-            CategoryPlot popravkePlot = (CategoryPlot) popravkeChart.getPlot();
-            popravkePlot.setRangeGridlinePaint(Color.BLUE);
-            popravkePlot.setBackgroundPaint(new Color(207, 229, 235));
-
-            LineAndShapeRenderer prihodiUkupnoRenderer = (LineAndShapeRenderer) prihodiUkupnoPlot.getRenderer();
-            prihodiUkupnoRenderer.setSeriesPaint(0, new Color(40, 106, 155));
-            prihodiUkupnoRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
-
-            LineAndShapeRenderer prihodiDijeloviRenderer = (LineAndShapeRenderer) prihodiDijeloviPlot.getRenderer();
-            prihodiDijeloviRenderer.setSeriesPaint(0, new Color(40, 106, 155));
-            prihodiDijeloviRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
-
-            BarRenderer popravkeRenderer = (BarRenderer) popravkePlot.getRenderer();
-            popravkeRenderer.setSeriesPaint(0, new Color(40, 106, 155));
-
-            ChartPanel prihodiukupnoBarPanel = new ChartPanel(prihodiUkupnoChart);
-            ChartPanel prihodiDijeloviBarPanel = new ChartPanel(prihodiDijeloviChart);
-            ChartPanel popravkeBarPanel = new ChartPanel(popravkeChart);
-
-            panelGrafikPrihodiUkupno.setLayout(new java.awt.BorderLayout());
-            panelGrafikPrihodiUkupno.removeAll();
-            panelGrafikPrihodiUkupno.add(prihodiukupnoBarPanel, BorderLayout.CENTER);
-            panelGrafikPrihodiUkupno.validate();
-
-            PanelGrafikPrihodiDijelovi.setLayout(new java.awt.BorderLayout());
-            PanelGrafikPrihodiDijelovi.removeAll();
-            PanelGrafikPrihodiDijelovi.add(prihodiDijeloviBarPanel, BorderLayout.CENTER);
-            PanelGrafikPrihodiDijelovi.validate();
-
-            panelGrafikPopravke.setLayout(new java.awt.BorderLayout());
-            panelGrafikPopravke.removeAll();
-            panelGrafikPopravke.add(popravkeBarPanel, BorderLayout.CENTER);
-            panelGrafikPopravke.validate();
-
-        }
-    }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -5771,129 +5616,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
     }
 
-    void loadGraphAutaNaStanju() {
-        DefaultPieDataset autaPieChart = new DefaultPieDataset();
-        JFreeChart autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
-        autaPieChart.setValue("Popravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaNaStanju() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
-        autaPieChart.setValue("Nepopravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
-        autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
-        PiePlot autaPlot = (PiePlot) autaChart.getPlot();
-        autaPlot.setBackgroundPaint(new Color(207, 229, 235));
-        // autaPlot.setSectionPaint("Popravljeni", Color.green);// ne radi ovako!
-        //autaPlot.setSectionPaint("Nepopravljeni", Color.yellow);
-        //autaPlot.setExplodePercent("Nepopravljeni", 0.10);
-        autaPlot.setSimpleLabels(true);
-
-        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
-                "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
-        autaPlot.setLabelGenerator(gen);
-
-        ChartPanel autaBarPanel = new ChartPanel(autaChart);
-        panelGrafikAuta.setLayout(new java.awt.BorderLayout());
-        panelGrafikAuta.removeAll();
-        panelGrafikAuta.add(autaBarPanel, BorderLayout.CENTER);
-        panelGrafikAuta.validate();
-    }
-
-    void loadGraphFakture() {
-
-        DefaultPieDataset pieChart = new DefaultPieDataset();
-
-        JFreeChart faktureChart = ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
-
-        faktureChart = ChartFactory.createRingChart("Fakture", pieChart, rootPaneCheckingEnabled, rootPaneCheckingEnabled, Locale.ITALY);
-
-        //OVAJ DIO OVDJE SAMO RADI PREGLEDA DOK SE NE UTVRDI DA LI TREBA, KAO PLACEHOLDER
-        pieChart.setValue("Placene", 10);
-        pieChart.setValue("Neplacene", 5);
-
-        RingPlot fakturePlot = (RingPlot) faktureChart.getPlot();
-        fakturePlot.setBackgroundPaint(new Color(207, 229, 235));
-
-        ChartPanel faktureBarPanel = new ChartPanel(faktureChart);
-
-        panelGrafikFakture.setLayout(new java.awt.BorderLayout());
-        panelGrafikFakture.removeAll();
-        panelGrafikFakture.add(faktureBarPanel, BorderLayout.CENTER);
-        panelGrafikFakture.validate();
-
-    }
-
-    void loadStatistics() {
-
-        loadZaradaUkupno();
-        loadZaradaDijelovi();
-        loadBrojPopravki();
-
-    }
-
-    void loadZaradaUkupno() {
-
-        NumberFormat formatter = new DecimalFormat("#0.00");
-
-        labelDnevnaZarada.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(), new Date())
-                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(), new Date())) + " KM");
-
-        Calendar calendar1 = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 31);
-
-        labelMjesecnaZarada.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
-                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))) + " KM");
-
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.JANUARY, 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.DECEMBER, 31);
-
-        labelGodisnjaZarada.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
-                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))) + " KM");
-
-    }
-
-    void loadZaradaDijelovi() {
-
-        NumberFormat formatter = new DecimalFormat("#0.00");
-
-        labelDnevnaZaradaDijelovi.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(), new Date())) + " KM");
-
-        Calendar calendar1 = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 31);
-
-        labelMjesecnaZaradaDijelovi.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))) + " KM");
-
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.JANUARY, 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.DECEMBER, 31);
-
-        labelGodisnjaZaradaDijelovi.setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))) + " KM");
-
-    }
-    
-    void loadBrojPopravki(){
-        
-        labelPopravkeDanas.setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(), new Date()) + "");
-        
-        Calendar calendar1 = Calendar.getInstance();
-        Calendar calendar2 = Calendar.getInstance();
-
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), 31);
-
-        labelPopravkeMjesec.setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())) + "");
-        
-        calendar1.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.JANUARY, 1);
-        calendar2.set(Calendar.getInstance().get(Calendar.YEAR), Calendar.DECEMBER, 31);
-        
-      
-
-
-
-        labelPopravkeGodina.setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())) + "");
-
-    }
+   
 
     void inicijalizujZaposleniPanel() {
         dateChooserDatumDoZaposlenog.setCalendar(Calendar.getInstance());
@@ -5904,10 +5627,165 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     }
 
+    public JComboBox<String> getComboBoxGodina() {
+        return comboBoxGodina;
+    }
+
+    public void setComboBoxGodina(JComboBox<String> comboBoxGodina) {
+        this.comboBoxGodina = comboBoxGodina;
+    }
+
+    public JComboBox<String> getComboBoxMjesec() {
+        return comboBoxMjesec;
+    }
+
+    public void setComboBoxMjesec(JComboBox<String> comboBoxMjesec) {
+        this.comboBoxMjesec = comboBoxMjesec;
+    }
+
+    public JLabel getLabelDnevnaZarada() {
+        return labelDnevnaZarada;
+    }
+
+    public void setLabelDnevnaZarada(JLabel labelDnevnaZarada) {
+        this.labelDnevnaZarada = labelDnevnaZarada;
+    }
+
+    public JLabel getLabelDnevnaZaradaDijelovi() {
+        return labelDnevnaZaradaDijelovi;
+    }
+
+    public void setLabelDnevnaZaradaDijelovi(JLabel labelDnevnaZaradaDijelovi) {
+        this.labelDnevnaZaradaDijelovi = labelDnevnaZaradaDijelovi;
+    }
+
+    public JLabel getLabelGodisnjaZarada() {
+        return labelGodisnjaZarada;
+    }
+
+    public void setLabelGodisnjaZarada(JLabel labelGodisnjaZarada) {
+        this.labelGodisnjaZarada = labelGodisnjaZarada;
+    }
+
+    public JLabel getLabelGodisnjaZaradaDijelovi() {
+        return labelGodisnjaZaradaDijelovi;
+    }
+
+    public void setLabelGodisnjaZaradaDijelovi(JLabel labelGodisnjaZaradaDijelovi) {
+        this.labelGodisnjaZaradaDijelovi = labelGodisnjaZaradaDijelovi;
+    }
+
+    public JLabel getLabelIntervalZarada() {
+        return labelIntervalZarada;
+    }
+
+    public void setLabelIntervalZarada(JLabel labelIntervalZarada) {
+        this.labelIntervalZarada = labelIntervalZarada;
+    }
+
+    public JLabel getLabelIntervalZaradaDijelovi() {
+        return labelIntervalZaradaDijelovi;
+    }
+
+    public void setLabelIntervalZaradaDijelovi(JLabel labelIntervalZaradaDijelovi) {
+        this.labelIntervalZaradaDijelovi = labelIntervalZaradaDijelovi;
+    }
+
+    public JLabel getLabelMjesecnaZarada() {
+        return labelMjesecnaZarada;
+    }
+
+    public void setLabelMjesecnaZarada(JLabel labelMjesecnaZarada) {
+        this.labelMjesecnaZarada = labelMjesecnaZarada;
+    }
+
+    public JLabel getLabelMjesecnaZaradaDijelovi() {
+        return labelMjesecnaZaradaDijelovi;
+    }
+
+    public void setLabelMjesecnaZaradaDijelovi(JLabel labelMjesecnaZaradaDijelovi) {
+        this.labelMjesecnaZaradaDijelovi = labelMjesecnaZaradaDijelovi;
+    }
+
+    public JLabel getLabelPopravkeDanas() {
+        return labelPopravkeDanas;
+    }
+
+    public void setLabelPopravkeDanas(JLabel labelPopravkeDanas) {
+        this.labelPopravkeDanas = labelPopravkeDanas;
+    }
+
+    public JLabel getLabelPopravkeGodina() {
+        return labelPopravkeGodina;
+    }
+
+    public void setLabelPopravkeGodina(JLabel labelPopravkeGodina) {
+        this.labelPopravkeGodina = labelPopravkeGodina;
+    }
+
+    public JLabel getLabelPopravkeInterval() {
+        return labelPopravkeInterval;
+    }
+
+    public void setLabelPopravkeInterval(JLabel labelPopravkeInterval) {
+        this.labelPopravkeInterval = labelPopravkeInterval;
+    }
+
+    public JLabel getLabelPopravkeMjesec() {
+        return labelPopravkeMjesec;
+    }
+
+    public void setLabelPopravkeMjesec(JLabel labelPopravkeMjesec) {
+        this.labelPopravkeMjesec = labelPopravkeMjesec;
+    }
+
+    public JPanel getPanelGrafikAuta() {
+        return panelGrafikAuta;
+    }
+
+    public void setPanelGrafikAuta(JPanel panelGrafikAuta) {
+        this.panelGrafikAuta = panelGrafikAuta;
+    }
+
+    public JPanel getPanelGrafikFakture() {
+        return panelGrafikFakture;
+    }
+
+    public void setPanelGrafikFakture(JPanel panelGrafikFakture) {
+        this.panelGrafikFakture = panelGrafikFakture;
+    }
+
+    public JPanel getPanelGrafikPopravke() {
+        return panelGrafikPopravke;
+    }
+
+    public void setPanelGrafikPopravke(JPanel panelGrafikPopravke) {
+        this.panelGrafikPopravke = panelGrafikPopravke;
+    }
+
+    public JPanel getPanelGrafikPrihodiUkupno() {
+        return panelGrafikPrihodiUkupno;
+    }
+
+    public void setPanelGrafikPrihodiUkupno(JPanel panelGrafikPrihodiUkupno) {
+        this.panelGrafikPrihodiUkupno = panelGrafikPrihodiUkupno;
+    }
+
+    public JPanel getPanelGrafikPrihodiDijelovi() {
+        return PanelGrafikPrihodiDijelovi;
+    }
+
+    public void setPanelGrafikPrihodiDijelovi(JPanel PanelGrafikPrihodiDijelovi) {
+        this.PanelGrafikPrihodiDijelovi = PanelGrafikPrihodiDijelovi;
+    }
+    
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;
-    public javax.swing.JPanel PanelGrafikPrihodiDijelovi;
+    private javax.swing.JPanel PanelGrafikPrihodiDijelovi;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnPonisti;
     private javax.swing.JButton btnPonistiSve;
@@ -6198,10 +6076,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemOtpustiRadnika;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel panelAkcijeNaFormi;
-    public javax.swing.JPanel panelGrafikAuta;
-    public javax.swing.JPanel panelGrafikFakture;
-    public javax.swing.JPanel panelGrafikPopravke;
-    public javax.swing.JPanel panelGrafikPrihodiUkupno;
+    private javax.swing.JPanel panelGrafikAuta;
+    private javax.swing.JPanel panelGrafikFakture;
+    private javax.swing.JPanel panelGrafikPopravke;
+    private javax.swing.JPanel panelGrafikPrihodiUkupno;
     private javax.swing.JPanel panelPronadjiVlasnika;
     private javax.swing.JPanel panelPronadjiVozilo;
     private javax.swing.JPanel panelVozilo;
