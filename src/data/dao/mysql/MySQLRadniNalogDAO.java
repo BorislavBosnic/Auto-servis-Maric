@@ -278,15 +278,15 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
 
 		String query = "UPDATE radni_nalog SET "
 				+ "Placeno=?, "
-                        + "DatumOtvaranjaNaloga=?, "
-                        + "DatumZatvaranjaNaloga=?, "
-                        + "IdVozilo=?, "
-                        + "Troskovi=?, "
-                        + "Kilometraza=?, "
-                        + "OpisProblema=?, "
-                        + "PredvidjenoVrijemeZavrsetka=?, "
-                        + "CijenaUsluge=? "
-			+ "WHERE IdRadniNalog=? ";
+                                + "DatumOtvaranjaNaloga=?, "
+                                + "DatumZatvaranjaNaloga=?, "
+                                + "IdVozilo=?, "
+                                + "Troskovi=?, "
+                                + "Kilometraza=?, "
+                                + "OpisProblema=?, "
+                                + "PredvidjenoVrijemeZavrsetka=?, "
+                                + "CijenaUsluge=? "
+                                + "WHERE IdRadniNalog=? ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -342,6 +342,4 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
 		}
 		return retVal;
     }
-    
-    
 }

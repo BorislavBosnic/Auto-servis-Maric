@@ -154,15 +154,15 @@ public class MySQLFakturaDAO implements FakturaDAO
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO faktura(IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos)"
-                        + "VALUES (?, ?, ?, ?, ?) ";
+        String query = "INSERT INTO faktura(DatumIzdavanja, IdRadniNalog, Iznos)"
+                        + "VALUES (?, ?, ?) ";
         try {
                 conn = ConnectionPool.getInstance().checkOut();
                 ps = conn.prepareStatement(query);
-                ps.setInt(1, faktura.getIdFaktura());
-                ps.setDate(2, faktura.getDatumIzdavanja());
-                ps.setInt(3, faktura.getIdRadniNalog());
-                ps.setDouble(4, faktura.getIznos());
+                //ps.setInt(1, faktura.getIdFaktura());
+                ps.setDate(1, faktura.getDatumIzdavanja());
+                ps.setInt(2, faktura.getIdRadniNalog());
+                ps.setDouble(3, faktura.getIznos());
 
                 retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -225,6 +225,32 @@ public class MySQLFakturaDAO implements FakturaDAO
         } finally {
                 ConnectionPool.getInstance().checkIn(conn);
                 DBUtilities.getInstance().close(ps);
+        }
+        return retVal;
+    }
+    
+    @Override
+    public int getMaxID()
+    {
+        int retVal = -1;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT max(IdFaktura)"
+                            + "FROM faktura ";
+        try {
+                conn = ConnectionPool.getInstance().checkOut();
+                ps = conn.prepareStatement(query);
+                rs = ps.executeQuery();
+
+                if (rs.next())retVal = rs.getInt(1);
+        } catch (SQLException e) {
+                e.printStackTrace();
+                DBUtilities.getInstance().showSQLException(e);
+        } finally {
+                ConnectionPool.getInstance().checkIn(conn);
+                DBUtilities.getInstance().close(ps, rs);
         }
         return retVal;
     }

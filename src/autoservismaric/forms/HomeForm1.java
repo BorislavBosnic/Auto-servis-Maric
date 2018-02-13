@@ -54,12 +54,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import static poslovnalogika.KnjigovodstvoLogika.fakturisaniRadniNalozi;
+import static poslovnalogika.KnjigovodstvoLogika.fakturisi;
 import static poslovnalogika.KnjigovodstvoLogika.nefakturisaniRadniNalozi;
+import static poslovnalogika.KnjigovodstvoLogika.plati;
 import static poslovnalogika.KnjigovodstvoLogika.poDatumuRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.poIDuRadniNalozi;
         
 
 import static poslovnalogika.KnjigovodstvoLogika.prikaziFakturu;
+import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
 import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
 import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.VozilaLogika;
@@ -82,31 +85,161 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
     private void uslugeKnjigovodstva()
     {
-        inicijalizacijaTabeleRadnihNaloga();
+        inicijalizacijaTabela();
         brisanjeStarihVrijednostiPoljaKnjigovodstva();
     }
     private void uslugeZakazivanja()
     {
         
     }
-    private void inicijalizacijaTabeleRadnihNaloga()
+    private void inicijalizacijaTabela()
     {
         ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         radniNaloziZaTabelu(lista,tblRadniNalozi);
         stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
         if(tblRadniNalozi.getRowCount()>0)tblRadniNalozi.setRowSelectionInterval(0, 0);
         if(tblFaktura.getRowCount()>0)tblFaktura.setRowSelectionInterval(0, 0);
+        provjeraZaDugmiceZaTabeluNaloga();
+        dodajIskacuciMeniUTabeluRadnihNaloga();
+    }
+    private void provjeraZaDugmiceZaTabeluNaloga()
+    {
         if(tblRadniNalozi.getRowCount()>0 &&
                 !("Nema fakture".equals((String)(
                         tblRadniNalozi.getValueAt(tblRadniNalozi.getSelectedRow(), 4)))))
+        {
             btnRacun.setEnabled(true);
+            btnPredracun.setEnabled(false);
+        }
         else
+        {
             btnRacun.setEnabled(false);
+            btnPredracun.setEnabled(true);
+        }
     }
     private void brisanjeStarihVrijednostiPoljaKnjigovodstva()
     {
         txtID.setText("");
         dtmDatum.setDate(null);
+    }
+    private static int opcija=-1;
+    private void dodajIskacuciMeniUTabeluRadnihNaloga()
+    {
+        opcija=-1;
+        popupMenu = new JPopupMenu();
+        JMenuItem detaljnoItem = new JMenuItem("Detaljno");
+        JMenuItem placenoItem = new JMenuItem("Plaćeno");
+        JMenuItem fakturisiItem = new JMenuItem("Fakturiši");
+        
+        detaljnoItem.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst
+                    (Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0))));
+                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
+                provjeraZaDugmiceZaTabeluNaloga();
+            }
+        });
+        popupMenu.add(detaljnoItem);
+
+        placenoItem.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int izbor=JOptionPane.showOptionDialog
+                (
+                    new JFrame(),
+                    "Da li ste sigurni da je placeno?",
+                    "Da li ste sigurni?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"DA","NE"},
+                    "NE"
+                );
+                if(izbor==JOptionPane.YES_OPTION)
+                    plati(Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
+                provjeraZaDugmiceZaTabeluNaloga();
+            }
+        });
+        popupMenu.add(placenoItem);
+
+        fakturisiItem.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int izbor=JOptionPane.showOptionDialog
+                (
+                    new JFrame(),
+                    "Da li ste sigurni da želite fakturisati?",
+                    "Da li ste sigurni?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"DA","NE"},
+                    "NE"
+                );
+                if(izbor==JOptionPane.YES_OPTION)
+                    fakturisi(Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
+                provjeraZaDugmiceZaTabeluNaloga();
+            }
+        });
+        popupMenu.add(fakturisiItem);
+        
+        tblRadniNalozi.setComponentPopupMenu(popupMenu);
+
+        popupMenu.addPopupMenuListener(new PopupMenuListener()
+        {
+
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e)
+            {
+                SwingUtilities.invokeLater(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        int rowAtPoint = tblRadniNalozi.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblRadniNalozi));
+                        selektovanRed = rowAtPoint;
+                        int column = 0;
+                        //int row = tableVozila.getSelectedRow();
+                        String imeKolone = tblRadniNalozi.getModel().getColumnName(0);
+
+                        if (selektovanRed >= 0)
+                        {
+                            
+                        }
+                        if (rowAtPoint > -1)
+                        {
+                            tblRadniNalozi.setRowSelectionInterval(rowAtPoint, rowAtPoint);
+                        }
+                        stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
+                        provjeraZaDugmiceZaTabeluNaloga();
+                    }
+                });
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
     /*****Kraj*****/
     
@@ -1453,6 +1586,10 @@ public class HomeForm1 extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 tblRadniNaloziMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tblRadniNaloziMouseReleased(evt);
             }
         });
         jScrollPane9.setViewportView(tblRadniNalozi);
@@ -5549,23 +5686,18 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnRacunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacunActionPerformed
     {//GEN-HEADEREND:event_btnRacunActionPerformed
-        // TODO add your handling code here:
+        prikaziFakturu(tblRadniNalozi, tblFaktura, "Račun");
     }//GEN-LAST:event_btnRacunActionPerformed
 
     private void btnPredracunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPredracunActionPerformed
     {//GEN-HEADEREND:event_btnPredracunActionPerformed
-        prikaziFakturu(tblRadniNalozi, tblFaktura);
+        prikaziFakturu(tblRadniNalozi, tblFaktura, "Faktura");
     }//GEN-LAST:event_btnPredracunActionPerformed
 
     private void tblRadniNaloziMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblRadniNaloziMouseClicked
     {//GEN-HEADEREND:event_tblRadniNaloziMouseClicked
         stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-        if(tblRadniNalozi.getRowCount()>0 &&
-                !("Nema fakture".equals((String)(
-                        tblRadniNalozi.getValueAt(tblRadniNalozi.getSelectedRow(), 4)))))
-            btnRacun.setEnabled(true);
-        else
-            btnRacun.setEnabled(false);
+        provjeraZaDugmiceZaTabeluNaloga();
     }//GEN-LAST:event_tblRadniNaloziMouseClicked
 
     private void btnNefakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNefakturisanoActionPerformed
@@ -5591,6 +5723,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poDatumuRadniNalozi(lista, tblRadniNalozi, dtmDatum);
     }//GEN-LAST:event_btnPoDatumuActionPerformed
+
+    private void tblRadniNaloziMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblRadniNaloziMouseReleased
+    {//GEN-HEADEREND:event_tblRadniNaloziMouseReleased
+        tblRadniNaloziMouseClicked(evt);
+    }//GEN-LAST:event_tblRadniNaloziMouseReleased
 
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};

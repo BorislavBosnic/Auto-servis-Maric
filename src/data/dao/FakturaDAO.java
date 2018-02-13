@@ -22,4 +22,5 @@ public interface FakturaDAO
     public boolean dodajFakturu(FakturaDTO faktura);
     public boolean azurirajFakturu(FakturaDTO faktura);
     public boolean obrisiFakturu(int idFaktura);
+    public int getMaxID();
 }
