@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`dio` (
   `Naziv` VARCHAR(50) NULL DEFAULT NULL,
   `Sifra` VARCHAR(20) NULL DEFAULT NULL,
   `GodisteVozila` INT(11) NULL DEFAULT NULL,
-  `Novo` TINYINT(1) NULL DEFAULT NULL,
+  `Novo` BOOLEAN NULL DEFAULT NULL,/*KARPA MIJENJAO*/
   `VrstaGoriva` VARCHAR(20) NULL DEFAULT NULL,
   `TrenutnaCijena` DECIMAL(6,2) NULL DEFAULT NULL,
   `Kolicina` INT(11) NULL DEFAULT NULL,
-  `ZaSve` TINYINT(1) NULL DEFAULT NULL,
+  `ZaSve` BOOLEAN NULL DEFAULT NULL,/*KARPA MIJENJAO*/
   PRIMARY KEY (`IdDio`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -113,7 +113,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`radni_nalog` (
   `IdRadniNalog` INT(11) NOT NULL AUTO_INCREMENT,
-  `Placeno` TINYINT(1) NOT NULL,
+  `Placeno` BOOLEAN NOT NULL,/*KARPA MIJENJAO*/
   `DatumOtvaranjaNaloga` DATE NULL DEFAULT NULL,
   `DatumZatvaranjaNaloga` DATE NULL DEFAULT NULL,
   `IdVozilo` INT(11) NULL DEFAULT NULL,
@@ -139,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`faktura` (
   `DatumIzdavanja` DATE NULL DEFAULT NULL,
   `IdRadniNalog` INT(11) NULL DEFAULT NULL,
   `Iznos` DECIMAL(8,2) NULL DEFAULT NULL,
+  `VrijemeRada` INT DEFAULT NULL,
   PRIMARY KEY (`IdFaktura`),
   INDEX `R_21` (`IdRadniNalog` ASC),
   CONSTRAINT `faktura_ibfk_1`
@@ -147,17 +148,34 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`faktura` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `autoservismaric`.`termin`/*KARPA DODAO*/
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `autoservismaric`.`termin` (
+  `IdTermin` INT(11) NOT NULL AUTO_INCREMENT,
+  `Datum` DATE NOT NULL,
+  `Vrijeme` TIME NOT NULL,
+  `Marka` VARCHAR(20) NOT NULL,
+  `Model` VARCHAR(20) NOT NULL,
+  `Ime` VARCHAR(20) NOT NULL,
+  `Prezime` VARCHAR(20) NOT NULL,
+  `BrojTelefona` VARCHAR(20) NULL DEFAULT NULL,
+  `DatumZakazivanja` DATE NOT NULL,
+  PRIMARY KEY (`IdTermin`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
 
 -- -----------------------------------------------------
 -- Table `autoservismaric`.`prodan_dio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`prodan_dio` (
-  `IdProdanDio` INT(11) NOT NULL AUTO_INCREMENT,
-  `IdDio` INT(11) NOT NULL,
+  `IdDio` INT(11) NOT NULL AUTO_INCREMENT,
   `CijenaProdaje` DECIMAL(6,2) NULL DEFAULT NULL,
   `Kolicina` INT(11) NULL DEFAULT NULL,
   `Datum` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`IdProdanDio`),
+  PRIMARY KEY (`IdDio`),
   CONSTRAINT `prodan_dio_ibfk_1`
     FOREIGN KEY (`IdDio`)
     REFERENCES `autoservismaric`.`dio` (`IdDio`))
@@ -229,33 +247,52 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+/*KARPA DODAO*/
+INSERT INTO dio VALUES (1, "Kurbla", "657asdf215", 2002, true, "Dizel", 12, 11, false);
+INSERT INTO dio VALUES (2, "Gurtna", "asdf9842d7", 2000, false, "Benzin", 18, 5, false);
+INSERT INTO dio VALUES (3, "Rotor", "5d8d1g32g1", 1995, true, "Benzin", 10.5, 3, false);
+INSERT INTO dio VALUES (4, "Stator", "9a5i1b6d3y", 2005, false, "Dizel", 50, 2, true);
+INSERT INTO dio VALUES (5, "Felna", "a4520yhn6a", 2010, false, "Hibrid", 35, 1, true);
 
+INSERT INTO prodan_dio VALUES (1, 55, 2, '2017-10-10');
+INSERT INTO prodan_dio VALUES (2, 12, 3, '2017-10-22');
+INSERT INTO prodan_dio VALUES (3, 13, 1, '2017-11-08');
+INSERT INTO prodan_dio VALUES (4, 55, 5, '2018-11-09');
 
-INSERT INTO `autoservismaric`.`dio` (`idDio`, `Naziv`, `Sifra`, `GodisteVozila`, `Novo`, `VrstaGoriva`, `TrenutnaCijena`, `Kolicina`, `ZaSve`) VALUES ('1', 'lamela', '3nac3fsa', '2002', '1', 'Dizel', '50', '5', '1');
-INSERT INTO `autoservismaric`.`dio` (`idDio`, `Naziv`, `Sifra`, `GodisteVozila`, `Novo`, `VrstaGoriva`, `TrenutnaCijena`, `Kolicina`, `ZaSve`) VALUES ('2', 'alternator', '32b5vc35', '2000', '0', 'benzin', '100', '3', '0');
-INSERT INTO `autoservismaric`.`dio` (`idDio`, `Naziv`, `Sifra`, `Novo`, `VrstaGoriva`, `TrenutnaCijena`, `Kolicina`) VALUES ('3', 'Michelin guma', 'a1b7vc35', '1', '', '30', '8');
-INSERT INTO `autoservismaric`.`dio` (`idDio`, `Naziv`, `Sifra`, `Novo`, `TrenutnaCijena`, `Kolicina`) VALUES ('4', 'Pirelli guma', '73nf5hk1', '1', '25', '10');
-INSERT INTO `autoservismaric`.`dio` (`idDio`, `Naziv`, `Sifra`, `Novo`, `TrenutnaCijena`, `Kolicina`) VALUES ('5', 'Dunlop guma', 'sjnfs32k', '1', '28', '12');
+INSERT INTO kupac VALUES (1,"Miki","065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
 
+INSERT INTO model_vozila VALUES (1,"BMW","X6");
+INSERT INTO model_vozila VALUES (2,"VW","Golf");
 
-INSERT INTO `autoservismaric`.`vozilo` (`idVozilo`, `BrojRegistracije`) VALUES ('1', '444-A-333');
-INSERT INTO `autoservismaric`.`vozilo` (`idVozilo`, `BrojRegistracije`) VALUES ('2', '222-B-111');
+INSERT INTO vozilo VALUES (1,'A10-B-200',230,2.3,2010,1,1,"Benzin");
+INSERT INTO vozilo VALUES (2,'B33-D-146',170,1.9,2005,1,1,"Dizel");
 
+INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2018-01-10', 1, 50, 300000, "Tu nešto piše jedan", '2018-01-15', 100);
+INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 250000, "Tu nešto piše dva", '2018-01-29', 140);
+INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65);
+INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125);
 
-INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('1', '70', '1', '2017-11-10');
-INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('2', '130', '1', '2017-11-21');
-INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('3', '40', '2', '2017-10-10');
-INSERT INTO `autoservismaric`.`prodan_dio` (`IdDio`, `CijenaProdaje`, `Kolicina`, `Datum`) VALUES ('4', '30', '2', '2018-01-01');
+INSERT INTO faktura VALUES (1, '2017-07-15', 1, 100, 2);
+INSERT INTO faktura VALUES (2, '2017-10-16', 4, 200, 1);
+INSERT INTO faktura VALUES (3, '2018-01-03', 3, 300, 2);
 
+INSERT INTO radni_nalog_dio VALUES (1,1,10,1);
+INSERT INTO radni_nalog_dio VALUES (1,2,12.5,1);
+INSERT INTO radni_nalog_dio VALUES (1,3,0.15,1);
+INSERT INTO radni_nalog_dio VALUES (1,4,11,1);
+INSERT INTO radni_nalog_dio VALUES (1,5,11.75,1);
 
-INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('1', '1', '2017-07-09', '2017-07-10', '50');
-INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('2', '1', '2017-10-09', '2017-10-14', '70');
-INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `CijenaUsluge`) VALUES ('3', '0', '2017-12-30', '30');
-INSERT INTO `autoservismaric`.`radni_nalog` (`IdRadniNalog`, `Placeno`, `DatumOtvaranjaNaloga`, `DatumZatvaranjaNaloga`, `CijenaUsluge`) VALUES ('4', '1', '2017-12-29', '2018-01-02', '60');
+INSERT INTO dio_model_vozila VALUES (1,1);
+INSERT INTO dio_model_vozila VALUES (2,1);
+INSERT INTO dio_model_vozila VALUES (3,1);
+INSERT INTO dio_model_vozila VALUES (4,2);
+INSERT INTO dio_model_vozila VALUES (5,2);
 
+INSERT INTO radnik VALUES (1,"Marko","Marković","066/488-844","Cara Lazara 5","SSS","Vojin","A506605B",'1990-3-31',"Šljakar",'2000-1-1','2018,1-1');
 
-INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('1', '2017-07-15', '1');
-INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('2', '2017-10-16', '2');
-INSERT INTO `autoservismaric`.`faktura` (`IdFaktura`, `DatumIzdavanja`, `IdRadniNalog`) VALUES ('3', '2018-01-03', '4');
+INSERT INTO radni_nalog_radnik VALUES (1,1,"Ima neki opis broj jedan");
+INSERT INTO radni_nalog_radnik VALUES (2,1,"Ima neki opis broj dva");
+INSERT INTO radni_nalog_radnik VALUES (3,1,"Ima neki opis broj tri");
+INSERT INTO radni_nalog_radnik VALUES (4,1,"Ima neki opis broj četiri");
 
-
+INSERT INTO termin VALUES (1,'2018-2-15','10:00',"AUDI","A8","Nemanja","Bosnić","065/112-224",'2018-2-13');
