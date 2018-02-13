@@ -32,7 +32,7 @@ public class MySQLDioDAO implements DioDAO{
                 /*String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "
                         + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n" +
                                 "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila\n" +
-                                "where d.Sifra=? AND d.Naziv=? ";*/
+                                "where d.Sifra=?";*/
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -134,9 +134,10 @@ public class MySQLDioDAO implements DioDAO{
 		/*String query = "SELECT IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve "
 				+ "FROM dio "
 				+ "WHERE IdDio=? ";*/
-                String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "
-                        + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n" +
-                                "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila\n" +
+                String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "+
+                                "mv.IdModelVozila, Marka, Model FROM dio d "+
+                                "INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio " +
+                                "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila " +
                                 "where d.IdDio=? ";
 		
 		try {

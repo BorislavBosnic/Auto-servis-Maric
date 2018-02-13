@@ -5,16 +5,21 @@
  */
 package poslovnalogika;
 
+import com.toedter.calendar.JDateChooser;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.FakturaDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.RadniNalogDioDTO;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,13 +30,19 @@ import javax.swing.table.DefaultTableModel;
 public class KnjigovodstvoLogika
 {
     public static double PDV;
+    public static int BROJ_FAKTURE;
+    public static String IME_PRODAVCA="Auto Servis Marić";
+    public static String ADRESA_PRODAVCA="Marka Markovića 33";
+    public static String GRAD_PRODAVCA="Prnjavor";
+    public static String EMAIL_PRODAVCA="maricmaric@teol.net";
     static{
         try
         {
             FileInputStream fileIn =
-            new FileInputStream("PDV.data");
+            new FileInputStream("Data.data");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             PDV=in.readDouble();
+            BROJ_FAKTURE=in.readInt();
             in.close();
             fileIn.close();
         }
@@ -67,7 +78,8 @@ public class KnjigovodstvoLogika
         dtm.setDataVector(sve,nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    public static void stavkeSaNalogaZaTabelu(JTable tabela, JTable nalozi)
+    public static void stavkeSaNalogaZaTabelu(JTable tabela, JTable nalozi,
+            JTextField  txtBezPDV, JTextField txtPDV, JTextField txtUkupno)
     {
         int row = nalozi.convertRowIndexToModel(nalozi.getSelectedRow());
         if(row<0)row=0;
@@ -76,26 +88,127 @@ public class KnjigovodstvoLogika
         DefaultTableModel dtm = (DefaultTableModel)tabela.getModel();
         ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(idRadnogNaloga);
         Object[][] sve=new Object[lista.size()+1][5];
+        double cijena=0;
         for(int i=0;i<lista.size();++i)
         {
-                    int idDio=lista.get(i).getIdDio();
+                int idDio=lista.get(i).getIdDio();
                 sve[i][0]=String.valueOf(idDio); 
-                    DioDTO dio=DAOFactory.getDAOFactory().getDioDAO().getDio(idDio);
-                /*sve[i][1]=String.valueOf(
-                        ""+dio.getNaziv()+" "+dio.getMarka()+" "+dio.getModel()+" "
-                        +dio.getVrstaGoriva()+" "+dio.getGodisteVozila());*/
+                DioDTO dio=DAOFactory.getDAOFactory().getDioDAO().getDio(idDio);
+                sve[i][1]=String.valueOf(
+                        ""+dio.getNaziv()+" "+dio.getMarka()+" "+dio.getModel()+
+                        " "+dio.getVrstaGoriva()+" "+dio.getGodisteVozila());
                 sve[i][2]=String.valueOf(lista.get(i).getKolicina());
                 sve[i][3]=String.valueOf(lista.get(i).getCijena());
                 sve[i][4]=String.valueOf(lista.get(i).getCijena()*(1.0+PDV));
+                
+                cijena+=lista.get(i).getCijena()*lista.get(i).getKolicina();
         }
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
-        sve[lista.size()][2]=" ";
+        sve[lista.size()][2]="1";
         sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge());
         sve[lista.size()][4]=String.valueOf(nalog.getCijenaUsluge()*(1.0+PDV));
+        cijena+=nalog.getCijenaUsluge();
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        txtBezPDV.setText(""+(double)Math.round(cijena * 100d) / 100d);
+        txtPDV.setText(""+(double)Math.round(cijena * PDV * 100d) / 100d);
+        txtUkupno.setText(""+(double)Math.round(cijena * (1+PDV) * 100d) / 100d);
+    }
+    public static void prikaziFakturu(JTable fakture, JTable stavke)
+    {
+        int selectedRow=fakture.getSelectedRow();
+        System.out.println(selectedRow);
+        FakturaLogika.create
+        (
+                stavke,
+                KnjigovodstvoLogika.PDV,
+                KnjigovodstvoLogika.BROJ_FAKTURE,
+                KnjigovodstvoLogika.IME_PRODAVCA,
+                KnjigovodstvoLogika.ADRESA_PRODAVCA,
+                KnjigovodstvoLogika.GRAD_PRODAVCA,
+                KnjigovodstvoLogika.EMAIL_PRODAVCA,
+                (String)(fakture.getValueAt(selectedRow,2)),
+                "test",
+                "test",
+                "test"
+        );
+    }
+    
+    public static void fakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
+    {
+        ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        for(RadniNalogDTO nalog:lista)
+            if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(nalog.getIdRadniNalog())!=null)
+                filtriranaLista.add(nalog);
+        radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
+    
+    public static void nefakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
+    {
+        ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        for(RadniNalogDTO nalog:lista)
+            if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(nalog.getIdRadniNalog())==null)
+                filtriranaLista.add(nalog);
+        radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
+    
+    public static void poIDuRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela, JTextField txtID)
+    {
+        int id=0;
+        try
+        {
+            id=Integer.parseInt(txtID.getText());
+        }
+        catch(Exception e)
+        {
+            id=-1;
+            //odraditi neki popup
+        }
+        ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        for(RadniNalogDTO nalog:lista)
+            if(id<0 || nalog.getIdRadniNalog()==id)
+                filtriranaLista.add(nalog);
+        radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
+    
+    public static void poDatumuRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela, JDateChooser txtDatum)
+    {
+        Date datum=null;
+        try
+        {
+            datum=new Date(txtDatum.getDate().getTime());
+        }
+        catch(Exception e)
+        {
+            //odraditi neki popup
+        }
+        ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        for(RadniNalogDTO nalog:lista)
+            if(datum==null || nalog.getDatumOtvaranjaNaloga().equals(datum))
+                filtriranaLista.add(nalog);
+        radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
+    
+    
+    public static void main(String[] args)
+    {
+        try
+        {
+            FileOutputStream fileOut =
+            new FileOutputStream("Data.data");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeDouble((double)0.17);
+            out.writeInt(BROJ_FAKTURE);
+            out.close();
+            fileOut.close();
+        }
+        catch (IOException i)
+        {
+            i.printStackTrace();
+        }
     }
 }

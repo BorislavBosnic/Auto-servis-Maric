@@ -2,6 +2,7 @@ package poslovnalogika;
 import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.examples.complex.invoice.Customer;
 import net.sf.dynamicreports.examples.complex.invoice.InvoiceData;
@@ -21,25 +22,63 @@ import net.sf.dynamicreports.report.exception.DRException;
 public class FakturaLogika {
    private InvoiceData data = new InvoiceData();
    private AggregationSubtotalBuilder<BigDecimal> totalSum;
-   public JasperReportBuilder create(ArrayList<Item> items,
-                                    int pdv, int brojFakture,
+   public static boolean create(JTable tabela,
+                                    double pdv, int brojFakture,
                                     String imeProdavca, String adresaProdavca,
                                     String gradProdavca, String emailProdavca,
                                     String imeKupca, String adresaKupca,
-                                    String gradKupca, String emailKupca)throws DRException
+                                    String gradKupca, String emailKupca)
    {
-       return build();
+       /**Stavke**/
+       ArrayList<Item>items=new ArrayList<>();
+       for(int i=0;i<tabela.getRowCount();++i)
+       {
+           Item item=new Item();
+           item.setDescription((String)tabela.getValueAt(i, 1));
+           item.setQuantity(Integer.valueOf((String)tabela.getValueAt(i, 2)));
+           item.setUnitprice(BigDecimal.valueOf(Double.valueOf((String)tabela.getValueAt(i, 3))));
+           items.add(item);
+       }
+       /**Prodavac**/
+       Customer prodavac=new Customer();
+       prodavac.setAddress(adresaProdavca);
+       prodavac.setCity(gradProdavca);
+       prodavac.setEmail(emailProdavca);
+       prodavac.setName(imeProdavca);
+       /**Kupac**/
+       Customer kupac = new Customer();
+       kupac.setAddress(adresaKupca);
+       kupac.setCity(gradKupca);
+       kupac.setEmail(emailKupca);
+       kupac.setName(imeKupca);
+       
+       FakturaLogika design = new FakturaLogika();
+       try
+       {
+           JasperReportBuilder report = design.build(items,pdv,brojFakture,prodavac,kupac);
+           report.show();
+       }
+       catch (DRException e)
+       {
+           return false;
+       }
+       return true;
    }
    
 
-   public JasperReportBuilder build(/*ArrayList<Item> items, int pdv, int brojFakture
-                       Customer prodavac, Customer kupac*/) throws DRException {
-          
-       double pdv=0.17;
-       data.getInvoice().setId(/*brojFakture*/5);
+   public JasperReportBuilder build(ArrayList<Item> items,
+                                    double pdv, int brojFakture,
+                                    Customer prodavac, Customer kupac) throws DRException
+   {
+       data.getInvoice().setId(brojFakture);
+       data.getInvoice().setItems(items);
+       data.getInvoice().setBillTo(prodavac);
+       data.getInvoice().setShipTo(kupac);
+       /*double pdv=0.17;
+       data.getInvoice().setId(5);*/
        
        /*OVOGA ISPOD SE TREBA RIJESITI*/
-       ArrayList<Item> items=new ArrayList<>();
+       /*ArrayList<Item> items=new ArrayList<>();
        Item it=new Item();
        it.setDescription("Bosch pumpa");
        it.setQuantity(Integer.valueOf(3));
@@ -56,10 +95,10 @@ public class FakturaLogika {
        it.setDescription("Rad");
        it.setQuantity(Integer.valueOf(5));
        it.setUnitprice(BigDecimal.valueOf(5));
-       items.add(it);
+       items.add(it);*/
        
        //*PROMJENE KUPCA I PRODAVCA*//
-      Customer prodavac=new Customer();
+      /*Customer prodavac=new Customer();
       prodavac.setAddress("Marića Marka 56");
       prodavac.setCity("Prnjavor");
       prodavac.setEmail("maric.najbolji@live.com");
@@ -71,11 +110,8 @@ public class FakturaLogika {
       kupac.setCity("Prnjavor");
       kupac.setEmail("maric.slabi@live.com");
       kupac.setName("Marić Milorad");
-              data.getInvoice().setShipTo(kupac);
+              data.getInvoice().setShipTo(kupac);*/
       /*---------------------------------------------------------------------*/
-       
-      data.getInvoice().setItems(items);
-       
       JasperReportBuilder report = report();
 
       //init styles
@@ -185,17 +221,6 @@ public class FakturaLogika {
          BigDecimal total = reportParameters.getValue(totalSum);
          BigDecimal shipping = total.add(data.getInvoice().getShipping());
          return "Iznos: " + type.bigDecimalType().valueToString(shipping, reportParameters.getLocale());
-      }
-   }
-
-   public static void main(String[] args) {
-      FakturaLogika design = new FakturaLogika();
-      try {
-         //JasperReportBuilder report = design.create(null,0,0,null,null,null,null,null,null,null,null);
-         JasperReportBuilder report = design.build();
-         report.show();
-      } catch (DRException e) {
-         e.printStackTrace();
       }
    }
 }
