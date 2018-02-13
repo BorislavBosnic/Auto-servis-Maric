@@ -18,6 +18,7 @@ import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.dynamicreports.report.exception.DRException;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class FakturaLogika {
    private InvoiceData data = new InvoiceData();
@@ -27,7 +28,8 @@ public class FakturaLogika {
                                     String imeProdavca, String adresaProdavca,
                                     String gradProdavca, String emailProdavca,
                                     String imeKupca, String adresaKupca,
-                                    String gradKupca, String emailKupca)
+                                    String gradKupca, String emailKupca,
+                                    String fakturaIliRacun)
    {
        /**Stavke**/
        ArrayList<Item>items=new ArrayList<>();
@@ -51,12 +53,13 @@ public class FakturaLogika {
        kupac.setCity(gradKupca);
        kupac.setEmail(emailKupca);
        kupac.setName(imeKupca);
-       
+
        FakturaLogika design = new FakturaLogika();
        try
        {
-           JasperReportBuilder report = design.build(items,pdv,brojFakture,prodavac,kupac);
-           report.show();
+           JasperReportBuilder report =
+                   design.build(items,pdv,brojFakture,prodavac,kupac,fakturaIliRacun);
+           report.show(false);
        }
        catch (DRException e)
        {
@@ -64,11 +67,12 @@ public class FakturaLogika {
        }
        return true;
    }
-   
+
 
    public JasperReportBuilder build(ArrayList<Item> items,
                                     double pdv, int brojFakture,
-                                    Customer prodavac, Customer kupac) throws DRException
+                                    Customer prodavac, Customer kupac,
+                                    String fakturaIliRacun) throws DRException
    {
        data.getInvoice().setId(brojFakture);
        data.getInvoice().setItems(items);
@@ -76,7 +80,7 @@ public class FakturaLogika {
        data.getInvoice().setShipTo(kupac);
        /*double pdv=0.17;
        data.getInvoice().setId(5);*/
-       
+
        /*OVOGA ISPOD SE TREBA RIJESITI*/
        /*ArrayList<Item> items=new ArrayList<>();
        Item it=new Item();
@@ -84,19 +88,19 @@ public class FakturaLogika {
        it.setQuantity(Integer.valueOf(3));
        it.setUnitprice(BigDecimal.valueOf(1.3));
        items.add(it);
-       
+
        it=new Item();
        it.setDescription("Brisači Yugo Koral");
        it.setQuantity(Integer.valueOf(1));
        it.setUnitprice(BigDecimal.valueOf(1.7));
        items.add(it);
-       
+
        it=new Item();
        it.setDescription("Rad");
        it.setQuantity(Integer.valueOf(5));
        it.setUnitprice(BigDecimal.valueOf(5));
        items.add(it);*/
-       
+
        //*PROMJENE KUPCA I PRODAVCA*//
       /*Customer prodavac=new Customer();
       prodavac.setAddress("Marića Marka 56");
@@ -104,7 +108,7 @@ public class FakturaLogika {
       prodavac.setEmail("maric.najbolji@live.com");
       prodavac.setName("Autoservis Marić");
               data.getInvoice().setBillTo(prodavac);
-              
+
       Customer kupac=new Customer();
       kupac.setAddress("Marića Marka 57");
       kupac.setCity("Prnjavor");
@@ -138,11 +142,11 @@ public class FakturaLogika {
          .setTitle("Cijena")
          .setDataType(type.bigDecimalType());
       //vat = price * tax
-      
+
       //*UBACIVANJE PDV-A I IZBACIVANJE DOSTAVE*//
       data.getInvoice().setTax(pdv);
       data.getInvoice().setShipping(BigDecimal.ZERO);
-      
+
       TextColumnBuilder<BigDecimal> vatColumn = priceColumn.multiply(data.getInvoice().getTax())
          .setTitle("PDV")
          .setDataType(type.bigDecimalType());
@@ -158,7 +162,7 @@ public class FakturaLogika {
          .setLabelStyle(Templates.boldStyle);
 
       //configure report
-      
+
       report
          .setTemplate(Templates.reportTemplate)
          .setColumnStyle(columnStyle)
@@ -177,7 +181,10 @@ public class FakturaLogika {
          //band components
          .title(
             /*Templates.createTitleComponent("Broj fakture: " + data.getInvoice().getId()),*/
-            cmp.text("Faktura broj: " + data.getInvoice().getId()).setStyle(Templates.bold22CenteredStyle),
+            cmp.text(fakturaIliRacun+
+                    "                           "+
+                    "broj: "+
+                    data.getInvoice().getId()).setStyle(Templates.bold22CenteredStyle),
             cmp.horizontalList().setStyle(stl.style(10)).setGap(50).add(
                cmp.hListCell(createCustomerComponent("Prodavac", data.getInvoice().getBillTo())).heightFixedOnTop(),
                cmp.hListCell(createCustomerComponent("Kupac", data.getInvoice().getShipTo())).heightFixedOnTop()),
@@ -192,7 +199,7 @@ public class FakturaLogika {
             cmp.verticalGap(30),
             cmp.text("Hvala Vam na povjerenju i dođite nam opet.").setStyle(Templates.bold12CenteredStyle))
          .setDataSource(data.createDataSource());
-      
+
       return report;
    }
 
