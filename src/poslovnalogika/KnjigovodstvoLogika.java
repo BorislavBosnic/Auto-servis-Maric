@@ -18,6 +18,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -30,7 +32,6 @@ import javax.swing.table.DefaultTableModel;
 public class KnjigovodstvoLogika
 {
     public static double PDV;
-    public static int BROJ_FAKTURE;
     public static String IME_PRODAVCA="Auto Servis Marić";
     public static String ADRESA_PRODAVCA="Marka Markovića 33";
     public static String GRAD_PRODAVCA="Prnjavor";
@@ -42,7 +43,6 @@ public class KnjigovodstvoLogika
             new FileInputStream("Data.data");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             PDV=in.readDouble();
-            BROJ_FAKTURE=in.readInt();
             in.close();
             fileIn.close();
         }
@@ -118,24 +118,31 @@ public class KnjigovodstvoLogika
         txtPDV.setText(""+(double)Math.round(cijena * PDV * 100d) / 100d);
         txtUkupno.setText(""+(double)Math.round(cijena * (1+PDV) * 100d) / 100d);
     }
-    public static void prikaziFakturu(JTable fakture, JTable stavke)
+    public static void prikaziFakturu(JTable fakture, JTable stavke, String fakturaIliRacun)
     {
         int selectedRow=fakture.getSelectedRow();
-        System.out.println(selectedRow);
-        FakturaLogika.create
-        (
-                stavke,
-                KnjigovodstvoLogika.PDV,
-                KnjigovodstvoLogika.BROJ_FAKTURE,
-                KnjigovodstvoLogika.IME_PRODAVCA,
-                KnjigovodstvoLogika.ADRESA_PRODAVCA,
-                KnjigovodstvoLogika.GRAD_PRODAVCA,
-                KnjigovodstvoLogika.EMAIL_PRODAVCA,
-                (String)(fakture.getValueAt(selectedRow,2)),
-                "test",
-                "test",
-                "test"
-        );
+        
+        new Thread()
+        {
+            public void run()
+            {
+                FakturaLogika.create
+                (
+                        stavke,
+                        KnjigovodstvoLogika.PDV,
+                        DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
+                        KnjigovodstvoLogika.IME_PRODAVCA,
+                        KnjigovodstvoLogika.ADRESA_PRODAVCA,
+                        KnjigovodstvoLogika.GRAD_PRODAVCA,
+                        KnjigovodstvoLogika.EMAIL_PRODAVCA,
+                        (String)(fakture.getValueAt(selectedRow,2)),
+                        "test",
+                        "test",
+                        "test",
+                        fakturaIliRacun
+                );
+            }
+        }.start();
     }
     
     public static void fakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
@@ -193,6 +200,46 @@ public class KnjigovodstvoLogika
         radniNaloziZaTabelu(filtriranaLista, tabela);
     }
     
+    public static boolean plati(int id)
+    {
+        RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
+        if(nalog.isPlaceno())return false;
+        nalog.setPlaceno(true);
+        DAOFactory.getDAOFactory().getRadniNalogDAO().azurirajRadniNalog(nalog);
+        return true;
+    }
+    public static boolean fakturisi(int id)
+    {
+        RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
+        if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id)!=null)return false;
+        double iznos=0;
+        ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(id);
+        for(RadniNalogDioDTO item:lista)iznos+=item.getCijena()*item.getKolicina();
+        FakturaDTO faktura=new FakturaDTO
+        (
+                DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
+                new Date(Calendar.getInstance().getTime().getTime()),
+                id,
+                iznos*(PDV+1.0)
+        );
+        DAOFactory.getDAOFactory().getFakturaDAO().dodajFakturu(faktura);
+        return true;
+    }
+    
+    public static String radniNalogIFakturaUTekst(int id)
+    {
+        RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
+        FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().faktura(id);
+        String rez=""+nalog.getIdRadniNalog()+" "+
+                nalog.getOpisProblema()+" "+
+                nalog.getDatumOtvaranjaNaloga()+"-"+
+                nalog.getDatumZatvaranjaNaloga();
+        if(faktura!=null)
+            rez+=" "+faktura.getIdFaktura()+" "+
+                faktura.getDatumIzdavanja().toString()+" "+
+                    faktura.getIznos();
+        return rez;
+    }
     
     public static void main(String[] args)
     {
@@ -202,7 +249,6 @@ public class KnjigovodstvoLogika
             new FileOutputStream("Data.data");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeDouble((double)0.17);
-            out.writeInt(BROJ_FAKTURE);
             out.close();
             fileOut.close();
         }
