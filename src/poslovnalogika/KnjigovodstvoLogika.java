@@ -153,6 +153,15 @@ public class KnjigovodstvoLogika
                 filtriranaLista.add(nalog);
         radniNaloziZaTabelu(filtriranaLista, tabela);
     }
+    public static void neplaceneFaktureZaPocetnuStranu(ArrayList<RadniNalogDTO>lista, JTable tabela)
+    {
+        ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        for(RadniNalogDTO nalog:lista)
+            if((!nalog.isPlaceno())&&
+                    DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(nalog.getIdRadniNalog())!=null)
+                filtriranaLista.add(nalog);
+        radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
     
     public static void nefakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
     {

@@ -1157,10 +1157,14 @@
                         <Component class="javax.swing.JTable" name="tblNeplaceneFakture">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="3" rowCount="17">
-                                <Column editable="true" title="Id fakture" type="java.lang.Object"/>
-                                <Column editable="true" title="Datum" type="java.lang.Object"/>
-                                <Column editable="true" title="Iznos" type="java.lang.Object"/>
+                              <Table columnCount="7" rowCount="17">
+                                <Column editable="false" title="ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Automobil" type="java.lang.Object"/>
+                                <Column editable="false" title="Vlasnik" type="java.lang.Object"/>
+                                <Column editable="false" title="Datum otvaranja" type="java.lang.Object"/>
+                                <Column editable="false" title="Datum fakturisanja" type="java.lang.Object"/>
+                                <Column editable="false" title="Iznos" type="java.lang.Object"/>
+                                <Column editable="false" title="Pla&#x107;eno" type="java.lang.Boolean"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1183,7 +1187,7 @@
                               </TableColumnModel>
                             </Property>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                              <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                             </Property>
                           </Properties>
                           <Events>

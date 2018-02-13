@@ -57,6 +57,7 @@ import javax.swing.event.ChangeListener;
 import static poslovnalogika.KnjigovodstvoLogika.fakturisaniRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.fakturisi;
 import static poslovnalogika.KnjigovodstvoLogika.nefakturisaniRadniNalozi;
+import static poslovnalogika.KnjigovodstvoLogika.neplaceneFaktureZaPocetnuStranu;
 import static poslovnalogika.KnjigovodstvoLogika.plati;
 import static poslovnalogika.KnjigovodstvoLogika.poDatumuRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.poIDuRadniNalozi;
@@ -121,7 +122,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void inicijalizacijaTabeleNeplacenihFaktura()
     {
         ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        radniNaloziZaTabelu(lista,tblNeplaceneFakture);
+        neplaceneFaktureZaPocetnuStranu(lista,tblNeplaceneFakture);
         if(tblNeplaceneFakture.getRowCount()>0)tblNeplaceneFakture.setRowSelectionInterval(0, 0);
         dodajIskacuciMeniUTabeluNeplacenihFaktura();
     }
@@ -1933,29 +1934,51 @@ public class HomeForm1 extends javax.swing.JFrame {
         tblNeplaceneFakture.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String []
             {
-                "Id fakture", "Datum", "Iznos"
+                "ID", "Automobil", "Vlasnik", "Datum otvaranja", "Datum fakturisanja", "Iznos", "Plaćeno"
             }
-        ));
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
+        tblNeplaceneFakture.getTableHeader().setResizingAllowed(false);
+        tblNeplaceneFakture.getTableHeader().setReorderingAllowed(false);
         tblNeplaceneFakture.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
