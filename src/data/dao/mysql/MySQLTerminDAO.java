@@ -255,20 +255,19 @@ public class MySQLTerminDAO implements TerminDAO
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO termin(IdTermin, Datum, Vrijeme, Marka, Model, Ime, Prezime, BrojTelefona, DatumZakazivanja) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        String query = "INSERT INTO termin(Datum, Vrijeme, Marka, Model, Ime, Prezime, BrojTelefona, DatumZakazivanja) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
         try {
                 conn = ConnectionPool.getInstance().checkOut();
                 ps = conn.prepareStatement(query);
-                ps.setInt(1, termin.getIdTermin());
-                ps.setDate(2, termin.getDatum());
-                ps.setTime(3, termin.getVrijeme());
-                ps.setString(4, termin.getMarka());
-                ps.setString(5, termin.getModel());
-                ps.setString(6, termin.getIme());
-                ps.setString(7, termin.getPrezime());
-                ps.setString(8, termin.getBrojTelefona());
-                ps.setDate(9, termin.getDatumZakazivanja());
+                ps.setDate(1, termin.getDatum());
+                ps.setTime(2, termin.getVrijeme());
+                ps.setString(3, termin.getMarka());
+                ps.setString(4, termin.getModel());
+                ps.setString(5, termin.getIme());
+                ps.setString(6, termin.getPrezime());
+                ps.setString(7, termin.getBrojTelefona());
+                ps.setDate(8, termin.getDatumZakazivanja());
 
                 retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {

@@ -295,4 +295,11 @@ INSERT INTO radni_nalog_radnik VALUES (2,1,"Ima neki opis broj dva");
 INSERT INTO radni_nalog_radnik VALUES (3,1,"Ima neki opis broj tri");
 INSERT INTO radni_nalog_radnik VALUES (4,1,"Ima neki opis broj četiri");
 
-INSERT INTO termin VALUES (1,'2018-2-15','10:00',"AUDI","A8","Nemanja","Bosnić","065/112-224",'2018-2-13');
+INSERT INTO termin VALUES (1,'2017-8-10','9:00',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-7-4');
+INSERT INTO termin VALUES (2,'2017-9-11','9:30',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-9-8');
+INSERT INTO termin VALUES (3,'2017-10-12','8:00',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-9-12');
+INSERT INTO termin VALUES (4,'2017-11-13','11:30',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-11-16');
+INSERT INTO termin VALUES (5,'2017-12-14','12:00',"VW","Golf","Marko","Brkić","065/111-333",'2017-12-10');
+INSERT INTO termin VALUES (6,'2018-1-10','13:45',"VW","Golf","Marko","Brkić","065/111-333",'2018-1-1');
+INSERT INTO termin VALUES (7,'2018-1-11','15:00',"VW","Golf","Marko","Brkić","065/111-333",'2018-1-5');
+INSERT INTO termin VALUES (8,'2018-2-15','11:15',"VW","Golf","Marko","Brkić","065/111-333",'2018-2-10');

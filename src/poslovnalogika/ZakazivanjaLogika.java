@@ -8,7 +8,9 @@ package poslovnalogika;
 import data.dao.DAOFactory;
 import data.dto.TerminDTO;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -46,11 +48,57 @@ public class ZakazivanjaLogika
         ArrayList<TerminDTO>filtriranaLista=new ArrayList<>();
         for(TerminDTO nalog:lista)
             if("".equals(marka) || nalog.getMarka().equals(marka))
-                if(datum!=null || nalog.getDatum().equals(new Date(datum.getTime())))
+                if(datum==null || (nalog.getDatum().toString().compareTo(datum.toString()))==0)
                     if("".equals(ime) || nalog.getIme().equals(ime))
                         if("".equals(prezime) || nalog.getPrezime().equals(prezime))
                             if("".equals(brojTelefona) || nalog.getBrojTelefona().equals(brojTelefona))
                                 filtriranaLista.add(nalog);
         terminiZaTabelu(filtriranaLista, tabela);
+    }
+    
+    public static boolean dodajTermin
+    (
+        Date datum,
+        String sati,
+        String minuti,
+        String marka,
+        String model,
+        String ime,
+        String prezime,
+        String brojTelefona
+    )
+    {
+        TerminDTO termin=new TerminDTO
+        (
+            0,
+            datum,
+            new Time(Integer.parseInt(sati),Integer.parseInt(minuti),0),
+            marka,
+            model,
+            ime,
+            prezime,
+            brojTelefona,
+            new Date(Calendar.getInstance().getTime().getTime())
+        );
+        return DAOFactory.getDAOFactory().getTerminDAO().dodajTermin(termin);
+    }
+    
+    public static boolean obrisiTermin(String datum, String vrijeme)
+    {
+        System.out.println(datum+" "+vrijeme);
+        Date datumSQL=new Date
+        (
+                Integer.parseInt(datum.split("-")[0])-1900,
+                Integer.parseInt(datum.split("-")[1])-1,
+                Integer.parseInt(datum.split("-")[2])
+        );
+        Time vrijemeSQL=new Time
+        (
+                Integer.parseInt(vrijeme.split(":")[0]),
+                Integer.parseInt(vrijeme.split(":")[1]),
+                Integer.parseInt(vrijeme.split(":")[2])
+        );
+        System.out.println(datumSQL.toString()+" "+vrijemeSQL.toString());
+        return DAOFactory.getDAOFactory().getTerminDAO().obrisiTerminDatumVrijeme(datumSQL, vrijemeSQL);
     }
 }
