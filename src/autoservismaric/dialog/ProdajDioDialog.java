@@ -64,37 +64,27 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel113 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel115 = new javax.swing.JLabel();
+        jLabel114 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbPoruka = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfId = new javax.swing.JTextField();
+        tfSifra = new javax.swing.JTextField();
         tfNaziv = new javax.swing.JTextField();
         tfMarka = new javax.swing.JTextField();
         tfModel = new javax.swing.JTextField();
         tfGorivo = new javax.swing.JTextField();
         tfCijena = new javax.swing.JTextField();
         tfKolicina = new javax.swing.JTextField();
-        jLabel111 = new javax.swing.JLabel();
-        jLabel112 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        tfSifra = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
         tfNovo = new javax.swing.JTextField();
-        jSeparator9 = new javax.swing.JSeparator();
-        jLabel113 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel115 = new javax.swing.JLabel();
         tfGodiste = new javax.swing.JTextField();
-        jLabel114 = new javax.swing.JLabel();
-        jSeparator10 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        lbPoruka = new javax.swing.JLabel();
-        tfId = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -126,52 +116,6 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jPanel2.setEnabled(false);
 
-        tfNaziv.setEditable(false);
-        tfNaziv.setBackground(new java.awt.Color(102, 153, 255));
-        tfNaziv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfNaziv.setForeground(new java.awt.Color(255, 255, 255));
-        tfNaziv.setBorder(null);
-
-        tfMarka.setEditable(false);
-        tfMarka.setBackground(new java.awt.Color(102, 153, 255));
-        tfMarka.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfMarka.setForeground(new java.awt.Color(255, 255, 255));
-        tfMarka.setBorder(null);
-
-        tfModel.setEditable(false);
-        tfModel.setBackground(new java.awt.Color(102, 153, 255));
-        tfModel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfModel.setForeground(new java.awt.Color(255, 255, 255));
-        tfModel.setBorder(null);
-        tfModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfModelActionPerformed(evt);
-            }
-        });
-
-        tfGorivo.setEditable(false);
-        tfGorivo.setBackground(new java.awt.Color(102, 153, 255));
-        tfGorivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfGorivo.setForeground(new java.awt.Color(255, 255, 255));
-        tfGorivo.setBorder(null);
-        tfGorivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfGorivoActionPerformed(evt);
-            }
-        });
-
-        tfCijena.setEditable(false);
-        tfCijena.setBackground(new java.awt.Color(102, 153, 255));
-        tfCijena.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfCijena.setForeground(new java.awt.Color(255, 255, 255));
-        tfCijena.setBorder(null);
-
-        tfKolicina.setEditable(false);
-        tfKolicina.setBackground(new java.awt.Color(102, 153, 255));
-        tfKolicina.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfKolicina.setForeground(new java.awt.Color(255, 255, 255));
-        tfKolicina.setBorder(null);
-
         jLabel111.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel111.setForeground(new java.awt.Color(255, 255, 255));
         jLabel111.setText("Naziv:");
@@ -184,42 +128,9 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Model:");
 
-        tfSifra.setEditable(false);
-        tfSifra.setBackground(new java.awt.Color(102, 153, 255));
-        tfSifra.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfSifra.setForeground(new java.awt.Color(255, 255, 255));
-        tfSifra.setBorder(null);
-
-        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator4.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator8.setForeground(new java.awt.Color(255, 255, 255));
-        jSeparator8.setPreferredSize(new java.awt.Dimension(50, 5));
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Novo:");
-
-        tfNovo.setEditable(false);
-        tfNovo.setBackground(new java.awt.Color(102, 153, 255));
-        tfNovo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfNovo.setForeground(new java.awt.Color(255, 255, 255));
-        tfNovo.setBorder(null);
-
-        jSeparator9.setForeground(new java.awt.Color(255, 255, 255));
-        jSeparator9.setMinimumSize(new java.awt.Dimension(50, 5));
-        jSeparator9.setPreferredSize(new java.awt.Dimension(50, 5));
 
         jLabel113.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel113.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,17 +144,9 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jLabel115.setForeground(new java.awt.Color(255, 255, 255));
         jLabel115.setText("Cijena");
 
-        tfGodiste.setEditable(false);
-        tfGodiste.setBackground(new java.awt.Color(102, 153, 255));
-        tfGodiste.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfGodiste.setForeground(new java.awt.Color(255, 255, 255));
-        tfGodiste.setBorder(null);
-
         jLabel114.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel114.setForeground(new java.awt.Color(255, 255, 255));
         jLabel114.setText("Količina:");
-
-        jSeparator10.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -252,20 +155,15 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         lbPoruka.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbPoruka.setText(" ");
 
-        tfId.setEditable(false);
-        tfId.setBackground(new java.awt.Color(102, 153, 255));
-        tfId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tfId.setForeground(new java.awt.Color(255, 255, 255));
-        tfId.setBorder(null);
-        tfId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfIdActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Šifra:");
+
+        tfSifra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSifraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -274,51 +172,39 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jSeparator4)
-                                .addComponent(jSeparator2)
-                                .addComponent(jSeparator1)
-                                .addComponent(tfNaziv)
-                                .addComponent(tfModel)
-                                .addComponent(tfMarka)
-                                .addComponent(tfId)
-                                .addComponent(tfSifra, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator10)
-                                .addComponent(jSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfNovo)
-                                .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lbPoruka)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel113, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel115)
-                            .addComponent(jLabel114))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator7)
-                            .addComponent(tfKolicina)
-                            .addComponent(tfCijena)
-                            .addComponent(tfGorivo)
-                            .addComponent(jSeparator5)
-                            .addComponent(jSeparator6)
-                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfSifra, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfNaziv, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfModel)
+                            .addComponent(tfMarka, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfId)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(tfGorivo, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                .addGap(1, 1, 1))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel113, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel115)
+                                .addComponent(jLabel114)))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfNovo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfKolicina, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCijena, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfGodiste, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(lbPoruka)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -328,67 +214,55 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel111))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                    .addComponent(jLabel111)
+                    .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel112))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                    .addComponent(jLabel112)
+                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfGorivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel113, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                        .addGap(7, 7, 7)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel115))
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
+                            .addComponent(jLabel113)
+                            .addComponent(tfGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel114))
-                        .addGap(0, 0, 0)
+                            .addComponent(jLabel115)
+                            .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPoruka)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel114)
+                                .addGap(0, 0, 0)
+                                .addComponent(lbPoruka))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(tfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(tfNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel24))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfId, tfSifra});
 
         jPanel3.setBackground(new java.awt.Color(102, 153, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -437,7 +311,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnUkupno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(tfUkupno, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -500,9 +374,9 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -521,23 +395,24 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelzmijeniDioLayout = new javax.swing.GroupLayout(panelzmijeniDio);
         panelzmijeniDio.setLayout(panelzmijeniDioLayout);
         panelzmijeniDioLayout.setHorizontalGroup(
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelzmijeniDioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelzmijeniDioLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelzmijeniDioLayout.setVerticalGroup(
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelzmijeniDioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -548,19 +423,11 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelzmijeniDio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelzmijeniDio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfModelActionPerformed
-
-    private void tfGorivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfGorivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfGorivoActionPerformed
 
     private void btnAzurirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajActionPerformed
        
@@ -616,10 +483,6 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
-    private void tfIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfIdActionPerformed
-
     private void btnUkupnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkupnoActionPerformed
         boolean flag = false;
        Integer kolNaStanju = (Integer) dtm.getValueAt(red, 8);
@@ -663,6 +526,10 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnUkupnoActionPerformed
 
+    private void tfSifraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSifraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSifraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -692,17 +559,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField jtfCijena;
     private javax.swing.JTextField jtfKolicina;
     private javax.swing.JTextField jtfPDV;

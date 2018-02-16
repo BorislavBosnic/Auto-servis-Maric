@@ -70,8 +70,8 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         tfPrezimeDodaj = new javax.swing.JTextField();
         tfNazivDodaj = new javax.swing.JTextField();
         tfTelefonDodaj = new javax.swing.JTextField();
-        tfGradDodaj = new javax.swing.JTextField();
         tfAdresaDodaj = new javax.swing.JTextField();
+        tfGradDodaj = new javax.swing.JTextField();
         rbPrivatno = new javax.swing.JRadioButton();
         rbPravno = new javax.swing.JRadioButton();
         jLabel111 = new javax.swing.JLabel();
@@ -195,8 +195,8 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfTelefonDodaj, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfAdresaDodaj)
                             .addComponent(tfGradDodaj)
+                            .addComponent(tfAdresaDodaj)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(rbPravno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(50, 50, 50))
@@ -253,22 +253,22 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
                         .addComponent(jLabel113)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfGradDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfAdresaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel115))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfAdresaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfGradDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel114))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(btnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(65, 65, 65))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(btnOdustani, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel111, jLabel112, jLabel113, jLabel114, jLabel115, jLabel24});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDodaj, btnOdustani});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfAdresaDodaj, tfGradDodaj, tfImeDodaj, tfNazivDodaj, tfPrezimeDodaj, tfTelefonDodaj});
 
         javax.swing.GroupLayout panelDodajVlasnikaLayout = new javax.swing.GroupLayout(panelDodajVlasnika);
         panelDodajVlasnika.setLayout(panelDodajVlasnikaLayout);
@@ -340,8 +340,8 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         if (rbPravno.isSelected()) {
             String naziv = tfNazivDodaj.getText();
             String telefon = tfTelefonDodaj.getText();
-            String adresa = tfAdresaDodaj.getText();
-            String grad = tfGradDodaj.getText();
+            String adresa = tfGradDodaj.getText();
+            String grad = tfAdresaDodaj.getText();
             if (naziv != null && !"".equals(naziv)) {
                 KupacDTO kupac = new KupacDTO();
                 kupac.setNaziv(naziv);
@@ -361,8 +361,8 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
             String ime = tfImeDodaj.getText();
             String prezime = tfPrezimeDodaj.getText();
             String telefon = tfTelefonDodaj.getText();
-            String adresa = tfAdresaDodaj.getText();
-            String grad = tfGradDodaj.getText();
+            String adresa = tfGradDodaj.getText();
+            String grad = tfAdresaDodaj.getText();
             if (ime != null && prezime != null && !"".equals(ime) && !"".equals(prezime)) {
                 KupacDTO kupac = new KupacDTO();
                 kupac.setIme(ime);
@@ -372,7 +372,9 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
                 kupac.setGrad(grad);
                 if (DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)) {
                     JOptionPane.showMessageDialog(rootPane, "Uspješno dodat vlasnik vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    kup = kupac;                } else {
+                    kup = kupac; 
+                    this.dispose();
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "Greška!", "Greška", JOptionPane.OK_OPTION);
                 }
             } else {
