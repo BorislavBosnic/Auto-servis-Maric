@@ -257,7 +257,7 @@ INSERT INTO dio VALUES (5, "Felna", "a4520yhn6a", 2010, false, "Hibrid", 35, 1, 
 INSERT INTO prodan_dio VALUES (1, 55, 2, '2017-10-10');
 INSERT INTO prodan_dio VALUES (2, 12, 3, '2017-10-22');
 INSERT INTO prodan_dio VALUES (3, 13, 1, '2017-11-08');
-INSERT INTO prodan_dio VALUES (4, 55, 5, '2018-11-09');
+INSERT INTO prodan_dio VALUES (4, 55, 5, '2017-11-09');
 
 INSERT INTO kupac VALUES (1,"Miki","065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
 
