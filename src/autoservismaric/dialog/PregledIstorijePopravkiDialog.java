@@ -166,6 +166,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         lbTelefon = new javax.swing.JLabel();
         lbAdresa = new javax.swing.JLabel();
         lbGrad = new javax.swing.JLabel();
+        lbGodiste = new javax.swing.JLabel();
         panelAzurirajRadniNalog = new javax.swing.JPanel();
         tbIdNaloga = new javax.swing.JTextField();
         tbTroskovi = new javax.swing.JTextField();
@@ -188,7 +189,6 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         tbRokZatvaranja = new com.toedter.calendar.JDateChooser();
         lbSTATUS = new javax.swing.JLabel();
         lbSTATUSVozilo = new javax.swing.JLabel();
-        lbGodiste = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -300,6 +300,10 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         lbGrad.setForeground(new java.awt.Color(255, 0, 0));
         lbGrad.setText("jLabel17");
 
+        lbGodiste.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lbGodiste.setForeground(new java.awt.Color(255, 0, 0));
+        lbGodiste.setText("jLabel13");
+
         javax.swing.GroupLayout panelTabelaLayout = new javax.swing.GroupLayout(panelTabela);
         panelTabela.setLayout(panelTabelaLayout);
         panelTabelaLayout.setHorizontalGroup(
@@ -316,7 +320,10 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                                         .addComponent(jLabel1)
                                         .addGap(18, 18, 18)
                                         .addComponent(lbBrojRegistracije))
-                                    .addComponent(jLabel2)
+                                    .addGroup(panelTabelaLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lbGodiste))
                                     .addGroup(panelTabelaLayout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -374,7 +381,8 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(jLabel12)
                     .addComponent(lbKubikaza)
-                    .addComponent(lbTelefon))
+                    .addComponent(lbTelefon)
+                    .addComponent(lbGodiste))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -495,7 +503,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                                 .addContainerGap())
                             .addGroup(panelAzurirajRadniNalogLayout.createSequentialGroup()
                                 .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                                 .addComponent(lbSTATUSVozilo)
                                 .addGap(70, 70, 70))))
                     .addGroup(panelAzurirajRadniNalogLayout.createSequentialGroup()
@@ -557,10 +565,6 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                         .addGap(26, 26, 26))))
         );
 
-        lbGodiste.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lbGodiste.setForeground(new java.awt.Color(255, 0, 0));
-        lbGodiste.setText("jLabel13");
-
         javax.swing.GroupLayout panelGlavniLayout = new javax.swing.GroupLayout(panelGlavni);
         panelGlavni.setLayout(panelGlavniLayout);
         panelGlavniLayout.setHorizontalGroup(
@@ -569,10 +573,6 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(panelAzurirajRadniNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(panelGlavniLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(lbGodiste)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelGlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelGlavniLayout.createSequentialGroup()
                     .addContainerGap()
@@ -582,9 +582,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         panelGlavniLayout.setVerticalGroup(
             panelGlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGlavniLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(lbGodiste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                .addContainerGap(343, Short.MAX_VALUE)
                 .addComponent(panelAzurirajRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(panelGlavniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

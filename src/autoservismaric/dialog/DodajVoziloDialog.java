@@ -50,6 +50,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         tabela.setDefaultEditor(Object.class, null);
         
         btnPrikaziSve.doClick();
+        
+        tabela.getTableHeader().setReorderingAllowed(false);
     }
 
     

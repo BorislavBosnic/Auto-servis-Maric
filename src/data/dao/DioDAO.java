@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Aco
  */
 public interface DioDAO {
+    public ArrayList<DioDTO> getDijeloviZaSvaVozila();
     public DioDTO dio(DioDTO dio);
     public boolean dodajDio(DioDTO kupac);
     public DioDTO getDio(DioDTO dio);

@@ -6,13 +6,25 @@
 package autoservismaric.dialog;
 
 import data.dao.DAOFactory;
+import data.dto.DioDTO;
+import data.dto.KupacDTO;
+import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
+import data.dto.RadniNalogDioDTO;
+import data.dto.RadniNalogRadnikDTO;
+import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
+import java.awt.Color;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,20 +44,69 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     
     public DodajRadniNalogDialog(java.awt.Frame parent, boolean modal, int idVozila) {
         this(parent, modal);
-        this.idVozila = idVozila;
+  
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.DATE, 7); 
         
-       DefaultListModel<String> model = new DefaultListModel<>();
+        datumOtvaranjaNaloga.setDate(new Date());
+        potrebnoZavrsitiDo.setDate(c.getTime());
+    
+        tabelaIzabraniDijelovi.setAutoCreateRowSorter(true);
+        tabelaDijelovi.setAutoCreateRowSorter(true);
+        tabelaDijelovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaIzabraniDijelovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabelaDijelovi.setDefaultEditor(Object.class, null);
+        tabelaIzabraniDijelovi.setDefaultEditor(Object.class, null);
+        
+        tabelaDijelovi.getTableHeader().setReorderingAllowed(false);
+        tabelaIzabraniDijelovi.getTableHeader().setReorderingAllowed(false);
+
+
+        VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
+        ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdVozilo());
+        
+        this.idVozila = idVozila;
+        tfIdVozila.setText(new Integer(idVozila).toString());
+        tfIdVozila.setEditable(false);
+        
+       DefaultListModel<ZaposleniDTO> model = new DefaultListModel<>();
        
-       List<ZaposleniDTO> lista = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
+       List<ZaposleniDTO> listaZaposlenih = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
+              
+      
        
-       for(ZaposleniDTO z: lista){
-           model.addElement(z.getIme() + " (" + z.getImeOca()+ ") " + z.getPrezime());
+       for(ZaposleniDTO z: listaZaposlenih){
+           model.addElement(z);
        }
        
        listaZaposleni.setModel(model);
-       tfIdVozila.setText(new Integer(idVozila).toString());
-       tfIdVozila.setEditable(false);
+       listaZaposleni.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
        
+       
+       
+       String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
+        DefaultTableModel modelDijelovi = new DefaultTableModel(columns, 0);
+        tabelaDijelovi.setModel(modelDijelovi);
+        
+        List<DioDTO> listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(vozilo.getVrstaGoriva(), modelVozila.getMarka(), modelVozila.getModel(), true);
+        List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
+        
+        for(DioDTO d: listaDijelova){
+            Object[] rowData = { d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo(), d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
+            modelDijelovi.addRow(rowData);
+       }
+        
+        for(DioDTO d: listaZaSvaVozila){
+            Object[] rowData = { d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo(), d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
+            modelDijelovi.addRow(rowData);
+       }
+        
+        tabelaDijelovi.setModel(modelDijelovi); 
+        
+        listaZaposleniZaduzeni.setModel(new DefaultListModel<>());
+
+        spinnerKolicina.setValue(1);
     }
 
     /**
@@ -75,18 +136,31 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         taProblem = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaDijelovi = new javax.swing.JList<>();
         jLabel10 = new javax.swing.JLabel();
         btnDodajDio = new javax.swing.JButton();
         Zaduzeni = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaZaposleni = new javax.swing.JList<>();
-        btnDodajRadnik = new javax.swing.JButton();
+        btnRazduzi = new javax.swing.JButton();
         datumOtvaranjaNaloga = new com.toedter.calendar.JDateChooser();
         datumZatvaranjaNaloga = new com.toedter.calendar.JDateChooser();
         potrebnoZavrsitiDo = new com.toedter.calendar.JDateChooser();
         btnKreirajNalog = new javax.swing.JButton();
+        spinnerKolicina = new javax.swing.JSpinner();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabelaIzabraniDijelovi = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tabelaDijelovi = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        btnUkloniDio = new javax.swing.JButton();
+        btnZaduzi = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaZaposleniZaduzeni = new javax.swing.JList<>();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        taUlogaRadnika = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novi radni nalog");
@@ -103,7 +177,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Id Vozila:");
+        jLabel2.setText("Id vozila:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,22 +217,41 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Opis problema:");
 
-        jScrollPane2.setViewportView(listaDijelovi);
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(240, 240, 240));
         jLabel10.setText("Lista dijelova:");
 
+        btnDodajDio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDodajDio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
         btnDodajDio.setText("Dodaj");
+        btnDodajDio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajDioActionPerformed(evt);
+            }
+        });
 
         Zaduzeni.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         Zaduzeni.setForeground(new java.awt.Color(240, 240, 240));
-        Zaduzeni.setText("Zaduzeni radnici:");
+        Zaduzeni.setText("Zaduženi radnici:");
 
+        listaZaposleni.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaZaposleniValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(listaZaposleni);
 
-        btnDodajRadnik.setText("Dodaj");
+        btnRazduzi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRazduzi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/fast-backward-double-left-arrow-symbol.png"))); // NOI18N
+        btnRazduzi.setText("Razduži radnika");
+        btnRazduzi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRazduziActionPerformed(evt);
+            }
+        });
 
+        btnKreirajNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnKreirajNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add-documents.png"))); // NOI18N
         btnKreirajNalog.setText("Kreiraj nalog");
         btnKreirajNalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,59 +259,157 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             }
         });
 
+        spinnerKolicina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tabelaIzabraniDijelovi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Naziv", "Šifra", "Količina", "Cijena"
+            }
+        ));
+        jScrollPane4.setViewportView(tabelaIzabraniDijelovi);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Količina:");
+
+        tabelaDijelovi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(tabelaDijelovi);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Izabrani dijelovi:");
+
+        btnUkloniDio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnUkloniDio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/eraser.png"))); // NOI18N
+        btnUkloniDio.setText("Ukloni dio");
+        btnUkloniDio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUkloniDioActionPerformed(evt);
+            }
+        });
+
+        btnZaduzi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnZaduzi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/fast-forward.png"))); // NOI18N
+        btnZaduzi.setText("Zaduži radnika");
+        btnZaduzi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnZaduziActionPerformed(evt);
+            }
+        });
+
+        listaZaposleniZaduzeni.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaZaposleniZaduzeniValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(listaZaposleniZaduzeni);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Svi radnici");
+
+        taUlogaRadnika.setEditable(false);
+        taUlogaRadnika.setBackground(new java.awt.Color(204, 204, 204));
+        taUlogaRadnika.setColumns(20);
+        taUlogaRadnika.setLineWrap(true);
+        taUlogaRadnika.setRows(5);
+        taUlogaRadnika.setWrapStyleWord(true);
+        jScrollPane6.setViewportView(taUlogaRadnika);
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Uloga radnika:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbPlaceno, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                    .addComponent(tfIdVozila)
-                                    .addComponent(tfTroskovi)
-                                    .addComponent(tfKilometraza)
-                                    .addComponent(tfCijena)
-                                    .addComponent(datumOtvaranjaNaloga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(datumZatvaranjaNaloga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Zaduzeni)
-                                    .addComponent(jLabel10))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel5)
+                                                .addComponent(jLabel6)
+                                                .addComponent(jLabel7)
+                                                .addComponent(jLabel8))
+                                            .addGap(29, 29, 29)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(cbPlaceno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(tfIdVozila)
+                                                .addComponent(tfTroskovi)
+                                                .addComponent(tfKilometraza)
+                                                .addComponent(tfCijena)
+                                                .addComponent(datumOtvaranjaNaloga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                                .addComponent(datumZatvaranjaNaloga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDodajRadnik, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDodajDio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnDodajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(66, 66, 66))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUkloniDio))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(312, 312, 312)
+                                .addComponent(jLabel11)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnZaduzi, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRazduzi))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Zaduzeni)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addGap(66, 66, 66))))))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
@@ -227,14 +418,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDodajDio)
-                        .addGap(2, 2, 2))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -260,32 +444,64 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                             .addComponent(jLabel6)
                             .addComponent(tfKilometraza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(0, 12, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDodajDio)
+                                    .addComponent(jLabel11)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(3, 3, 3)
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel12)))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(11, 11, 11)
                         .addComponent(cbPlaceno)
-                        .addGap(28, 28, 28)))
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel9))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnUkloniDio)
+                        .addGap(45, 45, 45)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Zaduzeni)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(Zaduzeni)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jScrollPane3))
+                                .addGap(59, 59, 59))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnZaduzi)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDodajRadnik))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                                .addComponent(btnRazduzi))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
@@ -296,7 +512,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1055, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -311,13 +527,11 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -328,8 +542,12 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         Date datumOtvaranja = datumOtvaranjaNaloga.getDate();
         java.sql.Date o = new java.sql.Date(datumOtvaranja.getTime());
 
+        java.sql.Date z = null;
         Date datumZatvaranja = datumZatvaranjaNaloga.getDate();
-        java.sql.Date z = new java.sql.Date(datumZatvaranja.getTime());
+        try{
+            z = new java.sql.Date(datumZatvaranja.getTime());
+        }
+        catch(Exception ex){   }
         
         
         Date potrebnoZavristi = potrebnoZavrsitiDo.getDate();
@@ -374,14 +592,176 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         String opisProblema = taProblem.getText();
         
         RadniNalogDTO rn = new RadniNalogDTO(placeno, o, z, this.idVozila, troskovi, kilometraza, pz, cijena);
-        if(DAOFactory.getDAOFactory().getRadniNalogDAO().dodajRadniNalog(rn)){
-        JOptionPane.showMessageDialog(rootPane, "Uspješno dodat radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+        rn.setOpisProblema(opisProblema);
+        
+        if(DAOFactory.getDAOFactory().getRadniNalogDAO().dodajRadniNalog(rn)){            
+            int idRadnogNaloga = rn.getIdRadniNalog();
+            
+            for(int i = 0; i < listaZaposleniZaduzeni.getModel().getSize(); i++){
+                ZaposleniDTO zaposleni = listaZaposleniZaduzeni.getModel().getElementAt(i);
+                RadniNalogRadnikDTO rnr = new RadniNalogRadnikDTO(idRadnogNaloga, zaposleni.getIdRadnik(), zaposleni.getUlogaRadnika());
+                DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().dodajRadniNalogRadnik(rnr);
+                
+               
+            }
+            
+             DefaultTableModel modelDio = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
+                for(int j = 0; j < modelDio.getRowCount(); j++){
+                    String sifraDio = tabelaIzabraniDijelovi.getModel().getValueAt(j, 1).toString();
+                    Integer kolicinaDio = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(j, 2).toString());
+                    Double cijenaDio = Double.parseDouble(tabelaIzabraniDijelovi.getModel().getValueAt(j, 3).toString());
+                    
+                    RadniNalogDioDTO rnd = new RadniNalogDioDTO();
+                    DioDTO dDTO =DAOFactory.getDAOFactory().getDioDAO().getDio(sifraDio);
+                    rnd.setIdRadniNalog(idRadnogNaloga);
+                    rnd.setIdDio(dDTO.getId());
+                    rnd.setKolicina(kolicinaDio);
+                    rnd.setCijena(cijenaDio);
+                    
+                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().dodajRadniNalogDio(rnd);
+                }
+            
+             JOptionPane.showMessageDialog(rootPane, "Uspješno dodat radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
                     JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
                     return;
         }
     }//GEN-LAST:event_btnKreirajNalogActionPerformed
+
+    private void btnDodajDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDioActionPerformed
+        
+        int red = tabelaDijelovi.getSelectedRow();
+        String sifra = tabelaDijelovi.getModel().getValueAt(red, 1).toString();
+        int dodajKolicinu = (Integer)spinnerKolicina.getValue();
+        
+               //String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
+
+        
+        String naziv = tabelaDijelovi.getModel().getValueAt(red, 0).toString();
+        Integer kolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString());
+        Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());      
+        boolean postoji = false;
+        
+        if(dodajKolicinu > kolicina){
+            JOptionPane.showMessageDialog(rootPane, "Nema toliko jedinica izabranog dijela na stanju!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+        
+        for(int i = 0; i < tabelaIzabraniDijelovi.getRowCount(); i++){
+            if(sifra.equals(tabelaIzabraniDijelovi.getModel().getValueAt(i, 1))){
+                tabelaIzabraniDijelovi.getModel().setValueAt((Integer)tabelaIzabraniDijelovi.getModel().getValueAt(i, 2) + dodajKolicinu, i, 2);
+                postoji = true;
+            }
+        }
+        
+        if(!postoji){
+            
+            DefaultTableModel dtm = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
+            
+            Object[] rowData = { naziv, sifra, dodajKolicinu, cijena};
+            dtm.addRow(rowData);
+        }
+        
+        if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
+            Double trenutnaCijena = Double.parseDouble(tfCijena.getText());
+            trenutnaCijena += dodajKolicinu*cijena;
+            tfCijena.setText(trenutnaCijena.toString());
+        }
+        else{
+            Double trenutnaCijena = 0.0;
+            trenutnaCijena += dodajKolicinu*cijena;
+            tfCijena.setText(trenutnaCijena.toString());
+        }
+        
+        tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString()) - dodajKolicinu,red, 5);
+        spinnerKolicina.setValue(1);
+    }//GEN-LAST:event_btnDodajDioActionPerformed
+
+    private void btnUkloniDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniDioActionPerformed
+        int red = tabelaIzabraniDijelovi.getSelectedRow();
+        
+        if(red < 0){
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati dio u tabeli koji želite ukloniti!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+        
+        Integer kolicina = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(red, 2).toString());
+        String sifra = tabelaIzabraniDijelovi.getModel().getValueAt(red, 1).toString();
+        boolean pronasao = false;
+        Double cijenaJednogDijela=0.0;
+        
+        
+        for(int i = 0; i < tabelaDijelovi.getRowCount() && pronasao==false; i++){
+            if(sifra.equals(tabelaDijelovi.getModel().getValueAt(i, 1))){
+               pronasao = true;
+               tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(i, 5).toString()) + kolicina, i, 5);
+               cijenaJednogDijela = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(i, 6).toString());
+            }
+        }
+        
+        Double cijena = Double.parseDouble(tfCijena.getText());
+        Double novaCijena = cijena-kolicina*cijenaJednogDijela;
+        tfCijena.setText(novaCijena.toString());
+        
+        if(novaCijena < 0){
+             tfCijena.setText(new String("0"));
+        }
+        
+        ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).removeRow(red);
+    }//GEN-LAST:event_btnUkloniDioActionPerformed
+
+    private void btnZaduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaduziActionPerformed
+        int brojReda = listaZaposleni.getSelectedIndex();
+        
+        if(brojReda < 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste svih radnika!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }        
+                
+        ZaposleniDTO red = listaZaposleni.getSelectedValue();
+        red.setUlogaRadnika(taUlogaRadnika.getText());
+        
+        ((DefaultListModel<ZaposleniDTO>)listaZaposleni.getModel()).removeElementAt(brojReda);
+        
+        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleniZaduzeni.getModel();
+        mod.addElement(red);
+        
+        taUlogaRadnika.setText("");
+    }//GEN-LAST:event_btnZaduziActionPerformed
+
+    private void btnRazduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRazduziActionPerformed
+        int brojReda = listaZaposleniZaduzeni.getSelectedIndex();
+        
+        if(brojReda < 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste zaduženih radnika!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }        
+        
+        
+        ZaposleniDTO red = listaZaposleniZaduzeni.getSelectedValue();
+        
+        ((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).removeElementAt(brojReda);
+        
+        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleni.getModel();
+        mod.addElement(red);
+    }//GEN-LAST:event_btnRazduziActionPerformed
+
+    private void listaZaposleniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniValueChanged
+        if(listaZaposleni.getSelectedIndex() >= 0){
+            taUlogaRadnika.setEditable(true);
+            taUlogaRadnika.setBackground(Color.WHITE);
+        }
+        else{
+            taUlogaRadnika.setEditable(false);
+            taUlogaRadnika.setBackground(Color.GRAY);
+        }
+    }//GEN-LAST:event_listaZaposleniValueChanged
+
+    private void listaZaposleniZaduzeniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniZaduzeniValueChanged
+    }//GEN-LAST:event_listaZaposleniZaduzeniValueChanged
 
     /**
      * @param args the command line arguments
@@ -428,13 +808,19 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Zaduzeni;
     private javax.swing.JButton btnDodajDio;
-    private javax.swing.JButton btnDodajRadnik;
     private javax.swing.JButton btnKreirajNalog;
+    private javax.swing.JButton btnRazduzi;
+    private javax.swing.JButton btnUkloniDio;
+    private javax.swing.JButton btnZaduzi;
     private javax.swing.JCheckBox cbPlaceno;
     private com.toedter.calendar.JDateChooser datumOtvaranjaNaloga;
     private com.toedter.calendar.JDateChooser datumZatvaranjaNaloga;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -448,10 +834,17 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> listaDijelovi;
-    private javax.swing.JList<String> listaZaposleni;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JList<ZaposleniDTO> listaZaposleni;
+    private javax.swing.JList<ZaposleniDTO> listaZaposleniZaduzeni;
     private com.toedter.calendar.JDateChooser potrebnoZavrsitiDo;
+    private javax.swing.JSpinner spinnerKolicina;
     private javax.swing.JTextArea taProblem;
+    private javax.swing.JTextArea taUlogaRadnika;
+    private javax.swing.JTable tabelaDijelovi;
+    private javax.swing.JTable tabelaIzabraniDijelovi;
     private javax.swing.JTextField tfCijena;
     private javax.swing.JTextField tfIdVozila;
     private javax.swing.JTextField tfKilometraza;

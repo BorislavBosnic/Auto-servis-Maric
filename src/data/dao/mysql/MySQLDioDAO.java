@@ -829,4 +829,32 @@ public class MySQLDioDAO implements DioDAO{
 		}
 		return retVal;
     }
+
+    @Override
+    public ArrayList<DioDTO> getDijeloviZaSvaVozila() {
+        ArrayList<DioDTO> retVal = new ArrayList<DioDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+                
+                String query = "SELECT IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve FROM dio WHERE ZaSve=true ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+                        
+			while (rs.next()){
+				retVal.add(new DioDTO(rs.getInt("IdDio"), rs.getString("Sifra"), rs.getString("Naziv"), 
+                                        rs.getString("VrstaGoriva"), rs.getInt("GodisteVozila"), rs.getBoolean("Novo"), 
+                                        rs.getDouble("TrenutnaCijena"), rs.getInt("Kolicina"), rs.getBoolean("ZaSve")));
+                        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
 }

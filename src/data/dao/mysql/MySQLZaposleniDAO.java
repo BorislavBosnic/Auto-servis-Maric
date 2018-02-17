@@ -231,4 +231,41 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
 		}
 		return retVal;
     }
+
+    @Override
+    public ZaposleniDTO zaposleniPoImenu(String ime, String prezime, String imeOca) {
+                ZaposleniDTO retVal = null;
+                Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * FROM radnik r "
+                        + "WHERE DatumDo is null, "
+                        + "Ime=?, "
+                        + "Prezime=? "
+                        + "AND ImeOca=? ";
+               
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+                        ps.setString(1, ime);
+                        ps.setString(2, prezime);
+                        ps.setString(3, imeOca);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				retVal = new ZaposleniDTO(rs.getInt("IdRadnik"),rs.getString("Ime"),
+                                        rs.getString("Prezime"), rs.getString("Telefon"), rs.getString("Adresa"),
+                                        rs.getString("StrucnaSprema"), rs.getString("ImeOca"),
+                                        rs.getString("BrojLicneKarte"), rs.getDate("DatumRodjenja"),
+                                        rs.getString("Funkcija"),rs.getDate("DatumOd"),rs.getDate("DatumDo"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
 }

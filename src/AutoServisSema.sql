@@ -259,7 +259,7 @@ INSERT INTO prodan_dio VALUES (2, 12, 3, '2017-10-22');
 INSERT INTO prodan_dio VALUES (3, 13, 1, '2017-11-08');
 INSERT INTO prodan_dio VALUES (4, 55, 5, '2018-11-09');
 
-INSERT INTO kupac VALUES (1,"Miki","065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
+INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
 
 INSERT INTO model_vozila VALUES (1,"BMW","X6");
 INSERT INTO model_vozila VALUES (2,"VW","Golf");

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public interface ZaposleniDAO {
     
+    public ZaposleniDTO zaposleniPoImenu(String ime, String prezime, String imeOca);
+    
     public List<ZaposleniDTO> sviZaposleni();
     
     public List<ZaposleniDTO> sviBivsiZaposleni();

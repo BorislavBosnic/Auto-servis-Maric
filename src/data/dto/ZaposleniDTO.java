@@ -24,6 +24,8 @@ public class ZaposleniDTO {
         private String funkcija;
         private java.sql.Date datumOd;
         private java.sql.Date datumDo;
+        
+        private String ulogaRadnika;
 
         public ZaposleniDTO(){
             
@@ -152,6 +154,21 @@ public class ZaposleniDTO {
 
     public void setDatumDo(Date datumDo) {
         this.datumDo = datumDo;
+    }
+
+    public String getUlogaRadnika() {
+        return ulogaRadnika;
+    }
+
+    public void setUlogaRadnika(String ulogaRadnika) {
+        this.ulogaRadnika = ulogaRadnika;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        return ime + " (" + imeOca + ") " + prezime;
     }
         
     

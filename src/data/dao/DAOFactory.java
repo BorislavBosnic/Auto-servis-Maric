@@ -3,6 +3,9 @@ package data.dao;
 import data.dao.mysql.MySQLDAOFactory;
 
 public abstract class DAOFactory {
+    
+    public abstract RadniNalogRadnikDAO getRadniNalogRadnikDAO();
+    
     public abstract KupacDAO getKupacDAO();
     
     public abstract VoziloDAO getVoziloDAO();

@@ -17,6 +17,8 @@ public class RadniNalogDioDTO
     private double cijena;
     private int kolicina;
     
+    public RadniNalogDioDTO(){}
+    
     /**Constructors**/
     public RadniNalogDioDTO(int idRadniNalog, int idDio, double cijena, int kolicina)
     {

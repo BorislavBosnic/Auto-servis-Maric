@@ -31,6 +31,8 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     public IzmijeniIzbrisiModelDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        tabela.getTableHeader().setReorderingAllowed(false);
 
         modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();

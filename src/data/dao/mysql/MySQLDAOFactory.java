@@ -9,6 +9,7 @@ import data.dao.ModelVozilaDAO;
 import data.dao.ProdanDioDAO;
 import data.dao.RadniNalogDAO;
 import data.dao.RadniNalogDioDAO;
+import data.dao.RadniNalogRadnikDAO;
 import data.dao.StatistikaDAO;
 import data.dao.TerminDAO;
 import data.dao.VoziloDAO;
@@ -77,5 +78,10 @@ public class MySQLDAOFactory extends DAOFactory {
     public RadniNalogDioDAO getRadniNalogDioDAO()
     {
         return new MySQLRadniNalogDioDAO();
+    }
+
+    @Override
+    public RadniNalogRadnikDAO getRadniNalogRadnikDAO() {
+        return new MySQLRadniNalogRadnikDAO();
     }
 }

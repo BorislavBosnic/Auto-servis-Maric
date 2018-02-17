@@ -4813,6 +4813,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         
         menuItemClick(menu3jPanel, 2, vozilaPanel);
         loadAutosuggester();
+        tableVozila.getTableHeader().setReorderingAllowed(false);
+        tableVozila.setDefaultEditor(Object.class, null);
 
     }//GEN-LAST:event_menu3jPanelMouseClicked
 

@@ -241,14 +241,12 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
                 boolean retVal = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
-
-      //public RadniNalogDTO(boolean placeno, java.sql.Date datumOtvaranjaNaloga, java.sql.Date datumZatvaranjaNaloga, int idVozilo, double troskovi, int kilometraza, java.sql.Date predvidjenoVrijemeZavrsetka, double cijenaUsluge) {
                
 		String query = "INSERT INTO radni_nalog(Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, PredvidjenoVrijemeZavrsetka, CijenaUsluge, OpisProblema) VALUES "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setObject(1, nalog.isPlaceno());
 			ps.setObject(2, nalog.getDatumOtvaranjaNaloga());
                         ps.setObject(3, nalog.getDatumZatvaranjaNaloga());
@@ -260,6 +258,16 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
                         ps.setObject(9, nalog.getOpisProblema());
                         
 			retVal = ps.executeUpdate() == 1;
+                        
+                        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                nalog.setIdRadniNalog(generatedKeys.getInt(1));
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
+        }
+                        
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
@@ -267,6 +275,8 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO{
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtilities.getInstance().close(ps);
 		}
+                
+                
 		return retVal;
     }
 
