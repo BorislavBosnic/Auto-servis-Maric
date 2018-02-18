@@ -15,6 +15,8 @@ import java.util.Date;
  */
 public interface RadniNalogDAO {
     
+    public boolean izbrisiRadniNalog(int id);
+    
     public double getSumaCijenaUsluga(Date datumOd, Date datumDo);
     
     public double getSumaCijenaDijelova(Date datumOd, Date datumDo);

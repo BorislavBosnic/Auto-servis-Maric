@@ -24,6 +24,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,7 +66,9 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
 
         VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
-        ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdVozilo());
+                
+        ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdModelVozila());
+        
         
         this.idVozila = idVozila;
         tfIdVozila.setText(new Integer(idVozila).toString());
@@ -87,8 +91,15 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         DefaultTableModel modelDijelovi = new DefaultTableModel(columns, 0);
         tabelaDijelovi.setModel(modelDijelovi);
         
-        List<DioDTO> listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(vozilo.getVrstaGoriva(), modelVozila.getMarka(), modelVozila.getModel(), true);
-        List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
+         List<DioDTO> listaDijelova=null;
+         
+        if(null != vozilo.getVrstaGoriva()){
+           listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(vozilo.getVrstaGoriva(), modelVozila.getMarka(), modelVozila.getModel(), true);
+        }
+        else{
+             listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
+        }
+         List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
         
         for(DioDTO d: listaDijelova){
             Object[] rowData = { d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo()==true?"Da":"Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
@@ -105,6 +116,18 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         listaZaposleniZaduzeni.setModel(new DefaultListModel<>());
 
         spinnerKolicina.setValue(1);
+        
+        tabelaDijelovi.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        @Override
+        public void valueChanged(ListSelectionEvent event) {
+        if (tabelaDijelovi.getSelectedRow() > -1) {
+            Double cijena = Double.parseDouble(tabelaDijelovi.getValueAt(tabelaDijelovi.getSelectedRow(), 6).toString());
+            tfCijenaDijela.setText(cijena.toString());
+        }
+    }
+});
+        
+          
     }
 
     /**
@@ -159,6 +182,8 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jScrollPane6 = new javax.swing.JScrollPane();
         taUlogaRadnika = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
+        tfCijenaDijela = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novi radni nalog");
@@ -330,6 +355,12 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Uloga radnika:");
 
+        tfCijenaDijela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Cijena dijela:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -376,6 +407,12 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                             .addComponent(jLabel10)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel15)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(btnDodajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -387,10 +424,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnUkloniDio))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(312, 312, 312)
-                                .addComponent(jLabel11)))
+                            .addComponent(jLabel12))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,32 +483,34 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnDodajDio)
-                                    .addComponent(jLabel11)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel12)))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(11, 11, 11)
-                        .addComponent(cbPlaceno)
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel9))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDodajDio)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel15)
+                            .addComponent(tfCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnUkloniDio)
-                        .addGap(45, 45, 45)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8))
+                                .addGap(11, 11, 11)
+                                .addComponent(cbPlaceno)
+                                .addGap(59, 59, 59)
+                                .addComponent(jLabel9)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -647,12 +683,10 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         String sifra = tabelaDijelovi.getModel().getValueAt(red, 1).toString();
         int dodajKolicinu = (Integer)spinnerKolicina.getValue();
         
-               //String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
-
-        
         String naziv = tabelaDijelovi.getModel().getValueAt(red, 0).toString();
         Integer kolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString());
-        Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());      
+       // Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());  
+        Double cijena = Double.parseDouble(tfCijenaDijela.getText());
         boolean postoji = false;
         
         if(dodajKolicinu > kolicina){
@@ -675,15 +709,17 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             dtm.addRow(rowData);
         }
         
-        if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
-            Double trenutnaCijena = Double.parseDouble(tfCijena.getText());
+        if(tfTroskovi.getText() != null && !"".equals(tfTroskovi.getText())){
+            Double trenutnaCijena = Double.parseDouble(tfTroskovi.getText());
             trenutnaCijena += dodajKolicinu*cijena;
-            tfCijena.setText(trenutnaCijena.toString());
+            trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
+            tfTroskovi.setText(trenutnaCijena.toString());
         }
         else{
             Double trenutnaCijena = 0.0;
             trenutnaCijena += dodajKolicinu*cijena;
-            tfCijena.setText(trenutnaCijena.toString());
+            trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
+            tfTroskovi.setText(trenutnaCijena.toString());
         }
         
         tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString()) - dodajKolicinu,red, 5);
@@ -717,12 +753,12 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             }
         }
         
-        Double cijena = Double.parseDouble(tfCijena.getText());
+        Double cijena = Double.parseDouble(tfTroskovi.getText());
         Double novaCijena = cijena-kolicina*cijenaJednogDijela;
-        tfCijena.setText(novaCijena.toString());
+        tfTroskovi.setText(novaCijena.toString());
         
         if(novaCijena < 0){
-             tfCijena.setText(new String("0"));
+             tfTroskovi.setText(new String("0"));
         }
         
         ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).removeRow(red);
@@ -838,6 +874,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -863,6 +900,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     private javax.swing.JTable tabelaDijelovi;
     private javax.swing.JTable tabelaIzabraniDijelovi;
     private javax.swing.JTextField tfCijena;
+    private javax.swing.JTextField tfCijenaDijela;
     private javax.swing.JTextField tfIdVozila;
     private javax.swing.JTextField tfKilometraza;
     private javax.swing.JTextField tfTroskovi;

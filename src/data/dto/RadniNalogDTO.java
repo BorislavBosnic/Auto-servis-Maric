@@ -22,6 +22,7 @@ public class RadniNalogDTO {
 	private java.sql.Date predvidjenoVrijemeZavrsetka;
 	private double cijenaUsluge; 
         private String opisProblema;
+        private boolean izbrisano;
 
     public String getOpisProblema() {
         return opisProblema;
@@ -31,8 +32,43 @@ public class RadniNalogDTO {
         this.opisProblema = opisProblema;
     }
 
-        
+    public RadniNalogDTO(int idRadniNalog, boolean placeno, Date datumOtvaranjaNaloga, Date datumZatvaranjaNaloga, int idVozilo, double troskovi, int kilometraza, Date predvidjenoVrijemeZavrsetka, double cijenaUsluge, String opisProblema, boolean izbrisano) {
+        this.idRadniNalog = idRadniNalog;
+        this.placeno = placeno;
+        this.datumOtvaranjaNaloga = datumOtvaranjaNaloga;
+        this.datumZatvaranjaNaloga = datumZatvaranjaNaloga;
+        this.idVozilo = idVozilo;
+        this.troskovi = troskovi;
+        this.kilometraza = kilometraza;
+        this.predvidjenoVrijemeZavrsetka = predvidjenoVrijemeZavrsetka;
+        this.cijenaUsluge = cijenaUsluge;
+        this.opisProblema = opisProblema;
+        this.izbrisano = izbrisano;
+    }
+
+    public boolean isIzbrisano() {
+        return izbrisano;
+    }
+
+    public void setIzbrisano(boolean izbrisano) {
+        this.izbrisano = izbrisano;
+    }    
+    
     public RadniNalogDTO() {
+    }
+    
+    public RadniNalogDTO(boolean placeno, Date datumOtvaranjaNaloga, Date datumZatvaranjaNaloga, int idVozilo, double troskovi, int kilometraza, Date predvidjenoVrijemeZavrsetka, double cijenaUsluge, String opisProblema, int id, boolean izbrisano) {
+        this.placeno = placeno;
+        this.datumOtvaranjaNaloga = datumOtvaranjaNaloga;
+        this.datumZatvaranjaNaloga = datumZatvaranjaNaloga;
+        this.idVozilo = idVozilo;
+        this.troskovi = troskovi;
+        this.kilometraza = kilometraza;
+        this.predvidjenoVrijemeZavrsetka = predvidjenoVrijemeZavrsetka;
+        this.cijenaUsluge = cijenaUsluge;
+        this.opisProblema = opisProblema;
+        this.idRadniNalog = id;
+        this.izbrisano = izbrisano;
     }
     
      public RadniNalogDTO(boolean placeno, Date datumOtvaranjaNaloga, Date datumZatvaranjaNaloga, int idVozilo, double troskovi, int kilometraza, Date predvidjenoVrijemeZavrsetka, double cijenaUsluge, String opisProblema, int id) {

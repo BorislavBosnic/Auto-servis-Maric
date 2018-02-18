@@ -72,7 +72,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`kupac` (
   `IdKupac` INT(11) NOT NULL AUTO_INCREMENT,
-  `Naziv` VARCHAR(50) NOT NULL,
+  `Naziv` VARCHAR(50) NULL DEFAULT NULL,
   `Telefon` VARCHAR(20) NULL DEFAULT NULL,
   `Adresa` VARCHAR(50) NULL DEFAULT NULL,
   `Grad` VARCHAR(50) NULL DEFAULT NULL,
@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`vozilo` (
   `IdKupac` INT(11) NULL DEFAULT NULL,
   `IdModelVozila` INT(11) NULL DEFAULT NULL,
   `VrstaGoriva` VARCHAR(20) NULL DEFAULT NULL,
+   `Izbrisano` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`IdVozilo`),
   INDEX `R_5` (`IdKupac` ASC),
   INDEX `R_14` (`IdModelVozila` ASC),
@@ -122,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`radni_nalog` (
   `OpisProblema` TEXT NULL DEFAULT NULL,
   `PredvidjenoVrijemeZavrsetka` DATE NULL DEFAULT NULL,
   `CijenaUsluge` DECIMAL(6,2) NULL DEFAULT NULL,
+   `Izbrisano` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`IdRadniNalog`),
   INDEX `R_6` (`IdVozilo` ASC),
   CONSTRAINT `radni_nalog_ibfk_1`
@@ -251,26 +253,26 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO dio VALUES (1, "Kurbla", "657asdf215", 2002, true, "Dizel", 12, 11, false);
 INSERT INTO dio VALUES (2, "Gurtna", "asdf9842d7", 2000, false, "Benzin", 18, 5, false);
 INSERT INTO dio VALUES (3, "Rotor", "5d8d1g32g1", 1995, true, "Benzin", 10.5, 3, false);
-INSERT INTO dio VALUES (4, "Stator", "9a5i1b6d3y", 2005, false, "Dizel", 50, 2, true);
-INSERT INTO dio VALUES (5, "Felna", "a4520yhn6a", 2010, false, "Hibrid", 35, 1, true);
+INSERT INTO dio VALUES (4, "Stator", "9a5i1b6d3y", 2005, false, null, 50, 2, true);
+INSERT INTO dio VALUES (5, "Felna", "a4520yhn6a", 2010, false, null, 35, 1, true);
 
 INSERT INTO prodan_dio VALUES (1, 55, 2, '2017-10-10');
 INSERT INTO prodan_dio VALUES (2, 12, 3, '2017-10-22');
 INSERT INTO prodan_dio VALUES (3, 13, 1, '2017-11-08');
 INSERT INTO prodan_dio VALUES (4, 55, 5, '2017-11-09');
 
-INSERT INTO kupac VALUES (1,"Miki","065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
+INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
 
 INSERT INTO model_vozila VALUES (1,"BMW","X6");
 INSERT INTO model_vozila VALUES (2,"VW","Golf");
 
-INSERT INTO vozilo VALUES (1,'A10-B-200',230,2.3,2010,1,1,"Benzin");
-INSERT INTO vozilo VALUES (2,'B33-D-146',170,1.9,2005,1,1,"Dizel");
+INSERT INTO vozilo VALUES (1,'A10-B-200',230,2.3,2010,1,1,"Benzin",false);
+INSERT INTO vozilo VALUES (2,'B33-D-146',170,1.9,2005,1,1,"Dizel",false);
 
-INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2017-10-30', 1, 50, 300000, "Tu nešto piše jedan", '2018-10-31', 100);
-INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 250000, "Tu nešto piše dva", '2018-01-29', 140);
-INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65);
-INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125);
+INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2017-10-30', 1, 50, 300000, "Tu nešto piše jedan", '2018-10-31', 100, false);
+INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 250000, "Tu nešto piše dva", '2018-01-29', 140, false);
+INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65, false);
+INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125, false);
 
 INSERT INTO faktura VALUES (1, '2017-11-02', 1, 100, 2);
 INSERT INTO faktura VALUES (2, '2018-02-25', 4, 200, 1);

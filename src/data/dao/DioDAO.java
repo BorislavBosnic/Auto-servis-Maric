@@ -33,7 +33,8 @@ public interface DioDAO {
     public ArrayList<DioDTO> dijelovibg(String naziv, String marka, Boolean stanje);
     public ArrayList<DioDTO> dijelovibg2(String naziv, String marka, String gorivo, Boolean stanje);
     public ArrayList<DioDTO> dijelovibg2(String naziv, String gorivo, Boolean stanje);
-    public ArrayList<DioDTO> getDijelovi(String gorivo, String marka, String model, Boolean stanje);
+    public ArrayList<DioDTO> getDijelovi(String gorivo, String marka, String model, Boolean stanje);   
+    public ArrayList<DioDTO> getDijelovi(String marka, String model);  
     public ArrayList<DioDTO> getDijelovi(String gorivo, String marka, Boolean stanje);
     public ArrayList<DioDTO> getDijeloviNaziv(String naziv, Boolean stanje);
     public boolean azurirajDio(DioDTO dio);

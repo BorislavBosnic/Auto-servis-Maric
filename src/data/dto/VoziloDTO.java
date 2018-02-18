@@ -11,6 +11,7 @@ public class VoziloDTO {
     private Integer idKupac;
     private Integer idModelVozila;
     private String vrstaGoriva;
+    private boolean izbrisano;
 
     public VoziloDTO(){}
     
@@ -25,6 +26,28 @@ public class VoziloDTO {
         this.vrstaGoriva = vrstaGoriva;
     }
 
+    public VoziloDTO(Integer idVozilo, String brojRegistracije, Integer kilovat, Double kubikaza, Integer godiste, Integer idKupac, Integer idModelVozila, String vrstaGoriva, boolean izbrisano) {
+        this.idVozilo = idVozilo;
+        this.brojRegistracije = brojRegistracije;
+        this.kilovat = kilovat;
+        this.kubikaza = kubikaza;
+        this.godiste = godiste;
+        this.idKupac = idKupac;
+        this.idModelVozila = idModelVozila;
+        this.vrstaGoriva = vrstaGoriva;
+        this.izbrisano = izbrisano;
+    }
+    
+    
+
+    public boolean isIzbrisano() {
+        return izbrisano;
+    }
+
+    public void setIzbrisano(boolean izbrisano) {
+        this.izbrisano = izbrisano;
+    }
+    
     public Integer getIdVozilo() {
         return idVozilo;
     }

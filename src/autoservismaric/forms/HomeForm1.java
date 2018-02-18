@@ -62,7 +62,7 @@ import static poslovnalogika.KnjigovodstvoLogika.plati;
 import static poslovnalogika.KnjigovodstvoLogika.poDatumuRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.poIDuRadniNalozi;
 import static poslovnalogika.ZakazivanjaLogika.filtrirajTermine;
-import static poslovnalogika.ZakazivanjaLogika.obrisiTermin;   
+import static poslovnalogika.ZakazivanjaLogika.obrisiTermin;
 
 import static poslovnalogika.KnjigovodstvoLogika.prikaziFakturu;
 import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
@@ -78,172 +78,165 @@ import static poslovnalogika.ZakazivanjaLogika.terminiZaTabelu;
  *
  * @author HP BOOK
  */
-
 public class HomeForm1 extends javax.swing.JFrame {
-    /**Karpin kod**/
+
+    /**
+     * Karpin kod*
+     */
     private static HomeForm1 homeForm;
-    private void inicijalisuciKod()
-    {
-        homeForm=this;
+
+    private void inicijalisuciKod() {
+        homeForm = this;
         uslugeKnjigovodstva();
-        uslugeZakazivanja(); 
+        uslugeZakazivanja();
         uslugePocetneStrane();
     }
-    private void uslugeKnjigovodstva()
-    {
+
+    private void uslugeKnjigovodstva() {
         inicijalizacijaTabelaKnjigovodstva();
         brisanjeStarihVrijednostiPoljaKnjigovodstva();
     }
-    private void uslugeZakazivanja()
-    {
+
+    private void uslugeZakazivanja() {
         inicijalizacijaTabelaZakazivanja();
     }
-    private void uslugePocetneStrane()
-    {
+
+    private void uslugePocetneStrane() {
         inicijalizacijaTabeleNeplacenihFaktura();
     }
-    private void inicijalizacijaTabelaKnjigovodstva()
-    {
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        radniNaloziZaTabelu(lista,tblRadniNalozi);
+
+    private void inicijalizacijaTabelaKnjigovodstva() {
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        radniNaloziZaTabelu(lista, tblRadniNalozi);
         stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-        if(tblRadniNalozi.getRowCount()>0)tblRadniNalozi.setRowSelectionInterval(0, 0);
-        if(tblFaktura.getRowCount()>0)tblFaktura.setRowSelectionInterval(0, 0);
+        if (tblRadniNalozi.getRowCount() > 0) {
+            tblRadniNalozi.setRowSelectionInterval(0, 0);
+        }
+        if (tblFaktura.getRowCount() > 0) {
+            tblFaktura.setRowSelectionInterval(0, 0);
+        }
         provjeraZaDugmiceZaTabeluNaloga();
         dodajIskacuciMeniUTabeluRadnihNaloga();
     }
-    private void inicijalizacijaTabelaZakazivanja()
-    {
-        ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+
+    private void inicijalizacijaTabelaZakazivanja() {
+        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, tblTermini);
-        if(tblTermini.getRowCount()>0)tblTermini.setRowSelectionInterval(0, 0);
+        if (tblTermini.getRowCount() > 0) {
+            tblTermini.setRowSelectionInterval(0, 0);
+        }
         dodajIskacuciMeniUTabeluTermina();
     }
-    private void inicijalizacijaTabeleNeplacenihFaktura()
-    {
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        neplaceneFaktureZaPocetnuStranu(lista,tblNeplaceneFakture);
-        if(tblNeplaceneFakture.getRowCount()>0)tblNeplaceneFakture.setRowSelectionInterval(0, 0);
+
+    private void inicijalizacijaTabeleNeplacenihFaktura() {
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        neplaceneFaktureZaPocetnuStranu(lista, tblNeplaceneFakture);
+        if (tblNeplaceneFakture.getRowCount() > 0) {
+            tblNeplaceneFakture.setRowSelectionInterval(0, 0);
+        }
         dodajIskacuciMeniUTabeluNeplacenihFaktura();
     }
-    private void provjeraZaDugmiceZaTabeluNaloga()
-    {
-        if(tblRadniNalozi.getRowCount()>0 &&
-                !("Nema fakture".equals((String)(
-                        tblRadniNalozi.getValueAt(tblRadniNalozi.getSelectedRow(), 4)))))
-        {
+
+    private void provjeraZaDugmiceZaTabeluNaloga() {
+        if (tblRadniNalozi.getRowCount() > 0
+                && !("Nema fakture".equals((String) (tblRadniNalozi.getValueAt(tblRadniNalozi.getSelectedRow(), 4))))) {
             btnRacun.setEnabled(true);
             btnPredracun.setEnabled(false);
-        }
-        else
-        {
+        } else {
             btnRacun.setEnabled(false);
             btnPredracun.setEnabled(true);
         }
     }
-    private void brisanjeStarihVrijednostiPoljaKnjigovodstva()
-    {
+
+    private void brisanjeStarihVrijednostiPoljaKnjigovodstva() {
         txtID.setText("");
         dtmDatum.setDate(null);
     }
-    private static int opcija=-1;
-    private void dodajIskacuciMeniUTabeluRadnihNaloga()
-    {
-        opcija=-1;
+    private static int opcija = -1;
+
+    private void dodajIskacuciMeniUTabeluRadnihNaloga() {
+        opcija = -1;
         popupMenu = new JPopupMenu();
         JMenuItem detaljnoItem = new JMenuItem("Detaljno");
         JMenuItem placenoItem = new JMenuItem("Plaćeno");
         JMenuItem fakturisiItem = new JMenuItem("Fakturiši");
-        
-        detaljnoItem.addActionListener(new ActionListener()
-        {
+
+        detaljnoItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst
-                    (Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0))));
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0))));
                 stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
                 provjeraZaDugmiceZaTabeluNaloga();
             }
         });
         popupMenu.add(detaljnoItem);
 
-        placenoItem.addActionListener(new ActionListener()
-        {
+        placenoItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int izbor=JOptionPane.showOptionDialog
-                (
-                    new JFrame(),
-                    "Da li ste sigurni da je placeno?",
-                    "Da li ste sigurni?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"DA","NE"},
-                    "NE"
+            public void actionPerformed(ActionEvent e) {
+                int izbor = JOptionPane.showOptionDialog(
+                        new JFrame(),
+                        "Da li ste sigurni da je placeno?",
+                        "Da li ste sigurni?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"DA", "NE"},
+                        "NE"
                 );
-                if(izbor==JOptionPane.YES_OPTION)
-                    plati(Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                if (izbor == JOptionPane.YES_OPTION) {
+                    plati(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                }
                 stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
                 provjeraZaDugmiceZaTabeluNaloga();
             }
         });
         popupMenu.add(placenoItem);
 
-        fakturisiItem.addActionListener(new ActionListener()
-        {
+        fakturisiItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int izbor=JOptionPane.showOptionDialog
-                (
-                    new JFrame(),
-                    "Da li ste sigurni da želite fakturisati?",
-                    "Da li ste sigurni?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"DA","NE"},
-                    "NE"
+            public void actionPerformed(ActionEvent e) {
+                int izbor = JOptionPane.showOptionDialog(
+                        new JFrame(),
+                        "Da li ste sigurni da želite fakturisati?",
+                        "Da li ste sigurni?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"DA", "NE"},
+                        "NE"
                 );
-                if(izbor==JOptionPane.YES_OPTION)
-                    fakturisi(Integer.parseInt((String)tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                if (izbor == JOptionPane.YES_OPTION) {
+                    fakturisi(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                }
                 stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
                 provjeraZaDugmiceZaTabeluNaloga();
             }
         });
         popupMenu.add(fakturisiItem);
-        
+
         tblRadniNalozi.setComponentPopupMenu(popupMenu);
 
-        popupMenu.addPopupMenuListener(new PopupMenuListener()
-        {
+        popupMenu.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         int rowAtPoint = tblRadniNalozi.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblRadniNalozi));
                         selektovanRed = rowAtPoint;
                         int column = 0;
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tblRadniNalozi.getModel().getColumnName(0);
 
-                        if (selektovanRed >= 0)
-                        {
-                            
+                        if (selektovanRed >= 0) {
+
                         }
-                        if (rowAtPoint > -1)
-                        {
+                        if (rowAtPoint > -1) {
                             tblRadniNalozi.setRowSelectionInterval(rowAtPoint, rowAtPoint);
                         }
                         stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
@@ -265,63 +258,49 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void dodajIskacuciMeniUTabeluTermina()
-    {
-        opcija=-1;
+
+    private void dodajIskacuciMeniUTabeluTermina() {
+        opcija = -1;
         popupMenu = new JPopupMenu();
         JMenuItem obrisiItem = new JMenuItem("Obriši");
-        
-        obrisiItem.addActionListener(new ActionListener()
-        {
+
+        obrisiItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                if
-                (
-                    obrisiTermin
-                    (
-                        (String)tblTermini.getValueAt(selektovanRed, 0),
-                        (String)tblTermini.getValueAt(selektovanRed, 1)
-                    )
-                )
-                {
+            public void actionPerformed(ActionEvent e) {
+                if (obrisiTermin(
+                        (String) tblTermini.getValueAt(selektovanRed, 0),
+                        (String) tblTermini.getValueAt(selektovanRed, 1)
+                )) {
                     JOptionPane.showMessageDialog(new JFrame(), "Termin je uklonjen.");
-                    ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+                    ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
                     terminiZaTabelu(lista, tblTermini);
-                }
-                else
+                } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Termin nije uklonjen.");
+                }
             }
         });
         popupMenu.add(obrisiItem);
-        
+
         tblTermini.setComponentPopupMenu(popupMenu);
 
-        popupMenu.addPopupMenuListener(new PopupMenuListener()
-        {
+        popupMenu.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         int rowAtPoint = tblTermini.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblTermini));
                         selektovanRed = rowAtPoint;
                         int column = 0;
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tblTermini.getModel().getColumnName(0);
 
-                        if (selektovanRed >= 0)
-                        {
-                            
+                        if (selektovanRed >= 0) {
+
                         }
-                        if (rowAtPoint > -1)
-                        {
+                        if (rowAtPoint > -1) {
                             tblTermini.setRowSelectionInterval(rowAtPoint, rowAtPoint);
                         }
                     }
@@ -341,97 +320,84 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
     }
-    private void dodajIskacuciMeniUTabeluNeplacenihFaktura()
-    {
-        opcija=-1;
+
+    private void dodajIskacuciMeniUTabeluNeplacenihFaktura() {
+        opcija = -1;
         popupMenu = new JPopupMenu();
         JMenuItem detaljnoItem = new JMenuItem("Detaljno");
         JMenuItem placenoItem = new JMenuItem("Plaćeno");
         JMenuItem fakturisiItem = new JMenuItem("Fakturiši");
-        
-        detaljnoItem.addActionListener(new ActionListener()
-        {
+
+        detaljnoItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst
-                    (Integer.parseInt((String)tblNeplaceneFakture.getValueAt(selektovanRed, 0))));
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0))));
             }
         });
         popupMenu.add(detaljnoItem);
 
-        placenoItem.addActionListener(new ActionListener()
-        {
+        placenoItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int izbor=JOptionPane.showOptionDialog
-                (
-                    new JFrame(),
-                    "Da li ste sigurni da je placeno?",
-                    "Da li ste sigurni?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"DA","NE"},
-                    "NE"
+            public void actionPerformed(ActionEvent e) {
+                int izbor = JOptionPane.showOptionDialog(
+                        new JFrame(),
+                        "Da li ste sigurni da je placeno?",
+                        "Da li ste sigurni?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"DA", "NE"},
+                        "NE"
                 );
-                if(izbor==JOptionPane.YES_OPTION)
-                    plati(Integer.parseInt((String)tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
+                if (izbor == JOptionPane.YES_OPTION) {
+                    plati(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
+                }
             }
         });
         popupMenu.add(placenoItem);
 
-        fakturisiItem.addActionListener(new ActionListener()
-        {
+        fakturisiItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int izbor=JOptionPane.showOptionDialog
-                (
-                    new JFrame(),
-                    "Da li ste sigurni da želite fakturisati?",
-                    "Da li ste sigurni?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE,
-                    null,
-                    new Object[]{"DA","NE"},
-                    "NE"
+            public void actionPerformed(ActionEvent e) {
+                int izbor = JOptionPane.showOptionDialog(
+                        new JFrame(),
+                        "Da li ste sigurni da želite fakturisati?",
+                        "Da li ste sigurni?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"DA", "NE"},
+                        "NE"
                 );
-                if(izbor==JOptionPane.YES_OPTION)
-                    fakturisi(Integer.parseInt((String)tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
+                if (izbor == JOptionPane.YES_OPTION) {
+                    fakturisi(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
+                }
             }
         });
         popupMenu.add(fakturisiItem);
-        
+
         tblNeplaceneFakture.setComponentPopupMenu(popupMenu);
 
-        popupMenu.addPopupMenuListener(new PopupMenuListener()
-        {
+        popupMenu.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e)
-            {
-                SwingUtilities.invokeLater(new Runnable()
-                {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         int rowAtPoint = tblNeplaceneFakture.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblNeplaceneFakture));
                         selektovanRed = rowAtPoint;
                         int column = 0;
                         //int row = tableVozila.getSelectedRow();
                         String imeKolone = tblNeplaceneFakture.getModel().getColumnName(0);
 
-                        if (selektovanRed >= 0)
-                        {
-                            
+                        if (selektovanRed >= 0) {
+
                         }
-                        if (rowAtPoint > -1)
-                        {
+                        if (rowAtPoint > -1) {
                             tblNeplaceneFakture.setRowSelectionInterval(rowAtPoint, rowAtPoint);
                         }
                     }
@@ -451,11 +417,10 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
     }
-    /*****Kraj*****/
-    
-    
-    
-    
+    /**
+     * ***Kraj****
+     */
+
     //Sve moje, ne diraj!
     ButtonGroup bGTraziVozilo;
     ButtonGroup bGTraziVlasnika;
@@ -491,7 +456,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, idVlasnika);
-                
+
                 iv.setVisible(true);
             }
         });
@@ -538,56 +503,53 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
 
     }
-    public void ucitajPopupZaDijelove(){
+
+    public void ucitajPopupZaDijelove() {
         JMenuItem prodaj = new JMenuItem("Prodaj");
         prodaj.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProdajDioDialog((DefaultTableModel)jTable.getModel(), jTable.getSelectedRow(), pdv).setVisible(true);
+                new ProdajDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow(), pdv).setVisible(true);
             }
         });
         popupDio.add(prodaj);
-        
+
         JMenuItem azuriraj = new JMenuItem("Ažuriraj");
         azuriraj.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new IzmijeniDioDialog((DefaultTableModel)jTable.getModel(), jTable.getSelectedRow()).setVisible(true);
+                new IzmijeniDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow()).setVisible(true);
             }
         });
         popupDio.add(azuriraj);
-        
+
         JMenuItem obrisi = new JMenuItem("Obriši");
         obrisi.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
-                //int id = 
-                int id = (Integer)((DefaultTableModel)jTable.getModel()).getValueAt(jTable.getSelectedRow(), 0);
-                System.out.println("idddddddd  " + id);
-                if(DAOFactory.getDAOFactory().getDioModelVozilaDAO().obrisiDioModelVozila(id) &&
-                DAOFactory.getDAOFactory().getDioDAO().obrisiDio(id)){
+                DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
+                int id = (Integer) ((DefaultTableModel) jTable.getModel()).getValueAt(jTable.getSelectedRow(), 0);
+                if (DAOFactory.getDAOFactory().getDioModelVozilaDAO().obrisiDioModelVozila(id)
+                        && DAOFactory.getDAOFactory().getDioDAO().obrisiDio(id)) {
                     dtm.removeRow(jTable.getSelectedRow());
                     JOptionPane jop = new JOptionPane();
-                        jop.showMessageDialog(new JFrame(), "Uspješno obrisan dio", "Obavještenje",
-                                JOptionPane.INFORMATION_MESSAGE);                        
+                    jop.showMessageDialog(new JFrame(), "Uspješno obrisan dio", "Obavještenje",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
         popupDio.add(obrisi);
         jTable.setComponentPopupMenu(popupDio);
-        
+
         /*jTable.addMouseListener(new MouseAdapter (){
             public void MouseClicked(MouseEvent me){
                 if(SwingUtilities.isRightMouseButton(me))
                     popupDio.show(me.getComponent(), me.getX(), me.getY());
             }
          });*/
-    
-        
         popupDio.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
@@ -625,8 +587,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
             }
         });
-}
-    
+    }
+
     public void ucitajPopupZaVozila() {
         popupMenu = new JPopupMenu();
         JMenuItem deleteItem = new JMenuItem("Izbrisi vozilo");
@@ -665,7 +627,38 @@ public class HomeForm1 extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(new JFrame(), "Right-click performed on table and choose DELETE");
+                //JOptionPane.showMessageDialog(new JFrame(), "Right-click performed on table and choose DELETE");
+
+                ArrayList<RadniNalogDTO> nalozi = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi(idVozila);
+                if (nalozi != null && nalozi.size() > 0) {
+                    JOptionPane jop = new JOptionPane();
+                    int dialogResult = jop.showConfirmDialog(new JFrame(), "Postoje radni nalozi za vozilo koje želite ukloniti.\n "
+                            + "Ako nastavite, oni će biti izbrisani, kao i podaci o vozilu.\n Da li ste sigurni da želite da nastavite?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+
+                        for (RadniNalogDTO r : nalozi) {
+                            DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(r.getIdRadniNalog());
+                        }
+
+                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
+
+                        JOptionPane.showMessageDialog(rootPane, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+
+                    } else if (dialogResult == JOptionPane.NO_OPTION) {
+
+                    }
+                } else {
+                    int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni želite da izbrišete podatke o vozilu?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
+
+                        JOptionPane.showMessageDialog(rootPane, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                    } else if (dialogResult == JOptionPane.NO_OPTION) {
+
+                    }
+                }
+
             }
         });
 
@@ -716,28 +709,26 @@ public class HomeForm1 extends javax.swing.JFrame {
     public static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     public static boolean menu[] = new boolean[numberOfItems];
     public StatistikaLogika statistikaLogika;
-    
+
     // public static JPanel employeePanel=new EmployeesForm().getPanel();
     // public static JPanel partsPanel=new PartsForm().getPanel();
-
     /**
      * Creates new form HomeForm1
      */
     public HomeForm1() {
         initComponents();
         statistikaLogika = new StatistikaLogika();
-        
-        jTabbedPane1.addChangeListener(new ChangeListener() {
-        public void stateChanged(ChangeEvent e) {
-            System.out.println("Tab: " + jTabbedPane1.getSelectedIndex());
-            if(jTabbedPane1.getSelectedIndex() == 2 || jTabbedPane1.getSelectedIndex() == 3){
-                odabirMjesecaStatistikaPanel.setVisible(false);
-            } else {
-               odabirMjesecaStatistikaPanel.setVisible(true);
 
+        jTabbedPane1.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 2 || jTabbedPane1.getSelectedIndex() == 3) {
+                    odabirMjesecaStatistikaPanel.setVisible(false);
+                } else {
+                    odabirMjesecaStatistikaPanel.setVisible(true);
+
+                }
             }
-        }
-    });
+        });
         /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack();
         setSize(screenSize.width,screenSize.height);*/
@@ -745,7 +736,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         //tableVozila.addMouseListener(new PopClickListener());
         ucitajPopupZaVozila();
         ucitajPopupZaDijelove();
-        
 
         //za autosuggestor zovila
 //        VozilaLogika vl1 = new VozilaLogika(VozilaLogika.UCITAJ_MODELE);
@@ -769,10 +759,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         datumLabel.setText("Aktivnosti planirane za danas, " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
 
         inicijalizujZaposleniPanel();
-        
-        /**Karpin kod**/
+
+        /**
+         * Karpin kod*
+         */
         inicijalisuciKod();
-        /*****Kraj*****/
+        /**
+         * ***Kraj****
+         */
     }
 
     public AutoSuggestor ucitajPreporukeMarke() {
@@ -1061,6 +1055,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         btnIzmijeniNalog = new javax.swing.JButton();
+        btnIzbrisiNalog = new javax.swing.JButton();
         spVoziloPretraga = new javax.swing.JScrollPane();
         tableVozila = new javax.swing.JTable();
         dijeloviPanel = new javax.swing.JPanel();
@@ -2846,6 +2841,13 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
+        btnIzbrisiNalog.setText("Izbrisi nalog");
+        btnIzbrisiNalog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzbrisiNalogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelVoziloLayout = new javax.swing.GroupLayout(panelVozilo);
         panelVozilo.setLayout(panelVoziloLayout);
         panelVoziloLayout.setHorizontalGroup(
@@ -2866,8 +2868,13 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelVoziloLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelVoziloLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(btnIzbrisiNalog)))))
                 .addGap(210, 210, 210))
         );
 
@@ -2893,7 +2900,9 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIzbrisiNalog))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
@@ -4798,9 +4807,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menu2jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2jPanelMouseClicked
-        
+
         menuItemClick(menu2jPanel, 1, radniNaloziPanel);
-        
+
 
     }//GEN-LAST:event_menu2jPanelMouseClicked
 
@@ -4821,11 +4830,14 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu2jPanelMousePressed
 
     private void menu3jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3jPanelMouseClicked
-        
+
         menuItemClick(menu3jPanel, 2, vozilaPanel);
         loadAutosuggester();
         tableVozila.getTableHeader().setReorderingAllowed(false);
         tableVozila.setDefaultEditor(Object.class, null);
+
+        tableVozila.setAutoCreateRowSorter(true);
+        tableVozila.setAutoCreateRowSorter(true);
 
     }//GEN-LAST:event_menu3jPanelMouseClicked
 
@@ -4857,12 +4869,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu4jPanelMouseExited
 
     private void menu7jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu7jPanelMouseClicked
-        
+
         menuItemClick(menu7jPanel, 6, statistikajPanel);
         statistikaLogika.loadGraph(this);
         statistikaLogika.loadStatistics(this);
-        
-    
+
 
     }//GEN-LAST:event_menu7jPanelMouseClicked
 
@@ -4882,10 +4893,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu7jPanelMousePressed
 
     private void menu5jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseClicked
-       
+
         menuItemClick(menu5jPanel, 4, zaposleniPanel);
 
-       
+
     }//GEN-LAST:event_menu5jPanelMouseClicked
 
     private void menu5jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5jPanelMouseEntered
@@ -4903,10 +4914,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_menu5jPanelMousePressed
 
     private void menu6jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6jPanelMouseClicked
-       
-       menuItemClick(menu6jPanel, 5, dijeloviPanel);
-       loadDijeloviForm();
-        
+
+        menuItemClick(menu6jPanel, 5, dijeloviPanel);
+        loadDijeloviForm();
+
     }//GEN-LAST:event_menu6jPanelMouseClicked
 
     private void menu6jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu6jPanelMouseEntered
@@ -4924,10 +4935,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4PropertyChange
 
     private void menu1jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseClicked
-       
+
         menuItemClick(menu1jPanel, 0, pocetnajPanel);
-        
-      
+
+
     }//GEN-LAST:event_menu1jPanelMouseClicked
 
     private void menu1jPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseEntered
@@ -5023,7 +5034,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPrikazSvihBivsihRadnikaActionPerformed
 
     private void buttonTraziRadneNalogeRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTraziRadneNalogeRadnikaActionPerformed
-        new ZaposleniLogika("statistika", new java.sql.Date(dateChooserDatumOdZaposlenog.getDate().getTime()), new java.sql.Date(dateChooserDatumDoZaposlenog.getDate().getTime()),labelBrojRadnihNaloga,labelOstvareniProfitRadnika).run();
+        new ZaposleniLogika("statistika", new java.sql.Date(dateChooserDatumOdZaposlenog.getDate().getTime()), new java.sql.Date(dateChooserDatumDoZaposlenog.getDate().getTime()), labelBrojRadnihNaloga, labelOstvareniProfitRadnika).run();
     }//GEN-LAST:event_buttonTraziRadneNalogeRadnikaActionPerformed
 
     private void rbPravnoTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoTraziActionPerformed
@@ -5214,7 +5225,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 }
             }
 
-            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getVrstaGoriva()};
+            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getVrstaGoriva()};
             model.addRow(rowData);
         }
 
@@ -5296,7 +5307,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                 }
 
                 boolean dodati = true;
-                //System.out.println(registracija + " " + v.getBrojRegistracije());
                 if (registracija != null && !"".equals(registracija)) {
                     if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
                         dodati = false;
@@ -5318,7 +5328,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     }
                 }
                 if (dodati == true) {
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste()==null?"":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
                     modell.addRow(rowData);
                     tableVozila.setModel(modell);
                 }
@@ -5341,7 +5351,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                 }
 
                 boolean dodati = true;
-                //System.out.println(registracija + " " + v.getBrojRegistracije());
                 if (registracija != null && !"".equals(registracija)) {
                     if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
                         dodati = false;
@@ -5387,7 +5396,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         }
                     }
 
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije()==null?"":v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "":v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva()==null?"":v.getVrstaGoriva(), v.getKilovat()==null?"":v.getKilovat(), v.getKubikaza()==null?"":v.getKubikaza()};
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
                     modell.addRow(rowData);
                     tableVozila.setModel(modell);
 
@@ -5404,35 +5413,35 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         String sifra = "";
-        String naziv = ""; 
-        Double cijena = null; 
+        String naziv = "";
+        Double cijena = null;
         Integer godiste = null;
-        boolean stanje; 
+        boolean stanje;
         String gorivo = "";
         String marka = "";
         String model = "";
         Integer kolicina = null;
         boolean flag = false;
-        
+
         sifra = jtfSifra.getText();
-        if("".equals(sifra)){
+        if ("".equals(sifra)) {
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(this, "Unesite šifru", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
             flag = true;
         }
         naziv = jtfNaziv.getText();
-        if("".equals(naziv)){
+        if ("".equals(naziv)) {
             JOptionPane jop = new JOptionPane();
-            jop.showMessageDialog(this, "Unesite naziv", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);            
+            jop.showMessageDialog(this, "Unesite naziv", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
             flag = true;
         }
-        try{
+        try {
             cijena = Double.parseDouble(jtfCijena.getText());
-        }catch(NumberFormatException e){
-            if(!"".equals(jtfCijena.getText())){
+        } catch (NumberFormatException e) {
+            if (!"".equals(jtfCijena.getText())) {
                 JOptionPane jop = new JOptionPane();
-                jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);      
-            }else{
+                jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);
+            } else {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Unesite cijenu!", "Greška", JOptionPane.ERROR_MESSAGE);
             }
@@ -5457,8 +5466,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             if (!"".equals(jtfKolicina.getText())) {
                 JOptionPane jop = new JOptionPane();
-                jop.showMessageDialog(this, "Nepravilan format količine!!!", "Greška", JOptionPane.ERROR_MESSAGE);                
-            }else{
+                jop.showMessageDialog(this, "Nepravilan format količine!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+            } else {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Unesite količinu!", "Greška", JOptionPane.ERROR_MESSAGE);
             }
@@ -5478,20 +5487,16 @@ public class HomeForm1 extends javax.swing.JFrame {
                 //DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().getDioo(noviDio.getSifra(), noviDio.getNaziv());
                 //noviDio.setId(dioo.getId());
                 //DAOFactory.getDAOFactory().getDioDAO().azurirajDio(noviDio)) {
-                    JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(this, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(this, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+
             } else {
                 if (DAOFactory.getDAOFactory().getDioDAO().dodajDio(noviDio)) {
                     if (modVoz == null) {
-                        //System.out.println("dodje");
                         DAOFactory.getDAOFactory().getModelVozilaDAO().dodajModel(new ModelVozilaDTO(marka, model));
                     }
-                    System.out.println("novi "+ noviDio.getSifra() + " " + noviDio.getId());
                     DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
-                    //System.out.println("dioooo" + dioo.getId());
                     ModelVozilaDTO mv = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-                   // System.out.println("model vozila " + mv.getIdModelVozila());
                     DAOFactory.getDAOFactory().getDioModelVozilaDAO().dodajDioModelVozila(dioo.getId(), mv.getIdModelVozila());
                     JOptionPane jop = new JOptionPane();
                     jop.showMessageDialog(this, "Uspješno dodan dio!!!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
@@ -5507,24 +5512,24 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         String sifra = "";
         String naziv = "";
-        Double cijena = null; 
+        Double cijena = null;
         Integer godiste = null;
-        boolean stanje; 
+        boolean stanje;
         String gorivo = "";
         String marka = "";
         String model = "";
         Integer kolicina = null;
         boolean flag = false;
         Integer id = null;
-        
+
         sifra = tfSifra.getText();
         naziv = tfNaziv.getText();
-        try{
+        try {
             id = Integer.parseInt(tfId.getText());
-        }catch(NumberFormatException e){
-            if(!"".equals(tfId.getText())){
+        } catch (NumberFormatException e) {
+            if (!"".equals(tfId.getText())) {
                 JOptionPane jop = new JOptionPane();
-                jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);      
+                jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);
             }
             id = 0;
             //flag = true;
@@ -5543,89 +5548,95 @@ public class HomeForm1 extends javax.swing.JFrame {
         gorivo = (String) cbGorivo.getSelectedItem();
         marka = (String) cbMarka.getSelectedItem();
         model = (String) cbModel.getSelectedItem();
-        
+
         ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
-        
-        if(!"".equals(tfId.getText())){
-            dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));        
-        }else if(!"".equals(sifra)){
+
+        if (!"".equals(tfId.getText())) {
+            dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));
+        } else if (!"".equals(sifra)) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(sifra));
-        }else if(!"".equals(naziv) && godiste != null && !"Svi".equals(marka) && !"Svi".equals(gorivo)){
-            if("Svi".equals(model))
+        } else if (!"".equals(naziv) && godiste != null && !"Svi".equals(marka) && !"Svi".equals(gorivo)) {
+            if ("Svi".equals(model)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, gorivo, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, model, gorivo, stanje);
-        }else if(!"".equals(naziv) && godiste != null && !"Svi".equals(marka)){
-            if("Svi".equals(model))
+            }
+        } else if (!"".equals(naziv) && godiste != null && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, marka, model, stanje);
-        }else if(!"".equals(naziv) && godiste != null){
-            if(!"Svi".equals(gorivo))
+            }
+        } else if (!"".equals(naziv) && godiste != null) {
+            if (!"Svi".equals(gorivo)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, gorivo, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, stanje);
-        }else if(!"".equals(naziv) && !"Svi".equals(marka) && !"Svi".equals(gorivo)){
-            if("Svi".equals(model))
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(marka) && !"Svi".equals(gorivo)) {
+            if ("Svi".equals(model)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, marka, gorivo, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, model, gorivo, stanje);
-        }else if(!"".equals(naziv) && !"Svi".equals(marka)){
-            if("Svi".equals(model))
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, model, stanje);
-        }else if(!"".equals(naziv) && !"Svi".equals(gorivo)){
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(gorivo)) {
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, gorivo, stanje);
-        }
-        else if(!"".equals(naziv)){
+        } else if (!"".equals(naziv)) {
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviNaziv(naziv, stanje);
-        }
-        else if(!"Svi".equals(gorivo) && !"Svi".equals(marka)){
-            if("Svi".equals(model))
+        } else if (!"Svi".equals(gorivo) && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, stanje);
-            else
+            } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, model, stanje);
+            }
         }
-        
-        DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         dtm.setRowCount(0);
-        
+
         int i = 0;
-        if(dijelovi != null)
-        while(i < dijelovi.size()){
-            DioDTO d = dijelovi.get(i);
-            dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
-                d.getVrstaGoriva(), Math.round(d.getTrenutnaCijena()*100)/100, d.getKolicina(), d.getNovo() ? "Da":"Ne"});
-            i++;
+        if (dijelovi != null) {
+            while (i < dijelovi.size()) {
+                DioDTO d = dijelovi.get(i);
+                dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
+                    d.getVrstaGoriva(), Math.round(d.getTrenutnaCijena() * 100) / 100, d.getKolicina(), d.getNovo() ? "Da" : "Ne"});
+                i++;
+            }
         }
     }//GEN-LAST:event_btnPretraziActionPerformed
 
     private void jLabel36KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel36KeyPressed
-        
+
     }//GEN-LAST:event_jLabel36KeyPressed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        
+
     }//GEN-LAST:event_jTableMouseClicked
 
     private void btnSviDijeloviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSviDijeloviActionPerformed
         ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        
-        DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         dtm.setRowCount(0);
-        
+
         int i = 0;
-        if(dijelovi != null)
-        while(i < dijelovi.size()){
-            DioDTO d = dijelovi.get(i);
-            dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
-                d.getVrstaGoriva(),  d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da":"Ne"});
-            i++;
+        if (dijelovi != null) {
+            while (i < dijelovi.size()) {
+                DioDTO d = dijelovi.get(i);
+                dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
+                    d.getVrstaGoriva(), d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da" : "Ne"});
+                i++;
+            }
         }
-       // if(evt.getButton() == MouseEvent.BUTTON3 && jTable.getSelectedRow() != -1){
-            //IzmijeniDioDialog dialog = new IzmijeniDioDialog((DefaultTableModel)jTable.getModel(), jTable.getSelectedRow());
-            //dialog.setVisible(true);
+        // if(evt.getButton() == MouseEvent.BUTTON3 && jTable.getSelectedRow() != -1){
+        //IzmijeniDioDialog dialog = new IzmijeniDioDialog((DefaultTableModel)jTable.getModel(), jTable.getSelectedRow());
+        //dialog.setVisible(true);
         //}
     }//GEN-LAST:event_btnSviDijeloviActionPerformed
 
@@ -5635,18 +5646,19 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnPronadjiTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPronadjiTerminActionPerformed
     {//GEN-HEADEREND:event_btnPronadjiTerminActionPerformed
-        ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        Date datum=null;
-        if(dtmDatumPretraga.getDate()!=null)datum=new Date(dtmDatumPretraga.getDate().getTime());
-        filtrirajTermine
-        (
-            lista,
-            tblTermini,
-            txtMarkaPretraga.getText(),
-            datum,
-            txtImePretraga.getText(),
-            txtPrezimePretraga.getText(),
-            txtBrojTelefonaPretraga.getText()
+        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+        Date datum = null;
+        if (dtmDatumPretraga.getDate() != null) {
+            datum = new Date(dtmDatumPretraga.getDate().getTime());
+        }
+        filtrirajTermine(
+                lista,
+                tblTermini,
+                txtMarkaPretraga.getText(),
+                datum,
+                txtImePretraga.getText(),
+                txtPrezimePretraga.getText(),
+                txtBrojTelefonaPretraga.getText()
         );
     }//GEN-LAST:event_btnPronadjiTerminActionPerformed
 
@@ -5657,32 +5669,33 @@ public class HomeForm1 extends javax.swing.JFrame {
         txtImePretraga.setText("");
         txtPrezimePretraga.setText("");
         txtBrojTelefonaPretraga.setText("");
-        ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, tblTermini);
     }//GEN-LAST:event_btnPonistiUnosePretragaActionPerformed
 
     private void btnDodajTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnDodajTerminActionPerformed
     {//GEN-HEADEREND:event_btnDodajTerminActionPerformed
-        Date datum=null;
-        if(dtmDatumTermina.getDate()!=null)datum=new Date(dtmDatumTermina.getDate().getTime());
-        boolean test=dodajTermin
-        (
-            datum,
-            ""+(txtVrijemeTerminaSati.getValue()),
-            ""+(txtVrijemeTerminaMinuti.getValue()),
-            txtMarkaTermina.getText(),
-            txtModelTermina.getText(),
-            txtImeTermina.getText(),
-            txtPrezimeTermina.getText(),
-            txtBrojTelefonaTermina.getText()
+        Date datum = null;
+        if (dtmDatumTermina.getDate() != null) {
+            datum = new Date(dtmDatumTermina.getDate().getTime());
+        }
+        boolean test = dodajTermin(
+                datum,
+                "" + (txtVrijemeTerminaSati.getValue()),
+                "" + (txtVrijemeTerminaMinuti.getValue()),
+                txtMarkaTermina.getText(),
+                txtModelTermina.getText(),
+                txtImeTermina.getText(),
+                txtPrezimeTermina.getText(),
+                txtBrojTelefonaTermina.getText()
         );
-        ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, tblTermini);
     }//GEN-LAST:event_btnDodajTerminActionPerformed
 
     private void btnPonistiUnoseTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPonistiUnoseTerminActionPerformed
     {//GEN-HEADEREND:event_btnPonistiUnoseTerminActionPerformed
-        ArrayList<TerminDTO> lista=DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
+        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, tblTermini);
     }//GEN-LAST:event_btnPonistiUnoseTerminActionPerformed
 
@@ -5704,25 +5717,25 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnNefakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNefakturisanoActionPerformed
     {//GEN-HEADEREND:event_btnNefakturisanoActionPerformed
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         nefakturisaniRadniNalozi(lista, tblRadniNalozi);
     }//GEN-LAST:event_btnNefakturisanoActionPerformed
 
     private void btnFakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFakturisanoActionPerformed
     {//GEN-HEADEREND:event_btnFakturisanoActionPerformed
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         fakturisaniRadniNalozi(lista, tblRadniNalozi);
     }//GEN-LAST:event_btnFakturisanoActionPerformed
 
     private void btnPoIDuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoIDuActionPerformed
     {//GEN-HEADEREND:event_btnPoIDuActionPerformed
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poIDuRadniNalozi(lista, tblRadniNalozi, txtID);
     }//GEN-LAST:event_btnPoIDuActionPerformed
 
     private void btnPoDatumuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoDatumuActionPerformed
     {//GEN-HEADEREND:event_btnPoDatumuActionPerformed
-        ArrayList<RadniNalogDTO> lista=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poDatumuRadniNalozi(lista, tblRadniNalozi, dtmDatum);
     }//GEN-LAST:event_btnPoDatumuActionPerformed
 
@@ -5733,12 +5746,16 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void tblNeplaceneFaktureMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblNeplaceneFaktureMouseClicked
     {//GEN-HEADEREND:event_tblNeplaceneFaktureMouseClicked
-        
+
     }//GEN-LAST:event_tblNeplaceneFaktureMouseClicked
 
     private void btnIzmijeniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniNalogActionPerformed
-        new IzmijeniRadniNalogDialog(this, true, 12).setVisible(true);
+        new IzmijeniRadniNalogDialog(this, true, 5).setVisible(true);
     }//GEN-LAST:event_btnIzmijeniNalogActionPerformed
+
+    private void btnIzbrisiNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzbrisiNalogActionPerformed
+        DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(4);
+    }//GEN-LAST:event_btnIzbrisiNalogActionPerformed
 
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
@@ -5772,8 +5789,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         panel.setBackground(new Color(51, 51, 255));
 
     }
-    
-    public void resetAllColors(JPanel panel){
+
+    public void resetAllColors(JPanel panel) {
         resetColor(menu1jPanel);
         resetColor(menu2jPanel);
         resetColor(menu3jPanel);
@@ -5782,21 +5799,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         resetColor(menu6jPanel);
         resetColor(menu7jPanel);
         resetColor(menu8jPanel);
-        
+
         setColor(panel);
-       
+
     }
-    
-    public void menuItemClick(JPanel menuItem,int index, JPanel newPanel){
+
+    public void menuItemClick(JPanel menuItem, int index, JPanel newPanel) {
         setColor(menuItem);
         for (int i = 0; i < numberOfItems; i++) {
             menu[i] = false;
         }
-        
-        menu[index] = true;
-        
-        resetAllColors(menuItem);
 
+        menu[index] = true;
+
+        resetAllColors(menuItem);
 
         parentPanel.removeAll();
         parentPanel.add(newPanel);
@@ -5804,8 +5820,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         parentPanel.revalidate();
 
     }
-    
-    private void loadAutosuggester(){
+
+    private void loadAutosuggester() {
         VozilaLogika vl = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
         VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
         VozilaLogika vl3 = new VozilaLogika((VozilaLogika.UCITAJ_MODELE));
@@ -5820,55 +5836,54 @@ public class HomeForm1 extends javax.swing.JFrame {
             modelAU = ucitajPreporukeModel();
         }
     }
-    
-    private void loadDijeloviForm(){
-        
+
+    private void loadDijeloviForm() {
+
         ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        DefaultTableModel dtm = (DefaultTableModel)jTable.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         dtm.setRowCount(0);
-        
+
         int i = 0;
-        if(dijelovi != null)
-        while(i < dijelovi.size()){
-            DioDTO d = dijelovi.get(i);
-            dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
-                d.getVrstaGoriva(), d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da":"Ne"});
-            i++;
+        if (dijelovi != null) {
+            while (i < dijelovi.size()) {
+                DioDTO d = dijelovi.get(i);
+                dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
+                    d.getVrstaGoriva(), d.getTrenutnaCijena(), d.getKolicina(), d.getNovo() ? "Da" : "Ne"});
+                i++;
+            }
         }
         int size = cbModel.getItemCount();
-        for(int j = 0; i < size; i++){
+        for (int j = 0; i < size; i++) {
             cbModel.removeItemAt(0);
         }
         size = cbMarka.getItemCount();
-        for(int j = 0; i < size; i++){
+        for (int j = 0; i < size; i++) {
             cbMarka.removeItemAt(0);
         }
         ArrayList<DioDTO> nazivi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
         ArrayList<String> naz = new ArrayList<String>();
         cbModel.removeAllItems();
         //cbModel.addItem("Svi");
-        for(DioDTO d : nazivi){
-            if(!naz.contains(d.getModel())){
+        for (DioDTO d : nazivi) {
+            if (!naz.contains(d.getModel())) {
                 naz.add(d.getModel());
                 cbModel.addItem(d.getModel());
             }
         }
-        
+
         //ArrayList<DioDTO> marke = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
         ArrayList<String> mar = new ArrayList<String>();
         cbMarka.removeAllItems();
-       //cbMarka.addItem("Svi");
-        for(DioDTO d : nazivi){
-            if(!mar.contains(d.getMarka())){
+        //cbMarka.addItem("Svi");
+        for (DioDTO d : nazivi) {
+            if (!mar.contains(d.getMarka())) {
                 mar.add(d.getMarka());
                 cbMarka.addItem(d.getMarka());
             }
         }
-        
-        
+
     }
 
-    
     /**
      * @param args the command line arguments
      */
@@ -5917,8 +5932,6 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
     }
-
-   
 
     void inicijalizujZaposleniPanel() {
         dateChooserDatumDoZaposlenog.setCalendar(Calendar.getInstance());
@@ -6080,9 +6093,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     public void setPanelGrafikPrihodiDijelovi(JPanel PanelGrafikPrihodiDijelovi) {
         this.PanelGrafikPrihodiDijelovi = PanelGrafikPrihodiDijelovi;
     }
-    
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -6091,6 +6101,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDodajTermin;
     private javax.swing.JButton btnFakturisano;
+    private javax.swing.JButton btnIzbrisiNalog;
     private javax.swing.JButton btnIzmijeniNalog;
     private javax.swing.JButton btnNefakturisano;
     private javax.swing.JButton btnPoDatumu;

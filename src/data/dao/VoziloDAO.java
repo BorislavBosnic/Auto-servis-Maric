@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface VoziloDAO {
        
+        public boolean obrisiVozilo(int id);
+    
         public ArrayList<VoziloDTO> dobijVozila(String query);
         
         public ArrayList<VoziloDTO> svaVozila();
