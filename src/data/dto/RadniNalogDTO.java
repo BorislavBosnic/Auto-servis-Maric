@@ -153,5 +153,31 @@ public class RadniNalogDTO {
     public void setPlaceno(boolean placeno) {
         this.placeno = placeno;
     }     
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.idRadniNalog;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RadniNalogDTO other = (RadniNalogDTO) obj;
+        if (this.idRadniNalog != other.idRadniNalog) {
+            return false;
+        }
+        return true;
+    }
         
+    
 }

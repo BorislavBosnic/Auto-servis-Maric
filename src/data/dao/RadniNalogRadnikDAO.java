@@ -6,7 +6,14 @@
 package data.dao;
 
 import data.dto.RadniNalogRadnikDTO;
+import java.util.ArrayList;
 
 public interface RadniNalogRadnikDAO {
     public boolean dodajRadniNalogRadnik(RadniNalogRadnikDTO rnr);
+    
+    public ArrayList<RadniNalogRadnikDTO> radniciNaRadnomNalogu(int idRadnogNaloga);
+    
+    public boolean postojiLiZapis(int idRadnogNaloga, int idRadnik);
+    
+    public boolean izbrisi(RadniNalogRadnikDTO rnr);
 }

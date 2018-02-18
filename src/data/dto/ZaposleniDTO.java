@@ -6,6 +6,7 @@
 package data.dto;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  *
@@ -169,6 +170,79 @@ public class ZaposleniDTO {
     @Override
     public String toString() {
         return ime + " (" + imeOca + ") " + prezime;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + this.idRadnik;
+        hash = 19 * hash + Objects.hashCode(this.ime);
+        hash = 19 * hash + Objects.hashCode(this.prezime);
+        hash = 19 * hash + Objects.hashCode(this.telefon);
+        hash = 19 * hash + Objects.hashCode(this.adresa);
+        hash = 19 * hash + Objects.hashCode(this.strucnaSprema);
+        hash = 19 * hash + Objects.hashCode(this.imeOca);
+        hash = 19 * hash + Objects.hashCode(this.brojLicneKarte);
+        hash = 19 * hash + Objects.hashCode(this.datumRodjenja);
+        hash = 19 * hash + Objects.hashCode(this.funkcija);
+        hash = 19 * hash + Objects.hashCode(this.datumOd);
+        hash = 19 * hash + Objects.hashCode(this.datumDo);
+        hash = 19 * hash + Objects.hashCode(this.ulogaRadnika);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ZaposleniDTO other = (ZaposleniDTO) obj;
+        if (this.idRadnik != other.idRadnik) {
+            return false;
+        }
+        if (!Objects.equals(this.ime, other.ime)) {
+            return false;
+        }
+        if (!Objects.equals(this.prezime, other.prezime)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefon, other.telefon)) {
+            return false;
+        }
+        if (!Objects.equals(this.adresa, other.adresa)) {
+            return false;
+        }
+        if (!Objects.equals(this.strucnaSprema, other.strucnaSprema)) {
+            return false;
+        }
+        if (!Objects.equals(this.imeOca, other.imeOca)) {
+            return false;
+        }
+        if (!Objects.equals(this.brojLicneKarte, other.brojLicneKarte)) {
+            return false;
+        }
+        if (!Objects.equals(this.funkcija, other.funkcija)) {
+            return false;
+        }
+        if (!Objects.equals(this.ulogaRadnika, other.ulogaRadnika)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumRodjenja, other.datumRodjenja)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumOd, other.datumOd)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumDo, other.datumDo)) {
+            return false;
+        }
+        return true;
     }
         
     

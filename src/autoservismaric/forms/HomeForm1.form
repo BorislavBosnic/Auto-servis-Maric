@@ -2116,6 +2116,7 @@
                                               <Component id="jButton2" linkSize="11" pref="203" max="32767" attributes="0"/>
                                               <Component id="jButton4" linkSize="11" max="32767" attributes="0"/>
                                               <Component id="jButton5" linkSize="11" max="32767" attributes="0"/>
+                                              <Component id="btnIzmijeniNalog" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jButton10" min="-2" pref="146" max="-2" attributes="0"/>
@@ -2146,6 +2147,8 @@
                                               <Component id="jButton10" max="32767" attributes="0"/>
                                               <Component id="jButton5" linkSize="13" min="-2" pref="65" max="-2" attributes="0"/>
                                           </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="btnIzmijeniNalog" min="-2" pref="41" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -2800,6 +2803,14 @@
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnIzmijeniNalog">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Izmijeni nalog"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzmijeniNalogActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>

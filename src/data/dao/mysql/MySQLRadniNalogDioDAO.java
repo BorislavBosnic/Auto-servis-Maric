@@ -144,11 +144,13 @@ public class MySQLRadniNalogDioDAO implements RadniNalogDioDAO
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String query = "UPDATE radni_nalog_dio SET"
+        String query = "UPDATE radni_nalog_dio SET "
                         + "IdRadniNalog=?, "
                         + "IdDio=?, "
                         + "Cijena=?, "
-                        + "Kolicina=?";
+                        + "Kolicina=? "
+                        + "WHERE IdRadniNalog=? "
+                        + "AND IdDio=?";
         try {
                 conn = ConnectionPool.getInstance().checkOut();
                 ps = conn.prepareStatement(query);
@@ -156,6 +158,8 @@ public class MySQLRadniNalogDioDAO implements RadniNalogDioDAO
                 ps.setInt(2, radniNalogDio.getIdDio());
                 ps.setDouble(3, radniNalogDio.getCijena());
                 ps.setInt(4, radniNalogDio.getKolicina());
+                ps.setInt(5, radniNalogDio.getIdRadniNalog());
+                ps.setInt(6, radniNalogDio.getIdDio());
 
                 retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -173,7 +177,7 @@ public class MySQLRadniNalogDioDAO implements RadniNalogDioDAO
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String query = "DELETE FROM radni_nalog_dio"
+        String query = "DELETE FROM radni_nalog_dio "
                         + "WHERE IdRadniNalog=? AND IdDio=?";
         try {
                 conn = ConnectionPool.getInstance().checkOut();

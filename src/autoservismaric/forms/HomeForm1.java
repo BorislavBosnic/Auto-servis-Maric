@@ -1060,6 +1060,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        btnIzmijeniNalog = new javax.swing.JButton();
         spVoziloPretraga = new javax.swing.JScrollPane();
         tableVozila = new javax.swing.JTable();
         dijeloviPanel = new javax.swing.JPanel();
@@ -2838,6 +2839,13 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
+        btnIzmijeniNalog.setText("Izmijeni nalog");
+        btnIzmijeniNalog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmijeniNalogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelVoziloLayout = new javax.swing.GroupLayout(panelVozilo);
         panelVozilo.setLayout(panelVoziloLayout);
         panelVoziloLayout.setHorizontalGroup(
@@ -2856,7 +2864,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(210, 210, 210))
@@ -2883,6 +2892,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
@@ -5725,6 +5736,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblNeplaceneFaktureMouseClicked
 
+    private void btnIzmijeniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniNalogActionPerformed
+        new IzmijeniRadniNalogDialog(this, true, 12).setVisible(true);
+    }//GEN-LAST:event_btnIzmijeniNalogActionPerformed
+
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
@@ -6076,6 +6091,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDodajTermin;
     private javax.swing.JButton btnFakturisano;
+    private javax.swing.JButton btnIzmijeniNalog;
     private javax.swing.JButton btnNefakturisano;
     private javax.swing.JButton btnPoDatumu;
     private javax.swing.JButton btnPoIDu;

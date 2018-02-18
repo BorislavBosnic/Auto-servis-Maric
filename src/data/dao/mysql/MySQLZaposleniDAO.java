@@ -23,7 +23,7 @@ import java.util.List;
 public class MySQLZaposleniDAO implements ZaposleniDAO{
     @Override
     public List<ZaposleniDTO> sviZaposleni() {
-        List<ZaposleniDTO> retVal = new ArrayList<ZaposleniDTO>();
+                List<ZaposleniDTO> retVal = new ArrayList<ZaposleniDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -251,6 +251,38 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
                         ps.setString(1, ime);
                         ps.setString(2, prezime);
                         ps.setString(3, imeOca);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				retVal = new ZaposleniDTO(rs.getInt("IdRadnik"),rs.getString("Ime"),
+                                        rs.getString("Prezime"), rs.getString("Telefon"), rs.getString("Adresa"),
+                                        rs.getString("StrucnaSprema"), rs.getString("ImeOca"),
+                                        rs.getString("BrojLicneKarte"), rs.getDate("DatumRodjenja"),
+                                        rs.getString("Funkcija"),rs.getDate("DatumOd"),rs.getDate("DatumDo"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
+
+    @Override
+    public ZaposleniDTO zaposleni(int id) {
+                ZaposleniDTO retVal = null;
+                Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT * FROM radnik "
+                        + "WHERE IdRadnik=? ";
+               
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+                        ps.setInt(1, id);
 			rs = ps.executeQuery();
 
 			while (rs.next())

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package autoservismaric.dialog;
 
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
-import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.RadniNalogDioDTO;
@@ -15,43 +9,62 @@ import data.dto.RadniNalogRadnikDTO;
 import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
 import java.awt.Color;
-import java.time.LocalDate;
+import java.awt.Frame;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
  * @author DulleX
  */
-public class DodajRadniNalogDialog extends javax.swing.JDialog {
+public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
 
-    
-    private int idVozila;
     /**
-     * Creates new form DodajRadniNalogDialog
+     * Creates new form IzmijeniRadniNalogDialog2
      */
-    public DodajRadniNalogDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    
+    private int idRadnogNaloga;
+    private int idVozila;
+    private RadniNalogDTO nalog;
+
+    public IzmijeniRadniNalogDialog(Frame owner, boolean modal) {
+        super(owner, modal);
         initComponents();
     }
     
-    public DodajRadniNalogDialog(java.awt.Frame parent, boolean modal, int idVozila) {
-        this(parent, modal);
-  
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.DATE, 7); 
-        
-        datumOtvaranjaNaloga.setDate(new Date());
-        potrebnoZavrsitiDo.setDate(c.getTime());
     
+    
+    public IzmijeniRadniNalogDialog(java.awt.Frame parent, boolean modal, int idRadnogNaloga) {
+        this(parent, modal);
+        
+        this.idRadnogNaloga = idRadnogNaloga;
+        RadniNalogDTO rn = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(this.idRadnogNaloga);
+        
+        datumOtvaranjaNaloga.setDate(rn.getDatumOtvaranjaNaloga());
+        datumZatvaranjaNaloga.setDate(rn.getDatumZatvaranjaNaloga());
+        potrebnoZavrsitiDo.setDate(rn.getPredvidjenoVrijemeZavrsetka());
+        
+        rn.setIdRadniNalog(this.idRadnogNaloga);
+        nalog = rn;
+        this.idVozila = rn.getIdVozilo();
+        tfIdVozila.setText((new Integer(rn.getIdVozilo()).toString()));
+        tfTroskovi.setText((new Double(rn.getTroskovi())).toString());
+        tfKilometraza.setText((new Integer(rn.getKilometraza()).toString()));
+        tfCijena.setText((new Double(rn.getCijenaUsluge()).toString()));
+        cbPlaceno.setSelected(rn.isPlaceno());
+        taProblem.setText(rn.getOpisProblema());
+        
         tabelaIzabraniDijelovi.setAutoCreateRowSorter(true);
         tabelaDijelovi.setAutoCreateRowSorter(true);
         tabelaDijelovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -65,25 +78,36 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
         VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
         ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdVozilo());
-        
-        this.idVozila = idVozila;
-        tfIdVozila.setText(new Integer(idVozila).toString());
+    
         tfIdVozila.setEditable(false);
+        spinnerKolicina.setValue(1);
         
-       DefaultListModel<ZaposleniDTO> model = new DefaultListModel<>();
-       
-       List<ZaposleniDTO> listaZaposlenih = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
-              
-      
-       
-       for(ZaposleniDTO z: listaZaposlenih){
-           model.addElement(z);
-       }
-       
-       listaZaposleni.setModel(model);
-       listaZaposleni.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       
-       String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
+        ArrayList<RadniNalogRadnikDTO> rnr = DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().radniciNaRadnomNalogu(this.idRadnogNaloga);
+        DefaultListModel<ZaposleniDTO> modelZaposleni = new DefaultListModel<>();
+                
+        for(RadniNalogRadnikDTO r : rnr){
+            ZaposleniDTO z = DAOFactory.getDAOFactory().getZaposleniDAO().zaposleni(r.getIdRadnik());
+            modelZaposleni.addElement(z);              
+        }
+        
+         listaZaposleniZaduzeni.setModel(modelZaposleni);
+         listaZaposleniZaduzeni.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+         
+         DefaultListModel<ZaposleniDTO> modelOstaliZaposleni = new DefaultListModel<>();
+
+         
+         ArrayList<ZaposleniDTO> sviAktivniZaposleni = (ArrayList<ZaposleniDTO>) DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
+         for(ZaposleniDTO z : sviAktivniZaposleni){
+             if(!((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).contains(z)){
+                 modelOstaliZaposleni.addElement(z);
+             }
+         }
+         
+         listaZaposleni.setModel(modelOstaliZaposleni);
+         listaZaposleni.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+         
+         //za tabelu dostupnih dijelova
+        String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
         DefaultTableModel modelDijelovi = new DefaultTableModel(columns, 0);
         tabelaDijelovi.setModel(modelDijelovi);
         
@@ -101,10 +125,22 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
        }
         
         tabelaDijelovi.setModel(modelDijelovi); 
+        //----------------
         
-        listaZaposleniZaduzeni.setModel(new DefaultListModel<>());
+        //--vec dodati dijelovi u radni nalog
+        List<RadniNalogDioDTO> listaDodatihDijelova = DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(rn.getIdRadniNalog());
+        String[] kolone = {"Naziv","Šifra", "Količina" ,"Cijena"};
+        DefaultTableModel modelDodatihDijelova = new DefaultTableModel(kolone, 0);
+        
+        for(RadniNalogDioDTO rndDTO : listaDodatihDijelova){
+            DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(rndDTO.getIdDio());
+            Object[] rowData = { dio.getNaziv(), dio.getSifra(), rndDTO.getKolicina(), rndDTO.getCijena()};
+            modelDodatihDijelova.addRow(rowData);
+        }
+        
+        tabelaIzabraniDijelovi.setModel(modelDodatihDijelova);
+         
 
-        spinnerKolicina.setValue(1);
     }
 
     /**
@@ -143,7 +179,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         datumOtvaranjaNaloga = new com.toedter.calendar.JDateChooser();
         datumZatvaranjaNaloga = new com.toedter.calendar.JDateChooser();
         potrebnoZavrsitiDo = new com.toedter.calendar.JDateChooser();
-        btnKreirajNalog = new javax.swing.JButton();
+        btnAzurirajNalog = new javax.swing.JButton();
         spinnerKolicina = new javax.swing.JSpinner();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabelaIzabraniDijelovi = new javax.swing.JTable();
@@ -161,8 +197,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Novi radni nalog");
-        setResizable(false);
+        setTitle("Izmijeni radni nalog");
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -248,12 +283,21 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             }
         });
 
-        btnKreirajNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnKreirajNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add-documents.png"))); // NOI18N
-        btnKreirajNalog.setText("Kreiraj nalog");
-        btnKreirajNalog.addActionListener(new java.awt.event.ActionListener() {
+        datumOtvaranjaNaloga.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                datumOtvaranjaNalogaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                datumOtvaranjaNalogaFocusLost(evt);
+            }
+        });
+
+        btnAzurirajNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAzurirajNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add-documents.png"))); // NOI18N
+        btnAzurirajNalog.setText("Ažuriraj nalog");
+        btnAzurirajNalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKreirajNalogActionPerformed(evt);
+                btnAzurirajNalogActionPerformed(evt);
             }
         });
 
@@ -367,7 +411,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                                                 .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAzurirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -409,9 +453,6 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addGap(66, 66, 66))))))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -498,11 +539,9 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAzurirajNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7, jLabel8});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -536,145 +575,45 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKreirajNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajNalogActionPerformed
-        Date datumOtvaranja = datumOtvaranjaNaloga.getDate();
-        java.sql.Date o = new java.sql.Date(datumOtvaranja.getTime());
-
-        java.sql.Date z = null;
-        Date datumZatvaranja = datumZatvaranjaNaloga.getDate();
-        try{
-            z = new java.sql.Date(datumZatvaranja.getTime());
-        }
-        catch(Exception ex){   }
-        
-        
-        Date potrebnoZavristi = potrebnoZavrsitiDo.getDate();
-        java.sql.Date pz = new java.sql.Date(potrebnoZavristi.getTime());
-
-        
-        Double troskovi = 0.0;
-        Integer kilometraza = 0;
-        Double cijena = 0.0;
-        Boolean placeno = cbPlaceno.isSelected();
-        
-        if(tfTroskovi.getText() != null && !"".equals(tfTroskovi.getText())){
-            try{
-                troskovi = new Double(tfTroskovi.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Troškovi moraju biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        if(tfKilometraza.getText() != null && !"".equals(tfKilometraza.getText())){
-            try{
-                kilometraza = new Integer(tfKilometraza.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Kilometraža mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
-            try{
-                cijena = new Double(tfCijena.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Cijena mora biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        String opisProblema = taProblem.getText();
-        
-        RadniNalogDTO rn = new RadniNalogDTO(placeno, o, z, this.idVozila, troskovi, kilometraza, pz, cijena);
-        rn.setOpisProblema(opisProblema);
-        
-        if(DAOFactory.getDAOFactory().getRadniNalogDAO().dodajRadniNalog(rn)){            
-            int idRadnogNaloga = rn.getIdRadniNalog();
-            
-            for(int i = 0; i < listaZaposleniZaduzeni.getModel().getSize(); i++){
-                ZaposleniDTO zaposleni = listaZaposleniZaduzeni.getModel().getElementAt(i);
-                RadniNalogRadnikDTO rnr = new RadniNalogRadnikDTO(idRadnogNaloga, zaposleni.getIdRadnik(), zaposleni.getUlogaRadnika());
-                DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().dodajRadniNalogRadnik(rnr);
-                
-               
-            }
-            
-             DefaultTableModel modelDio = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
-                for(int j = 0; j < modelDio.getRowCount(); j++){
-                    String sifraDio = tabelaIzabraniDijelovi.getModel().getValueAt(j, 1).toString();
-                    Integer kolicinaDio = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(j, 2).toString());
-                    Double cijenaDio = Double.parseDouble(tabelaIzabraniDijelovi.getModel().getValueAt(j, 3).toString());
-                    
-                    RadniNalogDioDTO rnd = new RadniNalogDioDTO();
-                    DioDTO dDTO =DAOFactory.getDAOFactory().getDioDAO().getDio(sifraDio);
-                    rnd.setIdRadniNalog(idRadnogNaloga);
-                    rnd.setIdDio(dDTO.getId());
-                    rnd.setKolicina(kolicinaDio);
-                    rnd.setCijena(cijenaDio);
-                    
-                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().dodajRadniNalogDio(rnd);
-                }
-                
-                //azuriranje kolicine dijelova
-            for(int k = 0; k < tabelaDijelovi.getModel().getRowCount(); k++){
-                String sifra = tabelaDijelovi.getModel().getValueAt(k, 1).toString();
-                Integer novaKolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(k, 5).toString());
-                DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
-                dio.setKolicina(novaKolicina);
-                
-                DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
-            }
-            
-             JOptionPane.showMessageDialog(rootPane, "Uspješno dodat radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-             dispose();
-        }
-        else{
-                    JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-                    return;
-        }
-    }//GEN-LAST:event_btnKreirajNalogActionPerformed
-
     private void btnDodajDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDioActionPerformed
-        
+
         int red = tabelaDijelovi.getSelectedRow();
         
-        if(red >= 0){
+        if(red <= 0){
+            JOptionPane.showMessageDialog(rootPane, "Izaberite dio koji želite dodati!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
         
         String sifra = tabelaDijelovi.getModel().getValueAt(red, 1).toString();
         int dodajKolicinu = (Integer)spinnerKolicina.getValue();
-        
-               //String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
 
-        
+        //String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
+
         String naziv = tabelaDijelovi.getModel().getValueAt(red, 0).toString();
         Integer kolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString());
-        Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());      
+        Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());
         boolean postoji = false;
-        
+
         if(dodajKolicinu > kolicina){
             JOptionPane.showMessageDialog(rootPane, "Nema toliko jedinica izabranog dijela na stanju!", "Greška", JOptionPane.OK_OPTION);
             return;
         }
-        
+
         for(int i = 0; i < tabelaIzabraniDijelovi.getRowCount(); i++){
             if(sifra.equals(tabelaIzabraniDijelovi.getModel().getValueAt(i, 1))){
                 tabelaIzabraniDijelovi.getModel().setValueAt((Integer)tabelaIzabraniDijelovi.getModel().getValueAt(i, 2) + dodajKolicinu, i, 2);
                 postoji = true;
             }
         }
-        
+
         if(!postoji){
-            
+
             DefaultTableModel dtm = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
-            
+
             Object[] rowData = { naziv, sifra, dodajKolicinu, cijena};
             dtm.addRow(rowData);
         }
-        
+
         if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
             Double trenutnaCijena = Double.parseDouble(tfCijena.getText());
             trenutnaCijena += dodajKolicinu*cijena;
@@ -685,86 +624,10 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
             trenutnaCijena += dodajKolicinu*cijena;
             tfCijena.setText(trenutnaCijena.toString());
         }
-        
+
         tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString()) - dodajKolicinu,red, 5);
         spinnerKolicina.setValue(1);
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Izaberite dio koji želite dodati!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
     }//GEN-LAST:event_btnDodajDioActionPerformed
-
-    private void btnUkloniDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniDioActionPerformed
-        int red = tabelaIzabraniDijelovi.getSelectedRow();
-        
-        if(red < 0){
-            JOptionPane.showMessageDialog(rootPane, "Morate odabrati dio u tabeli koji želite ukloniti!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        Integer kolicina = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(red, 2).toString());
-        String sifra = tabelaIzabraniDijelovi.getModel().getValueAt(red, 1).toString();
-        boolean pronasao = false;
-        Double cijenaJednogDijela=0.0;
-        
-        
-        for(int i = 0; i < tabelaDijelovi.getRowCount() && pronasao==false; i++){
-            if(sifra.equals(tabelaDijelovi.getModel().getValueAt(i, 1))){
-               pronasao = true;
-               tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(i, 5).toString()) + kolicina, i, 5);
-               cijenaJednogDijela = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(i, 6).toString());
-            }
-        }
-        
-        Double cijena = Double.parseDouble(tfCijena.getText());
-        Double novaCijena = cijena-kolicina*cijenaJednogDijela;
-        tfCijena.setText(novaCijena.toString());
-        
-        if(novaCijena < 0){
-             tfCijena.setText(new String("0"));
-        }
-        
-        ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).removeRow(red);
-    }//GEN-LAST:event_btnUkloniDioActionPerformed
-
-    private void btnZaduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaduziActionPerformed
-        int brojReda = listaZaposleni.getSelectedIndex();
-        
-        if(brojReda < 0)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste svih radnika!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }        
-                
-        ZaposleniDTO red = listaZaposleni.getSelectedValue();
-        red.setUlogaRadnika(taUlogaRadnika.getText());
-        
-        ((DefaultListModel<ZaposleniDTO>)listaZaposleni.getModel()).removeElementAt(brojReda);
-        
-        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleniZaduzeni.getModel();
-        mod.addElement(red);
-        
-        taUlogaRadnika.setText("");
-    }//GEN-LAST:event_btnZaduziActionPerformed
-
-    private void btnRazduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRazduziActionPerformed
-        int brojReda = listaZaposleniZaduzeni.getSelectedIndex();
-        
-        if(brojReda < 0)
-        {
-            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste zaduženih radnika!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }        
-        
-        
-        ZaposleniDTO red = listaZaposleniZaduzeni.getSelectedValue();
-        
-        ((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).removeElementAt(brojReda);
-        
-        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleni.getModel();
-        mod.addElement(red);
-    }//GEN-LAST:event_btnRazduziActionPerformed
 
     private void listaZaposleniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniValueChanged
         if(listaZaposleni.getSelectedIndex() >= 0){
@@ -777,8 +640,259 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_listaZaposleniValueChanged
 
+    private void btnRazduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRazduziActionPerformed
+        int brojReda = listaZaposleniZaduzeni.getSelectedIndex();
+
+        if(brojReda < 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste zaduženih radnika!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+
+        ZaposleniDTO red = listaZaposleniZaduzeni.getSelectedValue();
+
+        ((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).removeElementAt(brojReda);
+
+        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleni.getModel();
+        mod.addElement(red);
+    }//GEN-LAST:event_btnRazduziActionPerformed
+
+    private void btnAzurirajNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajNalogActionPerformed
+        Date datumOtvaranja = datumOtvaranjaNaloga.getDate();
+        java.sql.Date o = new java.sql.Date(datumOtvaranja.getTime());
+
+        java.sql.Date z = null;
+        Date datumZatvaranja = datumZatvaranjaNaloga.getDate();
+        try{
+            z = new java.sql.Date(datumZatvaranja.getTime());
+        }
+        catch(Exception ex){   }
+
+        Date potrebnoZavristi = potrebnoZavrsitiDo.getDate();
+        java.sql.Date pz = new java.sql.Date(potrebnoZavristi.getTime());
+
+        Double troskovi = 0.0;
+        Integer kilometraza = 0;
+        Double cijena = 0.0;
+        Boolean placeno = cbPlaceno.isSelected();
+
+        if(tfTroskovi.getText() != null && !"".equals(tfTroskovi.getText())){
+            try{
+                troskovi = new Double(tfTroskovi.getText());
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Troškovi moraju biti realan broj.", "Greška", JOptionPane.OK_OPTION);
+                return;
+            }
+        }
+
+        if(tfKilometraza.getText() != null && !"".equals(tfKilometraza.getText())){
+            try{
+                kilometraza = new Integer(tfKilometraza.getText());
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Kilometraža mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
+                return;
+            }
+        }
+
+        if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
+            try{
+                cijena = new Double(tfCijena.getText());
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Cijena mora biti realan broj.", "Greška", JOptionPane.OK_OPTION);
+                return;
+            }
+        }
+
+        String opisProblema = taProblem.getText();
+
+        RadniNalogDTO rn = new RadniNalogDTO(placeno, o, z, this.idVozila, troskovi, kilometraza, pz, cijena);
+        rn.setOpisProblema(opisProblema);
+        rn.setIdRadniNalog(this.idRadnogNaloga);
+        
+        DAOFactory.getDAOFactory().getRadniNalogDAO().azurirajRadniNalog(rn);
+
+        if(true){
+            int idRadnogNaloga = rn.getIdRadniNalog();
+            
+            //brisi radnike izmjena;
+            ArrayList<RadniNalogRadnikDTO> listaPrethodnih = DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().radniciNaRadnomNalogu(nalog.getIdRadniNalog());
+            
+            for(int i = 0; i < listaPrethodnih.size(); i++){
+                               
+                ZaposleniDTO zaposleni = DAOFactory.getDAOFactory().getZaposleniDAO().zaposleni(listaPrethodnih.get(i).getIdRadnik());
+                
+                if(!((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).contains(zaposleni)){
+                        
+                        DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().izbrisi(listaPrethodnih.get(i));
+                    }
+                
+            }
+
+            //dodaj radnike izmjena
+            for(int i = 0; i < listaZaposleniZaduzeni.getModel().getSize(); i++){
+                ZaposleniDTO zaposleni = listaZaposleniZaduzeni.getModel().getElementAt(i);
+                RadniNalogRadnikDTO rnr = new RadniNalogRadnikDTO(this.idRadnogNaloga, zaposleni.getIdRadnik(), zaposleni.getUlogaRadnika());
+       
+                if(!DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().postojiLiZapis(this.idRadnogNaloga, zaposleni.getIdRadnik())){
+                    DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().dodajRadniNalogRadnik(rnr);
+                }
+
+            }
+            
+            //dijelovi
+            
+            //brisanje izbrisanih
+            ArrayList<RadniNalogDioDTO> prethodniRND = DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(this.idRadnogNaloga);
+            for(RadniNalogDioDTO rnd : prethodniRND){
+                
+                DioDTO dioDTO = DAOFactory.getDAOFactory().getDioDAO().getDio(rnd.getIdDio());
+                
+                boolean pronadjen = false;
+                for(int i = 0; i < tabelaIzabraniDijelovi.getModel().getRowCount(); i++){
+                    if(dioDTO.getSifra().equals(tabelaIzabraniDijelovi.getModel().getValueAt(i, 1))){
+                        pronadjen = true;
+                        //rnd.setKolicina(new Integer(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 2).toString()));
+                    }
+                }
+                
+                if(pronadjen == false){
+                    dioDTO.setKolicina(dioDTO.getKolicina() + rnd.getKolicina());
+                    DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dioDTO);
+                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().obrisiRadniNalogDio(this.idRadnogNaloga, dioDTO.getId());
+                }
+            }
+            
+            
+            //dodavanje novih
+            for(int i = 0; i < tabelaIzabraniDijelovi.getModel().getRowCount(); i++){
+                String sifraDijela = ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 1).toString();
+                DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(sifraDijela);
+                
+                RadniNalogDioDTO rnd = DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDio(this.idRadnogNaloga, dio.getId());
+                if(rnd != null){
+                    
+                    int novoStanje = rnd.getKolicina() - new Integer(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 2).toString());
+                    dio.setKolicina(dio.getKolicina() + novoStanje);
+                    DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
+
+                    rnd.setKolicina(new Integer(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 2).toString()));
+                    rnd.setCijena(new Double(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 3).toString()));
+                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().azurirajRadniNalogDio(rnd);
+                }
+                else{
+                    RadniNalogDioDTO noviRadniNalogDio = new RadniNalogDioDTO();
+                    noviRadniNalogDio.setIdRadniNalog(this.idRadnogNaloga);
+                    noviRadniNalogDio.setIdDio(dio.getId());
+                    noviRadniNalogDio.setKolicina(new Integer(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 2).toString()));
+                    noviRadniNalogDio.setCijena(new Double(((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).getValueAt(i, 3).toString()));
+                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().dodajRadniNalogDio(noviRadniNalogDio);
+                }
+            }
+
+//            DefaultTableModel modelDio = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
+//            for(int j = 0; j < modelDio.getRowCount(); j++){
+//                String sifraDio = tabelaIzabraniDijelovi.getModel().getValueAt(j, 1).toString();
+//                Integer kolicinaDio = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(j, 2).toString());
+//                Double cijenaDio = Double.parseDouble(tabelaIzabraniDijelovi.getModel().getValueAt(j, 3).toString());
+//
+//                RadniNalogDioDTO rnd = new RadniNalogDioDTO();
+//                DioDTO dDTO =DAOFactory.getDAOFactory().getDioDAO().getDio(sifraDio);
+//                rnd.setIdRadniNalog(idRadnogNaloga);
+//                rnd.setIdDio(dDTO.getId());
+//                rnd.setKolicina(kolicinaDio);
+//                rnd.setCijena(cijenaDio);
+//
+//                DAOFactory.getDAOFactory().getRadniNalogDioDAO().dodajRadniNalogDio(rnd);
+//            }
+
+            
+             //azuriranje kolicine dijelova
+            for(int k = 0; k < tabelaDijelovi.getModel().getRowCount(); k++){
+                String sifra = tabelaDijelovi.getModel().getValueAt(k, 1).toString();
+                Integer novaKolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(k, 5).toString());
+                DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
+                dio.setKolicina(novaKolicina);
+                
+                DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
+            }
+            
+            
+            
+            JOptionPane.showMessageDialog(rootPane, "Uspješno ažuriran radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+    }//GEN-LAST:event_btnAzurirajNalogActionPerformed
+
+    private void btnUkloniDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniDioActionPerformed
+        int red = tabelaIzabraniDijelovi.getSelectedRow();
+
+        if(red < 0){
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati dio u tabeli koji želite ukloniti!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+
+        Integer kolicina = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(red, 2).toString());
+        String sifra = tabelaIzabraniDijelovi.getModel().getValueAt(red, 1).toString();
+        boolean pronasao = false;
+        Double cijenaJednogDijela=0.0;
+
+        for(int i = 0; i < tabelaDijelovi.getRowCount() && pronasao==false; i++){
+            if(sifra.equals(tabelaDijelovi.getModel().getValueAt(i, 1))){
+                pronasao = true;
+                tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(i, 5).toString()) + kolicina, i, 5);
+                cijenaJednogDijela = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(i, 6).toString());
+            }
+        }
+
+        Double cijena = Double.parseDouble(tfCijena.getText());
+        Double novaCijena = cijena-kolicina*cijenaJednogDijela;
+        tfCijena.setText(novaCijena.toString());
+
+        if(novaCijena < 0){
+            tfCijena.setText(new String("0"));
+        }
+
+        ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).removeRow(red);
+    }//GEN-LAST:event_btnUkloniDioActionPerformed
+
+    private void btnZaduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaduziActionPerformed
+        int brojReda = listaZaposleni.getSelectedIndex();
+
+        if(brojReda < 0)
+        {
+            JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste svih radnika!", "Greška", JOptionPane.OK_OPTION);
+            return;
+        }
+
+        ZaposleniDTO red = listaZaposleni.getSelectedValue();
+        red.setUlogaRadnika(taUlogaRadnika.getText());
+
+        ((DefaultListModel<ZaposleniDTO>)listaZaposleni.getModel()).removeElementAt(brojReda);
+
+        DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleniZaduzeni.getModel();
+        mod.addElement(red);
+
+        taUlogaRadnika.setText("");
+    }//GEN-LAST:event_btnZaduziActionPerformed
+
     private void listaZaposleniZaduzeniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniZaduzeniValueChanged
+
     }//GEN-LAST:event_listaZaposleniZaduzeniValueChanged
+    
+    private void datumOtvaranjaNalogaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_datumOtvaranjaNalogaFocusGained
+      
+    }//GEN-LAST:event_datumOtvaranjaNalogaFocusGained
+
+    private void datumOtvaranjaNalogaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_datumOtvaranjaNalogaFocusLost
+        
+    }//GEN-LAST:event_datumOtvaranjaNalogaFocusLost
 
     /**
      * @param args the command line arguments
@@ -797,20 +911,21 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DodajRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IzmijeniRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DodajRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IzmijeniRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DodajRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IzmijeniRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DodajRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IzmijeniRadniNalogDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DodajRadniNalogDialog dialog = new DodajRadniNalogDialog(new javax.swing.JFrame(), true);
+                IzmijeniRadniNalogDialog dialog = new IzmijeniRadniNalogDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -824,8 +939,8 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Zaduzeni;
+    private javax.swing.JButton btnAzurirajNalog;
     private javax.swing.JButton btnDodajDio;
-    private javax.swing.JButton btnKreirajNalog;
     private javax.swing.JButton btnRazduzi;
     private javax.swing.JButton btnUkloniDio;
     private javax.swing.JButton btnZaduzi;

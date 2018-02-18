@@ -793,7 +793,7 @@ public class MySQLDioDAO implements DioDAO{
                         ps.setBoolean(5, dio.getNovo());
                         ps.setObject(6, dio.getTrenutnaCijena());
                         ps.setObject(7, dio.getKolicina());
-                        ps.setBoolean(8, true);
+                        ps.setBoolean(8, dio.getZaSve());
                         ps.setInt(9, dio.getId());
 
 			retVal = ps.executeUpdate() == 1;
