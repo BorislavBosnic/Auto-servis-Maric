@@ -6,17 +6,19 @@
 package autoservismaric.dialog;
 
 import data.AutoSuggestor;
-import data.dao.DAOFactory;
-import data.dto.KupacDTO;
-import data.dto.ModelVozilaDTO;
-import data.dto.VoziloDTO;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.awt.ScrollPane;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import poslovnalogika.VozilaLogika;
+import poslovnalogika.VoziloLogika;
 
 /**
  *
@@ -28,95 +30,20 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
      * Creates new form DodajVoziloDialog
      */
     
-    ButtonGroup bg;
+    VoziloLogika voziloLogika = new VoziloLogika();
+    
+    ButtonGroup bg = new ButtonGroup();
     public AutoSuggestor model;
     public AutoSuggestor marka;
     
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        bg = new ButtonGroup();
-        bg.add(rbPravni);
-        bg.add(rbPrivatni);
-        
-        marka = ucitajPreporukeMarke();
-        model = ucitajPreporukeModel();
-        
-        tabela.setAutoCreateRowSorter(true);
-        tfVlasnikNaziv.setBackground(Color.gray);
-        tfVlasnikNaziv.setEditable(false);
-        
-        tabela.setDefaultEditor(Object.class, null);
-        
+        marka = voziloLogika.ucitajPreporukeMarke(this);
+        model = voziloLogika.ucitajPreporukeModel(this);
+        voziloLogika.inicijalizacijaDodajDijaloga(this);
         btnPrikaziSve.doClick();
-        
-        tabela.getTableHeader().setReorderingAllowed(false);
     }
-
-    
-    public AutoSuggestor ucitajPreporukeMarke(){
-        
-        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(tfMarka, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-               
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-                
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-                
-                VozilaLogika.modeli = lista;
-
-                for(ModelVozilaDTO mv : lista){
-                    if(!modeli.contains(mv.getMarka()))
-                        modeli.add(mv.getMarka());
-                }
-                
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-        return autoSuggestorMarke;
-   }
-    
-     public AutoSuggestor ucitajPreporukeModel(){
-        
-        AutoSuggestor autoSuggestorModel = new AutoSuggestor(tfModel, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                String marka = tfMarka.getText();
-                
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-                
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-
-                VozilaLogika.modeli = lista;
-                
-                for(ModelVozilaDTO mv : lista){
-                    if(tfModel.getText() != null && !"".equals(tfModel.getText())){
-                        if(mv.getMarka().equals(marka.trim())){
-                            modeli.add(mv.getModel());
-                        }
-                    }
-                    else if(tfModel.getText() == null || "".equals(tfModel.getText())){
-                        modeli.add(mv.getModel());
-                    }
-                }
-                
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-                
-        return autoSuggestorModel;
-   }  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -587,56 +514,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
     private void btnTraziVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziVlasnikaActionPerformed
-        ArrayList<KupacDTO> kupci = VozilaLogika.vlasnici;
-        if(rbPrivatni.isSelected()){
-            String ime = tfVlasnikIme.getText();
-            String prezime = tfVlasnikPrezime.getText();
-
-            String[] columns = {"ID","Ime", "Prezime", "Telefon", "Adresa", "Grad"};
-            DefaultTableModel model = new DefaultTableModel(columns, 0);
-            tabela.setModel(model);
-
-            if((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime))){
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPrivatni();
-            }
-            else if((ime == null || "".equals(ime))){
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
-            }
-            else if((prezime == null || "".equals(prezime))){
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciIme(ime);
-            }
-            else{
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrivatni(ime, prezime);
-            }
-
-            for(KupacDTO k : kupci){
-                Object[] rowData = { k.getIdKupac(),(k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-                model.addRow(rowData);
-                tabela.setModel(model);
-            }
-
-        }
-        else if(rbPravni.isSelected()){
-            String naziv = tfVlasnikNaziv.getText();
-
-            String[] columns = {"ID","Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-            DefaultTableModel model = new DefaultTableModel(columns, 0);
-            tabela.setModel(model);
-
-            if(naziv == null || "".equals(naziv)){
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPravni();
-            }
-            else{
-                kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
-            }
-
-            for(KupacDTO k : kupci){
-                Object[] rowData = { k.getIdKupac(), k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-                model.addRow(rowData);
-                tabela.setModel(model);
-            }
-
-        }
+        voziloLogika.traziVlasnika(this);
     }//GEN-LAST:event_btnTraziVlasnikaActionPerformed
 
     private void btnAddModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddModelActionPerformed
@@ -644,18 +522,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddModelActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
-
-        ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
-
-        String[] columns = {"ID","Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tabela.setModel(model);
-        for(KupacDTO k : kupci){
-            Object[] rowData = { k.getIdKupac(), (k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), (k.getNaziv() == null) ? "---" : k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-            model.addRow(rowData);
-        }
-
-        tabela.setModel(model);
+        voziloLogika.prikaziSveVlasnike(this);
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
@@ -663,113 +530,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        String registracija = tfRegistracija.getText();
-        
-        if(registracija == null || "".equals(registracija))
-        {
-            JOptionPane.showMessageDialog(rootPane, "Morate unijeti broj registracije vozila!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        String marka = tfMarka.getText();
-        String model = tfModel.getText();
-        
-        if(model == null || "".equals(model)){
-            JOptionPane.showMessageDialog(rootPane, "Morate unnijei model vozila!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        if(marka == null || "".equals(marka)){
-            JOptionPane.showMessageDialog(rootPane, "Morate unijeti marku vozila!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        String gorivo = tfGorivo.getText();
-        Integer godiste = null, kilovati = null;
-        Double kubikaza = null;
-        if(tfGodiste.getText() != null && !"".equals(tfGodiste.getText())){
-        try{
-            godiste = Integer.parseInt(tfGodiste.getText());
-            if(godiste < 1950){
-            throw new Exception();
-            }
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane, "Nevalidan format godišta. Mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        catch(Exception ex){
-              JOptionPane.showMessageDialog(rootPane, "Provjerite unesenu vrijednost godišta!", "Greška", JOptionPane.OK_OPTION);
-              return;
-            }
-        }
-
-        if(tfKilovat.getText() != null && !"".equals(tfKilovat.getText())){
-        try{
-            kilovati = Integer.parseInt(tfKilovat.getText());
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(rootPane, "Nevalidan format kilovata. Mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        }
-
-        if(tfKubikaza.getText() != null && !"".equals(tfKubikaza.getText())){
-        try{
-            kubikaza = Double.parseDouble(tfKubikaza.getText());
-        }
-        catch(NumberFormatException e){
-
-            JOptionPane.showMessageDialog(rootPane, "Nevalidan format kubikaže. Mora biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        }
-
-        int column = 0;
-        int row = tabela.getSelectedRow();
-        
-        if(row >= 0){
-        
-        Integer idVlasnik = Integer.parseInt(tabela.getModel().getValueAt(row, 0).toString());
-
-        ModelVozilaDTO mv = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-        if(mv != null){
-            VoziloDTO vozilo = new VoziloDTO();
-            vozilo.setBrojRegistracije(registracija);
-            vozilo.setGodiste(godiste);
-            vozilo.setKilovat(kilovati);
-            vozilo.setKubikaza(kubikaza);
-            vozilo.setVrstaGoriva(gorivo);
-            vozilo.setIdModelVozila(mv.getIdModelVozila());
-            vozilo.setIdKupac(idVlasnik);
-
-            if(DAOFactory.getDAOFactory().getVoziloDAO().dodajVozilo(vozilo)){
-               JOptionPane.showMessageDialog(rootPane, "Uspješno dodato vozilo!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-               tfRegistracija.setText("");
-               tfMarka.setText("");
-               tfModel.setText("");
-               tfGodiste.setText("");
-               tfGorivo.setText("");
-               tfKilovat.setText("");
-               tfKubikaza.setText("");
-               tfVlasnikIme.setText("");
-               tfVlasnikPrezime.setText("");
-               tfVlasnikNaziv.setText("");
-               btnPrikaziSve.doClick();
-            }
-            else{           
-                JOptionPane.showMessageDialog(rootPane, "Marka i model vozila ne postoje! \nPrvo ih dodajte, pa pokušajte ponovo!", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        }
-        else{
-             JOptionPane.showMessageDialog(rootPane, "Morate odabrati vlasnika u tabeli!", "Greška", JOptionPane.OK_OPTION);
-        }
+          voziloLogika.dodajVozilo(this);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void rbPravniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravniActionPerformed
@@ -812,6 +573,132 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfGodisteActionPerformed
 
+    public VoziloLogika getVoziloLogika() {
+        return voziloLogika;
+    }
+
+    public ButtonGroup getBg() {
+        return bg;
+    }
+
+    public AutoSuggestor getModel() {
+        return model;
+    }
+
+    public AutoSuggestor getMarka() {
+        return marka;
+    }
+
+    public JButton getBtnAddModel() {
+        return btnAddModel;
+    }
+
+    public JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public JButton getBtnDodajVlasnika() {
+        return btnDodajVlasnika;
+    }
+
+    public JButton getBtnOdustani() {
+        return btnOdustani;
+    }
+
+    public JButton getBtnPrikaziSve() {
+        return btnPrikaziSve;
+    }
+
+    public JButton getBtnTraziVlasnika() {
+        return btnTraziVlasnika;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public JButton getjButton4() {
+        return jButton4;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JLabel getLbPoruka() {
+        return lbPoruka;
+    }
+
+    public JPanel getPanelDodajVozilo() {
+        return panelDodajVozilo;
+    }
+
+    public JRadioButton getRbPravni() {
+        return rbPravni;
+    }
+
+    public JRadioButton getRbPrivatni() {
+        return rbPrivatni;
+    }
+
+    public ScrollPane getScrollPane1() {
+        return scrollPane1;
+    }
+
+    public JTable getTabela() {
+        return tabela;
+    }
+
+    public JTextField getTfGodiste() {
+        return tfGodiste;
+    }
+
+    public JTextField getTfGorivo() {
+        return tfGorivo;
+    }
+
+    public JTextField getTfKilovat() {
+        return tfKilovat;
+    }
+
+    public JTextField getTfKubikaza() {
+        return tfKubikaza;
+    }
+
+    public JTextField getTfMarka() {
+        return tfMarka;
+    }
+
+    public JTextField getTfModel() {
+        return tfModel;
+    }
+
+    public JTextField getTfRegistracija() {
+        return tfRegistracija;
+    }
+
+    public JTextField getTfVlasnikIme() {
+        return tfVlasnikIme;
+    }
+
+    public JTextField getTfVlasnikNaziv() {
+        return tfVlasnikNaziv;
+    }
+
+    public JTextField getTfVlasnikPrezime() {
+        return tfVlasnikPrezime;
+    }
+
+    
+    
     /**
      * @param args the command line arguments
      */

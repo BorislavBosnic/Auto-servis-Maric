@@ -16,6 +16,7 @@ import autoservismaric.dialog.IzmijeniVoziloDialog;
 import autoservismaric.dialog.OtpustiRadnikaDialog;
 import autoservismaric.dialog.PregledIstorijePopravkiDialog;
 import autoservismaric.dialog.SviBivsiZaposleniDialog;
+import com.toedter.calendar.JDateChooser;
 import data.AutoSuggestor;
 import data.dao.*;
 import data.dto.DioDTO;
@@ -41,6 +42,8 @@ import java.util.Objects;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +51,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -71,6 +81,7 @@ import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
 import poslovnalogika.StatistikaLogika;
+import poslovnalogika.VoziloKupacMeniLogika;
 import static poslovnalogika.ZakazivanjaLogika.dodajTermin;
 import static poslovnalogika.ZakazivanjaLogika.terminiZaTabelu;
 
@@ -417,11 +428,34 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
     }
+
+    public ButtonGroup getbGTraziVozilo() {
+        return bGTraziVozilo;
+    }
+
+    public ButtonGroup getbGTraziVlasnika() {
+        return bGTraziVlasnika;
+    }
+
+    public JPopupMenu getPopupMenu() {
+        return popupMenu;
+    }
+
+    public JPopupMenu getPopupMenuVlasnik() {
+        return popupMenuVlasnik;
+    }
+
+    public JPopupMenu getPopupDio() {
+        return popupDio;
+    }
+
     /**
      * ***Kraj****
      */
-
     //Sve moje, ne diraj!
+    public int getIdVlasnika() {
+        return idVlasnika;
+    }
     ButtonGroup bGTraziVozilo;
     ButtonGroup bGTraziVlasnika;
     AutoSuggestor modelAU, markeAU, vlasnikAU, registracijeAU, pravniNazivAU;
@@ -446,62 +480,23 @@ public class HomeForm1 extends javax.swing.JFrame {
         tableVozila.setComponentPopupMenu(popupMenuVlasnik);
     }
 
+    public void setPopupMenu(JPopupMenu popupMenu) {
+        this.popupMenu = popupMenu;
+    }
+
+    public void setPopupMenuVlasnik(JPopupMenu popupMenuVlasnik) {
+        this.popupMenuVlasnik = popupMenuVlasnik;
+    }
+
+    public void setPopupDio(JPopupMenu popupDio) {
+        this.popupDio = popupDio;
+    }
+
+    
+    VoziloKupacMeniLogika voziloKupacMeniLogika = new VoziloKupacMeniLogika();
+    
     public void ucitajPopupZaVlasnike() {
-
-        popupMenuVlasnik = new JPopupMenu();
-        JMenuItem izmijeniVlasnika = new JMenuItem("Izmijeni vlasnika");
-
-        izmijeniVlasnika.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, idVlasnika);
-
-                iv.setVisible(true);
-            }
-        });
-        popupMenuVlasnik.add(izmijeniVlasnika);
-        tableVozila.setComponentPopupMenu(popupMenuVlasnik);
-
-        popupMenuVlasnik.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tableVozila.rowAtPoint(SwingUtilities.convertPoint(popupMenuVlasnik, new Point(0, 0), tableVozila));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                        //int row = tableVozila.getSelectedRow();
-                        String imeKolone = tableVozila.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-
-                            if ("ID".equals(imeKolone)) {
-                                idVlasnika = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
-                            }
-                        }
-                        if (rowAtPoint > -1) {
-                            tableVozila.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
+          voziloKupacMeniLogika.ucitajPopupZaVlasnike(this);
     }
 
     public void ucitajPopupZaDijelove() {
@@ -590,125 +585,16 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public void ucitajPopupZaVozila() {
-        popupMenu = new JPopupMenu();
-        JMenuItem deleteItem = new JMenuItem("Izbrisi vozilo");
-        JMenuItem editItem = new JMenuItem("Izmijeni vozilo");
-        JMenuItem noviRadniNalog = new JMenuItem("Dodaj nov radni nalog");
-        JMenuItem pogledajIstorijuPopravki = new JMenuItem("Pogledaj istoriju popravki");
-
-        pogledajIstorijuPopravki.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PregledIstorijePopravkiDialog(new JFrame(), true, idVozila).setVisible(true);
-            }
-        });
-        popupMenu.add(pogledajIstorijuPopravki);
-
-        noviRadniNalog.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new DodajRadniNalogDialog(new JFrame(), true, idVozila).setVisible(true);
-            }
-        });
-        popupMenu.add(noviRadniNalog);
-
-        editItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new IzmijeniVoziloDialog(new JFrame(), true, idVozila).setVisible(true);
-            }
-        });
-        popupMenu.add(editItem);
-
-        deleteItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(new JFrame(), "Right-click performed on table and choose DELETE");
-
-                ArrayList<RadniNalogDTO> nalozi = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi(idVozila);
-                if (nalozi != null && nalozi.size() > 0) {
-                    JOptionPane jop = new JOptionPane();
-                    int dialogResult = jop.showConfirmDialog(new JFrame(), "Postoje radni nalozi za vozilo koje želite ukloniti.\n "
-                            + "Ako nastavite, oni će biti izbrisani, kao i podaci o vozilu.\n Da li ste sigurni da želite da nastavite?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-
-                        for (RadniNalogDTO r : nalozi) {
-                            DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(r.getIdRadniNalog());
-                        }
-
-                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
-
-                        JOptionPane.showMessageDialog(rootPane, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-
-                    } else if (dialogResult == JOptionPane.NO_OPTION) {
-
-                    }
-                } else {
-                    int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni želite da izbrišete podatke o vozilu?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
-
-                        JOptionPane.showMessageDialog(rootPane, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    } else if (dialogResult == JOptionPane.NO_OPTION) {
-
-                    }
-                }
-
-            }
-        });
-
-        popupMenu.add(deleteItem);
-        tableVozila.setComponentPopupMenu(popupMenu);
-
-        popupMenu.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tableVozila.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tableVozila));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                        //int row = tableVozila.getSelectedRow();
-                        String imeKolone = tableVozila.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-                            if ("ID".equals(imeKolone)) {
-                                idVozila = Integer.parseInt(tableVozila.getModel().getValueAt(selektovanRed, column).toString());
-                            }
-                        }
-                        if (rowAtPoint > -1) {
-                            tableVozila.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-
+            voziloKupacMeniLogika.ucitajPopupZaVozila(this);
     }
 
+    
+    
     static int numberOfItems = 8;
     public static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     public static boolean menu[] = new boolean[numberOfItems];
     public StatistikaLogika statistikaLogika;
+    
 
     // public static JPanel employeePanel=new EmployeesForm().getPanel();
     // public static JPanel partsPanel=new PartsForm().getPanel();
@@ -737,10 +623,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         ucitajPopupZaVozila();
         ucitajPopupZaDijelove();
 
-        //za autosuggestor zovila
-//        VozilaLogika vl1 = new VozilaLogika(VozilaLogika.UCITAJ_MODELE);
-//        VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
-//        VozilaLogika vl3 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
         tfNazivTrazi.setBackground(Color.gray);
         tfNazivVozilo.setBackground(Color.gray);
         tfNazivVozilo.setEditable(false);
@@ -770,128 +652,23 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public AutoSuggestor ucitajPreporukeMarke() {
-
-        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(tfMarkaTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-
-                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
-                    modeli.add(mv.getMarka());
-                }
-
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-        return autoSuggestorMarke;
+        return voziloKupacMeniLogika.ucitajPreporukeMarke(this);
     }
 
     public AutoSuggestor ucitajPreporukeModel() {
-
-        AutoSuggestor autoSuggestorModel = new AutoSuggestor(tfModelTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                String marka = tfMarkaTrazi.getText();
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-
-                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
-                    if (tfModelTrazi.getText() != null && !"".equals(tfModelTrazi.getText())) {
-                        if (mv.getMarka().equals(marka.trim())) {
-                            modeli.add(mv.getModel());
-                        }
-                    } else if (tfModelTrazi.getText() == null || "".equals(tfModelTrazi.getText())) {
-                        modeli.add(mv.getModel());
-                    }
-                }
-
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-        return autoSuggestorModel;
+            return voziloKupacMeniLogika.ucitajPreporukeModel(this);
     }
 
     public AutoSuggestor ucitajPreporukeRegistracija() {
-
-        AutoSuggestor autoSuggestorRegistracija = new AutoSuggestor(tfRegistracijaTrazi, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> registracije = new ArrayList<>();
-
-                for (VoziloDTO v : VozilaLogika.vozila) {
-                    registracije.add(v.getBrojRegistracije());
-                }
-
-                setDictionary(registracije);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorRegistracija;
+        return voziloKupacMeniLogika.ucitajPreporukeRegistracija(this);
     }
 
     public AutoSuggestor ucitajPreporukeVlasnik() {
-
-        AutoSuggestor autoSuggestorVlasnik = new AutoSuggestor(tfPrezimeVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> vlasnici = new ArrayList<>();
-
-                for (KupacDTO v : VozilaLogika.vlasnici) {
-                    if (v.getNaziv() == null) {
-                        vlasnici.add(v.getIme() + " " + v.getPrezime());
-                    }
-                }
-
-                setDictionary(vlasnici);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorVlasnik;
+        return voziloKupacMeniLogika.ucitajPreporukeVlasnika(this);
     }
 
     public AutoSuggestor ucitajPreporukePravniNaziv() {
-
-        AutoSuggestor autoSuggestorPravniNaziv = new AutoSuggestor(tfNazivVozilo, this, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> vlasnici = new ArrayList<>();
-
-                for (KupacDTO v : VozilaLogika.vlasnici) {
-                    if (v.getPrezime() == null && v.getIme() == null) {
-                        vlasnici.add(v.getNaziv());
-                    }
-                }
-
-                setDictionary(vlasnici);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorPravniNaziv;
+        return voziloKupacMeniLogika.ucitajPreporukePravniNaziv(this);
     }
 
     /**
@@ -2462,8 +2239,11 @@ public class HomeForm1 extends javax.swing.JFrame {
                 tfModelTraziFocusGained(evt);
             }
         });
-
-        tfPrezimeVozilo.setEditable(false);
+        tfModelTrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfModelTraziActionPerformed(evt);
+            }
+        });
 
         btnPronadji.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPronadji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
@@ -2491,8 +2271,6 @@ public class HomeForm1 extends javax.swing.JFrame {
                 btnPonistiSveActionPerformed(evt);
             }
         });
-
-        tfImeVozilo.setEditable(false);
 
         rbPrivatnoLiceVozilo.setBackground(new java.awt.Color(102, 153, 255));
         rbPrivatnoLiceVozilo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -2564,25 +2342,24 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(tfImeVozilo)
                     .addComponent(tfNazivVozilo)
                     .addComponent(tfPrezimeVozilo)
-                    .addComponent(tfGodisteTrazi, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
-                        .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
-                                    .addComponent(tfMarkaTrazi)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel107)
-                                    .addGap(2, 2, 2)
-                                    .addComponent(tfModelTrazi))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPronadjiVoziloLayout.createSequentialGroup()
-                                    .addComponent(rbPrivatnoLiceVozilo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(rbPravnoLiceVozilo)))
-                            .addComponent(tfRegistracijaTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPronadjiVoziloLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
+                        .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfGodisteTrazi, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
+                                .addComponent(tfMarkaTrazi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel107)
+                                .addGap(2, 2, 2)
+                                .addComponent(tfModelTrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPronadjiVoziloLayout.createSequentialGroup()
+                                .addComponent(rbPrivatnoLiceVozilo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbPravnoLiceVozilo))
+                            .addComponent(tfRegistracijaTrazi, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPronadjiVoziloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2857,7 +2634,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel96)
                     .addComponent(panelPronadjiVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel97)
                     .addGroup(panelVoziloLayout.createSequentialGroup()
@@ -5066,65 +4843,67 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPrivatnoTraziActionPerformed
 
     public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci) {
-        String[] columns = {"ID", "Ime", "Prezime", "Telefon", "Adresa", "Grad"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tableVozila.setModel(model);
-        for (KupacDTO k : kupci) {
-            Object[] rowData = {k.getIdKupac(), k.getIme(), k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-            model.addRow(rowData);
-        }
-        tableVozila.setModel(model);
+          voziloKupacMeniLogika.prikaziKupceUTabeli(kupci, this);
+//        String[] columns = {"ID", "Ime", "Prezime", "Telefon", "Adresa", "Grad"};
+//        DefaultTableModel model = new DefaultTableModel(columns, 0);
+//        tableVozila.setModel(model);
+//        for (KupacDTO k : kupci) {
+//            Object[] rowData = {k.getIdKupac(), k.getIme(), k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
+//            model.addRow(rowData);
+//        }
+//        tableVozila.setModel(model);
     }
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
-        izbrisiPopupZaVozila();
-        ucitajPopupZaVlasnike();
-        String izabrano = "";
-
-        for (Enumeration<AbstractButton> buttons = bGTraziVlasnika.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                izabrano = button.getText();
-            }
-        }
-
-        if ("Privatno lice".equals(izabrano)) {
-            String ime = tfImeTrazi.getText();
-            String prezime = tfPrezimeTrazi.getText();
-
-            if ((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime))) {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPrivatni();
-
-                prikaziKupceUTabeli(kupci);
-
-            } else if (prezime == null || "".equals(prezime)) {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciIme(ime);
-
-                prikaziKupceUTabeli(kupci);
-            } else if (ime == null || "".equals(ime)) {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
-
-                prikaziKupceUTabeli(kupci);
-            } else {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrivatni(ime, prezime);
-
-                prikaziKupceUTabeli(kupci);
-            }
-        } else if ("Pravno lice".equals(izabrano)) {
-            String naziv = tfNazivTrazi.getText();
-
-            if (naziv == null || "".equals(naziv)) {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPravni();
-
-                prikaziKupcePravneUTabeli(kupci);
-            } else {
-                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
-
-                prikaziKupcePravneUTabeli(kupci);
-            }
-        }
-
+          voziloKupacMeniLogika.traziKupce(this);
+//        izbrisiPopupZaVozila();
+//        ucitajPopupZaVlasnike();
+//        String izabrano = "";
+//
+//        for (Enumeration<AbstractButton> buttons = bGTraziVlasnika.getElements(); buttons.hasMoreElements();) {
+//            AbstractButton button = buttons.nextElement();
+//
+//            if (button.isSelected()) {
+//                izabrano = button.getText();
+//            }
+//        }
+//
+//        if ("Privatno lice".equals(izabrano)) {
+//            String ime = tfImeTrazi.getText();
+//            String prezime = tfPrezimeTrazi.getText();
+//
+//            if ((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime))) {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPrivatni();
+//
+//                prikaziKupceUTabeli(kupci);
+//
+//            } else if (prezime == null || "".equals(prezime)) {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciIme(ime);
+//
+//                prikaziKupceUTabeli(kupci);
+//            } else if (ime == null || "".equals(ime)) {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
+//
+//                prikaziKupceUTabeli(kupci);
+//            } else {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrivatni(ime, prezime);
+//
+//                prikaziKupceUTabeli(kupci);
+//            }
+//        } else if ("Pravno lice".equals(izabrano)) {
+//            String naziv = tfNazivTrazi.getText();
+//
+//            if (naziv == null || "".equals(naziv)) {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPravni();
+//
+//                prikaziKupcePravneUTabeli(kupci);
+//            } else {
+//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
+//
+//                prikaziKupcePravneUTabeli(kupci);
+//            }
+//        }
+//
 
     }//GEN-LAST:event_btnTraziActionPerformed
 
@@ -5335,7 +5114,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         } else {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Gorivo", "Kilovat", "Kubikaza"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             tableVozila.setModel(modell);
 
@@ -5377,29 +5156,33 @@ public class HomeForm1 extends javax.swing.JFrame {
                         String ime = tfImeVozilo.getText();
                         String prezime = tfPrezimeVozilo.getText();
 
-                        if (ime != null && !"".equals(ime)) {
-                            if (!ime.equals(kupac.getIme())) {
+                        if (ime != null && !"".equals(ime) && kupac.getIme() != null && !"".equals(kupac.getIme())) {
+                            if (!kupac.getIme().toLowerCase().startsWith(ime.toLowerCase())) {
                                 dodati = false;
                             }
                         }
-                        if (prezime != null && !"".equals(prezime)) {
-                            if (!prezime.equals(kupac.getPrezime())) {
+                        if (prezime != null && !"".equals(prezime) && kupac.getPrezime() != null && !"".equals(kupac.getPrezime())) {
+                            if (!kupac.getPrezime().toLowerCase().startsWith(prezime.toLowerCase())) {
                                 dodati = false;
                             }
                         }
                     } else if (rbPravnoLiceVozilo.isSelected()) {
                         String naziv = tfNazivVozilo.getText();
-                        if (naziv != null && !"".equals(naziv)) {
-                            if (!naziv.equals(kupac.getNaziv())) {
+                        System.out.println(kupac.getNaziv() + " " + naziv);
+                        if (naziv != null && !"".equals(naziv) && kupac.getNaziv() != null && !"".equals(kupac.getNaziv())) {
+                            if (!kupac.getNaziv().toLowerCase().startsWith(naziv.toLowerCase())) {
                                 dodati = false;
                             }
                         }
+                        else if(kupac.getNaziv() == null || "".equals(kupac.getNaziv()))
+                            dodati = false;
                     }
-
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
-                    modell.addRow(rowData);
+                    
+                    if(dodati == true){
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || kupac.getNaziv().equals("")) ? "" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
+                    modell.addRow(rowData); 
                     tableVozila.setModel(modell);
-
+                    }
                 }
             }
 
@@ -5408,7 +5191,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPronadjiActionPerformed
 
     private void tfModelTraziFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfModelTraziFocusGained
-        ucitajPreporukeModel();
+        //ucitajPreporukeModel();
     }//GEN-LAST:event_tfModelTraziFocusGained
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
@@ -5757,27 +5540,16 @@ public class HomeForm1 extends javax.swing.JFrame {
         DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(4);
     }//GEN-LAST:event_btnIzbrisiNalogActionPerformed
 
-    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
-        String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tableVozila.setModel(model);
-        for (KupacDTO k : kupci) {
-            Object[] rowData = {k.getIdKupac(), (k.getIme() == null) ? "---" : k.getIme(), (k.getPrezime() == null) ? "---" : k.getPrezime(), (k.getNaziv() == null) ? "---" : k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-            model.addRow(rowData);
-        }
+    private void tfModelTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelTraziActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfModelTraziActionPerformed
 
-        tableVozila.setModel(model);
+    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
+        voziloKupacMeniLogika.prikaziKupceSveUTabeli(kupci, this);
     }
 
     public void prikaziKupcePravneUTabeli(ArrayList<KupacDTO> kupci) {
-        String[] columns = {"ID", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tableVozila.setModel(model);
-        for (KupacDTO k : kupci) {
-            Object[] rowData = {k.getIdKupac(), k.getNaziv(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-            model.addRow(rowData);
-        }
-        tableVozila.setModel(model);
+        voziloKupacMeniLogika.prikaziKupcePravneUTabeli(kupci, this);
     }
 
     public void setColor(JPanel panel) {
@@ -5831,8 +5603,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             voziloPanelPrviPut = false;
             markeAU = ucitajPreporukeMarke();
             registracijeAU = ucitajPreporukeRegistracija();
-            vlasnikAU = ucitajPreporukeVlasnik();
-            pravniNazivAU = ucitajPreporukePravniNaziv();
+            //vlasnikAU = ucitajPreporukeVlasnik();
+            //pravniNazivAU = ucitajPreporukePravniNaziv();
             modelAU = ucitajPreporukeModel();
         }
     }
@@ -5941,6 +5713,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         new ZaposleniLogika("svi").run();
 
     }
+    
+    
 
     public JComboBox<String> getComboBoxGodina() {
         return comboBoxGodina;
@@ -6094,6 +5868,1345 @@ public class HomeForm1 extends javax.swing.JFrame {
         this.PanelGrafikPrihodiDijelovi = PanelGrafikPrihodiDijelovi;
     }
 
+    public void setIdVlasnika(int idVlasnika) {
+        this.idVlasnika = idVlasnika;
+    }
+    
+    
+
+    public static HomeForm1 getHomeForm() {
+        return homeForm;
+    }
+
+    public static int getOpcija() {
+        return opcija;
+    }
+
+    public AutoSuggestor getModelAU() {
+        return modelAU;
+    }
+
+    public AutoSuggestor getMarkeAU() {
+        return markeAU;
+    }
+
+    public AutoSuggestor getVlasnikAU() {
+        return vlasnikAU;
+    }
+
+    public AutoSuggestor getRegistracijeAU() {
+        return registracijeAU;
+    }
+
+    public AutoSuggestor getPravniNazivAU() {
+        return pravniNazivAU;
+    }
+
+    public AutoSuggestor getAutoModel() {
+        return autoModel;
+    }
+
+    public AutoSuggestor getAutoMarka() {
+        return autoMarka;
+    }
+
+    public AutoSuggestor getAutoNaziv() {
+        return autoNaziv;
+    }
+
+    public AutoSuggestor getAutoSifra() {
+        return autoSifra;
+    }
+
+    public static boolean isVoziloPanelPrviPut() {
+        return voziloPanelPrviPut;
+    }
+
+    public static int getSelRedDio() {
+        return selRedDio;
+    }
+
+    public static Double getPdv() {
+        return pdv;
+    }
+
+    public static int getSelektovanRed() {
+        return selektovanRed;
+    }
+
+    public static int getIdVozila() {
+        return idVozila;
+    }
+
+    public static int getNumberOfItems() {
+        return numberOfItems;
+    }
+
+    public static String[] getMjeseci() {
+        return mjeseci;
+    }
+
+    public static boolean[] getMenu() {
+        return menu;
+    }
+
+    public StatistikaLogika getStatistikaLogika() {
+        return statistikaLogika;
+    }
+
+    public JPanel getNapomene2() {
+        return Napomene2;
+    }
+
+    public JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public JButton getBtnDodajTermin() {
+        return btnDodajTermin;
+    }
+
+    public JButton getBtnFakturisano() {
+        return btnFakturisano;
+    }
+
+    public JButton getBtnIzbrisiNalog() {
+        return btnIzbrisiNalog;
+    }
+
+    public JButton getBtnIzmijeniNalog() {
+        return btnIzmijeniNalog;
+    }
+
+    public JButton getBtnNefakturisano() {
+        return btnNefakturisano;
+    }
+
+    public JButton getBtnPoDatumu() {
+        return btnPoDatumu;
+    }
+
+    public JButton getBtnPoIDu() {
+        return btnPoIDu;
+    }
+
+    public JButton getBtnPonisti() {
+        return btnPonisti;
+    }
+
+    public JButton getBtnPonistiSve() {
+        return btnPonistiSve;
+    }
+
+    public JButton getBtnPonistiUnosePretraga() {
+        return btnPonistiUnosePretraga;
+    }
+
+    public JButton getBtnPonistiUnoseTermin() {
+        return btnPonistiUnoseTermin;
+    }
+
+    public JButton getBtnPredracun() {
+        return btnPredracun;
+    }
+
+    public JButton getBtnPretrazi() {
+        return btnPretrazi;
+    }
+
+    public JButton getBtnPrikaziSve() {
+        return btnPrikaziSve;
+    }
+
+    public JButton getBtnProdani() {
+        return btnProdani;
+    }
+
+    public JButton getBtnPronadji() {
+        return btnPronadji;
+    }
+
+    public JButton getBtnPronadjiTermin() {
+        return btnPronadjiTermin;
+    }
+
+    public JButton getBtnRacun() {
+        return btnRacun;
+    }
+
+    public JButton getBtnSviDijelovi() {
+        return btnSviDijelovi;
+    }
+
+    public JButton getBtnTrazi() {
+        return btnTrazi;
+    }
+
+    public JButton getButtonDodajZaposlenog() {
+        return buttonDodajZaposlenog;
+    }
+
+    public JButton getButtonPregled() {
+        return buttonPregled;
+    }
+
+    public JButton getButtonPregledGrafik() {
+        return buttonPregledGrafik;
+    }
+
+    public JButton getButtonPrikazSvihBivsihRadnika() {
+        return buttonPrikazSvihBivsihRadnika;
+    }
+
+    public JButton getButtonTraziRadneNalogeRadnika() {
+        return buttonTraziRadneNalogeRadnika;
+    }
+
+    public JComboBox<String> getCbGorivo() {
+        return cbGorivo;
+    }
+
+    public JComboBox<String> getCbMarka() {
+        return cbMarka;
+    }
+
+    public JComboBox<String> getCbModel() {
+        return cbModel;
+    }
+
+    public JCheckBox getCbNovo() {
+        return cbNovo;
+    }
+
+    public JCheckBox getCbStanje() {
+        return cbStanje;
+    }
+
+    public JCheckBox getCbSvi() {
+        return cbSvi;
+    }
+
+    public JPanel getDanasnjeAktivnostiPanel() {
+        return danasnjeAktivnostiPanel;
+    }
+
+    public JDateChooser getDateChooserDatumDoZaposlenog() {
+        return dateChooserDatumDoZaposlenog;
+    }
+
+    public JDateChooser getDateChooserDatumOdZaposlenog() {
+        return dateChooserDatumOdZaposlenog;
+    }
+
+    public JDateChooser getDateChooserDatumPrimanjaURadniOdnos() {
+        return dateChooserDatumPrimanjaURadniOdnos;
+    }
+
+    public JDateChooser getDateChooserDatumRodjenja() {
+        return dateChooserDatumRodjenja;
+    }
+
+    public JLabel getDatumLabel() {
+        return datumLabel;
+    }
+
+    public JPanel getDijeloviPanel() {
+        return dijeloviPanel;
+    }
+
+    public JPanel getDodajDioPanel() {
+        return dodajDioPanel;
+    }
+
+    public JDateChooser getDtmDatum() {
+        return dtmDatum;
+    }
+
+    public JDateChooser getDtmDatumPretraga() {
+        return dtmDatumPretraga;
+    }
+
+    public JDateChooser getDtmDatumTermina() {
+        return dtmDatumTermina;
+    }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public JButton getjButton10() {
+        return jButton10;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
+    }
+
+    public JButton getjButton4() {
+        return jButton4;
+    }
+
+    public JButton getjButton5() {
+        return jButton5;
+    }
+
+    public JDateChooser getjDateChooserDatumDo() {
+        return jDateChooserDatumDo;
+    }
+
+    public JDateChooser getjDateChooserDatumOd() {
+        return jDateChooserDatumOd;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    public JLabel getjLabel101() {
+        return jLabel101;
+    }
+
+    public JLabel getjLabel105() {
+        return jLabel105;
+    }
+
+    public JLabel getjLabel106() {
+        return jLabel106;
+    }
+
+    public JLabel getjLabel107() {
+        return jLabel107;
+    }
+
+    public JLabel getjLabel108() {
+        return jLabel108;
+    }
+
+    public JLabel getjLabel109() {
+        return jLabel109;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public JLabel getjLabel110() {
+        return jLabel110;
+    }
+
+    public JLabel getjLabel117() {
+        return jLabel117;
+    }
+
+    public JLabel getjLabel118() {
+        return jLabel118;
+    }
+
+    public JLabel getjLabel119() {
+        return jLabel119;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public JLabel getjLabel120() {
+        return jLabel120;
+    }
+
+    public JLabel getjLabel122() {
+        return jLabel122;
+    }
+
+    public JLabel getjLabel124() {
+        return jLabel124;
+    }
+
+    public JLabel getjLabel126() {
+        return jLabel126;
+    }
+
+    public JLabel getjLabel127() {
+        return jLabel127;
+    }
+
+    public JLabel getjLabel128() {
+        return jLabel128;
+    }
+
+    public JLabel getjLabel129() {
+        return jLabel129;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public JLabel getjLabel130() {
+        return jLabel130;
+    }
+
+    public JLabel getjLabel131() {
+        return jLabel131;
+    }
+
+    public JLabel getjLabel132() {
+        return jLabel132;
+    }
+
+    public JLabel getjLabel133() {
+        return jLabel133;
+    }
+
+    public JLabel getjLabel134() {
+        return jLabel134;
+    }
+
+    public JLabel getjLabel135() {
+        return jLabel135;
+    }
+
+    public JLabel getjLabel136() {
+        return jLabel136;
+    }
+
+    public JLabel getjLabel137() {
+        return jLabel137;
+    }
+
+    public JLabel getjLabel138() {
+        return jLabel138;
+    }
+
+    public JLabel getjLabel139() {
+        return jLabel139;
+    }
+
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public JLabel getjLabel140() {
+        return jLabel140;
+    }
+
+    public JLabel getjLabel141() {
+        return jLabel141;
+    }
+
+    public JLabel getjLabel142() {
+        return jLabel142;
+    }
+
+    public JLabel getjLabel143() {
+        return jLabel143;
+    }
+
+    public JLabel getjLabel144() {
+        return jLabel144;
+    }
+
+    public JLabel getjLabel145() {
+        return jLabel145;
+    }
+
+    public JLabel getjLabel146() {
+        return jLabel146;
+    }
+
+    public JLabel getjLabel147() {
+        return jLabel147;
+    }
+
+    public JLabel getjLabel148() {
+        return jLabel148;
+    }
+
+    public JLabel getjLabel149() {
+        return jLabel149;
+    }
+
+    public JLabel getjLabel15() {
+        return jLabel15;
+    }
+
+    public JLabel getjLabel150() {
+        return jLabel150;
+    }
+
+    public JLabel getjLabel151() {
+        return jLabel151;
+    }
+
+    public JLabel getjLabel152() {
+        return jLabel152;
+    }
+
+    public JLabel getjLabel153() {
+        return jLabel153;
+    }
+
+    public JLabel getjLabel154() {
+        return jLabel154;
+    }
+
+    public JLabel getjLabel155() {
+        return jLabel155;
+    }
+
+    public JLabel getjLabel156() {
+        return jLabel156;
+    }
+
+    public JLabel getjLabel157() {
+        return jLabel157;
+    }
+
+    public JLabel getjLabel16() {
+        return jLabel16;
+    }
+
+    public JLabel getjLabel161() {
+        return jLabel161;
+    }
+
+    public JLabel getjLabel162() {
+        return jLabel162;
+    }
+
+    public JLabel getjLabel163() {
+        return jLabel163;
+    }
+
+    public JLabel getjLabel164() {
+        return jLabel164;
+    }
+
+    public JLabel getjLabel165() {
+        return jLabel165;
+    }
+
+    public JLabel getjLabel17() {
+        return jLabel17;
+    }
+
+    public JLabel getjLabel18() {
+        return jLabel18;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel20() {
+        return jLabel20;
+    }
+
+    public JLabel getjLabel21() {
+        return jLabel21;
+    }
+
+    public JLabel getjLabel22() {
+        return jLabel22;
+    }
+
+    public JLabel getjLabel23() {
+        return jLabel23;
+    }
+
+    public JLabel getjLabel24() {
+        return jLabel24;
+    }
+
+    public JLabel getjLabel25() {
+        return jLabel25;
+    }
+
+    public JLabel getjLabel26() {
+        return jLabel26;
+    }
+
+    public JLabel getjLabel27() {
+        return jLabel27;
+    }
+
+    public JLabel getjLabel28() {
+        return jLabel28;
+    }
+
+    public JLabel getjLabel29() {
+        return jLabel29;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JLabel getjLabel30() {
+        return jLabel30;
+    }
+
+    public JLabel getjLabel31() {
+        return jLabel31;
+    }
+
+    public JLabel getjLabel32() {
+        return jLabel32;
+    }
+
+    public JLabel getjLabel33() {
+        return jLabel33;
+    }
+
+    public JLabel getjLabel34() {
+        return jLabel34;
+    }
+
+    public JLabel getjLabel35() {
+        return jLabel35;
+    }
+
+    public JLabel getjLabel36() {
+        return jLabel36;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public JLabel getjLabel41() {
+        return jLabel41;
+    }
+
+    public JLabel getjLabel44() {
+        return jLabel44;
+    }
+
+    public JLabel getjLabel45() {
+        return jLabel45;
+    }
+
+    public JLabel getjLabel46() {
+        return jLabel46;
+    }
+
+    public JLabel getjLabel47() {
+        return jLabel47;
+    }
+
+    public JLabel getjLabel48() {
+        return jLabel48;
+    }
+
+    public JLabel getjLabel49() {
+        return jLabel49;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public JLabel getjLabel50() {
+        return jLabel50;
+    }
+
+    public JLabel getjLabel52() {
+        return jLabel52;
+    }
+
+    public JLabel getjLabel53() {
+        return jLabel53;
+    }
+
+    public JLabel getjLabel54() {
+        return jLabel54;
+    }
+
+    public JLabel getjLabel55() {
+        return jLabel55;
+    }
+
+    public JLabel getjLabel57() {
+        return jLabel57;
+    }
+
+    public JLabel getjLabel58() {
+        return jLabel58;
+    }
+
+    public JLabel getjLabel59() {
+        return jLabel59;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public JLabel getjLabel60() {
+        return jLabel60;
+    }
+
+    public JLabel getjLabel61() {
+        return jLabel61;
+    }
+
+    public JLabel getjLabel62() {
+        return jLabel62;
+    }
+
+    public JLabel getjLabel63() {
+        return jLabel63;
+    }
+
+    public JLabel getjLabel64() {
+        return jLabel64;
+    }
+
+    public JLabel getjLabel65() {
+        return jLabel65;
+    }
+
+    public JLabel getjLabel69() {
+        return jLabel69;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public JLabel getjLabel70() {
+        return jLabel70;
+    }
+
+    public JLabel getjLabel71() {
+        return jLabel71;
+    }
+
+    public JLabel getjLabel73() {
+        return jLabel73;
+    }
+
+    public JLabel getjLabel74() {
+        return jLabel74;
+    }
+
+    public JLabel getjLabel75() {
+        return jLabel75;
+    }
+
+    public JLabel getjLabel76() {
+        return jLabel76;
+    }
+
+    public JLabel getjLabel77() {
+        return jLabel77;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public JLabel getjLabel80() {
+        return jLabel80;
+    }
+
+    public JLabel getjLabel81() {
+        return jLabel81;
+    }
+
+    public JLabel getjLabel82() {
+        return jLabel82;
+    }
+
+    public JLabel getjLabel83() {
+        return jLabel83;
+    }
+
+    public JLabel getjLabel84() {
+        return jLabel84;
+    }
+
+    public JLabel getjLabel85() {
+        return jLabel85;
+    }
+
+    public JLabel getjLabel86() {
+        return jLabel86;
+    }
+
+    public JLabel getjLabel87() {
+        return jLabel87;
+    }
+
+    public JLabel getjLabel88() {
+        return jLabel88;
+    }
+
+    public JLabel getjLabel89() {
+        return jLabel89;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public JLabel getjLabel90() {
+        return jLabel90;
+    }
+
+    public JLabel getjLabel91() {
+        return jLabel91;
+    }
+
+    public JLabel getjLabel92() {
+        return jLabel92;
+    }
+
+    public JLabel getjLabel93() {
+        return jLabel93;
+    }
+
+    public JLabel getjLabel94() {
+        return jLabel94;
+    }
+
+    public JLabel getjLabel95() {
+        return jLabel95;
+    }
+
+    public JLabel getjLabel96() {
+        return jLabel96;
+    }
+
+    public JLabel getjLabel97() {
+        return jLabel97;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel10() {
+        return jPanel10;
+    }
+
+    public JPanel getjPanel13() {
+        return jPanel13;
+    }
+
+    public JPanel getjPanel14() {
+        return jPanel14;
+    }
+
+    public JPanel getjPanel17() {
+        return jPanel17;
+    }
+
+    public JPanel getjPanel18() {
+        return jPanel18;
+    }
+
+    public JPanel getjPanel19() {
+        return jPanel19;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JPanel getjPanel20() {
+        return jPanel20;
+    }
+
+    public JPanel getjPanel21() {
+        return jPanel21;
+    }
+
+    public JPanel getjPanel22() {
+        return jPanel22;
+    }
+
+    public JPanel getjPanel23() {
+        return jPanel23;
+    }
+
+    public JPanel getjPanel24() {
+        return jPanel24;
+    }
+
+    public JPanel getjPanel26() {
+        return jPanel26;
+    }
+
+    public JPanel getjPanel27() {
+        return jPanel27;
+    }
+
+    public JPanel getjPanel28() {
+        return jPanel28;
+    }
+
+    public JPanel getjPanel29() {
+        return jPanel29;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public JPanel getjPanel30() {
+        return jPanel30;
+    }
+
+    public JPanel getjPanel4() {
+        return jPanel4;
+    }
+
+    public JPanel getjPanel5() {
+        return jPanel5;
+    }
+
+    public JPanel getjPanel6() {
+        return jPanel6;
+    }
+
+    public JPanel getjPanel7() {
+        return jPanel7;
+    }
+
+    public JPanel getjPanel8() {
+        return jPanel8;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane10() {
+        return jScrollPane10;
+    }
+
+    public JScrollPane getjScrollPane11() {
+        return jScrollPane11;
+    }
+
+    public JScrollPane getjScrollPane12() {
+        return jScrollPane12;
+    }
+
+    public JScrollPane getjScrollPane13() {
+        return jScrollPane13;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public JScrollPane getjScrollPane8() {
+        return jScrollPane8;
+    }
+
+    public JScrollPane getjScrollPane9() {
+        return jScrollPane9;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public JSeparator getjSeparator24() {
+        return jSeparator24;
+    }
+
+    public JSeparator getjSeparator25() {
+        return jSeparator25;
+    }
+
+    public JSeparator getjSeparator26() {
+        return jSeparator26;
+    }
+
+    public JTabbedPane getjTabbedPane1() {
+        return jTabbedPane1;
+    }
+
+    public JTable getjTable() {
+        return jTable;
+    }
+
+    public JTable getjTable10() {
+        return jTable10;
+    }
+
+    public static JTable getjTableZaposleni() {
+        return jTableZaposleni;
+    }
+
+    public JTextField getjTextField21() {
+        return jTextField21;
+    }
+
+    public JTextField getjTextField22() {
+        return jTextField22;
+    }
+
+    public JComboBox<String> getJcbGorivo() {
+        return jcbGorivo;
+    }
+
+    public JComboBox<String> getJcbMarka() {
+        return jcbMarka;
+    }
+
+    public JComboBox<String> getJcbModel() {
+        return jcbModel;
+    }
+
+    public JTextField getJtfCijena() {
+        return jtfCijena;
+    }
+
+    public JTextField getJtfGodiste() {
+        return jtfGodiste;
+    }
+
+    public JTextField getJtfKolicina() {
+        return jtfKolicina;
+    }
+
+    public JTextField getJtfNaziv() {
+        return jtfNaziv;
+    }
+
+    public JTextField getJtfSifra() {
+        return jtfSifra;
+    }
+
+    public JPanel getKnjigovodstvoPanel() {
+        return knjigovodstvoPanel;
+    }
+
+    public JLabel getLabelBrojRadnihNaloga() {
+        return labelBrojRadnihNaloga;
+    }
+
+    public JLabel getLabelOstvareniProfitRadnika() {
+        return labelOstvareniProfitRadnika;
+    }
+
+    public JLabel getLabelPoruka() {
+        return labelPoruka;
+    }
+
+    public JPanel getMenu1jPanel() {
+        return menu1jPanel;
+    }
+
+    public JPanel getMenu2jPanel() {
+        return menu2jPanel;
+    }
+
+    public JPanel getMenu3jPanel() {
+        return menu3jPanel;
+    }
+
+    public JPanel getMenu4jPanel() {
+        return menu4jPanel;
+    }
+
+    public JPanel getMenu5jPanel() {
+        return menu5jPanel;
+    }
+
+    public JPanel getMenu6jPanel() {
+        return menu6jPanel;
+    }
+
+    public JPanel getMenu7jPanel() {
+        return menu7jPanel;
+    }
+
+    public JPanel getMenu8jPanel() {
+        return menu8jPanel;
+    }
+
+    public JMenuItem getMenuItemDetaljniOpis() {
+        return menuItemDetaljniOpis;
+    }
+
+    public JMenuItem getMenuItemIzmjeniRadnika() {
+        return menuItemIzmjeniRadnika;
+    }
+
+    public JMenuItem getMenuItemOtpustiRadnika() {
+        return menuItemOtpustiRadnika;
+    }
+
+    public JPanel getMenuPanel() {
+        return menuPanel;
+    }
+
+    public JPanel getOdabirMjesecaStatistikaPanel() {
+        return odabirMjesecaStatistikaPanel;
+    }
+
+    public JPanel getPanelAkcijeNaFormi() {
+        return panelAkcijeNaFormi;
+    }
+
+    public JPanel getPanelPronadjiVlasnika() {
+        return panelPronadjiVlasnika;
+    }
+
+    public JPanel getPanelPronadjiVozilo() {
+        return panelPronadjiVozilo;
+    }
+
+    public JPanel getPanelVozilo() {
+        return panelVozilo;
+    }
+
+    public JPanel getParentPanel() {
+        return parentPanel;
+    }
+
+    public JPanel getPocetnajPanel() {
+        return pocetnajPanel;
+    }
+
+    public JPopupMenu getPopupMenuZaposleni() {
+        return popupMenuZaposleni;
+    }
+
+    public JPanel getPretraziPanel() {
+        return pretraziPanel;
+    }
+
+    public JPanel getRadniNaloziPanel() {
+        return radniNaloziPanel;
+    }
+
+    public JRadioButton getRbPravnoLiceVozilo() {
+        return rbPravnoLiceVozilo;
+    }
+
+    public JRadioButton getRbPravnoTrazi() {
+        return rbPravnoTrazi;
+    }
+
+    public JRadioButton getRbPrivatnoLiceVozilo() {
+        return rbPrivatnoLiceVozilo;
+    }
+
+    public JRadioButton getRbPrivatnoTrazi() {
+        return rbPrivatnoTrazi;
+    }
+
+    public JScrollPane getSpVoziloPretraga() {
+        return spVoziloPretraga;
+    }
+
+    public JPanel getStatistikaHeaderjPanel() {
+        return statistikaHeaderjPanel;
+    }
+
+    public JPanel getStatistikajPanel() {
+        return statistikajPanel;
+    }
+
+    public static JTable getTableRadniNalozi() {
+        return tableRadniNalozi;
+    }
+
+    public JTable getTableVozila() {
+        return tableVozila;
+    }
+
+    public JTable getTblFaktura() {
+        return tblFaktura;
+    }
+
+    public JTable getTblNeplaceneFakture() {
+        return tblNeplaceneFakture;
+    }
+
+    public JTable getTblRadniNalozi() {
+        return tblRadniNalozi;
+    }
+
+    public JTable getTblTermini() {
+        return tblTermini;
+    }
+
+    public JTextField getTextFieldAdresa() {
+        return textFieldAdresa;
+    }
+
+    public JTextField getTextFieldBrojLicneKarte() {
+        return textFieldBrojLicneKarte;
+    }
+
+    public JTextField getTextFieldFunkcijaRadnika() {
+        return textFieldFunkcijaRadnika;
+    }
+
+    public JTextField getTextFieldIme() {
+        return textFieldIme;
+    }
+
+    public JTextField getTextFieldImeOca() {
+        return textFieldImeOca;
+    }
+
+    public JTextField getTextFieldPrezime() {
+        return textFieldPrezime;
+    }
+
+    public JTextField getTextFieldStrucnaSprema() {
+        return textFieldStrucnaSprema;
+    }
+
+    public JTextField getTextFieldTelefon() {
+        return textFieldTelefon;
+    }
+
+    public JTextField getTfGodiste() {
+        return tfGodiste;
+    }
+
+    public JTextField getTfGodisteTrazi() {
+        return tfGodisteTrazi;
+    }
+
+    public JTextField getTfId() {
+        return tfId;
+    }
+
+    public JTextField getTfImeTrazi() {
+        return tfImeTrazi;
+    }
+
+    public JTextField getTfImeVozilo() {
+        return tfImeVozilo;
+    }
+
+    public JTextField getTfMarkaTrazi() {
+        return tfMarkaTrazi;
+    }
+
+    public JTextField getTfModelTrazi() {
+        return tfModelTrazi;
+    }
+
+    public JTextField getTfNaziv() {
+        return tfNaziv;
+    }
+
+    public JTextField getTfNazivTrazi() {
+        return tfNazivTrazi;
+    }
+
+    public JTextField getTfNazivVozilo() {
+        return tfNazivVozilo;
+    }
+
+    public JTextField getTfPrezimeTrazi() {
+        return tfPrezimeTrazi;
+    }
+
+    public JTextField getTfPrezimeVozilo() {
+        return tfPrezimeVozilo;
+    }
+
+    public JTextField getTfRegistracijaTrazi() {
+        return tfRegistracijaTrazi;
+    }
+
+    public JTextField getTfSifra() {
+        return tfSifra;
+    }
+
+    public JTextField getTxtBezPDV() {
+        return txtBezPDV;
+    }
+
+    public JTextField getTxtBrojTelefonaPretraga() {
+        return txtBrojTelefonaPretraga;
+    }
+
+    public JTextField getTxtBrojTelefonaTermina() {
+        return txtBrojTelefonaTermina;
+    }
+
+    public JTextField getTxtID() {
+        return txtID;
+    }
+
+    public JTextField getTxtImePretraga() {
+        return txtImePretraga;
+    }
+
+    public JTextField getTxtImeTermina() {
+        return txtImeTermina;
+    }
+
+    public JTextField getTxtMarkaPretraga() {
+        return txtMarkaPretraga;
+    }
+
+    public JTextField getTxtMarkaTermina() {
+        return txtMarkaTermina;
+    }
+
+    public JTextField getTxtModelTermina() {
+        return txtModelTermina;
+    }
+
+    public JTextField getTxtPDV() {
+        return txtPDV;
+    }
+
+    public JTextField getTxtPrezimePretraga() {
+        return txtPrezimePretraga;
+    }
+
+    public JTextField getTxtPrezimeTermina() {
+        return txtPrezimeTermina;
+    }
+
+    public JTextField getTxtUkupno() {
+        return txtUkupno;
+    }
+
+    public JSpinner getTxtVrijemeTerminaMinuti() {
+        return txtVrijemeTerminaMinuti;
+    }
+
+    public JSpinner getTxtVrijemeTerminaSati() {
+        return txtVrijemeTerminaSati;
+    }
+
+    public JPanel getVozilaPanel() {
+        return vozilaPanel;
+    }
+
+    public JPanel getZakazivanjaPanel() {
+        return zakazivanjaPanel;
+    }
+
+    public JPanel getZaposleniPanel() {
+        return zaposleniPanel;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;

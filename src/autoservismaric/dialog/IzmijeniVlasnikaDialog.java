@@ -11,6 +11,12 @@ import java.awt.Color;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import poslovnalogika.KupacLogika;
 
 /**
  *
@@ -18,74 +24,24 @@ import javax.swing.ButtonGroup;
  */
 public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
 
-    
     public int idVlasnika;
     ButtonGroup bg;
+    public KupacLogika kupacLogika = new KupacLogika();
     /**
      * Creates new form IzmijeniVlasnikaDialog
      */
     public IzmijeniVlasnikaDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
-        
+        kupacLogika.inicijalizacijaIzmijeniDijaloga(this);     
     }
     
     public IzmijeniVlasnikaDialog(java.awt.Frame parent, boolean modal, int idVlasnika) {
-        this(parent, modal);
-        
-        bg = new ButtonGroup();
-        bg.add(rbPravno);
-        bg.add(rbPrivatno);
-        
+        super(parent, modal);
+        initComponents();
         this.idVlasnika = idVlasnika;
-        
-        System.out.println(idVlasnika);
-        KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(idVlasnika);
-        System.out.println(kupac.getIdKupac() + kupac.getIme() + kupac.getPrezime() + kupac.getNaziv() + kupac.getTelefon() + kupac.getGrad() + kupac.getAdresa());
-        if(kupac.getNaziv() == null){
-            
-            for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if ("Privatno".equals(button.getText())) {
-                button.setSelected(true);
-            }
-            }
-            
-            tfImeDodaj.setText(kupac.getIme());
-            tfPrezimeDodaj.setText(kupac.getPrezime());
-            
-            tfNazivDodaj.setEditable(false);
-            tfNazivDodaj.setBackground(Color.gray);
-            tfNazivDodaj.setText("");
-            
-            System.out.println(kupac.getIme() + kupac.getPrezime());
-            
-        }
-        else{
-            for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if ("Pravno".equals(button.getText())) {
-                button.setSelected(true);
-            }
-            }
-            
-            
-            tfNazivDodaj.setText(kupac.getNaziv());
-            tfImeDodaj.setText("");
-            tfPrezimeDodaj.setText("");
-            tfImeDodaj.setBackground(Color.gray);
-            tfPrezimeDodaj.setBackground(Color.gray);
-            tfImeDodaj.setEditable(false);
-            tfPrezimeDodaj.setEditable(false);
-        }
-        tfAdresaDodaj.setText(kupac.getAdresa());
-        tfTelefonDodaj.setText(kupac.getTelefon());
-        tfGradDodaj.setText(kupac.getGrad());
-        
+        bg = new ButtonGroup();
+        kupacLogika.inicijalizacijaIzmijeniDijaloga(this);
     }
 
     /**
@@ -338,7 +294,6 @@ public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
     private void rbPrivatnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoActionPerformed
         tfNazivDodaj.setEditable(false);
         tfNazivDodaj.setBackground(Color.gray);
-
         tfImeDodaj.setEditable(true);
         tfPrezimeDodaj.setEditable(true);
         tfImeDodaj.setBackground(Color.white);
@@ -349,75 +304,82 @@ public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
         tfImeDodaj.setEditable(false);
         tfPrezimeDodaj.setEditable(false);
         tfNazivDodaj.setEditable(true);
-
         tfImeDodaj.setBackground(Color.gray);
         tfPrezimeDodaj.setBackground(Color.gray);
         tfNazivDodaj.setBackground(Color.white);
     }//GEN-LAST:event_rbPravnoActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        if(rbPravno.isSelected()){
-            String naziv = tfNazivDodaj.getText();
-            String telefon = tfTelefonDodaj.getText();
-            String adresa = tfAdresaDodaj.getText();
-            String grad = tfGradDodaj.getText();
-            if(naziv != null && !"".equals(naziv)){
-                KupacDTO kupac = new KupacDTO();
-                kupac.setNaziv(naziv);
-                kupac.setTelefon(telefon);
-                kupac.setAdresa(adresa);
-                kupac.setGrad(grad);
-                kupac.setIdKupac(idVlasnika);
-                if(DAOFactory.getDAOFactory().getKupacDAO().azurirajKupca(kupac)){
-                    lbPoruka.setText("Uspješno!");
-                    lbPoruka.setBackground(Color.green);
-                    dispose();
-                }
-                else
-                {
-                    lbPoruka.setText("Greska pri upisu u bazu!");
-                    lbPoruka.setBackground(Color.red);
-                }
-            }
-            else{
-                lbPoruka.setText("Morate popuniti polja naziv pravnog lica!");
-                lbPoruka.setBackground(Color.red);
-            }
-        }
-        else if(rbPrivatno.isSelected()){
-            String ime = tfImeDodaj.getText();
-            String prezime = tfPrezimeDodaj.getText();
-            String telefon = tfTelefonDodaj.getText();
-            String adresa = tfAdresaDodaj.getText();
-            String grad = tfGradDodaj.getText();
-            if(ime != null && prezime != null && !"".equals(ime) && !"".equals(prezime)){
-                KupacDTO kupac = new KupacDTO();
-                kupac.setIme(ime);
-                kupac.setPrezime(prezime);
-                kupac.setTelefon(telefon);
-                kupac.setAdresa(adresa);
-                kupac.setGrad(grad);
-                if(DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)){
-                    lbPoruka.setText("Uspješno!");
-                    lbPoruka.setBackground(Color.green);
-                }
-                else
-                {
-                    lbPoruka.setText("Greska pri upisu u bazu!");
-                    lbPoruka.setBackground(Color.red);
-                }
-            }
-            else{
-                lbPoruka.setText("Morate popuniti polja za ime i prezime!");
-                lbPoruka.setBackground(Color.red);
-            }
-        }
+        kupacLogika.izmijeniKupca(this);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
         dispose();
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
+    public int getIdVlasnika() {
+        return idVlasnika;
+    }
+
+    public ButtonGroup getBg() {
+        return bg;
+    }
+
+    public JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public JButton getBtnOdustani() {
+        return btnOdustani;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JLabel getLbPoruka() {
+        return lbPoruka;
+    }
+
+    public JPanel getPanelDodajVlasnika() {
+        return panelDodajVlasnika;
+    }
+
+    public JRadioButton getRbPravno() {
+        return rbPravno;
+    }
+
+    public JRadioButton getRbPrivatno() {
+        return rbPrivatno;
+    }
+
+    public JTextField getTfAdresaDodaj() {
+        return tfAdresaDodaj;
+    }
+
+    public JTextField getTfGradDodaj() {
+        return tfGradDodaj;
+    }
+
+    public JTextField getTfImeDodaj() {
+        return tfImeDodaj;
+    }
+
+    public JTextField getTfNazivDodaj() {
+        return tfNazivDodaj;
+    }
+
+    public JTextField getTfPrezimeDodaj() {
+        return tfPrezimeDodaj;
+    }
+
+    public JTextField getTfTelefonDodaj() {
+        return tfTelefonDodaj;
+    }
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */

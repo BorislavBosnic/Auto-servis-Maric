@@ -5,17 +5,22 @@
  */
 package autoservismaric.dialog;
 
-import data.dao.DAOFactory;
 import data.dto.KupacDTO;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import poslovnalogika.KupacLogika;
 
 /**
  *
  * @author DulleX
  */
 public class DodajVlasnikaDialog extends javax.swing.JDialog {
+
+    public KupacLogika kupacLogika = new KupacLogika();
 
     ButtonGroup bg;
     KupacDTO kup;
@@ -28,31 +33,16 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
     public DodajVlasnikaDialog(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
         this.dvd = dvd;
-
         bg = new ButtonGroup();
-        bg.add(rbPravno);
-        bg.add(rbPrivatno);
-
-        tfNazivDodaj.setEditable(false);
-        tfNazivDodaj.setBackground(Color.gray);
-
-
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
     }
 
     public DodajVlasnikaDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
         bg = new ButtonGroup();
-        bg.add(rbPravno);
-        bg.add(rbPrivatno);
-
-        tfNazivDodaj.setEditable(false);
-        tfNazivDodaj.setBackground(Color.gray);
-        
-
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
     }
 
     /**
@@ -306,7 +296,6 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         tfNazivDodaj.setEditable(false);
         tfNazivDodaj.setBackground(Color.gray);
         tfNazivDodaj.setText("");
-
         tfImeDodaj.setEditable(true);
         tfPrezimeDodaj.setEditable(true);
         tfImeDodaj.setBackground(Color.white);
@@ -319,7 +308,6 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         tfImeDodaj.setEditable(false);
         tfPrezimeDodaj.setEditable(false);
         tfNazivDodaj.setEditable(true);
-
         tfImeDodaj.setBackground(Color.gray);
         tfPrezimeDodaj.setBackground(Color.gray);
         tfNazivDodaj.setBackground(Color.white);
@@ -337,51 +325,72 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        if (rbPravno.isSelected()) {
-            String naziv = tfNazivDodaj.getText();
-            String telefon = tfTelefonDodaj.getText();
-            String adresa = tfGradDodaj.getText();
-            String grad = tfAdresaDodaj.getText();
-            if (naziv != null && !"".equals(naziv)) {
-                KupacDTO kupac = new KupacDTO();
-                kupac.setNaziv(naziv);
-                kupac.setTelefon(telefon);
-                kupac.setAdresa(adresa);
-                kupac.setGrad(grad);
-                if (DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)) {
-                    JOptionPane.showMessageDialog(rootPane, "Uspješno dodat vlasnik vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    kup = kupac;
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Greška!", "Greška", JOptionPane.OK_OPTION);
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Morate popuniti polje naziv pravnog lica!", "Greška", JOptionPane.OK_OPTION);
-            }
-        } else if (rbPrivatno.isSelected()) {
-            String ime = tfImeDodaj.getText();
-            String prezime = tfPrezimeDodaj.getText();
-            String telefon = tfTelefonDodaj.getText();
-            String adresa = tfGradDodaj.getText();
-            String grad = tfAdresaDodaj.getText();
-            if (ime != null && prezime != null && !"".equals(ime) && !"".equals(prezime)) {
-                KupacDTO kupac = new KupacDTO();
-                kupac.setIme(ime);
-                kupac.setPrezime(prezime);
-                kupac.setTelefon(telefon);
-                kupac.setAdresa(adresa);
-                kupac.setGrad(grad);
-                if (DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)) {
-                    JOptionPane.showMessageDialog(rootPane, "Uspješno dodat vlasnik vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    kup = kupac; 
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Greška!", "Greška", JOptionPane.OK_OPTION);
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Morate popuniti polja za ime i prezime!", "Greška", JOptionPane.OK_OPTION);
-            }
-        }
+        kupacLogika.dodajKupca(this);
     }//GEN-LAST:event_btnDodajActionPerformed
+
+    public ButtonGroup getBg() {
+        return bg;
+    }
+
+    public KupacDTO getKup() {
+        return kup;
+    }
+
+    public DodajVoziloDialog getDvd() {
+        return dvd;
+    }
+
+    public JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public JButton getBtnOdustani() {
+        return btnOdustani;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getPanelDodajVlasnika() {
+        return panelDodajVlasnika;
+    }
+
+    public JRadioButton getRbPravno() {
+        return rbPravno;
+    }
+
+    public JRadioButton getRbPrivatno() {
+        return rbPrivatno;
+    }
+
+    public JTextField getTfAdresaDodaj() {
+        return tfAdresaDodaj;
+    }
+
+    public JTextField getTfGradDodaj() {
+        return tfGradDodaj;
+    }
+
+    public JTextField getTfImeDodaj() {
+        return tfImeDodaj;
+    }
+
+    public JTextField getTfNazivDodaj() {
+        return tfNazivDodaj;
+    }
+
+    public JTextField getTfPrezimeDodaj() {
+        return tfPrezimeDodaj;
+    }
+
+    public JTextField getTfTelefonDodaj() {
+        return tfTelefonDodaj;
+    }
+
+    public void setKup(KupacDTO kup) {
+        this.kup = kup;
+    }
 
     /**
      * @param args the command line arguments

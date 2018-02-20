@@ -5,28 +5,22 @@
  */
 package autoservismaric.dialog;
 
-import data.dao.DAOFactory;
-import data.dto.DioDTO;
-import data.dto.KupacDTO;
-import data.dto.ModelVozilaDTO;
-import data.dto.RadniNalogDTO;
-import data.dto.RadniNalogDioDTO;
-import data.dto.RadniNalogRadnikDTO;
-import data.dto.VoziloDTO;
+import com.toedter.calendar.JDateChooser;
 import data.dto.ZaposleniDTO;
 import java.awt.Color;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import poslovnalogika.RadniNalogLogika;
 
 /**
  *
@@ -34,8 +28,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
-    
     private int idVozila;
+    public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
+
     /**
      * Creates new form DodajRadniNalogDialog
      */
@@ -43,91 +38,12 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     public DodajRadniNalogDialog(java.awt.Frame parent, boolean modal, int idVozila) {
-        this(parent, modal);
-  
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date());
-        c.add(Calendar.DATE, 7); 
-        
-        datumOtvaranjaNaloga.setDate(new Date());
-        potrebnoZavrsitiDo.setDate(c.getTime());
-    
-        tabelaIzabraniDijelovi.setAutoCreateRowSorter(true);
-        tabelaDijelovi.setAutoCreateRowSorter(true);
-        tabelaDijelovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabelaIzabraniDijelovi.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabelaDijelovi.setDefaultEditor(Object.class, null);
-        tabelaIzabraniDijelovi.setDefaultEditor(Object.class, null);
-        
-        tabelaDijelovi.getTableHeader().setReorderingAllowed(false);
-        tabelaIzabraniDijelovi.getTableHeader().setReorderingAllowed(false);
-
-
-        VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
-                
-        ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdModelVozila());
-        
-        
+        super(parent, modal);
+        initComponents();
         this.idVozila = idVozila;
-        tfIdVozila.setText(new Integer(idVozila).toString());
-        tfIdVozila.setEditable(false);
-        
-       DefaultListModel<ZaposleniDTO> model = new DefaultListModel<>();
-       
-       List<ZaposleniDTO> listaZaposlenih = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
-              
-      
-       
-       for(ZaposleniDTO z: listaZaposlenih){
-           model.addElement(z);
-       }
-       
-       listaZaposleni.setModel(model);
-       listaZaposleni.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-       
-       String[] columns = {"Naziv","Šifra","Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina" ,"Cijena"};
-        DefaultTableModel modelDijelovi = new DefaultTableModel(columns, 0);
-        tabelaDijelovi.setModel(modelDijelovi);
-        
-         List<DioDTO> listaDijelova=null;
-         
-        if(null != vozilo.getVrstaGoriva()){
-           listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(vozilo.getVrstaGoriva(), modelVozila.getMarka(), modelVozila.getModel(), true);
-        }
-        else{
-             listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
-        }
-         List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
-        
-        for(DioDTO d: listaDijelova){
-            Object[] rowData = { d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo()==true?"Da":"Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
-            modelDijelovi.addRow(rowData);
-       }
-        
-        for(DioDTO d: listaZaSvaVozila){
-            Object[] rowData = { d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo()==true?"Da":"Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
-            modelDijelovi.addRow(rowData);
-       }
-        
-        tabelaDijelovi.setModel(modelDijelovi); 
-        
-        listaZaposleniZaduzeni.setModel(new DefaultListModel<>());
-
-        spinnerKolicina.setValue(1);
-        
-        tabelaDijelovi.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-        @Override
-        public void valueChanged(ListSelectionEvent event) {
-        if (tabelaDijelovi.getSelectedRow() > -1) {
-            Double cijena = Double.parseDouble(tabelaDijelovi.getValueAt(tabelaDijelovi.getSelectedRow(), 6).toString());
-            tfCijenaDijela.setText(cijena.toString());
-        }
-    }
-});
-        
-          
+        radniNalogLogika.inicijalizacijaDodajRadniNalog(this);
     }
 
     /**
@@ -573,241 +489,52 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKreirajNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajNalogActionPerformed
-        Date datumOtvaranja = datumOtvaranjaNaloga.getDate();
-        java.sql.Date o = new java.sql.Date(datumOtvaranja.getTime());
-
-        java.sql.Date z = null;
-        Date datumZatvaranja = datumZatvaranjaNaloga.getDate();
-        try{
-            z = new java.sql.Date(datumZatvaranja.getTime());
-        }
-        catch(Exception ex){   }
-        
-        
-        Date potrebnoZavristi = potrebnoZavrsitiDo.getDate();
-        java.sql.Date pz = new java.sql.Date(potrebnoZavristi.getTime());
-
-        
-        Double troskovi = 0.0;
-        Integer kilometraza = 0;
-        Double cijena = 0.0;
-        Boolean placeno = cbPlaceno.isSelected();
-        
-        if(tfTroskovi.getText() != null && !"".equals(tfTroskovi.getText())){
-            try{
-                troskovi = new Double(tfTroskovi.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Troškovi moraju biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        if(tfKilometraza.getText() != null && !"".equals(tfKilometraza.getText())){
-            try{
-                kilometraza = new Integer(tfKilometraza.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Kilometraža mora biti cjelobrojni podatak.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        if(tfCijena.getText() != null && !"".equals(tfCijena.getText())){
-            try{
-                cijena = new Double(tfCijena.getText());
-            }
-            catch(Exception ex){
-                JOptionPane.showMessageDialog(rootPane, "Cijena mora biti realan broj.", "Greška", JOptionPane.OK_OPTION);
-                return;
-            }
-        }
-        
-        String opisProblema = taProblem.getText();
-        
-        RadniNalogDTO rn = new RadniNalogDTO(placeno, o, z, this.idVozila, troskovi, kilometraza, pz, cijena);
-        rn.setOpisProblema(opisProblema);
-        
-        if(DAOFactory.getDAOFactory().getRadniNalogDAO().dodajRadniNalog(rn)){            
-            int idRadnogNaloga = rn.getIdRadniNalog();
-            
-            for(int i = 0; i < listaZaposleniZaduzeni.getModel().getSize(); i++){
-                ZaposleniDTO zaposleni = listaZaposleniZaduzeni.getModel().getElementAt(i);
-                RadniNalogRadnikDTO rnr = new RadniNalogRadnikDTO(idRadnogNaloga, zaposleni.getIdRadnik(), zaposleni.getUlogaRadnika());
-                DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().dodajRadniNalogRadnik(rnr);
-                
-               
-            }
-            
-             DefaultTableModel modelDio = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
-                for(int j = 0; j < modelDio.getRowCount(); j++){
-                    String sifraDio = tabelaIzabraniDijelovi.getModel().getValueAt(j, 1).toString();
-                    Integer kolicinaDio = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(j, 2).toString());
-                    Double cijenaDio = Double.parseDouble(tabelaIzabraniDijelovi.getModel().getValueAt(j, 3).toString());
-                    
-                    RadniNalogDioDTO rnd = new RadniNalogDioDTO();
-                    DioDTO dDTO =DAOFactory.getDAOFactory().getDioDAO().getDio(sifraDio);
-                    rnd.setIdRadniNalog(idRadnogNaloga);
-                    rnd.setIdDio(dDTO.getId());
-                    rnd.setKolicina(kolicinaDio);
-                    rnd.setCijena(cijenaDio);
-                    
-                    DAOFactory.getDAOFactory().getRadniNalogDioDAO().dodajRadniNalogDio(rnd);
-                }
-                
-                //azuriranje kolicine dijelova
-            for(int k = 0; k < tabelaDijelovi.getModel().getRowCount(); k++){
-                String sifra = tabelaDijelovi.getModel().getValueAt(k, 1).toString();
-                Integer novaKolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(k, 5).toString());
-                DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
-                dio.setKolicina(novaKolicina);
-                
-                DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
-            }
-            
-             JOptionPane.showMessageDialog(rootPane, "Uspješno dodat radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-             dispose();
-        }
-        else{
-                    JOptionPane.showMessageDialog(rootPane, "Greška", "Greška", JOptionPane.OK_OPTION);
-                    return;
-        }
+        radniNalogLogika.kreirajNalog(this);
     }//GEN-LAST:event_btnKreirajNalogActionPerformed
 
     private void btnDodajDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajDioActionPerformed
-        
-        int red = tabelaDijelovi.getSelectedRow();
-        
-        if(red >= 0){
-        
-        String sifra = tabelaDijelovi.getModel().getValueAt(red, 1).toString();
-        int dodajKolicinu = (Integer)spinnerKolicina.getValue();
-        
-        String naziv = tabelaDijelovi.getModel().getValueAt(red, 0).toString();
-        Integer kolicina = Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString());
-       // Double cijena = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(red, 6).toString());  
-        Double cijena = Double.parseDouble(tfCijenaDijela.getText());
-        boolean postoji = false;
-        
-        if(dodajKolicinu > kolicina){
-            JOptionPane.showMessageDialog(rootPane, "Nema toliko jedinica izabranog dijela na stanju!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        for(int i = 0; i < tabelaIzabraniDijelovi.getRowCount(); i++){
-            if(sifra.equals(tabelaIzabraniDijelovi.getModel().getValueAt(i, 1))){
-                tabelaIzabraniDijelovi.getModel().setValueAt((Integer)tabelaIzabraniDijelovi.getModel().getValueAt(i, 2) + dodajKolicinu, i, 2);
-                postoji = true;
-            }
-        }
-        
-        if(!postoji){
-            
-            DefaultTableModel dtm = (DefaultTableModel) tabelaIzabraniDijelovi.getModel();
-            
-            Object[] rowData = { naziv, sifra, dodajKolicinu, cijena};
-            dtm.addRow(rowData);
-        }
-        
-        if(tfTroskovi.getText() != null && !"".equals(tfTroskovi.getText())){
-            Double trenutnaCijena = Double.parseDouble(tfTroskovi.getText());
-            trenutnaCijena += dodajKolicinu*cijena;
-            trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
-            tfTroskovi.setText(trenutnaCijena.toString());
-        }
-        else{
-            Double trenutnaCijena = 0.0;
-            trenutnaCijena += dodajKolicinu*cijena;
-            trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
-            tfTroskovi.setText(trenutnaCijena.toString());
-        }
-        
-        tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(red, 5).toString()) - dodajKolicinu,red, 5);
-        spinnerKolicina.setValue(1);
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Izaberite dio koji želite dodati!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
+        radniNalogLogika.dodajDio(this);
     }//GEN-LAST:event_btnDodajDioActionPerformed
 
     private void btnUkloniDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniDioActionPerformed
-        int red = tabelaIzabraniDijelovi.getSelectedRow();
-        
-        if(red < 0){
-            JOptionPane.showMessageDialog(rootPane, "Morate odabrati dio u tabeli koji želite ukloniti!", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
-        
-        Integer kolicina = Integer.parseInt(tabelaIzabraniDijelovi.getModel().getValueAt(red, 2).toString());
-        String sifra = tabelaIzabraniDijelovi.getModel().getValueAt(red, 1).toString();
-        boolean pronasao = false;
-        Double cijenaJednogDijela=0.0;
-        
-        
-        for(int i = 0; i < tabelaDijelovi.getRowCount() && pronasao==false; i++){
-            if(sifra.equals(tabelaDijelovi.getModel().getValueAt(i, 1))){
-               pronasao = true;
-               tabelaDijelovi.getModel().setValueAt(Integer.parseInt(tabelaDijelovi.getModel().getValueAt(i, 5).toString()) + kolicina, i, 5);
-               cijenaJednogDijela = Double.parseDouble(tabelaDijelovi.getModel().getValueAt(i, 6).toString());
-            }
-        }
-        
-        Double cijena = Double.parseDouble(tfTroskovi.getText());
-        Double novaCijena = cijena-kolicina*cijenaJednogDijela;
-        tfTroskovi.setText(novaCijena.toString());
-        
-        if(novaCijena < 0){
-             tfTroskovi.setText(new String("0"));
-        }
-        
-        ((DefaultTableModel)tabelaIzabraniDijelovi.getModel()).removeRow(red);
+        radniNalogLogika.ukloniDio(this);
     }//GEN-LAST:event_btnUkloniDioActionPerformed
 
     private void btnZaduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaduziActionPerformed
         int brojReda = listaZaposleni.getSelectedIndex();
-        
-        if(brojReda < 0)
-        {
+
+        if (brojReda < 0) {
             JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste svih radnika!", "Greška", JOptionPane.OK_OPTION);
             return;
-        }        
-                
+        }
+
         ZaposleniDTO red = listaZaposleni.getSelectedValue();
         red.setUlogaRadnika(taUlogaRadnika.getText());
-        
-        ((DefaultListModel<ZaposleniDTO>)listaZaposleni.getModel()).removeElementAt(brojReda);
-        
+        ((DefaultListModel<ZaposleniDTO>) listaZaposleni.getModel()).removeElementAt(brojReda);
         DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleniZaduzeni.getModel();
         mod.addElement(red);
-        
         taUlogaRadnika.setText("");
     }//GEN-LAST:event_btnZaduziActionPerformed
 
     private void btnRazduziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRazduziActionPerformed
         int brojReda = listaZaposleniZaduzeni.getSelectedIndex();
-        
-        if(brojReda < 0)
-        {
+
+        if (brojReda < 0) {
             JOptionPane.showMessageDialog(rootPane, "Morate odabrati zaposlenog iz liste zaduženih radnika!", "Greška", JOptionPane.OK_OPTION);
             return;
-        }        
-        
-        
+        }
+
         ZaposleniDTO red = listaZaposleniZaduzeni.getSelectedValue();
-        
-        ((DefaultListModel<ZaposleniDTO>)listaZaposleniZaduzeni.getModel()).removeElementAt(brojReda);
-        
+        ((DefaultListModel<ZaposleniDTO>) listaZaposleniZaduzeni.getModel()).removeElementAt(brojReda);
         DefaultListModel<ZaposleniDTO> mod = (DefaultListModel<ZaposleniDTO>) listaZaposleni.getModel();
         mod.addElement(red);
     }//GEN-LAST:event_btnRazduziActionPerformed
 
     private void listaZaposleniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniValueChanged
-        if(listaZaposleni.getSelectedIndex() >= 0){
+        if (listaZaposleni.getSelectedIndex() >= 0) {
             taUlogaRadnika.setEditable(true);
             taUlogaRadnika.setBackground(Color.WHITE);
-        }
-        else{
+        } else {
             taUlogaRadnika.setEditable(false);
             taUlogaRadnika.setBackground(Color.GRAY);
         }
@@ -815,6 +542,134 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
     private void listaZaposleniZaduzeniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniZaduzeniValueChanged
     }//GEN-LAST:event_listaZaposleniZaduzeniValueChanged
+
+    public int getIdVozila() {
+        return idVozila;
+    }
+
+    public RadniNalogLogika getRadniNalogLogika() {
+        return radniNalogLogika;
+    }
+
+    public JLabel getZaduzeni() {
+        return Zaduzeni;
+    }
+
+    public JButton getBtnDodajDio() {
+        return btnDodajDio;
+    }
+
+    public JButton getBtnKreirajNalog() {
+        return btnKreirajNalog;
+    }
+
+    public JButton getBtnRazduzi() {
+        return btnRazduzi;
+    }
+
+    public JButton getBtnUkloniDio() {
+        return btnUkloniDio;
+    }
+
+    public JButton getBtnZaduzi() {
+        return btnZaduzi;
+    }
+
+    public JCheckBox getCbPlaceno() {
+        return cbPlaceno;
+    }
+
+    public JDateChooser getDatumOtvaranjaNaloga() {
+        return datumOtvaranjaNaloga;
+    }
+
+    public JDateChooser getDatumZatvaranjaNaloga() {
+        return datumZatvaranjaNaloga;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public JScrollPane getjScrollPane5() {
+        return jScrollPane5;
+    }
+
+    public JScrollPane getjScrollPane6() {
+        return jScrollPane6;
+    }
+
+    public JList<ZaposleniDTO> getListaZaposleni() {
+        return listaZaposleni;
+    }
+
+    public JList<ZaposleniDTO> getListaZaposleniZaduzeni() {
+        return listaZaposleniZaduzeni;
+    }
+
+    public JDateChooser getPotrebnoZavrsitiDo() {
+        return potrebnoZavrsitiDo;
+    }
+
+    public JSpinner getSpinnerKolicina() {
+        return spinnerKolicina;
+    }
+
+    public JTextArea getTaProblem() {
+        return taProblem;
+    }
+
+    public JTextArea getTaUlogaRadnika() {
+        return taUlogaRadnika;
+    }
+
+    public JTable getTabelaDijelovi() {
+        return tabelaDijelovi;
+    }
+
+    public JTable getTabelaIzabraniDijelovi() {
+        return tabelaIzabraniDijelovi;
+    }
+
+    public JTextField getTfCijena() {
+        return tfCijena;
+    }
+
+    public JTextField getTfCijenaDijela() {
+        return tfCijenaDijela;
+    }
+
+    public JTextField getTfIdVozila() {
+        return tfIdVozila;
+    }
+
+    public JTextField getTfKilometraza() {
+        return tfKilometraza;
+    }
+
+    public JTextField getTfTroskovi() {
+        return tfTroskovi;
+    }
 
     /**
      * @param args the command line arguments

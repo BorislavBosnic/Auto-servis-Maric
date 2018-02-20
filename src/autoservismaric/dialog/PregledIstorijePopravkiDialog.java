@@ -5,22 +5,18 @@
  */
 package autoservismaric.dialog;
 
-import static autoservismaric.forms.HomeForm1.selektovanRed;
-import data.dao.DAOFactory;
-import data.dto.KupacDTO;
-import data.dto.ModelVozilaDTO;
-import data.dto.RadniNalogDTO;
-import data.dto.RadniNalogRadnikDTO;
-import data.dto.VoziloDTO;
-import data.dto.ZaposleniDTO;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.DefaultListModel;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import poslovnalogika.RadniNalogLogika;
 
 /**
  *
@@ -30,6 +26,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
 
     private int idVozila;
     public static Integer IdRadnogNaloga;
+    public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
 
     /**
      * Creates new form PregledIstorijePopravkiDialog
@@ -43,97 +40,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     }
 
     public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal, int idVozila) {
-        this(parent, modal);
+        super(parent, modal);
+        initComponents();
         this.idVozila = idVozila;
-
-        tabela.setDefaultEditor(Object.class, null);
-        tabela.setAutoCreateRowSorter(true);
-
-        VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila);
-        ModelVozilaDTO model = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdKupac());
-        KupacDTO vlasnik = DAOFactory.getDAOFactory().getKupacDAO().kupac(vozilo.getIdKupac());
-
-        setTitle("Istorija vozila");
-
-        if (vlasnik.getNaziv() == null) {
-            lbVlasnik.setText(vlasnik.getIme() + " " + vlasnik.getPrezime() + " (Privatno lice)");
-        } else {
-            lbVlasnik.setText(vlasnik.getNaziv() + " (Pravno lice)");
-        }
-
-        lbAdresa.setText(vlasnik.getAdresa());
-        lbTelefon.setText(vlasnik.getTelefon());
-        lbGrad.setText(vlasnik.getGrad());
-
-        lbBrojRegistracije.setText(vozilo.getBrojRegistracije());
-        lbKilovati.setText(vozilo.getKilovat().toString());
-        lbKubikaza.setText(vozilo.getKubikaza().toString());
-        lbGodiste.setText(vozilo.getGodiste().toString());
-        lbVrstaGoriva.setText(vozilo.getVrstaGoriva());
-        lbModelVozila.setText(model.getMarka() + " " + model.getModel());
-
-        ArrayList<RadniNalogDTO> rn = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi(this.idVozila);
-        String[] columns = {"ID", "Datum otvaranja naloga", "Datum zatvaranja naloga", "Datum potrebnog završetka", "Plaćeno"};
-        DefaultTableModel modell = new DefaultTableModel(columns, 0);
-
-        for (RadniNalogDTO r : rn) {
-            String placeno;
-            if (r.isPlaceno()) {
-                placeno = "Da";
-            } else {
-                placeno = "Ne";
-            }
-            Object[] rowData = {r.getIdRadniNalog(), r.getDatumOtvaranjaNaloga(), r.getDatumZatvaranjaNaloga(), r.getPredvidjenoVrijemeZavrsetka(), placeno};
-            modell.addRow(rowData);
-        }
-
-        tabela.setModel(modell);
-
-        tabela.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent event) {
-                if (tabela.getSelectedRow() >= 0) {
-
-                    btnAzuriraj.setEnabled(true);
-                    int column = 0;
-                    int row = tabela.getSelectedRow();
-                    Integer value = new Integer(tabela.getModel().getValueAt(row, column).toString());
-
-                    RadniNalogDTO r = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(value);
-
-                    ArrayList<RadniNalogRadnikDTO> listaRadnika = DAOFactory.getDAOFactory().getRadniNalogRadnikDAO().radniciNaRadnomNalogu(value);
-
-                    DefaultListModel mod = new DefaultListModel();
-
-                    for (RadniNalogRadnikDTO rnt : listaRadnika) {
-                        ZaposleniDTO zap = DAOFactory.getDAOFactory().getZaposleniDAO().zaposleni(rnt.getIdRadnik());
-                        mod.addElement(zap.getIme() + "(" + zap.getImeOca() + ")" + zap.getPrezime());
-                    }
-
-                    listRadnici.setModel(mod);
-
-                    tbIdNaloga.setText(value.toString());
-                    tbIdNaloga.setEditable(false);
-                    Date d = new Date(r.getDatumOtvaranjaNaloga().getTime());
-                    tbNalogOtvoren.setDate(d);
-
-                    Date dd = new Date(r.getDatumZatvaranjaNaloga().getTime());
-                    tbNalogZatvoren.setDate(dd);
-                    Date ddd = new Date(r.getPredvidjenoVrijemeZavrsetka().getTime());
-                    tbRokZatvaranja.setDate(ddd);
-
-                    if (r.isPlaceno()) {
-                        cbPlaceno.setSelected(true);
-                    } else {
-                        cbPlaceno.setSelected(false);
-                    }
-
-                    tbTroskovi.setText(new Double(r.getTroskovi()).toString());
-                    tbCijena.setText(new Double(r.getCijenaUsluge()).toString());
-                    taProblem.setText(r.getOpisProblema());
-                }
-            }
-
-        });
+        
+        radniNalogLogika.inicijalizacijaPregledIstorije(this);
 
     }
 
@@ -177,8 +88,8 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         tbTroskovi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabelNalogZatvorenLABEL = new javax.swing.JLabel();
+        lbRokZaZatvaranjeLABEL = new javax.swing.JLabel();
         cbPlaceno = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -425,13 +336,13 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Nalog otvoren:");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Nalog zatvoren:");
+        jLabelNalogZatvorenLABEL.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelNalogZatvorenLABEL.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNalogZatvorenLABEL.setText("Nalog zatvoren:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Rok za zatvaranje:");
+        lbRokZaZatvaranjeLABEL.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbRokZaZatvaranjeLABEL.setForeground(new java.awt.Color(255, 255, 255));
+        lbRokZaZatvaranjeLABEL.setText("Rok za zatvaranje:");
 
         cbPlaceno.setBackground(new java.awt.Color(102, 153, 255));
         cbPlaceno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -494,8 +405,8 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                 .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel15)
+                    .addComponent(lbRokZaZatvaranjeLABEL)
+                    .addComponent(jLabelNalogZatvorenLABEL)
                     .addComponent(jLabel19)
                     .addComponent(jLabel18))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -517,12 +428,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                                 .addGap(31, 31, 31)
                                 .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))))
-                        .addContainerGap())
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAzurirajRadniNalogLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelAzurirajRadniNalogLayout.setVerticalGroup(
             panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,11 +450,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                             .addComponent(tbNalogOtvoren, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
+                            .addComponent(jLabelNalogZatvorenLABEL)
                             .addComponent(tbNalogZatvoren, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel16)
+                            .addComponent(lbRokZaZatvaranjeLABEL)
                             .addComponent(tbRokZatvaranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbPlaceno)
@@ -552,7 +462,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                         .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tbTroskovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18))
-                        .addGap(69, 69, 69))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tbCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelAzurirajRadniNalogLayout.createSequentialGroup()
                         .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -560,17 +474,9 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelAzurirajRadniNalogLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(btnAzuriraj)
-                                .addGap(0, 24, Short.MAX_VALUE))
-                            .addGroup(panelAzurirajRadniNalogLayout.createSequentialGroup()
-                                .addGroup(panelAzurirajRadniNalogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel19)
-                                    .addComponent(tbCijena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addGap(26, 26, 26)
+                        .addComponent(btnAzuriraj)
+                        .addGap(0, 24, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout panelGlavniLayout = new javax.swing.GroupLayout(panelGlavni);
@@ -624,6 +530,134 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnAzurirajActionPerformed
 
+    public int getIdVozila() {
+        return idVozila;
+    }
+
+    public static Integer getIdRadnogNaloga() {
+        return IdRadnogNaloga;
+    }
+
+    public RadniNalogLogika getRadniNalogLogika() {
+        return radniNalogLogika;
+    }
+
+    public JButton getBtnAzuriraj() {
+        return btnAzuriraj;
+    }
+
+    public JCheckBox getCbPlaceno() {
+        return cbPlaceno;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JLabel getLbAdresa() {
+        return lbAdresa;
+    }
+
+    public JLabel getLbBrojRegistracije() {
+        return lbBrojRegistracije;
+    }
+
+    public JLabel getLbGodiste() {
+        return lbGodiste;
+    }
+
+    public JLabel getLbGrad() {
+        return lbGrad;
+    }
+
+    public JLabel getLbKilovati() {
+        return lbKilovati;
+    }
+
+    public JLabel getLbKubikaza() {
+        return lbKubikaza;
+    }
+
+    public JLabel getLbModelVozila() {
+        return lbModelVozila;
+    }
+
+    public JLabel getLbTelefon() {
+        return lbTelefon;
+    }
+
+    public JLabel getLbVlasnik() {
+        return lbVlasnik;
+    }
+
+    public JLabel getLbVrstaGoriva() {
+        return lbVrstaGoriva;
+    }
+
+    public JList<String> getListRadnici() {
+        return listRadnici;
+    }
+
+    public JPanel getPanelAzurirajRadniNalog() {
+        return panelAzurirajRadniNalog;
+    }
+
+    public JPanel getPanelGlavni() {
+        return panelGlavni;
+    }
+
+    public JPanel getPanelTabela() {
+        return panelTabela;
+    }
+
+    public JScrollPane getSkrolPejn() {
+        return skrolPejn;
+    }
+
+    public JTextArea getTaProblem() {
+        return taProblem;
+    }
+
+    public JTable getTabela() {
+        return tabela;
+    }
+
+    public JTextField getTbCijena() {
+        return tbCijena;
+    }
+
+    public JTextField getTbIdNaloga() {
+        return tbIdNaloga;
+    }
+
+    public JDateChooser getTbNalogOtvoren() {
+        return tbNalogOtvoren;
+    }
+
+    public JDateChooser getTbNalogZatvoren() {
+        return tbNalogZatvoren;
+    }
+
+    public JDateChooser getTbRokZatvaranja() {
+        return tbRokZatvaranja;
+    }
+
+    public JTextField getTbTroskovi() {
+        return tbTroskovi;
+    }
+
+    public JLabel getjLabelNalogZatvorenLABEL() {
+        return jLabelNalogZatvorenLABEL;
+    }
+
+    public JLabel getLbRokZaZatvaranjeLABEL() {
+        return lbRokZaZatvaranjeLABEL;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -675,8 +709,6 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -689,6 +721,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelNalogZatvorenLABEL;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAdresa;
@@ -698,6 +731,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lbKilovati;
     private javax.swing.JLabel lbKubikaza;
     private javax.swing.JLabel lbModelVozila;
+    private javax.swing.JLabel lbRokZaZatvaranjeLABEL;
     private javax.swing.JLabel lbTelefon;
     private javax.swing.JLabel lbVlasnik;
     private javax.swing.JLabel lbVrstaGoriva;

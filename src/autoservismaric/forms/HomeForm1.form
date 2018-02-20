@@ -2106,7 +2106,7 @@
                                       <Component id="jLabel96" min="-2" max="-2" attributes="0"/>
                                       <Component id="panelPronadjiVozilo" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel97" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -2208,30 +2208,28 @@
                                           <Component id="tfImeVozilo" max="32767" attributes="0"/>
                                           <Component id="tfNazivVozilo" max="32767" attributes="0"/>
                                           <Component id="tfPrezimeVozilo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfGodisteTrazi" alignment="1" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="tfMarkaTrazi" max="32767" attributes="0"/>
-                                                          <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                                          <Component id="tfModelTrazi" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="rbPrivatnoLiceVozilo" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                          <Component id="rbPravnoLiceVozilo" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Component id="tfRegistracijaTrazi" min="-2" pref="192" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               <Component id="btnPronadji" min="-2" pref="112" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="tfGodisteTrazi" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="tfMarkaTrazi" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                                      <Component id="tfModelTrazi" min="-2" pref="73" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="rbPrivatnoLiceVozilo" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="rbPravnoLiceVozilo" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="tfRegistracijaTrazi" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -2352,12 +2350,10 @@
                             <Component class="javax.swing.JTextField" name="tfModelTrazi">
                               <Events>
                                 <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfModelTraziFocusGained"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfModelTraziActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfPrezimeVozilo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPronadji">
                               <Properties>
@@ -2414,9 +2410,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfImeVozilo">
-                              <Properties>
-                                <Property name="editable" type="boolean" value="false"/>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rbPrivatnoLiceVozilo">
                               <Properties>

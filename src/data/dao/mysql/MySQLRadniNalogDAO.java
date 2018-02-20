@@ -280,7 +280,6 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
                 + "Placeno=?, "
                 + "DatumOtvaranjaNaloga=?, "
                 + "DatumZatvaranjaNaloga=?, "
-                + "IdVozilo=?, "
                 + "Troskovi=?, "
                 + "Kilometraza=?, "
                 + "OpisProblema=?, "
@@ -293,14 +292,13 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
             ps.setObject(1, nalog.isPlaceno());
             ps.setObject(2, nalog.getDatumOtvaranjaNaloga());
             ps.setObject(3, nalog.getDatumZatvaranjaNaloga());
-            ps.setInt(4, nalog.getIdVozilo());
-            ps.setObject(5, nalog.getTroskovi());
-            ps.setObject(6, nalog.getKilometraza());
-            ps.setObject(7, nalog.getOpisProblema());
-            ps.setObject(8, nalog.getPredvidjenoVrijemeZavrsetka());
-            ps.setObject(9, nalog.getCijenaUsluge());
-            ps.setInt(10, nalog.getIdRadniNalog());
-
+            ps.setObject(4, nalog.getTroskovi());
+            ps.setObject(5, nalog.getKilometraza());
+            ps.setObject(6, nalog.getOpisProblema());
+            ps.setObject(7, nalog.getPredvidjenoVrijemeZavrsetka());
+            ps.setObject(8, nalog.getCijenaUsluge());
+            ps.setInt(9, nalog.getIdRadniNalog());
+            System.out.println(nalog.getIdVozilo());
             retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
