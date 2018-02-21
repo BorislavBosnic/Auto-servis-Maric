@@ -28,7 +28,36 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next())
-				retVal.add(new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka").toLowerCase(), rs.getString("Model").toLowerCase()));
+				retVal.add(new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka"), rs.getString("Model")));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
+    
+    @Override
+    public ArrayList<ModelVozilaDTO> getModeli(String marka){
+        ArrayList<ModelVozilaDTO> retVal = new ArrayList<ModelVozilaDTO>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT IdModelVozila, Marka, Model "
+                                + "FROM model_vozila "
+				+ "WHERE Marka=? "
+				+ "ORDER BY IdModelVozila ASC ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+                        ps.setString(1, marka);
+			rs = ps.executeQuery();
+
+			while (rs.next())
+				retVal.add(new ModelVozilaDTO(rs.getInt("IdModelVozila"), rs.getString("Marka"), rs.getString("Model")));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);

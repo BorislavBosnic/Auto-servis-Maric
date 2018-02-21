@@ -95,6 +95,8 @@ public class MySQLProdanDioDAO implements ProdanDioDAO {
 				retVal.add(new ProdanDioDTO(rs.getInt("d.IdProdanDio"), rs.getInt("d.IdDio"), 
                                         rs.getDouble("CijenaProdaje"), rs.getInt("Kolicina"), rs.getDate("Datum")));
                         }
+                        if(retVal.size() > 0)
+                            return retVal;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			DBUtilities.getInstance().showSQLException(e);
@@ -102,6 +104,6 @@ public class MySQLProdanDioDAO implements ProdanDioDAO {
 			ConnectionPool.getInstance().checkIn(conn);
 			DBUtilities.getInstance().close(ps, rs);
 		}
-		return retVal;
+		return null;
     }
 }

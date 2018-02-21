@@ -173,11 +173,12 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `autoservismaric`.`prodan_dio`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`prodan_dio` (
-  `IdDio` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdProdanDio` INT(11) NOT NULL AUTO_INCREMENT,
+  `IdDio` INT(11) NOT NULL,
   `CijenaProdaje` DECIMAL(6,2) NULL DEFAULT NULL,
   `Kolicina` INT(11) NULL DEFAULT NULL,
   `Datum` DATE NULL DEFAULT NULL,
-  PRIMARY KEY (`IdDio`),
+  PRIMARY KEY (`IdProdanDio`),
   CONSTRAINT `prodan_dio_ibfk_1`
     FOREIGN KEY (`IdDio`)
     REFERENCES `autoservismaric`.`dio` (`IdDio`))
@@ -256,10 +257,10 @@ INSERT INTO dio VALUES (3, "Rotor", "5d8d1g32g1", 1995, true, "Benzin", 10.5, 3,
 INSERT INTO dio VALUES (4, "Stator", "9a5i1b6d3y", 2005, false, null, 50, 2, true);
 INSERT INTO dio VALUES (5, "Felna", "a4520yhn6a", 2010, false, null, 35, 1, true);
 
-INSERT INTO prodan_dio VALUES (1, 55, 2, '2017-10-10');
-INSERT INTO prodan_dio VALUES (2, 12, 3, '2017-10-22');
-INSERT INTO prodan_dio VALUES (3, 13, 1, '2017-11-08');
-INSERT INTO prodan_dio VALUES (4, 55, 5, '2017-11-09');
+INSERT INTO prodan_dio VALUES (1, 1, 55, 2, '2017-10-10');
+INSERT INTO prodan_dio VALUES (2, 2, 12, 3, '2017-10-22');
+INSERT INTO prodan_dio VALUES (3, 3, 13, 1, '2017-11-08');
+INSERT INTO prodan_dio VALUES (4, 4, 55, 1, '2017-11-09');
 
 INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
 

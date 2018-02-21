@@ -27,6 +27,7 @@ import data.dto.RadniNalogDTO;
 import data.dto.TerminDTO;
 import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
+import java.io.*;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -64,6 +65,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import poslovnalogika.DioLogika;
 import static poslovnalogika.KnjigovodstvoLogika.fakturisaniRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.fakturisi;
 import static poslovnalogika.KnjigovodstvoLogika.nefakturisaniRadniNalozi;
@@ -78,6 +80,7 @@ import static poslovnalogika.KnjigovodstvoLogika.prikaziFakturu;
 import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
 import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
 import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
+import poslovnalogika.ModelVozilaLogika;
 import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
 import poslovnalogika.StatistikaLogika;
@@ -494,6 +497,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     
     VoziloKupacMeniLogika voziloKupacMeniLogika = new VoziloKupacMeniLogika();
+    ModelVozilaLogika modelVozilaLogika = new ModelVozilaLogika();
+    DioLogika dioLogika = new DioLogika();
     
     public void ucitajPopupZaVlasnike() {
           voziloKupacMeniLogika.ucitajPopupZaVlasnike(this);
@@ -638,8 +643,24 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(getClass().getResource("/autoservismaric/images/ikona2.png")).getImage());
-        datumLabel.setText("Aktivnosti planirane za danas, " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
-
+        
+        datumLabel.setText("Aktivnosti: " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
+        
+        dateChooserAktivnosti1.setCalendar(Calendar.getInstance());
+        dateChooserAktivnosti2.setCalendar(Calendar.getInstance()); 
+        
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream("baza.ser"));
+            java.util.Date dat = (java.util.Date)ois.readObject();
+            labelBaza.setText(new SimpleDateFormat("dd.MM.yyyy.").format(dat));
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
         inicijalizujZaposleniPanel();
 
         /**
@@ -720,23 +741,29 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel118 = new javax.swing.JLabel();
-        jSeparator24 = new javax.swing.JSeparator();
-        jSeparator25 = new javax.swing.JSeparator();
+        dateChooserAktivnosti1 = new com.toedter.calendar.JDateChooser();
+        dateChooserAktivnosti2 = new com.toedter.calendar.JDateChooser();
+        btnPrikazii = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        btnBaza = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        labelBaza = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        Napomene2 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblNeplaceneFakture = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
         danasnjeAktivnostiPanel = new javax.swing.JPanel();
         datumLabel = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
-        Napomene2 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tblNeplaceneFakture = new javax.swing.JTable();
         radniNaloziPanel = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
@@ -879,6 +906,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jtfCijena = new javax.swing.JTextField();
         jtfGodiste = new javax.swing.JTextField();
         jtfKolicina = new javax.swing.JTextField();
+        btnDodajModel = new javax.swing.JButton();
         jLabel49 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
@@ -1442,22 +1470,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(102, 153, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Search_25px.png"))); // NOI18N
-        jLabel18.setText("Pretraži");
-        jLabel18.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jTextField22.setBackground(new java.awt.Color(102, 153, 255));
-        jTextField22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField22.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField22.setBorder(null);
-
-        jTextField21.setBackground(new java.awt.Color(102, 153, 255));
-        jTextField21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField21.setBorder(null);
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Datum do:");
@@ -1467,50 +1479,49 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel118.setForeground(new java.awt.Color(255, 255, 255));
         jLabel118.setText("Datum od:");
 
-        jSeparator24.setForeground(new java.awt.Color(255, 255, 255));
-
-        jSeparator25.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrikazii.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPrikazii.setText("Prikaži");
+        btnPrikazii.setPreferredSize(new java.awt.Dimension(105, 38));
+        btnPrikazii.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrikaziiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel118, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jSeparator24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator25, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField21))
-                        .addGap(0, 8, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateChooserAktivnosti2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateChooserAktivnosti1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(btnPrikazii, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel118)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(4, 4, 4)
-                .addComponent(jSeparator25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dateChooserAktivnosti1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel118, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dateChooserAktivnosti2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPrikazii, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1522,6 +1533,74 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
+        jPanel16.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 369, Short.MAX_VALUE)
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel12.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+
+        btnBaza.setText("Čuvanje podataka");
+        btnBaza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBazaActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("Poslednji put:");
+
+        labelBaza.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelBaza.setForeground(new java.awt.Color(240, 240, 240));
+        labelBaza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelBaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(btnBaza)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel40)
+                .addGap(18, 18, 18)
+                .addComponent(labelBaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBaza, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel37.setText("Pretraga predračuna:");
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel38.setText("Čuvanje podataka:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1531,16 +1610,30 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel38))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel37)
+                    .addComponent(jLabel38))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1550,97 +1643,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Home_20px_1.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        danasnjeAktivnostiPanel.setBackground(new java.awt.Color(255, 255, 255));
-        danasnjeAktivnostiPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Današnje aktivnosti:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
-
-        datumLabel.setBackground(new java.awt.Color(255, 255, 255));
-        datumLabel.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
-        datumLabel.setForeground(new java.awt.Color(204, 204, 204));
-        datumLabel.setText("  ");
-
-        jTable10.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Rok", "Opis", "Vlasnik", "Auto"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane11.setViewportView(jTable10);
-
-        javax.swing.GroupLayout danasnjeAktivnostiPanelLayout = new javax.swing.GroupLayout(danasnjeAktivnostiPanel);
-        danasnjeAktivnostiPanel.setLayout(danasnjeAktivnostiPanelLayout);
-        danasnjeAktivnostiPanelLayout.setHorizontalGroup(
-            danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        danasnjeAktivnostiPanelLayout.setVerticalGroup(
-            danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(datumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        Napomene2.setBackground(new java.awt.Color(255, 255, 255));
-        Napomene2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Neplaćene fakture:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
+        Napomene2.setBackground(new java.awt.Color(102, 153, 255));
+        Napomene2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
         tblNeplaceneFakture.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1690,44 +1694,150 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(tblNeplaceneFakture);
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel18.setText("Predračuni:");
+
         javax.swing.GroupLayout Napomene2Layout = new javax.swing.GroupLayout(Napomene2);
         Napomene2.setLayout(Napomene2Layout);
         Napomene2Layout.setHorizontalGroup(
             Napomene2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(Napomene2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Napomene2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         Napomene2Layout.setVerticalGroup(
             Napomene2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Napomene2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
+
+        danasnjeAktivnostiPanel.setBackground(new java.awt.Color(102, 153, 255));
+        danasnjeAktivnostiPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        danasnjeAktivnostiPanel.setToolTipText("");
+
+        datumLabel.setBackground(new java.awt.Color(255, 255, 255));
+        datumLabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        datumLabel.setForeground(new java.awt.Color(240, 240, 240));
+        datumLabel.setText("Aktivnosti: ");
+
+        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Rok", "Opis", "Vlasnik", "Auto"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane11.setViewportView(jTable10);
+
+        javax.swing.GroupLayout danasnjeAktivnostiPanelLayout = new javax.swing.GroupLayout(danasnjeAktivnostiPanel);
+        danasnjeAktivnostiPanel.setLayout(danasnjeAktivnostiPanelLayout);
+        danasnjeAktivnostiPanelLayout.setHorizontalGroup(
+            danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
+                        .addComponent(datumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        danasnjeAktivnostiPanelLayout.setVerticalGroup(
+            danasnjeAktivnostiPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(danasnjeAktivnostiPanelLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(datumLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(danasnjeAktivnostiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Napomene2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2086, 2086, 2086)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Napomene2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(danasnjeAktivnostiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        Napomene2.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout pocetnajPanelLayout = new javax.swing.GroupLayout(pocetnajPanel);
         pocetnajPanel.setLayout(pocetnajPanelLayout);
         pocetnajPanelLayout.setHorizontalGroup(
             pocetnajPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pocetnajPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(danasnjeAktivnostiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(Napomene2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2204, Short.MAX_VALUE))
         );
         pocetnajPanelLayout.setVerticalGroup(
             pocetnajPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pocetnajPanelLayout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(pocetnajPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(danasnjeAktivnostiPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Napomene2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(1013, Short.MAX_VALUE))
+                .addContainerGap(1995, Short.MAX_VALUE))
         );
-
-        Napomene2.getAccessibleContext().setAccessibleDescription("");
 
         parentPanel.add(pocetnajPanel, "card2");
 
@@ -1767,7 +1877,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
-                .addContainerGap(2990, Short.MAX_VALUE))
+                .addContainerGap(2994, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1791,7 +1901,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             radniNaloziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, radniNaloziPanelLayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1512, Short.MAX_VALUE))
+                .addContainerGap(2405, Short.MAX_VALUE))
         );
 
         parentPanel.add(radniNaloziPanel, "card9");
@@ -2189,12 +2299,12 @@ public class HomeForm1 extends javax.swing.JFrame {
             zakazivanjaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(zakazivanjaPanelLayout.createSequentialGroup()
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, 3042, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 120, Short.MAX_VALUE))
+                .addGap(0, 124, Short.MAX_VALUE))
         );
         zakazivanjaPanelLayout.setVerticalGroup(
             zakazivanjaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(zakazivanjaPanelLayout.createSequentialGroup()
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, 1811, Short.MAX_VALUE)
+                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, 2704, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2712,7 +2822,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelAkcijeNaFormiLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(panelVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(2099, Short.MAX_VALUE))
+                .addContainerGap(2103, Short.MAX_VALUE))
         );
         panelAkcijeNaFormiLayout.setVerticalGroup(
             panelAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2777,6 +2887,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbMarka.setMaximumSize(new java.awt.Dimension(81, 20));
         cbMarka.setMinimumSize(new java.awt.Dimension(81, 20));
         cbMarka.setPreferredSize(new java.awt.Dimension(81, 20));
+        cbMarka.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMarkaItemStateChanged(evt);
+            }
+        });
 
         jLabel53.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel53.setForeground(new java.awt.Color(255, 255, 255));
@@ -2863,23 +2978,22 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addComponent(tfNaziv)
                             .addComponent(tfGodiste, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                         .addGap(86, 86, 86)
-                        .addGroup(pretraziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pretraziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pretraziPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel77, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbModel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pretraziPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pretraziPanelLayout.createSequentialGroup()
                                 .addGroup(pretraziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel73, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pretraziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel74, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel77, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(pretraziPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)))
+                        .addGroup(pretraziPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbModel, 0, 100, Short.MAX_VALUE)
+                            .addComponent(cbMarka, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbGorivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10))
                     .addGroup(pretraziPanelLayout.createSequentialGroup()
                         .addComponent(btnSviDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
@@ -2970,6 +3084,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         jcbMarka.setMaximumSize(new java.awt.Dimension(81, 20));
         jcbMarka.setMinimumSize(new java.awt.Dimension(81, 20));
         jcbMarka.setPreferredSize(new java.awt.Dimension(81, 20));
+        jcbMarka.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbMarkaItemStateChanged(evt);
+            }
+        });
 
         jLabel62.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel62.setForeground(new java.awt.Color(255, 255, 255));
@@ -3002,6 +3121,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("Količina:");
 
+        btnDodajModel.setText("Dodaj model");
+        btnDodajModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajModelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dodajDioPanelLayout = new javax.swing.GroupLayout(dodajDioPanel);
         dodajDioPanel.setLayout(dodajDioPanelLayout);
         dodajDioPanelLayout.setHorizontalGroup(
@@ -3022,26 +3148,32 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(jtfCijena)
                     .addComponent(jtfGodiste)
                     .addComponent(jtfKolicina, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addGap(86, 86, 86)
-                .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dodajDioPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(74, 74, 74)
+                        .addComponent(btnDodaj)
                         .addGap(18, 18, 18)
-                        .addComponent(jcbModel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dodajDioPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbStanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dodajDioPanelLayout.createSequentialGroup()
-                        .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel61, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcbMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(btnDodajModel))
+                    .addGroup(dodajDioPanelLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(dodajDioPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jcbGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dodajDioPanelLayout.createSequentialGroup()
+                                .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel62, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel64, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbModel, 0, 100, Short.MAX_VALUE)
+                                    .addComponent(jcbMarka, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dodajDioPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbStanje, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         dodajDioPanelLayout.setVerticalGroup(
             dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3077,13 +3209,12 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(jtfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dodajDioPanelLayout.createSequentialGroup()
-                        .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel34)
-                            .addComponent(jtfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnDodaj, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(dodajDioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel34)
+                        .addComponent(jtfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDodajModel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -3192,7 +3323,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(dijeloviPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2104, Short.MAX_VALUE))
+                .addContainerGap(2108, Short.MAX_VALUE))
         );
         dijeloviPanelLayout.setVerticalGroup(
             dijeloviPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3200,7 +3331,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1070, Short.MAX_VALUE))
+                .addGap(0, 1963, Short.MAX_VALUE))
         );
 
         parentPanel.add(dijeloviPanel, "card4");
@@ -3555,7 +3686,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(jLabel126))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addContainerGap(1423, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout knjigovodstvoPanelLayout = new javax.swing.GroupLayout(knjigovodstvoPanel);
@@ -3564,12 +3695,12 @@ public class HomeForm1 extends javax.swing.JFrame {
             knjigovodstvoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(knjigovodstvoPanelLayout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 952, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2210, Short.MAX_VALUE))
+                .addGap(0, 2214, Short.MAX_VALUE))
         );
         knjigovodstvoPanelLayout.setVerticalGroup(
             knjigovodstvoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(knjigovodstvoPanelLayout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, 1162, Short.MAX_VALUE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, 2055, Short.MAX_VALUE)
                 .addGap(660, 660, 660))
         );
 
@@ -3938,7 +4069,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                                 .addComponent(jLabel149, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel148, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(2062, Short.MAX_VALUE))
+                .addContainerGap(2066, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3966,7 +4097,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             zaposleniPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(zaposleniPanelLayout.createSequentialGroup()
                 .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 927, Short.MAX_VALUE))
+                .addGap(0, 1820, Short.MAX_VALUE))
         );
 
         parentPanel.add(zaposleniPanel, "card3");
@@ -4385,7 +4516,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addComponent(jLabel87, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel86)
-                .addContainerGap(3016, Short.MAX_VALUE))
+                .addContainerGap(3020, Short.MAX_VALUE))
             .addGroup(statistikaHeaderjPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -4554,7 +4685,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addGroup(statistikajPanelLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(odabirMjesecaStatistikaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 988, Short.MAX_VALUE))
+                .addGap(0, 1881, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Ukupni prihodi");
@@ -4706,10 +4837,6 @@ public class HomeForm1 extends javax.swing.JFrame {
             resetColor(menu6jPanel);
         }
     }//GEN-LAST:event_menu6jPanelMouseExited
-
-    private void jLabel4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel4PropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4PropertyChange
 
     private void menu1jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1jPanelMouseClicked
 
@@ -5257,39 +5384,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             flag = true;
         }
         if (!flag) {
-            DioDTO noviDio = new DioDTO(sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
-            DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
-            ModelVozilaDTO modVoz = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-            DioModelVozilaDTO dmv = null;
-            if (dio != null && modVoz != null) {
-                dmv = DAOFactory.getDAOFactory().getDioModelVozilaDAO().getDioModelVozila(dio.getId(),
-                        modVoz.getIdModelVozila());
-            }
-
-            if (dmv != null) {
-                //DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().getDioo(noviDio.getSifra(), noviDio.getNaziv());
-                //noviDio.setId(dioo.getId());
-                //DAOFactory.getDAOFactory().getDioDAO().azurirajDio(noviDio)) {
-                JOptionPane jop = new JOptionPane();
-                jop.showMessageDialog(this, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-
-            } else {
-                if (DAOFactory.getDAOFactory().getDioDAO().dodajDio(noviDio)) {
-                    if (modVoz == null) {
-                        DAOFactory.getDAOFactory().getModelVozilaDAO().dodajModel(new ModelVozilaDTO(marka, model));
-                    }
-                    DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
-                    ModelVozilaDTO mv = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-                    DAOFactory.getDAOFactory().getDioModelVozilaDAO().dodajDioModelVozila(dioo.getId(), mv.getIdModelVozila());
-                    JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(this, "Uspješno dodan dio!!!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
-                    dtm.addRow(new Object[]{dioo.getId(), sifra, naziv, marka, model, godiste, gorivo, cijena, kolicina, stanje ? "Da" : "Ne"});
-                }
-            }
+            dioLogika.dodajDio(this, sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
         }
-        /*DioDTO dio = new DioDTO(sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
-        DAOFactory.getDAOFactory().getDioDAO().dodajDio(dio);*/
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
@@ -5333,7 +5429,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         model = (String) cbModel.getSelectedItem();
 
         ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
-
         if (!"".equals(tfId.getText())) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));
         } else if (!"".equals(sifra)) {
@@ -5371,6 +5466,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         } else if (!"".equals(naziv) && !"Svi".equals(gorivo)) {
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, gorivo, stanje);
         } else if (!"".equals(naziv)) {
+            System.out.println("udje");
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviNaziv(naziv, stanje);
         } else if (!"Svi".equals(gorivo) && !"Svi".equals(marka)) {
             if ("Svi".equals(model)) {
@@ -5378,7 +5474,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             } else {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, model, stanje);
             }
-        }
+        }else
+            dijelovi = null;
 
         DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
         dtm.setRowCount(0);
@@ -5544,6 +5641,96 @@ public class HomeForm1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfModelTraziActionPerformed
 
+    private void btnPrikaziiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziiActionPerformed
+        java.util.Date dat1 = null;
+        java.util.Date dat2 = null;
+        boolean flag = true;
+        try{
+            dat1 = (java.util.Date)dateChooserAktivnosti1.getDate();
+            dat2 = (java.util.Date)dateChooserAktivnosti2.getDate();
+        }catch(NullPointerException e){
+            //e.printStackTrace();
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(new JFrame(), "Nepravilan format datuma", "Greška",
+                JOptionPane.ERROR_MESSAGE);
+            flag = false;
+        }
+        try{
+        if(flag){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
+            if(!dat1.equals(dat2)){
+                datumLabel.setText("Aktivnosti: " + sdf.format(dat1) + "-" + sdf.format(dat2));
+            }else{
+                datumLabel.setText("Aktivnosti: " + sdf.format(dat1));
+            }
+        }
+        }catch(NullPointerException e){
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(new JFrame(), "Nepravilan format datuma", "Greška",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPrikaziiActionPerformed
+
+    private void jLabel4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLabel4PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4PropertyChange
+
+    private void btnBazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBazaActionPerformed
+        // treba serijalizovati datum u file baza.ser
+    }//GEN-LAST:event_btnBazaActionPerformed
+
+    private void btnDodajModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajModelActionPerformed
+        new DodajModel(new JFrame(), true).setVisible(true);
+
+        int size = cbModel.getItemCount();
+        for(int i = 0; i < size; i++){
+            cbModel.removeItemAt(0);
+        }
+        size = cbMarka.getItemCount();
+        for(int i = 0; i < size; i++){
+            cbMarka.removeItemAt(0);
+        }
+
+        //za dodavanje
+        ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+        ArrayList<String> markee = new ArrayList<String>();
+        ArrayList<String> modelii = new ArrayList<String>();
+        markee.add("Svi");
+        modelii.add("Svi");
+
+        jcbModel.removeAllItems();
+        jcbMarka.removeAllItems();
+        cbModel.removeAllItems();
+        cbMarka.removeAllItems();
+
+        jcbModel.addItem("Svi");
+        jcbMarka.addItem("Svi");
+
+        cbModel.addItem("Svi");
+        cbMarka.addItem("Svi");
+        //cbModel.addItem("Svi");
+        for(ModelVozilaDTO d : modeli){
+            if(!modelii.contains(d.getModel())){
+                modelii.add(d.getModel());
+                jcbModel.addItem(d.getModel());
+                cbModel.addItem(d.getModel());
+            }
+            if(!markee.contains(d.getMarka())){
+                markee.add(d.getMarka());
+                jcbMarka.addItem(d.getMarka());
+                cbMarka.addItem(d.getMarka());
+            }
+        }
+    }//GEN-LAST:event_btnDodajModelActionPerformed
+
+    private void jcbMarkaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMarkaItemStateChanged
+        modelVozilaLogika.ucitajModeleDodavanje(this, jcbMarka.getItemAt(jcbMarka.getSelectedIndex()));
+    }//GEN-LAST:event_jcbMarkaItemStateChanged
+
+    private void cbMarkaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarkaItemStateChanged
+        modelVozilaLogika.ucitajModelePretrazivanje(this, cbMarka.getItemAt(cbMarka.getSelectedIndex()));
+    }//GEN-LAST:event_cbMarkaItemStateChanged
+
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         voziloKupacMeniLogika.prikaziKupceSveUTabeli(kupci, this);
     }
@@ -5625,23 +5812,43 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         }
         int size = cbModel.getItemCount();
-        for (int j = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             cbModel.removeItemAt(0);
         }
         size = cbMarka.getItemCount();
-        for (int j = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             cbMarka.removeItemAt(0);
         }
-        ArrayList<DioDTO> nazivi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
-        ArrayList<String> naz = new ArrayList<String>();
+        //ArrayList<DioDTO> nazivi = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
+        //ArrayList<String> naz = new ArrayList<String>();
+        //za dodavanje
+        ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+        ArrayList<String> markee = new ArrayList<String>();
+        ArrayList<String> modelii = new ArrayList<String>();
+        markee.add("Svi");
+        modelii.add("Svi");
+        
+        jcbModel.removeAllItems();
+        jcbMarka.removeAllItems();
         cbModel.removeAllItems();
+        cbMarka.removeAllItems();
+        
+        jcbModel.addItem("Svi");
+        jcbMarka.addItem("Svi");
+        
+        cbModel.addItem("Svi");
+        cbMarka.addItem("Svi");
         //cbModel.addItem("Svi");
-        for (DioDTO d : nazivi) {
+        /*for (DioDTO d : nazivi) {
             if (!naz.contains(d.getModel())) {
-                naz.add(d.getModel());
+                naz.add(d.getModel());*/
+        for(ModelVozilaDTO d : modeli){
+            if(!modelii.contains(d.getModel())){
+                modelii.add(d.getModel());
+                jcbModel.addItem(d.getModel());
                 cbModel.addItem(d.getModel());
             }
-        }
+        /*}
 
         //ArrayList<DioDTO> marke = DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
         ArrayList<String> mar = new ArrayList<String>();
@@ -5649,7 +5856,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         //cbMarka.addItem("Svi");
         for (DioDTO d : nazivi) {
             if (!mar.contains(d.getMarka())) {
-                mar.add(d.getMarka());
+                mar.add(d.getMarka());*/
+        if(!markee.contains(d.getMarka())){
+                markee.add(d.getMarka());
+                jcbMarka.addItem(d.getMarka());
                 cbMarka.addItem(d.getMarka());
             }
         }
@@ -6394,9 +6604,9 @@ public class HomeForm1 extends javax.swing.JFrame {
         return jLabel17;
     }
 
-    public JLabel getjLabel18() {
+    /*public JLabel getjLabel18() {
         return jLabel18;
-    }
+    }*/
 
     public JLabel getjLabel2() {
         return jLabel2;
@@ -6822,13 +7032,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         return jSeparator2;
     }
 
-    public JSeparator getjSeparator24() {
+    /*public JSeparator getjSeparator24() {
         return jSeparator24;
     }
 
     public JSeparator getjSeparator25() {
         return jSeparator25;
-    }
+    }*/
 
     public JSeparator getjSeparator26() {
         return jSeparator26;
@@ -6850,13 +7060,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         return jTableZaposleni;
     }
 
-    public JTextField getjTextField21() {
+    /*public JTextField getjTextField21() {
         return jTextField21;
     }
 
     public JTextField getjTextField22() {
         return jTextField22;
-    }
+    }*/
 
     public JComboBox<String> getJcbGorivo() {
         return jcbGorivo;
@@ -7211,7 +7421,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Napomene2;
     private javax.swing.JPanel PanelGrafikPrihodiDijelovi;
+    private javax.swing.JButton btnBaza;
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajModel;
     private javax.swing.JButton btnDodajTermin;
     private javax.swing.JButton btnFakturisano;
     private javax.swing.JButton btnIzbrisiNalog;
@@ -7226,6 +7438,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnPredracun;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JButton btnPrikaziSve;
+    private javax.swing.JButton btnPrikazii;
     private javax.swing.JButton btnProdani;
     private javax.swing.JButton btnPronadji;
     private javax.swing.JButton btnPronadjiTermin;
@@ -7246,6 +7459,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxGodina;
     private javax.swing.JComboBox<String> comboBoxMjesec;
     private javax.swing.JPanel danasnjeAktivnostiPanel;
+    private com.toedter.calendar.JDateChooser dateChooserAktivnosti1;
+    private com.toedter.calendar.JDateChooser dateChooserAktivnosti2;
     private com.toedter.calendar.JDateChooser dateChooserDatumDoZaposlenog;
     private com.toedter.calendar.JDateChooser dateChooserDatumOdZaposlenog;
     private com.toedter.calendar.JDateChooser dateChooserDatumPrimanjaURadniOdnos;
@@ -7342,7 +7557,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
@@ -7397,8 +7615,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -7429,15 +7649,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator24;
-    private javax.swing.JSeparator jSeparator25;
     private javax.swing.JSeparator jSeparator26;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JTable jTable10;
     public static javax.swing.JTable jTableZaposleni;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
     private javax.swing.JComboBox<String> jcbGorivo;
     private javax.swing.JComboBox<String> jcbMarka;
     private javax.swing.JComboBox<String> jcbModel;
@@ -7447,6 +7663,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNaziv;
     private javax.swing.JTextField jtfSifra;
     private javax.swing.JPanel knjigovodstvoPanel;
+    private javax.swing.JLabel labelBaza;
     private javax.swing.JLabel labelBrojRadnihNaloga;
     private javax.swing.JLabel labelDnevnaZarada;
     private javax.swing.JLabel labelDnevnaZaradaDijelovi;

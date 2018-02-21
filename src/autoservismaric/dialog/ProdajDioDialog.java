@@ -90,7 +90,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnOdustani = new javax.swing.JButton();
-        btnAzuriraj = new javax.swing.JButton();
+        btnProdaj = new javax.swing.JButton();
         jtfPDV = new javax.swing.JTextField();
         jtfKolicina = new javax.swing.JTextField();
         jtfCijena = new javax.swing.JTextField();
@@ -103,6 +103,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
 
         panelzmijeniDio.setBackground(new java.awt.Color(102, 153, 255));
         panelzmijeniDio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panelzmijeniDio.setNextFocusableComponent(jtfCijena);
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -159,11 +160,30 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Šifra:");
 
+        tfId.setEditable(false);
+
+        tfSifra.setEditable(false);
         tfSifra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSifraActionPerformed(evt);
             }
         });
+
+        tfNaziv.setEditable(false);
+
+        tfMarka.setEditable(false);
+
+        tfModel.setEditable(false);
+
+        tfGorivo.setEditable(false);
+
+        tfCijena.setEditable(false);
+
+        tfKolicina.setEditable(false);
+
+        tfNovo.setEditable(false);
+
+        tfGodiste.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,11 +238,11 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel111)
                     .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel112)
                     .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,7 +254,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel113)
                             .addComponent(tfGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
+                        .addGap(7, 7, 7)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel115)
                             .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,20 +265,17 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                                 .addGap(0, 0, 0)
                                 .addComponent(lbPoruka))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
+                                .addGap(7, 7, 7)
                                 .addComponent(tfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(7, 7, 7)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(tfNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel24))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5)
+                    .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -287,15 +304,25 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             }
         });
 
-        btnAzuriraj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAzuriraj.setText("Prodaj");
-        btnAzuriraj.addActionListener(new java.awt.event.ActionListener() {
+        btnProdaj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnProdaj.setText("Prodaj");
+        btnProdaj.setNextFocusableComponent(btnOdustani);
+        btnProdaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAzurirajActionPerformed(evt);
+                btnProdajActionPerformed(evt);
             }
         });
 
+        jtfPDV.setNextFocusableComponent(btnUkupno);
+
+        jtfKolicina.setNextFocusableComponent(jtfPDV);
+
+        jtfCijena.setNextFocusableComponent(jtfKolicina);
+
+        tfUkupno.setEditable(false);
+
         btnUkupno.setText("Izračunaj ukupno:");
+        btnUkupno.setNextFocusableComponent(btnProdaj);
         btnUkupno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUkupnoActionPerformed(evt);
@@ -311,9 +338,9 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnUkupno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(tfUkupno, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfUkupno, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jSeparator11)
                         .addContainerGap())
@@ -322,17 +349,17 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                             .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfPDV)
                             .addComponent(jtfKolicina, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jtfCijena))
+                            .addComponent(jtfCijena, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(jtfPDV, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(btnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(btnProdaj, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -359,9 +386,11 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOdustani)
-                    .addComponent(btnAzuriraj))
+                    .addComponent(btnProdaj))
                 .addGap(27, 27, 27))
         );
+
+        tfUkupno.getAccessibleContext().setAccessibleDescription("");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -395,7 +424,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelzmijeniDioLayout = new javax.swing.GroupLayout(panelzmijeniDio);
@@ -429,7 +458,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAzurirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajActionPerformed
+    private void btnProdajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdajActionPerformed
        
        boolean flag = false;
        Integer kolNaStanju = (Integer) dtm.getValueAt(red, 8);
@@ -477,7 +506,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
            JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Uspješno ste prodali dio", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
        }
-    }//GEN-LAST:event_btnAzurirajActionPerformed
+    }//GEN-LAST:event_btnProdajActionPerformed
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
         dispose();
@@ -538,8 +567,8 @@ public class ProdajDioDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAzuriraj;
     private javax.swing.JButton btnOdustani;
+    private javax.swing.JButton btnProdaj;
     private javax.swing.JButton btnUkupno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel111;

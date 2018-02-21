@@ -25,6 +25,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         initComponents();
         setTitle("Pregled prodanih dijelova");
         setLocationRelativeTo(null);
+        btnSvi.doClick();
     }
 
     /**
@@ -43,7 +44,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSvi = new javax.swing.JButton();
         jtfId = new javax.swing.JTextField();
         jtfSifra = new javax.swing.JTextField();
         jtfNaziv = new javax.swing.JTextField();
@@ -86,10 +87,10 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("Prikaži sve");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSvi.setText("Prikaži sve");
+        btnSvi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSviActionPerformed(evt);
             }
         });
 
@@ -106,7 +107,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                         .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(96, 96, 96)
                         .addComponent(jLabel3))
-                    .addComponent(jButton3))
+                    .addComponent(btnSvi))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +136,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnSvi))
                 .addContainerGap())
         );
 
@@ -171,7 +172,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Sifra", "Naziv", "Prodajna cijena/kom", "Kolicina", "Datum"
+                "IdDio", "Sifra", "Naziv", "Prodajna cijena/kom", "Kolicina", "Datum"
             }
         ) {
             Class[] types = new Class [] {
@@ -241,7 +242,8 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         ArrayList<DioDTO> dijelovi2 = new ArrayList<DioDTO>();
         if(id != null){
             DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(id);
-            dijelovi.add(dio);
+            if(dio != null)
+                dijelovi.add(dio);
         }else if(!"".equals(sifra)){
             DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
         }else if(!"".equals(naziv)){
@@ -253,10 +255,12 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         dtm.setRowCount(0);
         
         ArrayList<ProdanDioDTO> prodani = new ArrayList<ProdanDioDTO>();
-        
+        //System.out.println(dijelovi.size());
+        if(dijelovi != null)
         for(int i = 0; i < dijelovi.size(); i++){
             DioDTO dio = dijelovi.get(i);
             prodani = DAOFactory.getDAOFactory().getProdanDioDAO().getProdaniDijelovi(dio.getId());
+            if(prodani != null)
             for(int j = 0; j < prodani.size(); j++){
                 ProdanDioDTO prod = prodani.get(j);
                 dtm.addRow(new Object[]{dio.getId(), dio.getSifra(), dio.getNaziv(),prod.getCijena(),prod.getKolicina()
@@ -278,7 +282,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSviActionPerformed
         ArrayList<ProdanDioDTO> prodani = new ArrayList<ProdanDioDTO>();
         prodani = DAOFactory.getDAOFactory().getProdanDioDAO().getSviProdaniDijelovi();
         
@@ -292,7 +296,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                             ,prod.getDatum()});
             }
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnSviActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,9 +306,9 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSvi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
