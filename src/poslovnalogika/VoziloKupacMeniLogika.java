@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Objects;
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
@@ -33,13 +34,15 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author DulleX
  */
 public class VoziloKupacMeniLogika {
-    public void ucitajPopupZaVlasnike(HomeForm1 forma){
+
+    public void ucitajPopupZaVlasnike(HomeForm1 forma) {
         forma.setPopupMenuVlasnik(new JPopupMenu());
         JMenuItem izmijeniVlasnika = new JMenuItem("Izmijeni vlasnika");
 
@@ -55,6 +58,32 @@ public class VoziloKupacMeniLogika {
         forma.getPopupMenuVlasnik().add(izmijeniVlasnika);
         forma.getTableVozila().setComponentPopupMenu(forma.getPopupMenuVlasnik());
 
+        JMenuItem izbrisiVlasnika = new JMenuItem("Izbriši vlasnika");
+        izbrisiVlasnika.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(forma, "Da li ste sigurni da želite da izbrišete podatke o izabranom vlasniku vozila?", "Upozorenje!", dialogButton);
+                if (dialogResult == 0) {
+                    if (DAOFactory.getDAOFactory().getKupacDAO().obrisiKupca(forma.getIdVlasnika())) {
+                        JOptionPane.showMessageDialog(forma, "Uspješno obrisani podaci o vlasniku vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                        for (int i = forma.getTableVozila().getModel().getRowCount() - 1; i >= 0; i--) {
+                            if ((Integer.parseInt(forma.getTableVozila().getModel().getValueAt(i, 0).toString())) == forma.getIdVlasnika()) {
+                                ((DefaultTableModel) forma.getTableVozila().getModel()).removeRow(i);
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(forma, "Nemoguće brisanje.", "Greška", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
+                    //System.out.println("No Option");
+                }
+            }
+        });
+        forma.getPopupMenuVlasnik().add(izbrisiVlasnika);
+
         forma.getPopupMenuVlasnik().addPopupMenuListener(new PopupMenuListener() {
 
             @Override
@@ -65,7 +94,6 @@ public class VoziloKupacMeniLogika {
                         int rowAtPoint = forma.getTableVozila().rowAtPoint(SwingUtilities.convertPoint(forma.getPopupMenuVlasnik(), new Point(0, 0), forma.getTableVozila()));
                         selektovanRed = rowAtPoint;
                         int column = 0;
-                        //int row = tableVozila.getSelectedRow();
                         String imeKolone = forma.getTableVozila().getModel().getColumnName(0);
 
                         if (selektovanRed >= 0) {
@@ -94,12 +122,12 @@ public class VoziloKupacMeniLogika {
             }
         });
     }
-    
-    public void ucitajPopupZaVozila(HomeForm1 forma){
+
+    public void ucitajPopupZaVozila(HomeForm1 forma) {
         forma.setPopupMenu(new JPopupMenu());
-        JMenuItem deleteItem = new JMenuItem("Izbrisi vozilo");
+        JMenuItem deleteItem = new JMenuItem("Izbriši vozilo");
         JMenuItem editItem = new JMenuItem("Izmijeni vozilo");
-        JMenuItem noviRadniNalog = new JMenuItem("Dodaj nov radni nalog");
+        JMenuItem noviRadniNalog = new JMenuItem("Dodaj novi radni nalog");
         JMenuItem pogledajIstorijuPopravki = new JMenuItem("Pogledaj istoriju popravki");
 
         pogledajIstorijuPopravki.addActionListener(new ActionListener() {
@@ -133,8 +161,6 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(new JFrame(), "Right-click performed on table and choose DELETE");
-
                 ArrayList<RadniNalogDTO> nalozi = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi(idVozila);
                 if (nalozi != null && nalozi.size() > 0) {
                     JOptionPane jop = new JOptionPane();
@@ -142,14 +168,17 @@ public class VoziloKupacMeniLogika {
                             + "Ako nastavite, oni će biti izbrisani, kao i podaci o vozilu.\n Da li ste sigurni da želite da nastavite?", "Upozorenje", JOptionPane.YES_NO_OPTION);
                     if (dialogResult == JOptionPane.YES_OPTION) {
 
-                        for (RadniNalogDTO r : nalozi) {
-                            DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(r.getIdRadniNalog());
+//                        for (RadniNalogDTO r : nalozi) {
+//                            DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(r.getIdRadniNalog());
+//                        }
+                        if (DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila)) {
+                            JOptionPane.showMessageDialog(forma, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                            for (int i = forma.getTableVozila().getModel().getRowCount() - 1; i >= 0; i--) {
+                                if ((Integer.parseInt(forma.getTableVozila().getModel().getValueAt(i, 0).toString())) == idVozila) {
+                                    ((DefaultTableModel) forma.getTableVozila().getModel()).removeRow(i);
+                                }
+                            }
                         }
-
-                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
-
-                        JOptionPane.showMessageDialog(forma, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-
                     } else if (dialogResult == JOptionPane.NO_OPTION) {
 
                     }
@@ -157,9 +186,16 @@ public class VoziloKupacMeniLogika {
                     int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni želite da izbrišete podatke o vozilu?", "Upozorenje", JOptionPane.YES_NO_OPTION);
 
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila);
+                        if (DAOFactory.getDAOFactory().getVoziloDAO().obrisiVozilo(idVozila)) {
 
-                        JOptionPane.showMessageDialog(forma, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(forma, "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+
+                            for (int i = forma.getTableVozila().getModel().getRowCount() - 1; i >= 0; i--) {
+                                if ((Integer.parseInt(forma.getTableVozila().getModel().getValueAt(i, 0).toString())) == idVozila) {
+                                    ((DefaultTableModel) forma.getTableVozila().getModel()).removeRow(i);
+                                }
+                            }
+                        }
                     } else if (dialogResult == JOptionPane.NO_OPTION) {
 
                     }
@@ -210,30 +246,30 @@ public class VoziloKupacMeniLogika {
         });
 
     }
-    
-    public AutoSuggestor ucitajPreporukeMarke(HomeForm1 forma){
+
+    public AutoSuggestor ucitajPreporukeMarke(HomeForm1 forma) {
         AutoSuggestor autoSuggestorMarke = new AutoSuggestor(forma.getTfMarkaTrazi(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
+                ArrayList<String> marke = new ArrayList<>();
+                ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
 
-                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
-                    modeli.add(mv.getMarka());
+                for (ModelVozilaDTO mv : modeli) {
+                    marke.add(mv.getMarka());
                 }
 
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
+                setDictionary(marke);
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
         };
         return autoSuggestorMarke;
     }
-    
-    public AutoSuggestor ucitajPreporukeModel(HomeForm1 forma){
-         AutoSuggestor autoSuggestorModel = new AutoSuggestor(forma.getTfModelTrazi(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
+
+    public AutoSuggestor ucitajPreporukeModel(HomeForm1 forma) {
+        AutoSuggestor autoSuggestorModel = new AutoSuggestor(forma.getTfModelTrazi(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
@@ -242,7 +278,9 @@ public class VoziloKupacMeniLogika {
                 //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> modeli = new ArrayList<>();
 
-                for (ModelVozilaDTO mv : VozilaLogika.modeli) {
+                ArrayList<ModelVozilaDTO> markaModeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+
+                for (ModelVozilaDTO mv : markaModeli) {
                     if (forma.getTfModelTrazi().getText() != null && !"".equals(forma.getTfModelTrazi().getText())) {
                         if (mv.getMarka().equals(marka.trim())) {
                             modeli.add(mv.getModel());
@@ -253,28 +291,26 @@ public class VoziloKupacMeniLogika {
                 }
 
                 setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
         };
         return autoSuggestorModel;
     }
-    
-    public AutoSuggestor ucitajPreporukeRegistracija(HomeForm1 forma){
+
+    public AutoSuggestor ucitajPreporukeRegistracija(HomeForm1 forma) {
         AutoSuggestor autoSuggestorRegistracija = new AutoSuggestor(forma.getTfRegistracijaTrazi(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> registracije = new ArrayList<>();
+                ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
 
-                for (VoziloDTO v : VozilaLogika.vozila) {
+                for (VoziloDTO v : vozila) {
                     registracije.add(v.getBrojRegistracije());
                 }
 
                 setDictionary(registracije);
-                //addToDictionary("bye");//adds a single word
 
                 return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
             }
@@ -282,16 +318,16 @@ public class VoziloKupacMeniLogika {
 
         return autoSuggestorRegistracija;
     }
-    
-    public AutoSuggestor ucitajPreporukeVlasnika(HomeForm1 forma){
+
+    public AutoSuggestor ucitajPreporukeVlasnika(HomeForm1 forma) {
         AutoSuggestor autoSuggestorVlasnik = new AutoSuggestor(forma.getTfPrezimeVozilo(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> vlasnici = new ArrayList<>();
+                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
 
-                for (KupacDTO v : VozilaLogika.vlasnici) {
+                for (KupacDTO v : kupci) {
                     if (v.getNaziv() == null) {
                         vlasnici.add(v.getIme() + " " + v.getPrezime());
                     }
@@ -306,16 +342,17 @@ public class VoziloKupacMeniLogika {
 
         return autoSuggestorVlasnik;
     }
-    
-    public AutoSuggestor ucitajPreporukePravniNaziv(HomeForm1 forma){
+
+    public AutoSuggestor ucitajPreporukePravniNaziv(HomeForm1 forma) {
         AutoSuggestor autoSuggestorPravniNaziv = new AutoSuggestor(forma.getTfNazivVozilo(), forma, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
             @Override
             public boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
                 ArrayList<String> vlasnici = new ArrayList<>();
 
-                for (KupacDTO v : VozilaLogika.vlasnici) {
+                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
+
+                for (KupacDTO v : kupci) {
                     if (v.getPrezime() == null && v.getIme() == null) {
                         vlasnici.add(v.getNaziv());
                     }
@@ -329,8 +366,8 @@ public class VoziloKupacMeniLogika {
 
         return autoSuggestorPravniNaziv;
     }
-    
-    public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma){
+
+    public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma) {
         String[] columns = {"ID", "Ime", "Prezime", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableVozila().setModel(model);
@@ -340,8 +377,8 @@ public class VoziloKupacMeniLogika {
         }
         forma.getTableVozila().setModel(model);
     }
-    
-    public void traziKupce(HomeForm1 forma){
+
+    public void traziKupce(HomeForm1 forma) {
         forma.izbrisiPopupZaVozila();
         forma.ucitajPopupZaVlasnike();
         String izabrano = "";
@@ -390,10 +427,9 @@ public class VoziloKupacMeniLogika {
             }
         }
 
-
     }
-    
-    public void prikaziKupcePravneUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma){
+
+    public void prikaziKupcePravneUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma) {
         String[] columns = {"ID", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableVozila().setModel(model);
@@ -403,8 +439,8 @@ public class VoziloKupacMeniLogika {
         }
         forma.getTableVozila().setModel(model);
     }
-    
-    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma){
+
+    public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci, HomeForm1 forma) {
         String[] columns = {"ID", "Ime", "Prezime", "Naziv pravnog lica", "Telefon", "Adresa", "Grad"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableVozila().setModel(model);
@@ -414,5 +450,166 @@ public class VoziloKupacMeniLogika {
         }
 
         forma.getTableVozila().setModel(model);
+    }
+
+    public void prikaziSvaVozila(HomeForm1 forma) {
+        ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
+        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        forma.getTableVozila().setModel(model);
+
+        for (VoziloDTO v : vozila) {
+            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+            ModelVozilaDTO mod = new ModelVozilaDTO();
+            ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+            for (ModelVozilaDTO m : modeli) {
+                if (m.getIdModelVozila() == v.getIdModelVozila()) {
+                    mod = m;
+                }
+            }
+
+            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
+            model.addRow(rowData);
+        }
+
+        forma.getTableVozila().setModel(model);
+    }
+
+    public void pronadjiVozilo(HomeForm1 forma) {
+        String registracija = forma.getTfRegistracijaTrazi().getText();
+        Integer godiste = 0;
+
+        if (forma.getTfGodisteTrazi().getText() != null && !"".equals(forma.getTfGodisteTrazi().getText())) {
+            try {
+                godiste = Integer.parseInt(forma.getTfGodisteTrazi().getText());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(forma, "Pogrešan format godišta. Mora da bude cjelobrojni podatak. ", "Greška", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        String marka = forma.getTfMarkaTrazi().getText();
+        String model = forma.getTfModelTrazi().getText();
+        boolean svi = forma.getCbSvi().isSelected();
+
+        if (svi) {
+
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            DefaultTableModel modell = new DefaultTableModel(columns, 0);
+            forma.getTableVozila().setModel(modell);
+
+            ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
+            for (VoziloDTO v : vozila) {
+
+                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+                ModelVozilaDTO mod = new ModelVozilaDTO();
+                ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+                for (ModelVozilaDTO m : modeli) {
+                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
+                        mod = m;
+                    }
+                }
+
+                boolean dodati = true;
+                if (registracija != null && !"".equals(registracija)) {
+                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (godiste != 0) {
+                    if (!Objects.equals(v.getGodiste(), godiste)) {
+                        dodati = false;
+                    }
+                }
+                if (marka != null && !"".equals(marka)) {
+                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (model != null && !"".equals(model)) {
+                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (dodati == true) {
+                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
+                    modell.addRow(rowData);
+                    forma.getTableVozila().setModel(modell);
+                }
+            }
+        } else {
+
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            DefaultTableModel modell = new DefaultTableModel(columns, 0);
+            forma.getTableVozila().setModel(modell);
+
+            ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
+            for (VoziloDTO v : vozila) {
+
+                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
+                ModelVozilaDTO mod = new ModelVozilaDTO();
+                ArrayList<ModelVozilaDTO> modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+                for (ModelVozilaDTO m : modeli) {
+                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
+                        mod = m;
+                    }
+                }
+
+                boolean dodati = true;
+                if (registracija != null && !"".equals(registracija)) {
+                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (godiste != 0) {
+                    if (!Objects.equals(v.getGodiste(), godiste)) {
+                        dodati = false;
+                    }
+                }
+                if (marka != null && !"".equals(marka)) {
+                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (model != null && !"".equals(model)) {
+                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
+                        dodati = false;
+                    }
+                }
+                if (dodati == true) {
+
+                    if (forma.getRbPrivatnoLiceVozilo().isSelected()) {
+                        String ime = forma.getTfImeVozilo().getText();
+                        String prezime = forma.getTfPrezimeVozilo().getText();
+
+                        if (ime != null && !"".equals(ime) && kupac.getIme() != null && !"".equals(kupac.getIme())) {
+                            if (!kupac.getIme().toLowerCase().startsWith(ime.toLowerCase())) {
+                                dodati = false;
+                            }
+                        }
+                        if (prezime != null && !"".equals(prezime) && kupac.getPrezime() != null && !"".equals(kupac.getPrezime())) {
+                            if (!kupac.getPrezime().toLowerCase().startsWith(prezime.toLowerCase())) {
+                                dodati = false;
+                            }
+                        }
+                    } else if (forma.getRbPravnoLiceVozilo().isSelected()) {
+                        String naziv = forma.getTfNazivVozilo().getText();
+                        if (naziv != null && !"".equals(naziv) && kupac.getNaziv() != null && !"".equals(kupac.getNaziv())) {
+                            if (!kupac.getNaziv().toLowerCase().startsWith(naziv.toLowerCase())) {
+                                dodati = false;
+                            }
+                        } else if (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) {
+                            dodati = false;
+                        }
+                    }
+
+                    if (dodati == true) {
+                        Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || kupac.getNaziv().equals("")) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
+                        modell.addRow(rowData);
+                        forma.getTableVozila().setModel(modell);
+                    }
+                }
+            }
+
+        }
     }
 }

@@ -137,6 +137,8 @@ public class KupacLogika {
             kupac.setTelefon(telefon);
             kupac.setAdresa(adresa);
             kupac.setGrad(grad);
+            kupac.setIme(null);
+            kupac.setPrezime(null);
 
             if (naziv != null && !"".equals(naziv)) {
                 if (DAOFactory.getDAOFactory().getKupacDAO().azurirajKupca(kupac)) {
@@ -159,6 +161,7 @@ public class KupacLogika {
             kupac.setTelefon(telefon);
             kupac.setAdresa(adresa);
             kupac.setGrad(grad);
+            kupac.setNaziv(null);
 
             if (ime != null && prezime != null && !"".equals(ime) && !"".equals(prezime)) {
                 

@@ -12,10 +12,32 @@ public class KupacDTO implements Serializable{
     private String telefon;
     private String adresa;
     private String grad;
+    private boolean aktivan;
 
     public KupacDTO(){
         
     }
+
+    public boolean isAktivan() {
+        return aktivan;
+    }
+
+    public void setAktivan(boolean aktivan) {
+        this.aktivan = aktivan;
+    }
+
+    public KupacDTO(Integer idKupac, String ime, String prezime, String naziv, String telefon, String adresa, String grad, boolean aktivan) {
+        this.idKupac = idKupac;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.naziv = naziv;
+        this.telefon = telefon;
+        this.adresa = adresa;
+        this.grad = grad;
+        this.aktivan = aktivan;
+    }
+    
+    
     
     public KupacDTO(Integer idKupac, String ime, String prezime, String naziv, String telefon, String adresa, String grad) {
         this.idKupac = idKupac;

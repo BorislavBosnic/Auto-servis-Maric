@@ -60,11 +60,8 @@ public class RadniNalogLogika {
 
         List<ZaposleniDTO> listaZaposlenih = DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni();
 
-        System.out.println(listaZaposlenih.size());
-
         for (ZaposleniDTO z : listaZaposlenih) {
             model.addElement(z);
-            System.out.println(z);
         }
 
         dijalog.getListaZaposleni().setModel(model);

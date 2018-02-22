@@ -7,25 +7,19 @@ package autoservismaric.forms;
 
 import autoservismaric.dialog.*;
 import autoservismaric.dialog.DodajModel;
-import autoservismaric.dialog.DodajRadniNalogDialog;
 import autoservismaric.dialog.DodajVlasnikaDialog;
 import autoservismaric.dialog.DodajVoziloDialog;
 import autoservismaric.dialog.IzmijeniIzbrisiModelDialog;
-import autoservismaric.dialog.IzmijeniVlasnikaDialog;
-import autoservismaric.dialog.IzmijeniVoziloDialog;
 import autoservismaric.dialog.OtpustiRadnikaDialog;
-import autoservismaric.dialog.PregledIstorijePopravkiDialog;
 import autoservismaric.dialog.SviBivsiZaposleniDialog;
 import com.toedter.calendar.JDateChooser;
 import data.AutoSuggestor;
 import data.dao.*;
 import data.dto.DioDTO;
-import data.dto.DioModelVozilaDTO;
 import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.TerminDTO;
-import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
 import java.io.*;
 import java.awt.Color;
@@ -38,9 +32,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Enumeration;
-import java.util.Objects;
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -75,13 +66,11 @@ import static poslovnalogika.KnjigovodstvoLogika.poDatumuRadniNalozi;
 import static poslovnalogika.KnjigovodstvoLogika.poIDuRadniNalozi;
 import static poslovnalogika.ZakazivanjaLogika.filtrirajTermine;
 import static poslovnalogika.ZakazivanjaLogika.obrisiTermin;
-
 import static poslovnalogika.KnjigovodstvoLogika.prikaziFakturu;
 import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
 import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
 import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.ModelVozilaLogika;
-import poslovnalogika.VozilaLogika;
 import poslovnalogika.ZaposleniLogika;
 import poslovnalogika.StatistikaLogika;
 import poslovnalogika.VoziloKupacMeniLogika;
@@ -825,7 +814,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         tfGodisteTrazi = new javax.swing.JTextField();
         tfModelTrazi = new javax.swing.JTextField();
         tfPrezimeVozilo = new javax.swing.JTextField();
-        btnPronadji = new javax.swing.JButton();
+        btnPronadjiVozilo = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         tfMarkaTrazi = new javax.swing.JTextField();
         tfNazivVozilo = new javax.swing.JTextField();
@@ -836,7 +825,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoLiceVozilo = new javax.swing.JRadioButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPrikaziSvaVozila = new javax.swing.JButton();
         cbSvi = new javax.swing.JCheckBox();
         jLabel96 = new javax.swing.JLabel();
         jLabel97 = new javax.swing.JLabel();
@@ -854,12 +843,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         btnPonisti = new javax.swing.JButton();
         labelPoruka = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        btnIzmijeniNalog = new javax.swing.JButton();
-        btnIzbrisiNalog = new javax.swing.JButton();
+        btnDodajVozilo = new javax.swing.JButton();
+        btnDodajVlasnika = new javax.swing.JButton();
+        btnDodajModel2 = new javax.swing.JButton();
+        btnIzmijeniIzbrisiModel = new javax.swing.JButton();
         spVoziloPretraga = new javax.swing.JScrollPane();
         tableVozila = new javax.swing.JTable();
         dijeloviPanel = new javax.swing.JPanel();
@@ -2311,7 +2298,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         parentPanel.add(zakazivanjaPanel, "card8");
 
         vozilaPanel.setBackground(new java.awt.Color(102, 153, 255));
-        vozilaPanel.setPreferredSize(new java.awt.Dimension(1088, 697));
+        vozilaPanel.setPreferredSize(new java.awt.Dimension(1088, 685));
 
         panelAkcijeNaFormi.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -2334,7 +2321,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jLabel106.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel106.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel106.setText("Godiste:");
+        jLabel106.setText("Godište:");
 
         jLabel107.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel107.setForeground(new java.awt.Color(255, 255, 255));
@@ -2355,12 +2342,12 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
-        btnPronadji.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnPronadji.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
-        btnPronadji.setText("Traži");
-        btnPronadji.addActionListener(new java.awt.event.ActionListener() {
+        btnPronadjiVozilo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPronadjiVozilo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
+        btnPronadjiVozilo.setText("Traži");
+        btnPronadjiVozilo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPronadjiActionPerformed(evt);
+                btnPronadjiVoziloActionPerformed(evt);
             }
         });
 
@@ -2411,11 +2398,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Vlasnik:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Prikaži sve");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPrikaziSvaVozila.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPrikaziSvaVozila.setText("Prikaži sve");
+        btnPrikaziSvaVozila.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPrikaziSvaVozilaActionPerformed(evt);
             }
         });
 
@@ -2436,7 +2423,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrikaziSvaVozila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel105)
@@ -2454,7 +2441,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(tfPrezimeVozilo)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPronadjiVoziloLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPronadji, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPronadjiVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
                         .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tfGodisteTrazi, javax.swing.GroupLayout.Alignment.LEADING)
@@ -2515,10 +2502,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPronadjiVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPronadjiVoziloLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrikaziSvaVozila, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPonistiSve, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnPronadji))
+                    .addComponent(btnPronadjiVozilo))
                 .addContainerGap())
         );
 
@@ -2687,51 +2674,37 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         panelPronadjiVlasnikaLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnPonisti, btnPrikaziSve, btnTrazi});
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/racing (1).png"))); // NOI18N
-        jButton2.setText("Dodaj Vozilo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDodajVozilo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDodajVozilo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/racing (1).png"))); // NOI18N
+        btnDodajVozilo.setText("Dodaj Vozilo");
+        btnDodajVozilo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDodajVoziloActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (2).png"))); // NOI18N
-        jButton4.setText("Dodaj Vlasnika");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnDodajVlasnika.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDodajVlasnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (2).png"))); // NOI18N
+        btnDodajVlasnika.setText("Dodaj Vlasnika");
+        btnDodajVlasnika.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnDodajVlasnikaActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cube.png"))); // NOI18N
-        jButton5.setText("Dodaj Model");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnDodajModel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDodajModel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cube.png"))); // NOI18N
+        btnDodajModel2.setText("Dodaj Model");
+        btnDodajModel2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnDodajModel2ActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Izmijeni/Izbriši model");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnIzmijeniIzbrisiModel.setText("Izmijeni/Izbriši model");
+        btnIzmijeniIzbrisiModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        btnIzmijeniNalog.setText("Izmijeni nalog");
-        btnIzmijeniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIzmijeniNalogActionPerformed(evt);
-            }
-        });
-
-        btnIzbrisiNalog.setText("Izbrisi nalog");
-        btnIzbrisiNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIzbrisiNalogActionPerformed(evt);
+                btnIzmijeniIzbrisiModelActionPerformed(evt);
             }
         });
 
@@ -2750,22 +2723,16 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addGroup(panelVoziloLayout.createSequentialGroup()
                         .addComponent(panelPronadjiVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelVoziloLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelVoziloLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(btnIzbrisiNalog)))))
+                            .addComponent(btnDodajVozilo, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                            .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDodajModel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(210, 210, 210))
         );
 
-        panelVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButton4, jButton5});
+        panelVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDodajModel2, btnDodajVlasnika, btnDodajVozilo});
 
         panelVoziloLayout.setVerticalGroup(
             panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2779,22 +2746,18 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(panelPronadjiVozilo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPronadjiVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelVoziloLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDodajVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnIzmijeniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnIzbrisiNalog))
+                            .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDodajModel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
 
-        panelVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton4, jButton5});
+        panelVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDodajModel2, btnDodajVlasnika, btnDodajVozilo});
 
         tableVozila.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2832,9 +2795,9 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spVoziloPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout vozilaPanelLayout = new javax.swing.GroupLayout(vozilaPanel);
@@ -4953,7 +4916,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPravnoTraziActionPerformed
 
     private void rbPrivatnoTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPrivatnoTraziActionPerformed
-
         tfNazivTrazi.setText("");
         tfNazivTrazi.setEditable(false);
         tfNazivTrazi.setBackground(Color.gray);
@@ -4962,76 +4924,16 @@ public class HomeForm1 extends javax.swing.JFrame {
         tfImeTrazi.setEditable(true);
         tfPrezimeTrazi.setEditable(true);
         rbPrivatnoTrazi.setSelected(true);
-
         rbPravnoTrazi.setSelected(false);
-
         rbPrivatnoTrazi.setSelected(false);
-
     }//GEN-LAST:event_rbPrivatnoTraziActionPerformed
 
     public void prikaziKupceUTabeli(ArrayList<KupacDTO> kupci) {
           voziloKupacMeniLogika.prikaziKupceUTabeli(kupci, this);
-//        String[] columns = {"ID", "Ime", "Prezime", "Telefon", "Adresa", "Grad"};
-//        DefaultTableModel model = new DefaultTableModel(columns, 0);
-//        tableVozila.setModel(model);
-//        for (KupacDTO k : kupci) {
-//            Object[] rowData = {k.getIdKupac(), k.getIme(), k.getPrezime(), k.getTelefon(), k.getAdresa(), k.getGrad()};
-//            model.addRow(rowData);
-//        }
-//        tableVozila.setModel(model);
     }
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
           voziloKupacMeniLogika.traziKupce(this);
-//        izbrisiPopupZaVozila();
-//        ucitajPopupZaVlasnike();
-//        String izabrano = "";
-//
-//        for (Enumeration<AbstractButton> buttons = bGTraziVlasnika.getElements(); buttons.hasMoreElements();) {
-//            AbstractButton button = buttons.nextElement();
-//
-//            if (button.isSelected()) {
-//                izabrano = button.getText();
-//            }
-//        }
-//
-//        if ("Privatno lice".equals(izabrano)) {
-//            String ime = tfImeTrazi.getText();
-//            String prezime = tfPrezimeTrazi.getText();
-//
-//            if ((ime == null || "".equals(ime)) && (prezime == null || "".equals(prezime))) {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPrivatni();
-//
-//                prikaziKupceUTabeli(kupci);
-//
-//            } else if (prezime == null || "".equals(prezime)) {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciIme(ime);
-//
-//                prikaziKupceUTabeli(kupci);
-//            } else if (ime == null || "".equals(ime)) {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrezime(prezime);
-//
-//                prikaziKupceUTabeli(kupci);
-//            } else {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPrivatni(ime, prezime);
-//
-//                prikaziKupceUTabeli(kupci);
-//            }
-//        } else if ("Pravno lice".equals(izabrano)) {
-//            String naziv = tfNazivTrazi.getText();
-//
-//            if (naziv == null || "".equals(naziv)) {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviPravni();
-//
-//                prikaziKupcePravneUTabeli(kupci);
-//            } else {
-//                ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
-//
-//                prikaziKupcePravneUTabeli(kupci);
-//            }
-//        }
-//
-
     }//GEN-LAST:event_btnTraziActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
@@ -5048,6 +4950,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoTrazi.setSelected(true);
         rbPravnoTrazi.setSelected(true);
         tfNazivTrazi.setEditable(false);
+        tfImeTrazi.setEditable(true);
+        tfPrezimeTrazi.setEditable(true);
         tfNazivTrazi.setBackground(Color.gray);
         tfImeTrazi.setBackground(Color.white);
         tfPrezimeTrazi.setBackground(Color.white);
@@ -5055,21 +4959,21 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoTrazi.setSelected(true);
     }//GEN-LAST:event_btnPonistiActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnDodajModel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajModel2ActionPerformed
         new DodajModel(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnDodajModel2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVlasnikaActionPerformed
         new DodajVlasnikaDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnDodajVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVoziloActionPerformed
         new DodajVoziloDialog(this, true).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnDodajVoziloActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnIzmijeniIzbrisiModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniIzbrisiModelActionPerformed
         new IzmijeniIzbrisiModelDialog(new JFrame(), true).setVisible(true);
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnIzmijeniIzbrisiModelActionPerformed
 
     private void buttonPregledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPregledActionPerformed
         // new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
@@ -5112,31 +5016,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbSviActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPrikaziSvaVozilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSvaVozilaActionPerformed
         izbrisiPopupZaVlasnike();
         ucitajPopupZaVozila();
-
-        ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
-
-        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
-        tableVozila.setModel(model);
-
-        for (VoziloDTO v : vozila) {
-            KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-            ModelVozilaDTO mod = new ModelVozilaDTO();
-            for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                    mod = m;
-                }
-            }
-
-            Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getVrstaGoriva()};
-            model.addRow(rowData);
-        }
-
-        tableVozila.setModel(model);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        voziloKupacMeniLogika.prikaziSvaVozila(this);
+    }//GEN-LAST:event_btnPrikaziSvaVozilaActionPerformed
 
     private void rbPravnoLiceVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoLiceVoziloActionPerformed
         tfNazivVozilo.setEditable(true);
@@ -5174,148 +5058,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoLiceVozilo.setSelected(false);
         tfNazivVozilo.setEditable(false);
         tfNazivVozilo.setBackground(Color.gray);
+        tfImeVozilo.setBackground(Color.white);
+        tfPrezimeVozilo.setBackground(Color.white);
+        tfImeVozilo.setEditable(true);
+        tfPrezimeVozilo.setEditable(true);
     }//GEN-LAST:event_btnPonistiSveActionPerformed
 
-    private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
+    private void btnPronadjiVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiVoziloActionPerformed
         izbrisiPopupZaVlasnike();
-        ucitajPopupZaVozila();
-
-        String registracija = tfRegistracijaTrazi.getText();
-        Integer godiste = 0;
-
-        if (tfGodisteTrazi.getText() != null && !"".equals(tfGodisteTrazi.getText())) {
-            try {
-                godiste = Integer.parseInt(tfGodisteTrazi.getText());
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Pogresno godiste.", "Obavjestenje", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        String marka = tfMarkaTrazi.getText();
-        String model = tfModelTrazi.getText();
-        boolean svi = cbSvi.isSelected();
-
-        if (svi) {
-
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
-            DefaultTableModel modell = new DefaultTableModel(columns, 0);
-            tableVozila.setModel(modell);
-
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
-            for (VoziloDTO v : vozila) {
-
-                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-                ModelVozilaDTO mod = new ModelVozilaDTO();
-                for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                        mod = m;
-                    }
-                }
-
-                boolean dodati = true;
-                if (registracija != null && !"".equals(registracija)) {
-                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (godiste != 0) {
-                    if (!Objects.equals(v.getGodiste(), godiste)) {
-                        dodati = false;
-                    }
-                }
-                if (marka != null && !"".equals(marka)) {
-                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (model != null && !"".equals(model)) {
-                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (dodati == true) {
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) ? "---" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
-                    modell.addRow(rowData);
-                    tableVozila.setModel(modell);
-                }
-            }
-        } else {
-
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godiste", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaza"};
-            DefaultTableModel modell = new DefaultTableModel(columns, 0);
-            tableVozila.setModel(modell);
-
-            ArrayList<VoziloDTO> vozila = VozilaLogika.vozila;
-            for (VoziloDTO v : vozila) {
-
-                KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(v.getIdKupac());
-                ModelVozilaDTO mod = new ModelVozilaDTO();
-                for (ModelVozilaDTO m : VozilaLogika.modeli) {
-                    if (m.getIdModelVozila() == v.getIdModelVozila()) {
-                        mod = m;
-                    }
-                }
-
-                boolean dodati = true;
-                if (registracija != null && !"".equals(registracija)) {
-                    if (!v.getBrojRegistracije().toLowerCase().startsWith(registracija.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (godiste != 0) {
-                    if (!Objects.equals(v.getGodiste(), godiste)) {
-                        dodati = false;
-                    }
-                }
-                if (marka != null && !"".equals(marka)) {
-                    if (!mod.getMarka().toLowerCase().equals(marka.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (model != null && !"".equals(model)) {
-                    if (!mod.getModel().toLowerCase().equals(model.toLowerCase())) {
-                        dodati = false;
-                    }
-                }
-                if (dodati == true) {
-
-                    if (rbPrivatnoLiceVozilo.isSelected()) {
-                        String ime = tfImeVozilo.getText();
-                        String prezime = tfPrezimeVozilo.getText();
-
-                        if (ime != null && !"".equals(ime) && kupac.getIme() != null && !"".equals(kupac.getIme())) {
-                            if (!kupac.getIme().toLowerCase().startsWith(ime.toLowerCase())) {
-                                dodati = false;
-                            }
-                        }
-                        if (prezime != null && !"".equals(prezime) && kupac.getPrezime() != null && !"".equals(kupac.getPrezime())) {
-                            if (!kupac.getPrezime().toLowerCase().startsWith(prezime.toLowerCase())) {
-                                dodati = false;
-                            }
-                        }
-                    } else if (rbPravnoLiceVozilo.isSelected()) {
-                        String naziv = tfNazivVozilo.getText();
-                        System.out.println(kupac.getNaziv() + " " + naziv);
-                        if (naziv != null && !"".equals(naziv) && kupac.getNaziv() != null && !"".equals(kupac.getNaziv())) {
-                            if (!kupac.getNaziv().toLowerCase().startsWith(naziv.toLowerCase())) {
-                                dodati = false;
-                            }
-                        }
-                        else if(kupac.getNaziv() == null || "".equals(kupac.getNaziv()))
-                            dodati = false;
-                    }
-                    
-                    if(dodati == true){
-                    Object[] rowData = {v.getIdVozilo(), v.getBrojRegistracije() == null ? "" : v.getBrojRegistracije(), mod.getMarka(), mod.getModel(), v.getGodiste() == null ? "" : v.getGodiste(), (kupac.getPrezime() == null || "".equals(kupac.getPrezime())) ? "---" : kupac.getPrezime(), (kupac.getIme() == null || "".equals(kupac.getIme())) ? "---" : kupac.getIme(), (kupac.getNaziv() == null || kupac.getNaziv().equals("")) ? "" : kupac.getNaziv(), v.getVrstaGoriva() == null ? "" : v.getVrstaGoriva(), v.getKilovat() == null ? "" : v.getKilovat(), v.getKubikaza() == null ? "" : v.getKubikaza()};
-                    modell.addRow(rowData); 
-                    tableVozila.setModel(modell);
-                    }
-                }
-            }
-
-        }
-
-    }//GEN-LAST:event_btnPronadjiActionPerformed
+        ucitajPopupZaVozila();    
+        voziloKupacMeniLogika.pronadjiVozilo(this);
+    }//GEN-LAST:event_btnPronadjiVoziloActionPerformed
 
     private void tfModelTraziFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfModelTraziFocusGained
         //ucitajPreporukeModel();
@@ -5466,7 +5219,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         } else if (!"".equals(naziv) && !"Svi".equals(gorivo)) {
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, gorivo, stanje);
         } else if (!"".equals(naziv)) {
-            System.out.println("udje");
             dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviNaziv(naziv, stanje);
         } else if (!"Svi".equals(gorivo) && !"Svi".equals(marka)) {
             if ("Svi".equals(model)) {
@@ -5629,14 +5381,6 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblNeplaceneFaktureMouseClicked
 
-    private void btnIzmijeniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniNalogActionPerformed
-        new IzmijeniRadniNalogDialog(this, true, 5).setVisible(true);
-    }//GEN-LAST:event_btnIzmijeniNalogActionPerformed
-
-    private void btnIzbrisiNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzbrisiNalogActionPerformed
-        DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(4);
-    }//GEN-LAST:event_btnIzbrisiNalogActionPerformed
-
     private void tfModelTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelTraziActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfModelTraziActionPerformed
@@ -5781,10 +5525,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     private void loadAutosuggester() {
-        VozilaLogika vl = new VozilaLogika(VozilaLogika.UCITAJ_VOZILA);
-        VozilaLogika vl2 = new VozilaLogika(VozilaLogika.UCITAJ_VLASNIKE);
-        VozilaLogika vl3 = new VozilaLogika((VozilaLogika.UCITAJ_MODELE));
-
         //ucitavanje autosuggestora
         if (voziloPanelPrviPut == true) {
             voziloPanelPrviPut = false;
@@ -6180,14 +5920,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         return btnFakturisano;
     }
 
-    public JButton getBtnIzbrisiNalog() {
-        return btnIzbrisiNalog;
-    }
-
-    public JButton getBtnIzmijeniNalog() {
-        return btnIzmijeniNalog;
-    }
-
     public JButton getBtnNefakturisano() {
         return btnNefakturisano;
     }
@@ -6233,7 +5965,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JButton getBtnPronadji() {
-        return btnPronadji;
+        return btnPronadjiVozilo;
     }
 
     public JButton getBtnPronadjiTermin() {
@@ -6341,23 +6073,23 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JButton getjButton1() {
-        return jButton1;
+        return btnPrikaziSvaVozila;
     }
 
     public JButton getjButton10() {
-        return jButton10;
+        return btnIzmijeniIzbrisiModel;
     }
 
     public JButton getjButton2() {
-        return jButton2;
+        return btnDodajVozilo;
     }
 
     public JButton getjButton4() {
-        return jButton4;
+        return btnDodajVlasnika;
     }
 
     public JButton getjButton5() {
-        return jButton5;
+        return btnDodajModel2;
     }
 
     public JDateChooser getjDateChooserDatumDo() {
@@ -6366,534 +6098,6 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     public JDateChooser getjDateChooserDatumOd() {
         return jDateChooserDatumOd;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public JLabel getjLabel10() {
-        return jLabel10;
-    }
-
-    public JLabel getjLabel101() {
-        return jLabel101;
-    }
-
-    public JLabel getjLabel105() {
-        return jLabel105;
-    }
-
-    public JLabel getjLabel106() {
-        return jLabel106;
-    }
-
-    public JLabel getjLabel107() {
-        return jLabel107;
-    }
-
-    public JLabel getjLabel108() {
-        return jLabel108;
-    }
-
-    public JLabel getjLabel109() {
-        return jLabel109;
-    }
-
-    public JLabel getjLabel11() {
-        return jLabel11;
-    }
-
-    public JLabel getjLabel110() {
-        return jLabel110;
-    }
-
-    public JLabel getjLabel117() {
-        return jLabel117;
-    }
-
-    public JLabel getjLabel118() {
-        return jLabel118;
-    }
-
-    public JLabel getjLabel119() {
-        return jLabel119;
-    }
-
-    public JLabel getjLabel12() {
-        return jLabel12;
-    }
-
-    public JLabel getjLabel120() {
-        return jLabel120;
-    }
-
-    public JLabel getjLabel122() {
-        return jLabel122;
-    }
-
-    public JLabel getjLabel124() {
-        return jLabel124;
-    }
-
-    public JLabel getjLabel126() {
-        return jLabel126;
-    }
-
-    public JLabel getjLabel127() {
-        return jLabel127;
-    }
-
-    public JLabel getjLabel128() {
-        return jLabel128;
-    }
-
-    public JLabel getjLabel129() {
-        return jLabel129;
-    }
-
-    public JLabel getjLabel13() {
-        return jLabel13;
-    }
-
-    public JLabel getjLabel130() {
-        return jLabel130;
-    }
-
-    public JLabel getjLabel131() {
-        return jLabel131;
-    }
-
-    public JLabel getjLabel132() {
-        return jLabel132;
-    }
-
-    public JLabel getjLabel133() {
-        return jLabel133;
-    }
-
-    public JLabel getjLabel134() {
-        return jLabel134;
-    }
-
-    public JLabel getjLabel135() {
-        return jLabel135;
-    }
-
-    public JLabel getjLabel136() {
-        return jLabel136;
-    }
-
-    public JLabel getjLabel137() {
-        return jLabel137;
-    }
-
-    public JLabel getjLabel138() {
-        return jLabel138;
-    }
-
-    public JLabel getjLabel139() {
-        return jLabel139;
-    }
-
-    public JLabel getjLabel14() {
-        return jLabel14;
-    }
-
-    public JLabel getjLabel140() {
-        return jLabel140;
-    }
-
-    public JLabel getjLabel141() {
-        return jLabel141;
-    }
-
-    public JLabel getjLabel142() {
-        return jLabel142;
-    }
-
-    public JLabel getjLabel143() {
-        return jLabel143;
-    }
-
-    public JLabel getjLabel144() {
-        return jLabel144;
-    }
-
-    public JLabel getjLabel145() {
-        return jLabel145;
-    }
-
-    public JLabel getjLabel146() {
-        return jLabel146;
-    }
-
-    public JLabel getjLabel147() {
-        return jLabel147;
-    }
-
-    public JLabel getjLabel148() {
-        return jLabel148;
-    }
-
-    public JLabel getjLabel149() {
-        return jLabel149;
-    }
-
-    public JLabel getjLabel15() {
-        return jLabel15;
-    }
-
-    public JLabel getjLabel150() {
-        return jLabel150;
-    }
-
-    public JLabel getjLabel151() {
-        return jLabel151;
-    }
-
-    public JLabel getjLabel152() {
-        return jLabel152;
-    }
-
-    public JLabel getjLabel153() {
-        return jLabel153;
-    }
-
-    public JLabel getjLabel154() {
-        return jLabel154;
-    }
-
-    public JLabel getjLabel155() {
-        return jLabel155;
-    }
-
-    public JLabel getjLabel156() {
-        return jLabel156;
-    }
-
-    public JLabel getjLabel157() {
-        return jLabel157;
-    }
-
-    public JLabel getjLabel16() {
-        return jLabel16;
-    }
-
-    public JLabel getjLabel161() {
-        return jLabel161;
-    }
-
-    public JLabel getjLabel162() {
-        return jLabel162;
-    }
-
-    public JLabel getjLabel163() {
-        return jLabel163;
-    }
-
-    public JLabel getjLabel164() {
-        return jLabel164;
-    }
-
-    public JLabel getjLabel165() {
-        return jLabel165;
-    }
-
-    public JLabel getjLabel17() {
-        return jLabel17;
-    }
-
-    /*public JLabel getjLabel18() {
-        return jLabel18;
-    }*/
-
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
-
-    public JLabel getjLabel20() {
-        return jLabel20;
-    }
-
-    public JLabel getjLabel21() {
-        return jLabel21;
-    }
-
-    public JLabel getjLabel22() {
-        return jLabel22;
-    }
-
-    public JLabel getjLabel23() {
-        return jLabel23;
-    }
-
-    public JLabel getjLabel24() {
-        return jLabel24;
-    }
-
-    public JLabel getjLabel25() {
-        return jLabel25;
-    }
-
-    public JLabel getjLabel26() {
-        return jLabel26;
-    }
-
-    public JLabel getjLabel27() {
-        return jLabel27;
-    }
-
-    public JLabel getjLabel28() {
-        return jLabel28;
-    }
-
-    public JLabel getjLabel29() {
-        return jLabel29;
-    }
-
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
-
-    public JLabel getjLabel30() {
-        return jLabel30;
-    }
-
-    public JLabel getjLabel31() {
-        return jLabel31;
-    }
-
-    public JLabel getjLabel32() {
-        return jLabel32;
-    }
-
-    public JLabel getjLabel33() {
-        return jLabel33;
-    }
-
-    public JLabel getjLabel34() {
-        return jLabel34;
-    }
-
-    public JLabel getjLabel35() {
-        return jLabel35;
-    }
-
-    public JLabel getjLabel36() {
-        return jLabel36;
-    }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public JLabel getjLabel41() {
-        return jLabel41;
-    }
-
-    public JLabel getjLabel44() {
-        return jLabel44;
-    }
-
-    public JLabel getjLabel45() {
-        return jLabel45;
-    }
-
-    public JLabel getjLabel46() {
-        return jLabel46;
-    }
-
-    public JLabel getjLabel47() {
-        return jLabel47;
-    }
-
-    public JLabel getjLabel48() {
-        return jLabel48;
-    }
-
-    public JLabel getjLabel49() {
-        return jLabel49;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public JLabel getjLabel50() {
-        return jLabel50;
-    }
-
-    public JLabel getjLabel52() {
-        return jLabel52;
-    }
-
-    public JLabel getjLabel53() {
-        return jLabel53;
-    }
-
-    public JLabel getjLabel54() {
-        return jLabel54;
-    }
-
-    public JLabel getjLabel55() {
-        return jLabel55;
-    }
-
-    public JLabel getjLabel57() {
-        return jLabel57;
-    }
-
-    public JLabel getjLabel58() {
-        return jLabel58;
-    }
-
-    public JLabel getjLabel59() {
-        return jLabel59;
-    }
-
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public JLabel getjLabel60() {
-        return jLabel60;
-    }
-
-    public JLabel getjLabel61() {
-        return jLabel61;
-    }
-
-    public JLabel getjLabel62() {
-        return jLabel62;
-    }
-
-    public JLabel getjLabel63() {
-        return jLabel63;
-    }
-
-    public JLabel getjLabel64() {
-        return jLabel64;
-    }
-
-    public JLabel getjLabel65() {
-        return jLabel65;
-    }
-
-    public JLabel getjLabel69() {
-        return jLabel69;
-    }
-
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public JLabel getjLabel70() {
-        return jLabel70;
-    }
-
-    public JLabel getjLabel71() {
-        return jLabel71;
-    }
-
-    public JLabel getjLabel73() {
-        return jLabel73;
-    }
-
-    public JLabel getjLabel74() {
-        return jLabel74;
-    }
-
-    public JLabel getjLabel75() {
-        return jLabel75;
-    }
-
-    public JLabel getjLabel76() {
-        return jLabel76;
-    }
-
-    public JLabel getjLabel77() {
-        return jLabel77;
-    }
-
-    public JLabel getjLabel8() {
-        return jLabel8;
-    }
-
-    public JLabel getjLabel80() {
-        return jLabel80;
-    }
-
-    public JLabel getjLabel81() {
-        return jLabel81;
-    }
-
-    public JLabel getjLabel82() {
-        return jLabel82;
-    }
-
-    public JLabel getjLabel83() {
-        return jLabel83;
-    }
-
-    public JLabel getjLabel84() {
-        return jLabel84;
-    }
-
-    public JLabel getjLabel85() {
-        return jLabel85;
-    }
-
-    public JLabel getjLabel86() {
-        return jLabel86;
-    }
-
-    public JLabel getjLabel87() {
-        return jLabel87;
-    }
-
-    public JLabel getjLabel88() {
-        return jLabel88;
-    }
-
-    public JLabel getjLabel89() {
-        return jLabel89;
-    }
-
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
-
-    public JLabel getjLabel90() {
-        return jLabel90;
-    }
-
-    public JLabel getjLabel91() {
-        return jLabel91;
-    }
-
-    public JLabel getjLabel92() {
-        return jLabel92;
-    }
-
-    public JLabel getjLabel93() {
-        return jLabel93;
-    }
-
-    public JLabel getjLabel94() {
-        return jLabel94;
-    }
-
-    public JLabel getjLabel95() {
-        return jLabel95;
-    }
-
-    public JLabel getjLabel96() {
-        return jLabel96;
-    }
-
-    public JLabel getjLabel97() {
-        return jLabel97;
     }
 
     public JPanel getjPanel1() {
@@ -7424,10 +6628,12 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnBaza;
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnDodajModel;
+    private javax.swing.JButton btnDodajModel2;
     private javax.swing.JButton btnDodajTermin;
+    private javax.swing.JButton btnDodajVlasnika;
+    private javax.swing.JButton btnDodajVozilo;
     private javax.swing.JButton btnFakturisano;
-    private javax.swing.JButton btnIzbrisiNalog;
-    private javax.swing.JButton btnIzmijeniNalog;
+    private javax.swing.JButton btnIzmijeniIzbrisiModel;
     private javax.swing.JButton btnNefakturisano;
     private javax.swing.JButton btnPoDatumu;
     private javax.swing.JButton btnPoIDu;
@@ -7437,11 +6643,12 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnPonistiUnoseTermin;
     private javax.swing.JButton btnPredracun;
     private javax.swing.JButton btnPretrazi;
+    private javax.swing.JButton btnPrikaziSvaVozila;
     private javax.swing.JButton btnPrikaziSve;
     private javax.swing.JButton btnPrikazii;
     private javax.swing.JButton btnProdani;
-    private javax.swing.JButton btnPronadji;
     private javax.swing.JButton btnPronadjiTermin;
+    private javax.swing.JButton btnPronadjiVozilo;
     private javax.swing.JButton btnRacun;
     private javax.swing.JButton btnSviDijelovi;
     private javax.swing.JButton btnTrazi;
@@ -7471,11 +6678,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dtmDatum;
     private com.toedter.calendar.JDateChooser dtmDatumPretraga;
     private com.toedter.calendar.JDateChooser dtmDatumTermina;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooserDatumDo;
     private com.toedter.calendar.JDateChooser jDateChooserDatumOd;
     private javax.swing.JLabel jLabel1;

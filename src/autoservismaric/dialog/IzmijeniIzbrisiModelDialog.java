@@ -11,9 +11,16 @@ import data.dto.ModelVozilaDTO;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import poslovnalogika.ModelVozilaLogika;
 
 /**
  *
@@ -27,23 +34,12 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     ArrayList<ModelVozilaDTO> modeli = null;
     String marka;
     String model;
+    private ModelVozilaLogika modelVozilaLogika = new ModelVozilaLogika();
 
     public IzmijeniIzbrisiModelDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        tabela.getTableHeader().setReorderingAllowed(false);
-
-        modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        for (ModelVozilaDTO m : modeli) {
-            Object[] objekat = {m.getMarka(), m.getModel()};
-            model.addRow(objekat);
-        }
-
-        tabela.setModel(model);
-        tabela.setAutoCreateRowSorter(true);
-        tabela.setDefaultEditor(Object.class, null);
+        modelVozilaLogika.inicijalizujIzmijeniIzbrisiModel(this);
     }
 
     /**
@@ -149,6 +145,11 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         btnIzbrisi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/rubbish-bin (3).png"))); // NOI18N
         btnIzbrisi.setText("Izbriši");
         btnIzbrisi.setToolTipText("");
+        btnIzbrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzbrisiActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -389,32 +390,8 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnIzmijeniActionPerformed
 
     private void btnAzurirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajActionPerformed
-        String marka = tfMarkaAzuriraj.getText();
-        String model = tfModelAzuriraj.getText();
+        modelVozilaLogika.azurirajModel(this);
         
-        if(DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model) != null){
-             JOptionPane.showMessageDialog(rootPane, "Već postoji takav tip vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-             return;
-        }
-
-        ModelVozilaDTO m = DAOFactory.getDAOFactory().getModelVozilaDAO().model(this.marka, this.model);
-        m.setMarka(marka);
-        m.setModel(model);
-        if (DAOFactory.getDAOFactory().getModelVozilaDAO().azurirajModel(m)) {
-            JOptionPane.showMessageDialog(rootPane, "Uspješno ažuriranje!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Neuspješno ažuriranje!", "Greška", JOptionPane.OK_OPTION);
-        }
-
-        this.modeli = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-        Object[] columns = {"Marka", "Model"};
-        DefaultTableModel dtm = new DefaultTableModel(columns, 0);
-        for (ModelVozilaDTO mmmm : this.modeli) {
-            Object[] row = {mmmm.getMarka(), mmmm.getModel()};
-            dtm.addRow(row);
-        }
-        tabela.setModel(dtm);
-
         tfMarkaAzuriraj.setEditable(false);
         tfModelAzuriraj.setEditable(false);
         tfMarkaAzuriraj.setText("");
@@ -534,6 +511,117 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tfModelKeyReleased
 
+    private void btnIzbrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzbrisiActionPerformed
+       modelVozilaLogika.izbrisi(this);
+    }//GEN-LAST:event_btnIzbrisiActionPerformed
+
+    public void setMarka(String marka) {
+        this.marka = marka;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public ArrayList<ModelVozilaDTO> getModeli() {
+        return modeli;
+    }
+
+    public String getMarka() {
+        return marka;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public ModelVozilaLogika getModelVozilaLogika() {
+        return modelVozilaLogika;
+    }
+
+    public JButton getBtnAzuriraj() {
+        return btnAzuriraj;
+    }
+
+    public JButton getBtnIzbrisi() {
+        return btnIzbrisi;
+    }
+
+    public JButton getBtnIzmijeni() {
+        return btnIzmijeni;
+    }
+
+    public JButton getBtnOdustani() {
+        return btnOdustani;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JTable getTabela() {
+        return tabela;
+    }
+
+    public JTextField getTfMarka() {
+        return tfMarka;
+    }
+
+    public JTextField getTfMarkaAzuriraj() {
+        return tfMarkaAzuriraj;
+    }
+
+    public JTextField getTfModel() {
+        return tfModel;
+    }
+
+    public JTextField getTfModelAzuriraj() {
+        return tfModelAzuriraj;
+    }
+
+    public void setModeli(ArrayList<ModelVozilaDTO> modeli) {
+        this.modeli = modeli;
+    }
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */

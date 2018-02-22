@@ -55,6 +55,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`dio_model_vozila` (
   `IdDio` INT(11) NOT NULL,
   `IdModelVozila` INT(11) NOT NULL,
+   `Aktivan` BOOLEAN NULL DEFAULT TRUE
   PRIMARY KEY (`IdDio`, `IdModelVozila`),
   INDEX `R_20` (`IdModelVozila` ASC),
   CONSTRAINT `dio_model_vozila_ibfk_1`
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`kupac` (
   `Grad` VARCHAR(50) NULL DEFAULT NULL,
   `Ime` VARCHAR(50) NULL DEFAULT NULL,
   `Prezime` VARCHAR(50) NULL DEFAULT NULL,
+  `Aktivan` BOOLEAN NULL DEFAULT TRUE, 
   PRIMARY KEY (`IdKupac`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -262,10 +264,10 @@ INSERT INTO prodan_dio VALUES (2, 2, 12, 3, '2017-10-22');
 INSERT INTO prodan_dio VALUES (3, 3, 13, 1, '2017-11-08');
 INSERT INTO prodan_dio VALUES (4, 4, 55, 1, '2017-11-09');
 
-INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić");
+INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić", true);
 
-INSERT INTO model_vozila VALUES (1,"BMW","X6");
-INSERT INTO model_vozila VALUES (2,"VW","Golf");
+INSERT INTO model_vozila VALUES (1,"BMW","X6", true);
+INSERT INTO model_vozila VALUES (2,"VW","Golf", true);
 
 INSERT INTO vozilo VALUES (1,'A10-B-200',230,2.3,2010,1,1,"Benzin",false);
 INSERT INTO vozilo VALUES (2,'B33-D-146',170,1.9,2005,1,1,"Dizel",false);

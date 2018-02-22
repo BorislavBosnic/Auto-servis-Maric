@@ -11,8 +11,6 @@ import java.util.List;
 
 public class MySQLKupacDAO implements KupacDAO{
 
-    
-    
     @Override
     public ArrayList<KupacDTO> kupciPrivatni(String ime, String prezime) {
         ArrayList<KupacDTO> retVal = new ArrayList<KupacDTO>();
@@ -23,7 +21,7 @@ public class MySQLKupacDAO implements KupacDAO{
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
                                 + "WHERE Ime LIKE ? "
-                                + "AND Prezime LIKE ? "
+                                + "AND Prezime LIKE ? WHERE Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -53,7 +51,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Naziv LIKE ? "
+                                + "WHERE Naziv LIKE ? WHERE Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -81,7 +79,7 @@ public class MySQLKupacDAO implements KupacDAO{
 		ResultSet rs = null;
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
-				+ "FROM kupac "
+				+ "FROM kupac WHERE Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -226,7 +224,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Ime LIKE CONCAT(?,'%') "
+                                + "WHERE Ime LIKE CONCAT(?,'%') AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -255,7 +253,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Prezime LIKE CONCAT(?,'%') "
+                                + "WHERE Prezime LIKE CONCAT(?,'%') AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -284,7 +282,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Naziv IS NULL "
+                                + "WHERE Naziv IS NULL AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -312,7 +310,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Naziv IS NOT NULL "
+                                + "WHERE Naziv IS NOT NULL AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -340,7 +338,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Telefon, Adresa, Grad, Ime, Prezime "
 				+ "FROM kupac "
-				+ "WHERE IdKupac=? ";
+				+ "WHERE IdKupac=? AND Aktivan!=false";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -358,5 +356,33 @@ public class MySQLKupacDAO implements KupacDAO{
 		}
 		return retVal;
     }
+
+    @Override
+    public boolean obrisiKupca(int id) {
+        boolean retVal = false;
+	Connection conn = null;
+	PreparedStatement ps = null;
+        
+        
+            String query = "UPDATE kupac "
+                     + "SET Aktivan=false "
+                     + "WHERE IdKupac=? ";
+            
+            try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+
+                        retVal = ps.executeUpdate() == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps);
+		}
+		return retVal;
+        }
+        
     
 }

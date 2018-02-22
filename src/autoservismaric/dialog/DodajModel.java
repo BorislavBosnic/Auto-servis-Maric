@@ -7,10 +7,13 @@ package autoservismaric.dialog;
 
 import data.dao.DAOFactory;
 import data.dto.ModelVozilaDTO;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import poslovnalogika.VozilaLogika;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import poslovnalogika.ModelVozilaLogika;
 
 /**
  *
@@ -20,8 +23,9 @@ public class DodajModel extends javax.swing.JDialog {
 
     
     private ModelVozilaDTO m;
-    public DodajVoziloDialog dvd;
-    public IzmijeniVoziloDialog ivd;
+    private DodajVoziloDialog dvd;
+    private IzmijeniVoziloDialog ivd;
+    private ModelVozilaLogika modelVozilaLogika = new ModelVozilaLogika();
     
     public DodajModel(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -203,59 +207,7 @@ public class DodajModel extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
-        String marka = tfMarkaDodaj.getText();
-        String model = tfModel.getText();
-        if(marka != null && !"".equals(marka) && model != null && !"".equals(model)){
-            ModelVozilaDTO e = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-            if(e == null){
-                ModelVozilaDTO mv = new ModelVozilaDTO();
-                mv.setMarka(marka);
-                mv.setModel(model);
-                if(DAOFactory.getDAOFactory().getModelVozilaDAO().dodajModel(mv)){
-                    //lbPoruka.setText("Uspješno dodato.");
-                    
-                    JOptionPane.showMessageDialog(rootPane, "Uspješno dodat model", "Obavješenje", JOptionPane.INFORMATION_MESSAGE);
-                    
-                     if(this.dvd != null){
-                       // dvd.ucitajPreporukeMarke();
-                        //dvd.ucitajPreporukeModel();
-                        dvd.marka.addToDictionary(marka);
-                        dvd.model.addToDictionary(model);
-                    }
-                     
-                     if(this.ivd != null){
-                         //ivd.ucitajPreporukeMarke();
-                         //ivd.ucitajPreporukeModel();
-                         dvd.marka.addToDictionary(marka);
-                        dvd.model.addToDictionary(model);
-                               
-                     }
-                    
-                    
-                    m = mv;
-                    if(VozilaLogika.modeli == null){
-                        try{
-                            VozilaLogika.modeli.add(mv);
-                        }catch(NullPointerException ex){
-                            //ex.printStackTrace();
-                        }
-                    }
-                }
-                else{
-                        JOptionPane.showMessageDialog(rootPane, "Nije dodat model", "Greška", JOptionPane.OK_OPTION);
-//                    lbPoruka.setText("Nije dodato");
-//                    lbPoruka.setForeground(Color.red);
-                }
-            }
-            else{
-                 JOptionPane.showMessageDialog(rootPane, "Već postoji taj model", "Greška", JOptionPane.OK_OPTION);
-                 return;
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Morate popuniti polja za model i marku", "Greška", JOptionPane.OK_OPTION);
-            return;
-        }
+          modelVozilaLogika.dodajModel(this);
     }//GEN-LAST:event_btnDodajActionPerformed
 
     private void tfModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelActionPerformed
@@ -268,6 +220,68 @@ public class DodajModel extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tfModelKeyPressed
 
+    public ModelVozilaDTO getM() {
+        return m;
+    }
+
+    public DodajVoziloDialog getDvd() {
+        return dvd;
+    }
+
+    public IzmijeniVoziloDialog getIvd() {
+        return ivd;
+    }
+
+    public JButton getBtnDodaj() {
+        return btnDodaj;
+    }
+
+    public JButton getBtnOdustani() {
+        return btnOdustani;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JTextField getTfMarkaDodaj() {
+        return tfMarkaDodaj;
+    }
+
+    public JTextField getTfModel() {
+        return tfModel;
+    }
+
+    public void setM(ModelVozilaDTO m) {
+        this.m = m;
+    }
+
+    public void setDvd(DodajVoziloDialog dvd) {
+        this.dvd = dvd;
+    }
+
+    public void setIvd(IzmijeniVoziloDialog ivd) {
+        this.ivd = ivd;
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

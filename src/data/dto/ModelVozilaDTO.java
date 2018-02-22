@@ -6,6 +6,7 @@ public class ModelVozilaDTO {
     private Integer IdModelVozila;
     private String marka;
     private String model;
+    private boolean aktivan;
 
     public ModelVozilaDTO(Integer IdModelVozila, String marka, String model) {
         this.IdModelVozila = IdModelVozila;
@@ -18,6 +19,23 @@ public class ModelVozilaDTO {
         this.marka = marka;
     }
     public ModelVozilaDTO(){   }
+
+    public ModelVozilaDTO(Integer IdModelVozila, String marka, String model, boolean aktivan) {
+        this.IdModelVozila = IdModelVozila;
+        this.marka = marka;
+        this.model = model;
+        this.aktivan = aktivan;
+    }
+    
+    public boolean isAktivan() {
+        return aktivan;
+    }
+
+    public void setAktivan(boolean aktivan) {
+        this.aktivan = aktivan;
+    }
+    
+    
 
     public Integer getIdModelVozila() {
         return IdModelVozila;

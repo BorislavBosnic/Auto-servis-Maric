@@ -28,5 +28,7 @@ public interface KupacDAO {
 	public boolean azurirajKupca(KupacDTO kupac);
 
 	public boolean obrisiKupca(KupacDTO kupac);
+        
+        public boolean obrisiKupca(int id);
 
 }

@@ -18,4 +18,6 @@ public interface ModelVozilaDAO {
     public boolean azurirajModel(ModelVozilaDTO model);
 
     public boolean obrisiModel(ModelVozilaDTO model);
+    
+    public boolean postojiLiVoziloSaOvimModelom(ModelVozilaDTO model);
 }

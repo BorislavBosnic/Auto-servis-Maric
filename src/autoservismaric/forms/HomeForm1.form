@@ -2095,7 +2095,7 @@
                   <Color blue="ff" green="99" red="66" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[1088, 697]"/>
+                  <Dimension value="[1088, 685]"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -2159,9 +2159,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="panelVozilo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="spVoziloPretraga" min="-2" pref="295" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="19" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2217,22 +2217,13 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="panelPronadjiVlasnika" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jButton2" linkSize="11" pref="203" max="32767" attributes="0"/>
-                                              <Component id="jButton4" linkSize="11" max="32767" attributes="0"/>
-                                              <Component id="jButton5" linkSize="11" max="32767" attributes="0"/>
-                                              <Component id="btnIzmijeniNalog" max="32767" attributes="0"/>
-                                          </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Component id="jButton10" min="-2" pref="146" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                                  <Component id="btnIzbrisiNalog" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="btnDodajVozilo" linkSize="11" pref="203" max="32767" attributes="0"/>
+                                              <Component id="btnDodajVlasnika" linkSize="11" max="32767" attributes="0"/>
+                                              <Component id="btnDodajModel2" linkSize="11" max="32767" attributes="0"/>
                                           </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="btnIzmijeniIzbrisiModel" min="-2" pref="146" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
@@ -2252,18 +2243,13 @@
                                       <Component id="panelPronadjiVozilo" max="32767" attributes="0"/>
                                       <Component id="panelPronadjiVlasnika" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="jButton2" linkSize="13" min="-2" pref="56" max="-2" attributes="0"/>
+                                          <Component id="btnDodajVozilo" linkSize="13" min="-2" pref="56" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton4" linkSize="13" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Component id="btnDodajVlasnika" linkSize="13" min="-2" pref="70" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jButton10" max="32767" attributes="0"/>
-                                              <Component id="jButton5" linkSize="13" min="-2" pref="65" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="btnIzmijeniNalog" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                                              <Component id="btnIzbrisiNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnIzmijeniIzbrisiModel" max="32767" attributes="0"/>
+                                              <Component id="btnDodajModel2" linkSize="13" min="-2" pref="65" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -2294,7 +2280,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jButton1" max="32767" attributes="0"/>
+                                          <Component id="btnPrikaziSvaVozila" max="32767" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel105" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -2315,7 +2301,7 @@
                                           <Component id="tfPrezimeVozilo" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              <Component id="btnPronadji" min="-2" pref="112" max="-2" attributes="0"/>
+                                              <Component id="btnPronadjiVozilo" min="-2" pref="112" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -2392,11 +2378,11 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jButton1" min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="btnPrikaziSvaVozila" min="-2" pref="35" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="btnPonistiSve" min="-2" pref="32" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="btnPronadji" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnPronadjiVozilo" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
@@ -2423,7 +2409,7 @@
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Godiste:"/>
+                                <Property name="text" type="java.lang.String" value="Godi&#x161;te:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel107">
@@ -2460,7 +2446,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfPrezimeVozilo">
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnPronadji">
+                            <Component class="javax.swing.JButton" name="btnPronadjiVozilo">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -2471,7 +2457,7 @@
                                 <Property name="text" type="java.lang.String" value="Tra&#x17e;i"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPronadjiActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPronadjiVoziloActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel28">
@@ -2573,7 +2559,7 @@
                                 <Property name="text" type="java.lang.String" value="Vlasnik:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="jButton1">
+                            <Component class="javax.swing.JButton" name="btnPrikaziSvaVozila">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -2581,7 +2567,7 @@
                                 <Property name="text" type="java.lang.String" value="Prika&#x17e;i sve"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrikaziSvaVozilaActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JCheckBox" name="cbSvi">
@@ -2864,7 +2850,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JButton" name="jButton2">
+                        <Component class="javax.swing.JButton" name="btnDodajVozilo">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="0"/>
@@ -2875,10 +2861,10 @@
                             <Property name="text" type="java.lang.String" value="Dodaj Vozilo"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajVoziloActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton4">
+                        <Component class="javax.swing.JButton" name="btnDodajVlasnika">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="0"/>
@@ -2889,10 +2875,10 @@
                             <Property name="text" type="java.lang.String" value="Dodaj Vlasnika"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajVlasnikaActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton5">
+                        <Component class="javax.swing.JButton" name="btnDodajModel2">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="0"/>
@@ -2903,31 +2889,15 @@
                             <Property name="text" type="java.lang.String" value="Dodaj Model"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajModel2ActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton10">
+                        <Component class="javax.swing.JButton" name="btnIzmijeniIzbrisiModel">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Izmijeni/Izbri&#x161;i model"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btnIzmijeniNalog">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Izmijeni nalog"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzmijeniNalogActionPerformed"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btnIzbrisiNalog">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Izbrisi nalog"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzbrisiNalogActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzmijeniIzbrisiModelActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>

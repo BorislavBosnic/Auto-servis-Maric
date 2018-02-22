@@ -21,6 +21,7 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 
 		String query = "SELECT IdModelVozila, Marka, Model "
 				+  "FROM model_vozila "
+                                + "WHERE Aktivan!= false "
 				+ "ORDER BY IdModelVozila ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -48,7 +49,7 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 
 		String query = "SELECT IdModelVozila, Marka, Model "
                                 + "FROM model_vozila "
-				+ "WHERE Marka=? "
+				+ "WHERE Marka=? AND Aktivan!=false "
 				+ "ORDER BY IdModelVozila ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
@@ -127,14 +128,13 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 	Connection conn = null;
 	PreparedStatement ps = null;
 
-	String query = "DELETE FROM model_vozila "
-                     + "WHERE Marka=? "
-                     + "AND Model=? ";
+	String query = "UPDATE model_vozila "
+                     + "SET Aktivan=false "
+                     + "WHERE IdModelVozila=? ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, model.getMarka());
-                        ps.setString(2, model.getModel());
+			ps.setInt(1, model.getIdModelVozila());
 
 			retVal = ps.executeUpdate() == 1;
 		} catch (SQLException e) {
@@ -157,7 +157,7 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 		String query = "SELECT IdModelVozila, Marka, Model "
 				+ "FROM model_vozila "
 				+ "WHERE Marka LIKE ? "
-                                + "AND Model LIKE ? ";
+                                + "AND Model LIKE ? AND Aktivan!=false ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -204,5 +204,42 @@ public class MySQLModelVozilaDAO implements ModelVozilaDAO {
 		}
 		return retVal;
     }
+
+    @Override
+    public boolean postojiLiVoziloSaOvimModelom(ModelVozilaDTO model) {
+                boolean retVal = true;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "select IdModelVozila\n" +
+                               "from vozilo\n" +
+                                "where IdModelVozila=? AND Izbrisano!=true\n" +
+                                "group by IdModelVozila\n" +
+                                "having count(IdModelVozila) > 0;";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, model.getIdModelVozila());
+			rs = ps.executeQuery();
+
+			if (rs.next()){
+                            
+                       
+                            return true;
+                        }
+                        else return false;
+
+                  } catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+
+    }
+    
     
 }
