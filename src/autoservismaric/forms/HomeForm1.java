@@ -5291,17 +5291,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         String marka = "";
         String model = "";
         Integer kolicina = null;
+        boolean flag = false;
 
         sifra = jtfSifra.getText();
         if ("".equals(sifra)) {
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(this, "Unesite šifru", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            flag = true;
             return;
         }
         naziv = jtfNaziv.getText();
         if ("".equals(naziv)) {
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(this, "Unesite naziv", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            flag = true;
             return;
         }
         try {
@@ -5310,10 +5313,12 @@ public class HomeForm1 extends javax.swing.JFrame {
             if (!"".equals(jtfCijena.getText())) {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
                 return;
             } else {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Unesite cijenu!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
                 return;
             }
         }
@@ -5323,6 +5328,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             if (!"".equals(jtfGodiste.getText())) {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Nepravilan format godišta!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
                 return;
             }
             godiste = null;
@@ -5337,15 +5343,17 @@ public class HomeForm1 extends javax.swing.JFrame {
             if (!"".equals(jtfKolicina.getText())) {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Nepravilan format količine!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
                 return;
             } else {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Unesite količinu!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
                 return;
             }
         }
-
-        dioLogika.dodajDio(this, sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
+        if(!flag)
+            dioLogika.dodajDio(this, sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
 
     }//GEN-LAST:event_btnDodajActionPerformed
 

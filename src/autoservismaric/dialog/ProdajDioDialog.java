@@ -549,7 +549,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             cijena = null;
         }
         if(cijena != null && kolicina != null){
-            Double rez = cijena * kolicina;
+             Double rez = (cijena + pdv*cijena/100)* kolicina;
             tfUkupno.setText(String.format("%.2f", rez));
         }else{
             tfUkupno.setText("0");
