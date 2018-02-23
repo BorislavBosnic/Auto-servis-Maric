@@ -745,6 +745,12 @@ public class MySQLDioDAO implements DioDAO {
         Connection conn = null;
         PreparedStatement ps = null;
 
+        boolean zaSve;
+        if("Svi".equals(dio.getMarka()))
+            zaSve = true;
+        else
+            zaSve = false;
+        
         String query = "INSERT INTO dio(Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, "
                 + "Kolicina, ZaSve) VALUES "
                 + "(?, ?, ?, ?, ?, ?, ?, ?) ";
@@ -758,7 +764,7 @@ public class MySQLDioDAO implements DioDAO {
             ps.setString(5, dio.getVrstaGoriva());
             ps.setObject(6, dio.getTrenutnaCijena());
             ps.setObject(7, dio.getKolicina());//int
-            ps.setBoolean(8, true);
+            ps.setBoolean(8, zaSve);
 
             retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -874,6 +880,39 @@ public class MySQLDioDAO implements DioDAO {
                 + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n"
                 + "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila\n"
                 + "where mv.Marka=? AND mv.Model=?";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, marka);
+            ps.setString(2, model);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retVal.add(new DioDTO(rs.getInt("d.IdDio"), rs.getString("d.Sifra"), rs.getString("d.Naziv"),
+                        rs.getString("d.VrstaGoriva"), rs.getInt("d.GodisteVozila"), rs.getBoolean("d.Novo"),
+                        rs.getDouble("d.TrenutnaCijena"), rs.getInt("d.Kolicina"), rs.getBoolean("d.ZaSve"),
+                        rs.getString("mv.Marka"), rs.getString("mv.Model")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
+
+    @Override
+    public ArrayList<DioDTO> getDijeloviZaPonudu(String marka, String model) {
+         ArrayList<DioDTO> retVal = new ArrayList<DioDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "
+                + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n"
+                + "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila WHERE (Marka='Svi') OR (Marka=? AND Model=?) OR ZaSve=true";
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);

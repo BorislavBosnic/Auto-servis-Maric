@@ -39,4 +39,6 @@ public interface DioDAO {
     public ArrayList<DioDTO> getDijeloviNaziv(String naziv, Boolean stanje);
     public boolean azurirajDio(DioDTO dio);
     public boolean obrisiDio(int id);
+    
+    public ArrayList<DioDTO> getDijeloviZaPonudu(String marka, String model);
 }

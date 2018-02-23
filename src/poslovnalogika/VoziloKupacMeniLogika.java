@@ -217,12 +217,12 @@ public class VoziloKupacMeniLogika {
                         int rowAtPoint = forma.getTableVozila().rowAtPoint(SwingUtilities.convertPoint(forma.getPopupMenu(), new Point(0, 0), forma.getTableVozila()));
                         selektovanRed = rowAtPoint;
                         int column = 0;
-                        //int row = tableVozila.getSelectedRow();
+                        int row = forma.getTableVozila().getSelectedRow();
                         String imeKolone = forma.getTableVozila().getModel().getColumnName(0);
 
-                        if (selektovanRed >= 0) {
+                        if (row >= 0) {
                             if ("ID".equals(imeKolone)) {
-                                idVozila = Integer.parseInt(forma.getTableVozila().getModel().getValueAt(selektovanRed, column).toString());
+                                idVozila = Integer.parseInt(forma.getTableVozila().getModel().getValueAt(row, column).toString());
                             }
                         }
                         if (rowAtPoint > -1) {

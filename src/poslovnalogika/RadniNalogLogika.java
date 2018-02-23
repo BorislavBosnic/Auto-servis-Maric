@@ -72,18 +72,19 @@ public class RadniNalogLogika {
         dijalog.getTabelaDijelovi().setModel(modelDijelovi);
 
         List<DioDTO> listaDijelova = null;
-        listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
-        List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
+        //listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
+        //List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
 
+        listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaPonudu(modelVozila.getMarka(), modelVozila.getModel());
         for (DioDTO d : listaDijelova) {
             Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
             modelDijelovi.addRow(rowData);
         }
 
-        for (DioDTO d : listaZaSvaVozila) {
-            Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
-            modelDijelovi.addRow(rowData);
-        }
+//        for (DioDTO d : listaZaSvaVozila) {
+//            Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
+//            modelDijelovi.addRow(rowData);
+//        }
 
         dijalog.getTabelaDijelovi().setModel(modelDijelovi);
 
@@ -347,16 +348,8 @@ public class RadniNalogLogika {
 
         List<DioDTO> listaDijelova = null;
 
-        listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
-
-        List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
-
+        listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaPonudu(modelVozila.getMarka(), modelVozila.getModel());
         for (DioDTO d : listaDijelova) {
-            Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
-            modelDijelovi.addRow(rowData);
-        }
-
-        for (DioDTO d : listaZaSvaVozila) {
             Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
             modelDijelovi.addRow(rowData);
         }
