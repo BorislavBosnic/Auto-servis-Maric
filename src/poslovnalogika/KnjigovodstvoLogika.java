@@ -108,9 +108,9 @@ public class KnjigovodstvoLogika
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
-        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge());
-        sve[lista.size()][4]=String.valueOf(nalog.getCijenaUsluge()*(1.0+PDV));
-        cijena+=nalog.getCijenaUsluge();
+        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()+nalog.getTroskovi());
+        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()+nalog.getTroskovi())*(1.0+PDV));
+        cijena+=nalog.getCijenaUsluge()+nalog.getTroskovi();
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
@@ -243,14 +243,19 @@ public class KnjigovodstvoLogika
         RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
         FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id);
         String opisProblema=nalog.getOpisProblema();
-        String opis=opisProblema;
-        /*String opis="";
+        String opis="";
         String[] rijeci=opisProblema.split(" ");
-        int length=50;
+        int length=0;
         for(String rijec:rijeci)
         {
-            opis+=
-        }*/
+            length+=rijec.length();
+            if(length>20)
+            {
+                opis+="\n        ";
+                length=0;
+            }
+            opis+=rijec+" ";
+        }
         
         String rez="ID naloga: "+nalog.getIdRadniNalog()
                 +"\nOpis problema: "+opis

@@ -272,7 +272,7 @@ INSERT INTO model_vozila VALUES (2,"VW","Golf", true);
 INSERT INTO vozilo VALUES (1,'A10-B-200',230,2.3,2010,1,1,"Benzin",false);
 INSERT INTO vozilo VALUES (2,'B33-D-146',170,1.9,2005,1,1,"Dizel",false);
 
-INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2017-10-30', 1, 50, 300000, "Tu nešto piše jedan", '2018-10-31', 100, false);
+INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2017-10-30', 1, 50, 300000, "Tu aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa nešto piše jedan", '2018-10-31', 100, false);
 INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 250000, "Tu nešto piše dva", '2018-01-29', 140, false);
 INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65, false);
 INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125, false);

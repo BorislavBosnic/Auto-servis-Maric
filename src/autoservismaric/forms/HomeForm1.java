@@ -905,7 +905,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         knjigovodstvoPanel = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
-        jLabel120 = new javax.swing.JLabel();
+        lblRadniNalozi = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnPredracun = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -3459,9 +3459,9 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel22.setBackground(new java.awt.Color(102, 153, 255));
         jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jLabel120.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel120.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel120.setText("Radni nalozi:");
+        lblRadniNalozi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblRadniNalozi.setForeground(new java.awt.Color(255, 255, 255));
+        lblRadniNalozi.setText("Radni nalozi:");
 
         btnPredracun.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPredracun.setText("Predračun");
@@ -3712,7 +3712,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel22Layout.createSequentialGroup()
-                                .addComponent(jLabel120)
+                                .addComponent(lblRadniNalozi)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel22Layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3723,18 +3723,17 @@ public class HomeForm1 extends javax.swing.JFrame {
                                             .addGroup(jPanel22Layout.createSequentialGroup()
                                                 .addComponent(btnPoIDu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(8, 8, 8))
+                                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel22Layout.createSequentialGroup()
                                                 .addComponent(btnPoDatumu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(dtmDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(8, 8, 8))))
+                                                .addComponent(dtmDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(jPanel22Layout.createSequentialGroup()
                                         .addGap(62, 62, 62)
                                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnNefakturisano)
-                                            .addComponent(btnFakturisano, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                            .addComponent(btnFakturisano, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(8, 8, 8))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2))
@@ -3768,7 +3767,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel120)
+                .addComponent(lblRadniNalozi)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel22Layout.createSequentialGroup()
@@ -4932,6 +4931,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void menu4jPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4jPanelMouseClicked
         menuItemClick(menu4jPanel, 3, knjigovodstvoPanel);
         uslugeKnjigovodstva();
+        lblRadniNalozi.setText("Radni nalozi:");
 
     }//GEN-LAST:event_menu4jPanelMouseClicked
 
@@ -5568,24 +5568,28 @@ public class HomeForm1 extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_btnNefakturisanoActionPerformed
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         nefakturisaniRadniNalozi(lista, tblRadniNalozi);
+        lblRadniNalozi.setText("Nefakturisani radni nalozi:");
     }//GEN-LAST:event_btnNefakturisanoActionPerformed
 
     private void btnFakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFakturisanoActionPerformed
     {//GEN-HEADEREND:event_btnFakturisanoActionPerformed
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         fakturisaniRadniNalozi(lista, tblRadniNalozi);
+        lblRadniNalozi.setText("Fakturisani radni nalozi:");
     }//GEN-LAST:event_btnFakturisanoActionPerformed
 
     private void btnPoIDuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoIDuActionPerformed
     {//GEN-HEADEREND:event_btnPoIDuActionPerformed
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poIDuRadniNalozi(lista, tblRadniNalozi, txtID);
+        lblRadniNalozi.setText("Radni nalozi:");
     }//GEN-LAST:event_btnPoIDuActionPerformed
 
     private void btnPoDatumuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoDatumuActionPerformed
     {//GEN-HEADEREND:event_btnPoDatumuActionPerformed
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poDatumuRadniNalozi(lista, tblRadniNalozi, dtmDatum);
+        lblRadniNalozi.setText("Radni nalozi:");
     }//GEN-LAST:event_btnPoDatumuActionPerformed
 
     private void tblRadniNaloziMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblRadniNaloziMouseReleased
@@ -6904,7 +6908,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel120;
     private javax.swing.JLabel jLabel122;
     private javax.swing.JLabel jLabel124;
     private javax.swing.JLabel jLabel126;
@@ -7091,6 +7094,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel labelPopravkeInterval;
     private javax.swing.JLabel labelPopravkeMjesec;
     private javax.swing.JLabel labelPoruka;
+    private javax.swing.JLabel lblRadniNalozi;
     private javax.swing.JPanel menu1jPanel;
     private javax.swing.JPanel menu2jPanel;
     private javax.swing.JPanel menu3jPanel;
