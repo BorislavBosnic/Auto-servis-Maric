@@ -3540,6 +3540,15 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
         jScrollPane9.setViewportView(tblRadniNalozi);
+        if (tblRadniNalozi.getColumnModel().getColumnCount() > 0)
+        {
+            tblRadniNalozi.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblRadniNalozi.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblRadniNalozi.getColumnModel().getColumn(5).setPreferredWidth(40);
+            tblRadniNalozi.getColumnModel().getColumn(5).setMaxWidth(40);
+            tblRadniNalozi.getColumnModel().getColumn(6).setPreferredWidth(40);
+            tblRadniNalozi.getColumnModel().getColumn(6).setMaxWidth(40);
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -3629,6 +3638,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         tblFaktura.getTableHeader().setResizingAllowed(false);
         tblFaktura.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblFaktura);
+        if (tblFaktura.getColumnModel().getColumnCount() > 0)
+        {
+            tblFaktura.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tblFaktura.getColumnModel().getColumn(0).setMaxWidth(40);
+            tblFaktura.getColumnModel().getColumn(1).setResizable(false);
+            tblFaktura.getColumnModel().getColumn(2).setPreferredWidth(40);
+            tblFaktura.getColumnModel().getColumn(2).setMaxWidth(40);
+            tblFaktura.getColumnModel().getColumn(3).setPreferredWidth(40);
+            tblFaktura.getColumnModel().getColumn(3).setMaxWidth(40);
+            tblFaktura.getColumnModel().getColumn(4).setPreferredWidth(40);
+            tblFaktura.getColumnModel().getColumn(4).setMaxWidth(40);
+        }
 
         btnRacun.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnRacun.setText("Račun");
