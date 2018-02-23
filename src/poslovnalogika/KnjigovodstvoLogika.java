@@ -63,8 +63,10 @@ public class KnjigovodstvoLogika
             sve[i][1]=DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getMarka()
                     +DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
                 int idKupca=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdKupac();
-            sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()+" "
-                    +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
+            if("".equals(DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()))
+                sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()+" ";
+            else
+                sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
             sve[i][3]=String.valueOf(lista.get(i).getDatumOtvaranjaNaloga());
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
@@ -99,7 +101,7 @@ public class KnjigovodstvoLogika
                         " "+dio.getVrstaGoriva()+" "+dio.getGodisteVozila());
                 sve[i][2]=String.valueOf(lista.get(i).getKolicina());
                 sve[i][3]=String.valueOf(lista.get(i).getCijena());
-                sve[i][4]=String.valueOf(lista.get(i).getCijena()*(1.0+PDV));
+                sve[i][4]=String.valueOf((double)Math.round(((lista.get(i).getCijena()*(1.0+PDV))*100d))/100d);
                 
                 cijena+=lista.get(i).getCijena()*lista.get(i).getKolicina();
         }
@@ -229,7 +231,8 @@ public class KnjigovodstvoLogika
                 DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
                 new Date(Calendar.getInstance().getTime().getTime()),
                 id,
-                iznos*(PDV+1.0)
+                iznos*(PDV+1.0),
+                (int)nalog.getTroskovi()
         );
         DAOFactory.getDAOFactory().getFakturaDAO().dodajFakturu(faktura);
         return true;
@@ -238,15 +241,27 @@ public class KnjigovodstvoLogika
     public static String radniNalogIFakturaUTekst(int id)
     {
         RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
-        FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().faktura(id);
-        String rez=""+nalog.getIdRadniNalog()+" "+
-                nalog.getOpisProblema()+" "+
-                nalog.getDatumOtvaranjaNaloga()+"-"+
-                nalog.getDatumZatvaranjaNaloga();
+        FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id);
+        String opisProblema=nalog.getOpisProblema();
+        String opis=opisProblema;
+        /*String opis="";
+        String[] rijeci=opisProblema.split(" ");
+        int length=50;
+        for(String rijec:rijeci)
+        {
+            opis+=
+        }*/
+        
+        String rez="ID naloga: "+nalog.getIdRadniNalog()
+                +"\nOpis problema: "+opis
+                +"\nDatum otvaranja naloga: "+nalog.getDatumOtvaranjaNaloga()
+                +"\nDatum zatvaranja naloga: "+nalog.getDatumZatvaranjaNaloga();
         if(faktura!=null)
-            rez+=" "+faktura.getIdFaktura()+" "+
-                faktura.getDatumIzdavanja().toString()+" "+
-                    faktura.getIznos();
+            rez+="\nFakturisano:"
+                +"\nID fakture: "+faktura.getIdFaktura()
+                +"\nDatum izdavanja: "+faktura.getDatumIzdavanja().toString()
+                +"\nVrijeme rada: "+faktura.getVrijemeRada()
+                +"\nIznos: "+faktura.getIznos();
         return rez;
     }
     
