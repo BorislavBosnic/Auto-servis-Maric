@@ -214,7 +214,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         "NE"
                 );
                 if (izbor == JOptionPane.YES_OPTION) {
-                    fakturisi(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)));
+                    fakturisi(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)), txtUkupno);
                 }
                 stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
                 provjeraZaDugmiceZaTabeluNaloga();

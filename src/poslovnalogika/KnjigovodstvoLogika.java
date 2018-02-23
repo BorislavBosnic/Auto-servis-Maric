@@ -69,10 +69,13 @@ public class KnjigovodstvoLogika
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
             sve[i][3]=String.valueOf(lista.get(i).getDatumOtvaranjaNaloga());
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
-                sve[i][4]="Nema fakture";
+                sve[i][4]="Nije fakturisan";
+                sve[i][5]="xxx";
             if(faktura!=null)
+            {
                 sve[i][4]=String.valueOf(faktura.getDatumIzdavanja());
-            sve[i][5]=String.valueOf(lista.get(i).getCijenaUsluge());
+                sve[i][5]=String.valueOf(faktura.getIznos());
+            }
             sve[i][6]=Boolean.valueOf(DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(lista.get(i).getIdRadniNalog()).isPlaceno());
         }
         String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos","Plaćeno"};
@@ -218,20 +221,20 @@ public class KnjigovodstvoLogika
         DAOFactory.getDAOFactory().getRadniNalogDAO().azurirajRadniNalog(nalog);
         return true;
     }
-    public static boolean fakturisi(int id)
+    public static boolean fakturisi(int id, JTextField txtUkupno)
     {
         RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
         if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id)!=null)return false;
-        double iznos=0;
-        ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(id);
-        for(RadniNalogDioDTO item:lista)iznos+=item.getCijena()*item.getKolicina();
+        //double iznos=0;
+        //ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(id);
+        //for(RadniNalogDioDTO item:lista)iznos+=item.getCijena()*item.getKolicina();
         FakturaDTO faktura=new FakturaDTO
         (
                 DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
                 new Date(Calendar.getInstance().getTime().getTime()),
                 id,
-                iznos*(PDV+1.0),
-                (int)nalog.getTroskovi()
+                Double.parseDouble(txtUkupno.getText())/*(iznos+nalog.getCijenaUsluge()+nalog.getTroskovi())*(PDV+1)*/,
+                (int)(nalog.getTroskovi()/30)
         );
         DAOFactory.getDAOFactory().getFakturaDAO().dodajFakturu(faktura);
         return true;

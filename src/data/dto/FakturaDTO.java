@@ -29,7 +29,7 @@ public class FakturaDTO
         int vrijemeRada
     )
     {
-        this.idFaktura=idFaktura;
+        this.idFaktura=idFakture;
         this.datumIzdavanja=datumIzdavanja;
         this.idRadniNalog=idRadniNalog;
         this.iznos=iznos;
