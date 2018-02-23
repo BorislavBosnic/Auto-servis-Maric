@@ -17,6 +17,7 @@ public class FakturaDTO
     private Date datumIzdavanja;
     private int idRadniNalog;
     private double iznos;
+    private int vrijemeRada;
     
     /**Constructors**/
     public FakturaDTO
@@ -24,13 +25,15 @@ public class FakturaDTO
         int idFakture,
         Date datumIzdavanja,
         int idRadniNalog,
-        double iznos
+        double iznos,
+        int vrijemeRada
     )
     {
         this.idFaktura=idFaktura;
         this.datumIzdavanja=datumIzdavanja;
         this.idRadniNalog=idRadniNalog;
         this.iznos=iznos;
+        this.vrijemeRada=vrijemeRada;
     }
     
     /**Getters**/
@@ -50,6 +53,10 @@ public class FakturaDTO
     {
         return iznos;
     }
+    public int getVrijemeRada()
+    {
+        return vrijemeRada;
+    }
     
     /**Setters**/
     public void setIdFaktura(int idFaktura)
@@ -67,5 +74,9 @@ public class FakturaDTO
     public void setIznos(double iznos)
     {
         this.iznos=iznos;
+    }
+    public void setVrijemeRada(int vrijemeRada)
+    {
+        this.vrijemeRada=vrijemeRada;
     }
 }

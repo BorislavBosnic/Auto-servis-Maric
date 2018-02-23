@@ -28,7 +28,7 @@ public class MySQLFakturaDAO implements FakturaDAO
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos"
+        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada "
                         + "FROM faktura "
                         + "ORDER BY IdFaktura ASC ";
         try {
@@ -41,7 +41,8 @@ public class MySQLFakturaDAO implements FakturaDAO
                                 rs.getInt("IdFaktura"),
                                 rs.getDate("DatumIzdavanja"),
                                 rs.getInt("IdRadniNalog"),
-                                rs.getDouble("Iznos")));
+                                rs.getDouble("Iznos"),
+                                rs.getInt("VrijemeRada")));
         } catch (SQLException e) {
                 e.printStackTrace();
                 DBUtilities.getInstance().showSQLException(e);
@@ -59,7 +60,7 @@ public class MySQLFakturaDAO implements FakturaDAO
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos "
+        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada "
                             + "FROM faktura "
                             + "WHERE IdFaktura=? ";
         try {
@@ -73,7 +74,8 @@ public class MySQLFakturaDAO implements FakturaDAO
                                         rs.getInt("IdFaktura"),
                                         rs.getDate("DatumIzdavanja"),
                                         rs.getInt("IdRadniNalog"),
-                                        rs.getDouble("Iznos"));
+                                        rs.getDouble("Iznos"),
+                                        rs.getInt("VrijemeRada"));
         } catch (SQLException e) {
                 e.printStackTrace();
                 DBUtilities.getInstance().showSQLException(e);
@@ -91,7 +93,7 @@ public class MySQLFakturaDAO implements FakturaDAO
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos "
+        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada "
                             + "FROM faktura "
                             + "WHERE IdRadniNalog=? ";
         try {
@@ -105,7 +107,8 @@ public class MySQLFakturaDAO implements FakturaDAO
                                         rs.getInt("IdFaktura"),
                                         rs.getDate("DatumIzdavanja"),
                                         rs.getInt("IdRadniNalog"),
-                                        rs.getDouble("Iznos"));
+                                        rs.getDouble("Iznos"),
+                                        rs.getInt("VrijemeRada"));
         } catch (SQLException e) {
                 e.printStackTrace();
                 DBUtilities.getInstance().showSQLException(e);
@@ -123,7 +126,7 @@ public class MySQLFakturaDAO implements FakturaDAO
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos "
+        String query = "SELECT IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada "
                             + "FROM faktura "
                             + "WHERE DatumIzdavanja=? ";
         try {
@@ -137,7 +140,8 @@ public class MySQLFakturaDAO implements FakturaDAO
                                         rs.getInt("IdFaktura"),
                                         rs.getDate("DatumIzdavanja"),
                                         rs.getInt("IdRadniNalog"),
-                                        rs.getDouble("Iznos"));
+                                        rs.getDouble("Iznos"),
+                                        rs.getInt("VrijemeRada"));
         } catch (SQLException e) {
                 e.printStackTrace();
                 DBUtilities.getInstance().showSQLException(e);
@@ -154,8 +158,8 @@ public class MySQLFakturaDAO implements FakturaDAO
         Connection conn = null;
         PreparedStatement ps = null;
 
-        String query = "INSERT INTO faktura(DatumIzdavanja, IdRadniNalog, Iznos)"
-                        + "VALUES (?, ?, ?) ";
+        String query = "INSERT INTO faktura(DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada)"
+                        + "VALUES (?, ?, ?, ?) ";
         try {
                 conn = ConnectionPool.getInstance().checkOut();
                 ps = conn.prepareStatement(query);
@@ -163,6 +167,7 @@ public class MySQLFakturaDAO implements FakturaDAO
                 ps.setDate(1, faktura.getDatumIzdavanja());
                 ps.setInt(2, faktura.getIdRadniNalog());
                 ps.setDouble(3, faktura.getIznos());
+                ps.setInt(4, faktura.getVrijemeRada());
 
                 retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
@@ -185,7 +190,8 @@ public class MySQLFakturaDAO implements FakturaDAO
                         + "IdFaktura=?, "
                         + "DatumIzdavanja=?, "
                         + "IdRadniNalog=?, "
-                        + "Iznos=?, ";
+                        + "Iznos=?, "
+                        + "VrijemeRada=? ";
         try {
                 conn = ConnectionPool.getInstance().checkOut();
                 ps = conn.prepareStatement(query);
@@ -193,6 +199,7 @@ public class MySQLFakturaDAO implements FakturaDAO
                 ps.setDate(2, faktura.getDatumIzdavanja());
                 ps.setInt(3, faktura.getIdRadniNalog());
                 ps.setDouble(4, faktura.getIznos());
+                ps.setInt(5, faktura.getVrijemeRada());
 
                 retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {

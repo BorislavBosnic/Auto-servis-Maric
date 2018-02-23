@@ -298,7 +298,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
             ps.setObject(7, nalog.getPredvidjenoVrijemeZavrsetka());
             ps.setObject(8, nalog.getCijenaUsluge());
             ps.setInt(9, nalog.getIdRadniNalog());
-            System.out.println(nalog.getIdVozilo());
+            //System.out.println(ps.toString());
             retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -317,9 +317,9 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = "SELECT IdRadniNalog, Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, OpisProblema, PredvidjenoVrijemeZavrsetka, CijenaUsluge "
+        String query = "SELECT IdRadniNalog, Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, OpisProblema, PredvidjenoVrijemeZavrsetka, CijenaUsluge, Izbrisano "
                 + "FROM radni_nalog "
-                + "WHERE IdRadniNalog=? ";
+                + "WHERE IdRadniNalog=?;";
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
@@ -328,7 +328,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
 
             //public RadniNalogDTO(boolean placeno, java.sql.Date datumOtvaranjaNaloga, java.sql.Date datumZatvaranjaNaloga, int idVozilo, double troskovi, int kilometraza, java.sql.Date predvidjenoVrijemeZavrsetka, double cijenaUsluge) {
             while (rs.next()) {
-                retVal = new RadniNalogDTO(rs.getBoolean("Placeno"), rs.getDate("DatumOtvaranjaNaloga"), rs.getDate("DatumZatvaranjaNaloga"), rs.getInt("IdVozilo"), rs.getDouble("Troskovi"), rs.getInt("Kilometraza"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("CijenaUsluge"), rs.getString("OpisProblema"));
+                retVal = new RadniNalogDTO(rs.getInt("IdRadniNalog"), rs.getBoolean("Placeno"), rs.getDate("DatumOtvaranjaNaloga"), rs.getDate("DatumZatvaranjaNaloga"), rs.getInt("IdVozilo"), rs.getDouble("Troskovi"), rs.getInt("Kilometraza"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("CijenaUsluge"), rs.getString("OpisProblema"), rs.getBoolean("Izbrisano"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

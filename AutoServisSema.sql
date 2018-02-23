@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `autoservismaric`.`model_vozila` (
   `IdModelVozila` INT(11) NOT NULL AUTO_INCREMENT,
   `Marka` VARCHAR(20) NULL DEFAULT NULL,
   `Model` VARCHAR(20) NULL DEFAULT NULL,
+  `Aktivan` BOOLEAN NULL DEFAULT TRUE,
   PRIMARY KEY (`IdModelVozila`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -55,7 +56,6 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `autoservismaric`.`dio_model_vozila` (
   `IdDio` INT(11) NOT NULL,
   `IdModelVozila` INT(11) NOT NULL,
-   `Aktivan` BOOLEAN NULL DEFAULT TRUE
   PRIMARY KEY (`IdDio`, `IdModelVozila`),
   INDEX `R_20` (`IdModelVozila` ASC),
   CONSTRAINT `dio_model_vozila_ibfk_1`
@@ -276,11 +276,12 @@ INSERT INTO radni_nalog VALUES (1, true, '2017-10-22', '2017-10-30', 1, 50, 3000
 INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 250000, "Tu nešto piše dva", '2018-01-29', 140, false);
 INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65, false);
 INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125, false);
+INSERT INTO radni_nalog VALUES (5, false, '2017-12-26', '2018-02-21', 1, 65, 30500, "Tu nešto piše pet", '2018-02-25', 226, false);
 
 INSERT INTO faktura VALUES (1, '2017-11-02', 1, 100, 2);
 INSERT INTO faktura VALUES (2, '2018-02-25', 4, 200, 1);
 INSERT INTO faktura VALUES (3, '2018-02-17', 3, 300, 2);
-INSERT INTO faktura VALUES (4, '2018-01-16', 2, 200, 1);
+INSERT INTO faktura VALUES (4, '2018-01-16', 2, 400, 1);
 
 
 INSERT INTO radni_nalog_dio VALUES (1,1,10,1);
