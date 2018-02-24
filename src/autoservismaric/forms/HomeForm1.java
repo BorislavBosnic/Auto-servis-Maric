@@ -19,8 +19,6 @@ import data.dto.DioDTO;
 import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
-import data.dto.RadniNalogParametri;
-import data.dto.RezultatRNPretrazivanje;
 import data.dto.TerminDTO;
 import data.dto.ZaposleniDTO;
 import java.io.*;
@@ -29,8 +27,6 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -774,7 +770,8 @@ public class HomeForm1 extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jLabel59 = new javax.swing.JLabel();
         popupMenuZaposleni = new javax.swing.JPopupMenu();
@@ -892,11 +889,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         spanelTabela = new javax.swing.JScrollPane();
         tableRNalozi = new javax.swing.JTable();
         pnlZakazivanja = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel24 = new javax.swing.JPanel();
-        jLabel128 = new javax.swing.JLabel();
-        jLabel132 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlOsnovniZakazivanja = new javax.swing.JPanel();
+        pnlOkvirZakazivanja = new javax.swing.JPanel();
+        txtPronadjiZakazivanja = new javax.swing.JLabel();
+        txtZakaziZakazivanja = new javax.swing.JLabel();
+        pnlPronadjiZakazivanja = new javax.swing.JPanel();
         jLabel144 = new javax.swing.JLabel();
         jLabel145 = new javax.swing.JLabel();
         jLabel143 = new javax.swing.JLabel();
@@ -909,7 +906,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         txtBrojTelefonaPretraga = new javax.swing.JTextField();
         dtmDatumPretraga = new com.toedter.calendar.JDateChooser();
         btnPonistiUnosePretraga = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlZakaziZakazivanja = new javax.swing.JPanel();
         jLabel131 = new javax.swing.JLabel();
         jLabel135 = new javax.swing.JLabel();
         jLabel141 = new javax.swing.JLabel();
@@ -929,10 +926,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel156 = new javax.swing.JLabel();
         jLabel157 = new javax.swing.JLabel();
         btnPonistiUnoseTermin = new javax.swing.JButton();
-        jScrollPane10 = new javax.swing.JScrollPane();
+        pnlTabelaZakazivanje = new javax.swing.JScrollPane();
         tblTermini = new javax.swing.JTable();
-        jLabel138 = new javax.swing.JLabel();
-        jLabel139 = new javax.swing.JLabel();
+        txtZakazivanja = new javax.swing.JLabel();
+        txtSlikaZakazivanja = new javax.swing.JLabel();
         pnlVozila = new javax.swing.JPanel();
         pnllAkcijeNaFormi = new javax.swing.JPanel();
         lblNaslovVozila = new javax.swing.JLabel();
@@ -1033,18 +1030,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         pnlKnjigovodstvo = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
+        pnlOsnovniKnjigovodstvo = new javax.swing.JPanel();
+        pnlOkvirKnjigovodstvo = new javax.swing.JPanel();
         lblRadniNalozi = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnPredracun = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane9 = new javax.swing.JScrollPane();
+        pnlNaloziKnjigovodstvo = new javax.swing.JPanel();
+        pnlRadniNaloziKnjigovodstvo = new javax.swing.JScrollPane();
         tblRadniNalozi = new javax.swing.JTable();
         jLabel161 = new javax.swing.JLabel();
         txtUkupno = new javax.swing.JTextField();
         jLabel162 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        pnlTabelaKnjigovodstvo = new javax.swing.JScrollPane();
         tblFaktura = new javax.swing.JTable();
         btnRacun = new javax.swing.JButton();
         btnPoIDu = new javax.swing.JButton();
@@ -1058,8 +1055,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnNefakturisano = new javax.swing.JButton();
         btnFakturisano = new javax.swing.JButton();
         dtmDatum = new com.toedter.calendar.JDateChooser();
-        jLabel126 = new javax.swing.JLabel();
-        jLabel127 = new javax.swing.JLabel();
+        txtKnjigovodstvo = new javax.swing.JLabel();
+        txtSlikaKnjigovodstvo = new javax.swing.JLabel();
         pnlZaposleni = new javax.swing.JPanel();
         jPanel27 = new javax.swing.JPanel();
         jPanel28 = new javax.swing.JPanel();
@@ -1165,8 +1162,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         menuItemDetaljniOpis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         menuItemDetaljniOpis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
         menuItemDetaljniOpis.setText("Detaljan opis");
-        menuItemDetaljniOpis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuItemDetaljniOpis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuItemDetaljniOpisActionPerformed(evt);
             }
         });
@@ -1174,8 +1173,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         menuItemIzmjeniRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Settings_32px_3.png"))); // NOI18N
         menuItemIzmjeniRadnika.setText("Izmjeni radnika");
-        menuItemIzmjeniRadnika.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuItemIzmjeniRadnika.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuItemIzmjeniRadnikaActionPerformed(evt);
             }
         });
@@ -1183,8 +1184,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         menuItemOtpustiRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/icon.png"))); // NOI18N
         menuItemOtpustiRadnika.setText("Otpusti radnika");
-        menuItemOtpustiRadnika.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        menuItemOtpustiRadnika.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 menuItemOtpustiRadnikaActionPerformed(evt);
             }
         });
@@ -1200,17 +1203,22 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel1.setBounds(10, 408, 0, 33);
 
         pnlMeniRadniNalozi.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniRadniNaloziMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniRadniNaloziMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniRadniNaloziMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniRadniNaloziMousePressed(evt);
             }
         });
@@ -1267,14 +1275,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlSlika.setBounds(-1, -1, 257, 113);
 
         pnlMeniVozila.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniVozila.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniVozila.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniVozilaMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniVozilaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniVozilaMouseExited(evt);
             }
         });
@@ -1307,14 +1319,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlMeniVozila.setBounds(10, 390, 260, 50);
 
         pnlMeniKnjigovodstvo.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniKnjigovodstvo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniKnjigovodstvo.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniKnjigovodstvoMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniKnjigovodstvoMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniKnjigovodstvoMouseExited(evt);
             }
         });
@@ -1347,17 +1363,22 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlMeniKnjigovodstvo.setBounds(10, 490, 260, 50);
 
         pnlMeniStatistika.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniStatistika.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniStatistika.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniStatistikaMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniStatistikaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniStatistikaMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniStatistikaMousePressed(evt);
             }
         });
@@ -1396,17 +1417,22 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel2.setBounds(40, 810, 160, 30);
 
         pnlMeniZaposleni.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniZaposleni.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniZaposleni.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZaposleniMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZaposleniMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZaposleniMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZaposleniMousePressed(evt);
             }
         });
@@ -1439,14 +1465,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlMeniZaposleni.setBounds(10, 540, 261, 50);
 
         pnlMeniDijelovi.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniDijelovi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniDijelovi.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniDijeloviMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniDijeloviMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniDijeloviMouseExited(evt);
             }
         });
@@ -1460,8 +1490,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel36.setMaximumSize(new java.awt.Dimension(68, 50));
         jLabel36.setMinimumSize(new java.awt.Dimension(68, 50));
         jLabel36.setPreferredSize(new java.awt.Dimension(68, 50));
-        jLabel36.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        jLabel36.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 jLabel36KeyPressed(evt);
             }
         });
@@ -1487,17 +1519,22 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlMeniDijelovi.setBounds(10, 440, 260, 50);
 
         pnlMeniPocetnaStrana.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniPocetnaStrana.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniPocetnaStrana.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniPocetnaStranaMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniPocetnaStranaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniPocetnaStranaMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniPocetnaStranaMousePressed(evt);
             }
         });
@@ -1530,17 +1567,22 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlMeniPocetnaStrana.setBounds(10, 240, 260, 50);
 
         pnlMeniZakazivanja.setBackground(new java.awt.Color(51, 51, 255));
-        pnlMeniZakazivanja.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlMeniZakazivanja.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZakazivanjaMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZakazivanjaMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZakazivanjaMouseExited(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 pnlMeniZakazivanjaMousePressed(evt);
             }
         });
@@ -1602,8 +1644,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPrikazii.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrikazii.setText("Prikaži");
         btnPrikazii.setPreferredSize(new java.awt.Dimension(105, 38));
-        btnPrikazii.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikazii.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziiActionPerformed(evt);
             }
         });
@@ -1647,8 +1691,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Pregled aktivnosti:");
-        jLabel4.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+        jLabel4.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
                 jLabel4PropertyChange(evt);
             }
         });
@@ -1657,15 +1703,19 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
         btnPrikaziSvePredracune.setText("Prikaži sve");
-        btnPrikaziSvePredracune.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikaziSvePredracune.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziSvePredracuneActionPerformed(evt);
             }
         });
 
         btnPrikaziPredracune.setText("Prikaži");
-        btnPrikaziPredracune.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikaziPredracune.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziPredracuneActionPerformed(evt);
             }
         });
@@ -1677,16 +1727,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         jrbPrivatno.setForeground(new java.awt.Color(240, 240, 240));
         jrbPrivatno.setSelected(true);
         jrbPrivatno.setText("Privatno lice");
-        jrbPrivatno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jrbPrivatno.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jrbPrivatnoActionPerformed(evt);
             }
         });
 
         jrbPravnoo.setForeground(new java.awt.Color(240, 240, 240));
         jrbPravnoo.setText("Pravno lice");
-        jrbPravnoo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jrbPravnoo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jrbPravnooActionPerformed(evt);
             }
         });
@@ -1765,8 +1819,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
         btnBaza.setText("Čuvanje podataka");
-        btnBaza.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBaza.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBazaActionPerformed(evt);
             }
         });
@@ -1861,7 +1917,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         Napomene2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
         tblNeplaceneFakture.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -1880,34 +1937,43 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Automobil", "Vlasnik", "Datum otvaranja", "Datum fakturisanja", "Iznos", "Plaćeno"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         tblNeplaceneFakture.getTableHeader().setResizingAllowed(false);
         tblNeplaceneFakture.getTableHeader().setReorderingAllowed(false);
-        tblNeplaceneFakture.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tblNeplaceneFakture.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tblNeplaceneFaktureMouseClicked(evt);
             }
         });
         jScrollPane8.setViewportView(tblNeplaceneFakture);
-        if (tblNeplaceneFakture.getColumnModel().getColumnCount() > 0) {
+        if (tblNeplaceneFakture.getColumnModel().getColumnCount() > 0)
+        {
             tblNeplaceneFakture.getColumnModel().getColumn(0).setResizable(false);
             tblNeplaceneFakture.getColumnModel().getColumn(0).setPreferredWidth(20);
             tblNeplaceneFakture.getColumnModel().getColumn(1).setResizable(false);
@@ -1949,30 +2015,38 @@ public class HomeForm1 extends javax.swing.JFrame {
         datumLabel.setText("Aktivnosti: ");
 
         tableAktivnosti.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Id", "Vlasnik", "Auto", "Pocetak rada", "Rok"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane11.setViewportView(tableAktivnosti);
-        if (tableAktivnosti.getColumnModel().getColumnCount() > 0) {
+        if (tableAktivnosti.getColumnModel().getColumnCount() > 0)
+        {
             tableAktivnosti.getColumnModel().getColumn(0).setResizable(false);
             tableAktivnosti.getColumnModel().getColumn(0).setPreferredWidth(20);
             tableAktivnosti.getColumnModel().getColumn(1).setResizable(false);
@@ -2066,8 +2140,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnNoviRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnNoviRadniNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add-documents.png"))); // NOI18N
         btnNoviRadniNalog.setText("Novi radni nalog");
-        btnNoviRadniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnNoviRadniNalog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnNoviRadniNalogActionPerformed(evt);
             }
         });
@@ -2132,8 +2208,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPrikaziRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnPrikaziRadniNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPrikaziRadniNalog.setText("Prikaži radne naloge");
-        btnPrikaziRadniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikaziRadniNalog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziRadniNalogActionPerformed(evt);
             }
         });
@@ -2154,8 +2232,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPravnoRadniNalog.setForeground(new java.awt.Color(255, 255, 255));
         rbPravnoRadniNalog.setText("Pravno lice");
-        rbPravnoRadniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPravnoRadniNalog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPravnoRadniNalogActionPerformed(evt);
             }
         });
@@ -2165,8 +2245,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoRadniNalog.setForeground(new java.awt.Color(255, 255, 255));
         rbPrivatnoRadniNalog.setSelected(true);
         rbPrivatnoRadniNalog.setText("Privatno lice");
-        rbPrivatnoRadniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPrivatnoRadniNalog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPrivatnoRadniNalogActionPerformed(evt);
             }
         });
@@ -2191,8 +2273,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbSviRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbSviRadniNalog.setForeground(new java.awt.Color(255, 255, 255));
         cbSviRadniNalog.setText("Svi");
-        cbSviRadniNalog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cbSviRadniNalog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cbSviRadniNalogActionPerformed(evt);
             }
         });
@@ -2412,25 +2496,32 @@ public class HomeForm1 extends javax.swing.JFrame {
         spanelTabela.setBackground(new java.awt.Color(102, 153, 255));
 
         tableRNalozi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Potrebno završiti do", "Datum zatvaranja", "Troškovi dijelova", "Cijena usluge", "Plaćeno"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -2457,24 +2548,24 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         pnlParent.add(pnlRadniNalozi, "card9");
 
-        jPanel23.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel23.setPreferredSize(new java.awt.Dimension(1485, 980));
+        pnlOsnovniZakazivanja.setBackground(new java.awt.Color(102, 153, 255));
+        pnlOsnovniZakazivanja.setPreferredSize(new java.awt.Dimension(1485, 980));
 
-        jPanel24.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel24.setAlignmentX(1.0F);
-        jPanel24.setAlignmentY(1.0F);
+        pnlOkvirZakazivanja.setBackground(new java.awt.Color(102, 153, 255));
+        pnlOkvirZakazivanja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        pnlOkvirZakazivanja.setAlignmentX(1.0F);
+        pnlOkvirZakazivanja.setAlignmentY(1.0F);
 
-        jLabel128.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel128.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel128.setText("Zakaži termin:");
+        txtPronadjiZakazivanja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPronadjiZakazivanja.setForeground(new java.awt.Color(255, 255, 255));
+        txtPronadjiZakazivanja.setText("Zakaži termin:");
 
-        jLabel132.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel132.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel132.setText("Pronađi termin:");
+        txtZakaziZakazivanja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtZakaziZakazivanja.setForeground(new java.awt.Color(255, 255, 255));
+        txtZakaziZakazivanja.setText("Pronađi termin:");
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPronadjiZakazivanja.setBackground(new java.awt.Color(102, 153, 255));
+        pnlPronadjiZakazivanja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel144.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel144.setForeground(new java.awt.Color(255, 255, 255));
@@ -2497,87 +2588,91 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel136.setText("Datum termina:");
 
         btnPronadjiTermin.setText("Pronađi termin");
-        btnPronadjiTermin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPronadjiTermin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPronadjiTerminActionPerformed(evt);
             }
         });
 
         btnPonistiUnosePretraga.setText("Poništi unose");
-        btnPonistiUnosePretraga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPonistiUnosePretraga.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPonistiUnosePretragaActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPronadjiZakazivanjaLayout = new javax.swing.GroupLayout(pnlPronadjiZakazivanja);
+        pnlPronadjiZakazivanja.setLayout(pnlPronadjiZakazivanjaLayout);
+        pnlPronadjiZakazivanjaLayout.setHorizontalGroup(
+            pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addComponent(btnPronadjiTermin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(btnPonistiUnosePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addComponent(jLabel144)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtBrojTelefonaPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addComponent(jLabel133)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtMarkaPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addComponent(jLabel145)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtPrezimePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPronadjiZakazivanjaLayout.createSequentialGroup()
+                        .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel143)
                             .addComponent(jLabel136))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtImePretraga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dtmDatumPretraga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(10, 10, 10))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlPronadjiZakazivanjaLayout.setVerticalGroup(
+            pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel133)
                     .addComponent(txtMarkaPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel136))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlPronadjiZakazivanjaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(dtmDatumPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel143)
                     .addComponent(txtImePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel145)
                     .addComponent(txtPrezimePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel144)
                     .addComponent(txtBrojTelefonaPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlPronadjiZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPronadjiTermin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPonistiUnosePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlZakaziZakazivanja.setBackground(new java.awt.Color(102, 153, 255));
+        pnlZakaziZakazivanja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel131.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel131.setForeground(new java.awt.Color(255, 255, 255));
@@ -2600,8 +2695,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel142.setText("Broj telefona:");
 
         btnDodajTermin.setText("Dodaj termin");
-        btnDodajTermin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodajTermin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajTerminActionPerformed(evt);
             }
         });
@@ -2629,25 +2726,27 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel157.setToolTipText("");
 
         btnPonistiUnoseTermin.setText("Poništi unose");
-        btnPonistiUnoseTermin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPonistiUnoseTermin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPonistiUnoseTerminActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlZakaziZakazivanjaLayout = new javax.swing.GroupLayout(pnlZakaziZakazivanja);
+        pnlZakaziZakazivanja.setLayout(pnlZakaziZakazivanjaLayout);
+        pnlZakaziZakazivanjaLayout.setHorizontalGroup(
+            pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
                         .addComponent(btnDodajTermin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(btnPonistiUnoseTermin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel131)
                             .addComponent(jLabel135)
                             .addComponent(jLabel141)
@@ -2655,8 +2754,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addComponent(jLabel142)
                             .addComponent(jLabel130))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlZakaziZakazivanjaLayout.createSequentialGroup()
                                 .addComponent(txtVrijemeTerminaSati, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel156, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2669,52 +2768,52 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addComponent(txtImeTermina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrezimeTermina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBrojTelefonaTermina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlZakaziZakazivanjaLayout.createSequentialGroup()
                         .addComponent(jLabel134)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dtmDatumTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlZakaziZakazivanjaLayout.setVerticalGroup(
+            pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
+                .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDodajTermin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addComponent(jLabel134))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(pnlZakaziZakazivanjaLayout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(dtmDatumTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtVrijemeTerminaSati, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtVrijemeTerminaMinuti, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel130)
                                     .addComponent(jLabel156)
                                     .addComponent(jLabel157))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel131)
                             .addComponent(txtMarkaTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel135)
                             .addComponent(txtModelTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel141)
                             .addComponent(txtImeTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel140)
                             .addComponent(txtPrezimeTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlZakaziZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel142)
                             .addComponent(txtBrojTelefonaTermina, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2723,13 +2822,14 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jScrollPane10.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane10.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane10.setMaximumSize(new java.awt.Dimension(920, 800));
-        jScrollPane10.setPreferredSize(new java.awt.Dimension(920, 800));
+        pnlTabelaZakazivanje.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pnlTabelaZakazivanje.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        pnlTabelaZakazivanje.setMaximumSize(new java.awt.Dimension(920, 800));
+        pnlTabelaZakazivanje.setPreferredSize(new java.awt.Dimension(920, 800));
 
         tblTermini.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -2761,15 +2861,19 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Datum termina", "Vrijeme termina", "Datum zakazivanja", "Marka", "Model", "Ime", "Prezime", "Broj telefona"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -2778,72 +2882,72 @@ public class HomeForm1 extends javax.swing.JFrame {
         tblTermini.setPreferredSize(new java.awt.Dimension(1000, 288));
         tblTermini.getTableHeader().setResizingAllowed(false);
         tblTermini.getTableHeader().setReorderingAllowed(false);
-        jScrollPane10.setViewportView(tblTermini);
+        pnlTabelaZakazivanje.setViewportView(tblTermini);
 
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOkvirZakazivanjaLayout = new javax.swing.GroupLayout(pnlOkvirZakazivanja);
+        pnlOkvirZakazivanja.setLayout(pnlOkvirZakazivanjaLayout);
+        pnlOkvirZakazivanjaLayout.setHorizontalGroup(
+            pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOkvirZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 1043, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel132))
+                .addGroup(pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlTabelaZakazivanje, javax.swing.GroupLayout.DEFAULT_SIZE, 1043, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOkvirZakazivanjaLayout.createSequentialGroup()
+                        .addGroup(pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlPronadjiZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtZakaziZakazivanja))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel128)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPronadjiZakazivanja)
+                            .addComponent(pnlZakaziZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
+        pnlOkvirZakazivanjaLayout.setVerticalGroup(
+            pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOkvirZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel132)
-                    .addComponent(jLabel128))
+                .addGroup(pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtZakaziZakazivanja)
+                    .addComponent(txtPronadjiZakazivanja))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlOkvirZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlPronadjiZakazivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlZakaziZakazivanja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTabelaZakazivanje, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jLabel138.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel138.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel138.setForeground(new java.awt.Color(229, 229, 229));
-        jLabel138.setText(">Zakazivanja");
+        txtZakazivanja.setBackground(new java.awt.Color(255, 255, 255));
+        txtZakazivanja.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtZakazivanja.setForeground(new java.awt.Color(229, 229, 229));
+        txtZakazivanja.setText(">Zakazivanja");
 
-        jLabel139.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Clock_20px.png"))); // NOI18N
+        txtSlikaZakazivanja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Clock_20px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOsnovniZakazivanjaLayout = new javax.swing.GroupLayout(pnlOsnovniZakazivanja);
+        pnlOsnovniZakazivanja.setLayout(pnlOsnovniZakazivanjaLayout);
+        pnlOsnovniZakazivanjaLayout.setHorizontalGroup(
+            pnlOsnovniZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOsnovniZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel139, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSlikaZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel138)
+                .addComponent(txtZakazivanja)
                 .addContainerGap(2875, Short.MAX_VALUE))
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(pnlOsnovniZakazivanjaLayout.createSequentialGroup()
+                .addComponent(pnlOkvirZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
+        pnlOsnovniZakazivanjaLayout.setVerticalGroup(
+            pnlOsnovniZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOsnovniZakazivanjaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel139, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel138))
+                .addGroup(pnlOsnovniZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSlikaZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtZakazivanja))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOkvirZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2018, 2018, 2018))
         );
 
@@ -2852,13 +2956,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlZakazivanjaLayout.setHorizontalGroup(
             pnlZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlZakazivanjaLayout.createSequentialGroup()
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, 3042, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOsnovniZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, 3042, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 124, Short.MAX_VALUE))
         );
         pnlZakazivanjaLayout.setVerticalGroup(
             pnlZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlZakazivanjaLayout.createSequentialGroup()
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, 3512, Short.MAX_VALUE)
+                .addComponent(pnlOsnovniZakazivanja, javax.swing.GroupLayout.DEFAULT_SIZE, 3512, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2898,13 +3002,17 @@ public class HomeForm1 extends javax.swing.JFrame {
         lblPrezimeVozila.setForeground(new java.awt.Color(255, 255, 255));
         lblPrezimeVozila.setText("Prezime:");
 
-        txtModelTrazi.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        txtModelTrazi.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 txtModelTraziFocusGained(evt);
             }
         });
-        txtModelTrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtModelTrazi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtModelTraziActionPerformed(evt);
             }
         });
@@ -2912,8 +3020,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPronadjiVozilo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPronadjiVozilo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPronadjiVozilo.setText("Traži");
-        btnPronadjiVozilo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPronadjiVozilo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPronadjiVoziloActionPerformed(evt);
             }
         });
@@ -2930,8 +3040,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPonistiSve.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPonistiSve.setText("Poništi unose");
-        btnPonistiSve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPonistiSve.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPonistiSveActionPerformed(evt);
             }
         });
@@ -2941,8 +3053,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoLiceVozilo.setForeground(new java.awt.Color(255, 255, 255));
         rbPrivatnoLiceVozilo.setSelected(true);
         rbPrivatnoLiceVozilo.setText("Privatno lice");
-        rbPrivatnoLiceVozilo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPrivatnoLiceVozilo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPrivatnoLiceVoziloActionPerformed(evt);
             }
         });
@@ -2951,8 +3065,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoLiceVozilo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPravnoLiceVozilo.setForeground(new java.awt.Color(255, 255, 255));
         rbPravnoLiceVozilo.setText("Pravno lice");
-        rbPravnoLiceVozilo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPravnoLiceVozilo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPravnoLiceVoziloActionPerformed(evt);
             }
         });
@@ -2967,8 +3083,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPrikaziSvaVozila.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrikaziSvaVozila.setText("Prikaži sve");
-        btnPrikaziSvaVozila.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikaziSvaVozila.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziSvaVozilaActionPerformed(evt);
             }
         });
@@ -2977,8 +3095,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbSvi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbSvi.setForeground(new java.awt.Color(240, 240, 240));
         cbSvi.setText("Svi");
-        cbSvi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cbSvi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cbSviActionPerformed(evt);
             }
         });
@@ -3098,8 +3218,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnTrazi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnTrazi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnTrazi.setText("Traži");
-        btnTrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTrazi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTraziActionPerformed(evt);
             }
         });
@@ -3115,8 +3237,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoTrazi.setForeground(new java.awt.Color(255, 255, 255));
         rbPrivatnoTrazi.setSelected(true);
         rbPrivatnoTrazi.setText("Privatno lice");
-        rbPrivatnoTrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPrivatnoTrazi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPrivatnoTraziActionPerformed(evt);
             }
         });
@@ -3125,16 +3249,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPravnoTrazi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPravnoTrazi.setForeground(new java.awt.Color(255, 255, 255));
         rbPravnoTrazi.setText("Pravno lice");
-        rbPravnoTrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        rbPravnoTrazi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 rbPravnoTraziActionPerformed(evt);
             }
         });
 
         btnPrikaziSve.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrikaziSve.setText("Prikaži sve");
-        btnPrikaziSve.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrikaziSve.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrikaziSveActionPerformed(evt);
             }
         });
@@ -3145,8 +3273,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPonisti.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPonisti.setText("Poništi unose");
-        btnPonisti.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPonisti.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPonistiActionPerformed(evt);
             }
         });
@@ -3244,8 +3374,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnDodajVozilo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDodajVozilo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/racing (1).png"))); // NOI18N
         btnDodajVozilo.setText("Dodaj Vozilo");
-        btnDodajVozilo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodajVozilo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajVoziloActionPerformed(evt);
             }
         });
@@ -3253,8 +3385,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnDodajVlasnika.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDodajVlasnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/user (2).png"))); // NOI18N
         btnDodajVlasnika.setText("Dodaj Vlasnika");
-        btnDodajVlasnika.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodajVlasnika.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajVlasnikaActionPerformed(evt);
             }
         });
@@ -3262,15 +3396,19 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnDodajModel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnDodajModel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cube.png"))); // NOI18N
         btnDodajModel2.setText("Dodaj Model");
-        btnDodajModel2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodajModel2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajModel2ActionPerformed(evt);
             }
         });
 
         btnIzmijeniIzbrisiModel.setText("Izmijeni/Izbriši model");
-        btnIzmijeniIzbrisiModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnIzmijeniIzbrisiModel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnIzmijeniIzbrisiModelActionPerformed(evt);
             }
         });
@@ -3327,10 +3465,12 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDodajModel2, btnDodajVlasnika, btnDodajVozilo});
 
         tableVozila.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -3417,8 +3557,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbMarka.setMaximumSize(new java.awt.Dimension(81, 20));
         cbMarka.setMinimumSize(new java.awt.Dimension(81, 20));
         cbMarka.setPreferredSize(new java.awt.Dimension(81, 20));
-        cbMarka.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        cbMarka.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 cbMarkaItemStateChanged(evt);
             }
         });
@@ -3466,24 +3608,30 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPretrazi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnPretrazi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPretrazi.setText("Traži");
-        btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPretrazi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPretraziActionPerformed(evt);
             }
         });
 
         btnSviDijelovi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSviDijelovi.setText("Prikaži sve");
-        btnSviDijelovi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSviDijelovi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSviDijeloviActionPerformed(evt);
             }
         });
 
         btnProdani.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnProdani.setText("Prodani dijelovi");
-        btnProdani.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnProdani.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnProdaniActionPerformed(evt);
             }
         });
@@ -3619,8 +3767,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jcbMarka.setMaximumSize(new java.awt.Dimension(81, 20));
         jcbMarka.setMinimumSize(new java.awt.Dimension(81, 20));
         jcbMarka.setPreferredSize(new java.awt.Dimension(81, 20));
-        jcbMarka.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        jcbMarka.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 jcbMarkaItemStateChanged(evt);
             }
         });
@@ -3647,8 +3797,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnDodaj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnDodaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
         btnDodaj.setText("DODAJ");
-        btnDodaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodaj.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajActionPerformed(evt);
             }
         });
@@ -3658,8 +3810,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel34.setText("Količina:");
 
         btnDodajModel.setText("Dodaj model");
-        btnDodajModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDodajModel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDodajModelActionPerformed(evt);
             }
         });
@@ -3823,30 +3977,39 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Id", "Šifra", "Naziv", "Marka", "Model", "Godište", "Vrsta goriva", "Cijena", "Količina", "Novo"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
-        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTable.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jTableMouseClicked(evt);
             }
         });
@@ -3876,11 +4039,11 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         pnlKnjigovodstvo.setBackground(new java.awt.Color(102, 153, 255));
 
-        jPanel17.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel17.setPreferredSize(new java.awt.Dimension(895, 600));
+        pnlOsnovniKnjigovodstvo.setBackground(new java.awt.Color(102, 153, 255));
+        pnlOsnovniKnjigovodstvo.setPreferredSize(new java.awt.Dimension(895, 600));
 
-        jPanel22.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        pnlOkvirKnjigovodstvo.setBackground(new java.awt.Color(102, 153, 255));
+        pnlOkvirKnjigovodstvo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         lblRadniNalozi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblRadniNalozi.setForeground(new java.awt.Color(255, 255, 255));
@@ -3888,20 +4051,23 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         btnPredracun.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPredracun.setText("Predračun");
-        btnPredracun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPredracun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPredracunActionPerformed(evt);
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlNaloziKnjigovodstvo.setBackground(new java.awt.Color(102, 153, 255));
+        pnlNaloziKnjigovodstvo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jScrollPane9.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane9.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        pnlRadniNaloziKnjigovodstvo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pnlRadniNaloziKnjigovodstvo.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         tblRadniNalozi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -3923,35 +4089,45 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Automobil", "Vlasnik", "Datum otvaranja", "Datum fakturisanja", "Iznos", "Plaćeno"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false, true, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
-        tblRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tblRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tblRadniNaloziMouseClicked(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 tblRadniNaloziMouseReleased(evt);
             }
         });
-        jScrollPane9.setViewportView(tblRadniNalozi);
-        if (tblRadniNalozi.getColumnModel().getColumnCount() > 0) {
+        pnlRadniNaloziKnjigovodstvo.setViewportView(tblRadniNalozi);
+        if (tblRadniNalozi.getColumnModel().getColumnCount() > 0)
+        {
             tblRadniNalozi.getColumnModel().getColumn(0).setPreferredWidth(40);
             tblRadniNalozi.getColumnModel().getColumn(0).setMaxWidth(40);
             tblRadniNalozi.getColumnModel().getColumn(5).setPreferredWidth(40);
@@ -3960,20 +4136,20 @@ public class HomeForm1 extends javax.swing.JFrame {
             tblRadniNalozi.getColumnModel().getColumn(6).setMaxWidth(40);
         }
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlNaloziKnjigovodstvoLayout = new javax.swing.GroupLayout(pnlNaloziKnjigovodstvo);
+        pnlNaloziKnjigovodstvo.setLayout(pnlNaloziKnjigovodstvoLayout);
+        pnlNaloziKnjigovodstvoLayout.setHorizontalGroup(
+            pnlNaloziKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNaloziKnjigovodstvoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9)
+                .addComponent(pnlRadniNaloziKnjigovodstvo)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        pnlNaloziKnjigovodstvoLayout.setVerticalGroup(
+            pnlNaloziKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNaloziKnjigovodstvoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(pnlRadniNaloziKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3989,11 +4165,12 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel162.setForeground(new java.awt.Color(255, 255, 255));
         jLabel162.setText("KM");
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        pnlTabelaKnjigovodstvo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pnlTabelaKnjigovodstvo.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         tblFaktura.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -4025,15 +4202,19 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Naziv", "Količina", "Osnovica", "Cijena sa PDV"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -4042,8 +4223,9 @@ public class HomeForm1 extends javax.swing.JFrame {
         tblFaktura.setPreferredSize(new java.awt.Dimension(1000, 480));
         tblFaktura.getTableHeader().setResizingAllowed(false);
         tblFaktura.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tblFaktura);
-        if (tblFaktura.getColumnModel().getColumnCount() > 0) {
+        pnlTabelaKnjigovodstvo.setViewportView(tblFaktura);
+        if (tblFaktura.getColumnModel().getColumnCount() > 0)
+        {
             tblFaktura.getColumnModel().getColumn(0).setPreferredWidth(40);
             tblFaktura.getColumnModel().getColumn(0).setMaxWidth(40);
             tblFaktura.getColumnModel().getColumn(1).setResizable(false);
@@ -4058,8 +4240,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnRacun.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnRacun.setText("Račun");
         btnRacun.setEnabled(false);
-        btnRacun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRacun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRacunActionPerformed(evt);
             }
         });
@@ -4067,16 +4251,20 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPoIDu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPoIDu.setText("Po ID-u");
         btnPoIDu.setToolTipText("");
-        btnPoIDu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPoIDu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPoIDuActionPerformed(evt);
             }
         });
 
         btnPoDatumu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPoDatumu.setText("Po datumu");
-        btnPoDatumu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPoDatumu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPoDatumuActionPerformed(evt);
             }
         });
@@ -4102,8 +4290,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnNefakturisano.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnNefakturisano.setText("Nefakturisani nalozi");
         btnNefakturisano.setToolTipText("");
-        btnNefakturisano.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnNefakturisano.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnNefakturisanoActionPerformed(evt);
             }
         });
@@ -4111,49 +4301,51 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnFakturisano.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnFakturisano.setText("Fakturisani nalozi");
         btnFakturisano.setToolTipText("");
-        btnFakturisano.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnFakturisano.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnFakturisanoActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel22Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOkvirKnjigovodstvoLayout = new javax.swing.GroupLayout(pnlOkvirKnjigovodstvo);
+        pnlOkvirKnjigovodstvo.setLayout(pnlOkvirKnjigovodstvoLayout);
+        pnlOkvirKnjigovodstvoLayout.setHorizontalGroup(
+            pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
+                .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                 .addComponent(lblRadniNalozi)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel22Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel22Layout.createSequentialGroup()
+                            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
+                                .addComponent(pnlNaloziKnjigovodstvo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                        .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                                 .addComponent(btnPoIDu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel22Layout.createSequentialGroup()
+                                            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                                 .addComponent(btnPoDatumu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(dtmDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(jPanel22Layout.createSequentialGroup()
+                                    .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                         .addGap(62, 62, 62)
-                                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(btnNefakturisano)
                                             .addComponent(btnFakturisano, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(8, 8, 8))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2))
+                        .addComponent(pnlTabelaKnjigovodstvo))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel22Layout.createSequentialGroup()
+                    .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jLabel164)
                         .addGap(29, 29, 29)
@@ -4171,45 +4363,45 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel162)))
                 .addContainerGap())
-            .addGroup(jPanel22Layout.createSequentialGroup()
+            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                 .addGap(277, 277, 277)
                 .addComponent(btnPredracun, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRacun, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
+        pnlOkvirKnjigovodstvoLayout.setVerticalGroup(
+            pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRadniNalozi)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel22Layout.createSequentialGroup()
+                .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                         .addComponent(btnNefakturisano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnFakturisano, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnPoIDu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel22Layout.createSequentialGroup()
+                            .addGroup(pnlOkvirKnjigovodstvoLayout.createSequentialGroup()
                                 .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnPoDatumu, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                             .addComponent(dtmDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlNaloziKnjigovodstvo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPredracun, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                     .addComponent(btnRacun, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTabelaKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlOkvirKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel164)
                     .addComponent(jLabel165)
                     .addComponent(txtBezPDV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4221,37 +4413,37 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel126.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel126.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel126.setForeground(new java.awt.Color(229, 229, 229));
-        jLabel126.setText(">Knjigovodstvo");
+        txtKnjigovodstvo.setBackground(new java.awt.Color(255, 255, 255));
+        txtKnjigovodstvo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtKnjigovodstvo.setForeground(new java.awt.Color(229, 229, 229));
+        txtKnjigovodstvo.setText(">Knjigovodstvo");
 
-        jLabel127.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Book Stack_20px.png"))); // NOI18N
+        txtSlikaKnjigovodstvo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/Book Stack_20px.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOsnovniKnjigovodstvoLayout = new javax.swing.GroupLayout(pnlOsnovniKnjigovodstvo);
+        pnlOsnovniKnjigovodstvo.setLayout(pnlOsnovniKnjigovodstvoLayout);
+        pnlOsnovniKnjigovodstvoLayout.setHorizontalGroup(
+            pnlOsnovniKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOsnovniKnjigovodstvoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addComponent(jLabel127, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlOsnovniKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlOkvirKnjigovodstvo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlOsnovniKnjigovodstvoLayout.createSequentialGroup()
+                        .addComponent(txtSlikaKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel126)
+                        .addComponent(txtKnjigovodstvo)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+        pnlOsnovniKnjigovodstvoLayout.setVerticalGroup(
+            pnlOsnovniKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOsnovniKnjigovodstvoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel127, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel126))
+                .addGroup(pnlOsnovniKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSlikaKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtKnjigovodstvo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOkvirKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(2141, Short.MAX_VALUE))
         );
 
@@ -4260,13 +4452,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlKnjigovodstvoLayout.setHorizontalGroup(
             pnlKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKnjigovodstvoLayout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOsnovniKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 2101, Short.MAX_VALUE))
         );
         pnlKnjigovodstvoLayout.setVerticalGroup(
             pnlKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKnjigovodstvoLayout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, 2863, Short.MAX_VALUE)
+                .addComponent(pnlOsnovniKnjigovodstvo, javax.swing.GroupLayout.DEFAULT_SIZE, 2863, Short.MAX_VALUE)
                 .addGap(660, 660, 660))
         );
 
@@ -4290,7 +4482,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jTableZaposleni.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         jTableZaposleni.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {"", null, "", ""},
                 {"", null, null, ""},
                 {null, null, null, null},
@@ -4308,17 +4501,21 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Ime", "Ime oca", "Prezime", "Telefon"
             }
         ));
-        jTableZaposleni.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        jTableZaposleni.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jTableZaposleniMouseReleased(evt);
             }
         });
         jScrollPane12.setViewportView(jTableZaposleni);
-        if (jTableZaposleni.getColumnModel().getColumnCount() > 0) {
+        if (jTableZaposleni.getColumnModel().getColumnCount() > 0)
+        {
             jTableZaposleni.getColumnModel().getColumn(1).setResizable(false);
         }
 
@@ -4336,8 +4533,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         buttonTraziRadneNalogeRadnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonTraziRadneNalogeRadnika.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         buttonTraziRadneNalogeRadnika.setText("Traži");
-        buttonTraziRadneNalogeRadnika.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonTraziRadneNalogeRadnika.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonTraziRadneNalogeRadnikaActionPerformed(evt);
             }
         });
@@ -4372,8 +4571,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         buttonDodajZaposlenog.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonDodajZaposlenog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/noviZaposleni.png"))); // NOI18N
         buttonDodajZaposlenog.setText("Dodaj zaposlenog");
-        buttonDodajZaposlenog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonDodajZaposlenog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonDodajZaposlenogActionPerformed(evt);
             }
         });
@@ -4506,8 +4707,10 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         buttonPrikazSvihBivsihRadnika.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonPrikazSvihBivsihRadnika.setText("Prikaz svih bivših zaposlenih");
-        buttonPrikazSvihBivsihRadnika.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonPrikazSvihBivsihRadnika.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 buttonPrikazSvihBivsihRadnikaActionPerformed(evt);
             }
         });
@@ -4588,7 +4791,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         tableRadniNalozi.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         tableRadniNalozi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {"", "", null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -4615,7 +4819,8 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Marka", "Model", "Registracija", "Datum popravka", "Opis popravke", "Cijena troskova", "Cijena naplate", "Profit"
             }
         ));
@@ -4903,8 +5108,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPregled.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPregled.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPregled.setText("Pregled");
-        btnPregled.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPregled.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPregledActionPerformed(evt);
             }
         });
@@ -5185,8 +5392,10 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnPregledGrafik.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnPregledGrafik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPregledGrafik.setText("Pregled");
-        btnPregledGrafik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPregledGrafik.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPregledGrafikActionPerformed(evt);
             }
         });
@@ -6162,9 +6371,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrikaziSvePredracuneActionPerformed
 
     private void btnPrikaziPredracuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziPredracuneActionPerformed
-        KnjigovodstvoLogika knjLogika = new KnjigovodstvoLogika();
+        //KnjigovodstvoLogika knjLogika = new KnjigovodstvoLogika();
         //if(!"".equals(tfNazivv.getText()))
-            knjLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivv.getText(), tfImee.getText(), tfPrezimee.getText());
+            //knjLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivv.getText(), tfImee.getText(), tfPrezimee.getText());
+            KnjigovodstvoLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivv.getText(), tfImee.getText(), tfPrezimee.getText());
     }//GEN-LAST:event_btnPrikaziPredracuneActionPerformed
 
     private void btnPregledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPregledActionPerformed
@@ -6864,7 +7074,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel1() {
-        return jPanel1;
+        return pnlPronadjiZakazivanja;
     }
 
     public JPanel getjPanel10() {
@@ -6880,7 +7090,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel17() {
-        return jPanel17;
+        return pnlOsnovniKnjigovodstvo;
     }
 
     public JPanel getjPanel18() {
@@ -6892,7 +7102,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel2() {
-        return jPanel2;
+        return pnlZakaziZakazivanja;
     }
 
     public JPanel getjPanel20() {
@@ -6904,15 +7114,15 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel22() {
-        return jPanel22;
+        return pnlOkvirKnjigovodstvo;
     }
 
     public JPanel getjPanel23() {
-        return jPanel23;
+        return pnlOsnovniZakazivanja;
     }
 
     public JPanel getjPanel24() {
-        return jPanel24;
+        return pnlOkvirZakazivanja;
     }
 
     public JPanel getjPanel26() {
@@ -6940,7 +7150,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel4() {
-        return jPanel4;
+        return pnlNaloziKnjigovodstvo;
     }
 
     public JPanel getjPanel5() {
@@ -6964,7 +7174,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JScrollPane getjScrollPane10() {
-        return jScrollPane10;
+        return pnlTabelaZakazivanje;
     }
 
     public JScrollPane getjScrollPane11() {
@@ -6980,7 +7190,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JScrollPane getjScrollPane2() {
-        return jScrollPane2;
+        return pnlTabelaKnjigovodstvo;
     }
 
     public JScrollPane getjScrollPane4() {
@@ -6992,7 +7202,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JScrollPane getjScrollPane9() {
-        return jScrollPane9;
+        return pnlRadniNaloziKnjigovodstvo;
     }
 
     public JSeparator getjSeparator2() {
@@ -7574,15 +7784,15 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JLabel getjLabel126() {
-        return jLabel126;
+        return txtKnjigovodstvo;
     }
 
     public JLabel getjLabel127() {
-        return jLabel127;
+        return txtSlikaKnjigovodstvo;
     }
 
     public JLabel getjLabel128() {
-        return jLabel128;
+        return txtPronadjiZakazivanja;
     }
 
     public JLabel getjLabel129() {
@@ -7602,7 +7812,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JLabel getjLabel132() {
-        return jLabel132;
+        return txtZakaziZakazivanja;
     }
 
     public JLabel getjLabel133() {
@@ -7626,11 +7836,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JLabel getjLabel138() {
-        return jLabel138;
+        return txtZakazivanja;
     }
 
     public JLabel getjLabel139() {
-        return jLabel139;
+        return txtSlikaZakazivanja;
     }
 
     public JLabel getjLabel14() {
@@ -8266,21 +8476,15 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel122;
     private javax.swing.JLabel jLabel124;
-    private javax.swing.JLabel jLabel126;
-    private javax.swing.JLabel jLabel127;
-    private javax.swing.JLabel jLabel128;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel130;
     private javax.swing.JLabel jLabel131;
-    private javax.swing.JLabel jLabel132;
     private javax.swing.JLabel jLabel133;
     private javax.swing.JLabel jLabel134;
     private javax.swing.JLabel jLabel135;
     private javax.swing.JLabel jLabel136;
     private javax.swing.JLabel jLabel137;
-    private javax.swing.JLabel jLabel138;
-    private javax.swing.JLabel jLabel139;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel140;
     private javax.swing.JLabel jLabel141;
@@ -8381,32 +8585,22 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel94;
     private javax.swing.JLabel jLabel96;
     private javax.swing.JLabel jLabel97;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator26;
     private javax.swing.JTable jTable;
@@ -8488,16 +8682,26 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMeniVozila;
     private javax.swing.JPanel pnlMeniZakazivanja;
     private javax.swing.JPanel pnlMeniZaposleni;
+    private javax.swing.JPanel pnlNaloziKnjigovodstvo;
     private javax.swing.JPanel pnlOdabirIntervala;
     private javax.swing.JPanel pnlOdabirMjesecaStatistika;
+    private javax.swing.JPanel pnlOkvirKnjigovodstvo;
+    private javax.swing.JPanel pnlOkvirZakazivanja;
+    private javax.swing.JPanel pnlOsnovniKnjigovodstvo;
+    private javax.swing.JPanel pnlOsnovniZakazivanja;
     private javax.swing.JPanel pnlParent;
     private javax.swing.JPanel pnlPocetna;
     private javax.swing.JPanel pnlPronadjiVlasnika;
+    private javax.swing.JPanel pnlPronadjiZakazivanja;
     private javax.swing.JPanel pnlRadniNalozi;
+    private javax.swing.JScrollPane pnlRadniNaloziKnjigovodstvo;
     private javax.swing.JPanel pnlSlika;
     private javax.swing.JPanel pnlStatistika;
+    private javax.swing.JScrollPane pnlTabelaKnjigovodstvo;
+    private javax.swing.JScrollPane pnlTabelaZakazivanje;
     private javax.swing.JPanel pnlVozila;
     private javax.swing.JPanel pnlVozilo;
+    private javax.swing.JPanel pnlZakaziZakazivanja;
     private javax.swing.JPanel pnlZakazivanja;
     private javax.swing.JPanel pnlZaposleni;
     private javax.swing.JPanel pnlZaradaDijelovi;
@@ -8552,6 +8756,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JTextField txtImeTermina;
     private javax.swing.JTextField txtImeTrazi;
     private javax.swing.JTextField txtImeVozilo;
+    private javax.swing.JLabel txtKnjigovodstvo;
     private javax.swing.JTextField txtMarkaPretraga;
     private javax.swing.JTextField txtMarkaTermina;
     private javax.swing.JTextField txtMarkaTrazi;
@@ -8564,9 +8769,14 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrezimeTermina;
     private javax.swing.JTextField txtPrezimeTrazi;
     private javax.swing.JTextField txtPrezimeVozilo;
+    private javax.swing.JLabel txtPronadjiZakazivanja;
     private javax.swing.JTextField txtRegistracijaTrazi;
+    private javax.swing.JLabel txtSlikaKnjigovodstvo;
+    private javax.swing.JLabel txtSlikaZakazivanja;
     private javax.swing.JTextField txtUkupno;
     private javax.swing.JSpinner txtVrijemeTerminaMinuti;
     private javax.swing.JSpinner txtVrijemeTerminaSati;
+    private javax.swing.JLabel txtZakaziZakazivanja;
+    private javax.swing.JLabel txtZakazivanja;
     // End of variables declaration//GEN-END:variables
 }

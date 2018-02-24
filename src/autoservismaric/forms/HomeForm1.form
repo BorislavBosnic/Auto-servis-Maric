@@ -2209,7 +2209,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel23" min="-2" pref="3042" max="-2" attributes="0"/>
+                          <Component id="pnlOsnovniZakazivanja" min="-2" pref="3042" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="124" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -2217,14 +2217,14 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel23" pref="3512" max="32767" attributes="0"/>
+                          <Component id="pnlOsnovniZakazivanja" pref="3512" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel23">
+                <Container class="javax.swing.JPanel" name="pnlOsnovniZakazivanja">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2239,13 +2239,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel139" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="txtSlikaZakazivanja" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel138" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtZakazivanja" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="2875" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlOkvirZakazivanja" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -2255,18 +2255,18 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel139" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="jLabel138" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSlikaZakazivanja" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtZakazivanja" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel24" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlOkvirZakazivanja" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2018" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel24">
+                    <Container class="javax.swing.JPanel" name="pnlOkvirZakazivanja">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2288,16 +2288,16 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane10" pref="1043" max="32767" attributes="0"/>
+                                      <Component id="pnlTabelaZakazivanje" pref="1043" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel132" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="pnlPronadjiZakazivanja" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtZakaziZakazivanja" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel128" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtPronadjiZakazivanja" min="-2" max="-2" attributes="0"/>
+                                              <Component id="pnlZakaziZakazivanja" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -2310,23 +2310,23 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace pref="12" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel132" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel128" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtZakaziZakazivanja" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPronadjiZakazivanja" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPanel1" max="32767" attributes="0"/>
-                                      <Component id="jPanel2" max="32767" attributes="0"/>
+                                      <Component id="pnlPronadjiZakazivanja" max="32767" attributes="0"/>
+                                      <Component id="pnlZakaziZakazivanja" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane10" min="-2" pref="215" max="-2" attributes="0"/>
+                                  <Component id="pnlTabelaZakazivanje" min="-2" pref="215" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jLabel128">
+                        <Component class="javax.swing.JLabel" name="txtPronadjiZakazivanja">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="0"/>
@@ -2337,7 +2337,7 @@
                             <Property name="text" type="java.lang.String" value="Zaka&#x17e;i termin:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel132">
+                        <Component class="javax.swing.JLabel" name="txtZakaziZakazivanja">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="0"/>
@@ -2348,7 +2348,7 @@
                             <Property name="text" type="java.lang.String" value="Prona&#x111;i termin:"/>
                           </Properties>
                         </Component>
-                        <Container class="javax.swing.JPanel" name="jPanel1">
+                        <Container class="javax.swing.JPanel" name="pnlPronadjiZakazivanja">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2529,7 +2529,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel2">
+                        <Container class="javax.swing.JPanel" name="pnlZakaziZakazivanja">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2797,7 +2797,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane10">
+                        <Container class="javax.swing.JScrollPane" name="pnlTabelaZakazivanje">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="22"/>
@@ -2846,7 +2846,7 @@
                         </Container>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel138">
+                    <Component class="javax.swing.JLabel" name="txtZakazivanja">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -2860,7 +2860,7 @@
                         <Property name="text" type="java.lang.String" value="&gt;Zakazivanja"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel139">
+                    <Component class="javax.swing.JLabel" name="txtSlikaZakazivanja">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/autoservismaric/images/Clock_20px.png"/>
@@ -4730,7 +4730,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel17" min="-2" pref="1065" max="-2" attributes="0"/>
+                          <Component id="pnlOsnovniKnjigovodstvo" min="-2" pref="1065" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="2101" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -4738,14 +4738,14 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel17" pref="2863" max="32767" attributes="0"/>
+                          <Component id="pnlOsnovniKnjigovodstvo" pref="2863" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="660" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel17">
+                <Container class="javax.swing.JPanel" name="pnlOsnovniKnjigovodstvo">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -4761,11 +4761,11 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel22" max="32767" attributes="0"/>
+                                  <Component id="pnlOkvirKnjigovodstvo" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel127" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="txtSlikaKnjigovodstvo" min="-2" pref="27" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel126" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtKnjigovodstvo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -4778,18 +4778,18 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel127" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="jLabel126" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSlikaKnjigovodstvo" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtKnjigovodstvo" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel22" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlOkvirKnjigovodstvo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="2141" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel22">
+                    <Container class="javax.swing.JPanel" name="pnlOkvirKnjigovodstvo">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -4816,7 +4816,7 @@
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" attributes="0">
-                                                  <Component id="jPanel4" max="32767" attributes="0"/>
+                                                  <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" attributes="0">
                                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -4847,7 +4847,7 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jScrollPane2" max="32767" attributes="0"/>
+                                          <Component id="pnlTabelaKnjigovodstvo" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -4905,7 +4905,7 @@
                                               <Component id="dtmDatum" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jPanel4" max="32767" attributes="0"/>
+                                      <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -4915,7 +4915,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator2" min="-2" pref="7" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" pref="294" max="-2" attributes="0"/>
+                                  <Component id="pnlTabelaKnjigovodstvo" min="-2" pref="294" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel164" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -4957,7 +4957,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPredracunActionPerformed"/>
                           </Events>
                         </Component>
-                        <Container class="javax.swing.JPanel" name="jPanel4">
+                        <Container class="javax.swing.JPanel" name="pnlNaloziKnjigovodstvo">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -4974,7 +4974,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane9" max="32767" attributes="0"/>
+                                      <Component id="pnlRadniNaloziKnjigovodstvo" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -4983,14 +4983,14 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane9" pref="0" max="32767" attributes="0"/>
+                                      <Component id="pnlRadniNaloziKnjigovodstvo" pref="0" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JScrollPane" name="jScrollPane9">
+                            <Container class="javax.swing.JScrollPane" name="pnlRadniNaloziKnjigovodstvo">
                               <Properties>
                                 <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                                 <Property name="verticalScrollBarPolicy" type="int" value="22"/>
@@ -5097,7 +5097,7 @@
                             <Property name="text" type="java.lang.String" value="KM"/>
                           </Properties>
                         </Component>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                        <Container class="javax.swing.JScrollPane" name="pnlTabelaKnjigovodstvo">
                           <Properties>
                             <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="22"/>
@@ -5271,7 +5271,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel126">
+                    <Component class="javax.swing.JLabel" name="txtKnjigovodstvo">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -5285,7 +5285,7 @@
                         <Property name="text" type="java.lang.String" value="&gt;Knjigovodstvo"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel127">
+                    <Component class="javax.swing.JLabel" name="txtSlikaKnjigovodstvo">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/autoservismaric/images/Book Stack_20px.png"/>

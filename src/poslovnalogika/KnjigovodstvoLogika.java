@@ -113,9 +113,9 @@ public class KnjigovodstvoLogika
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
-        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()+nalog.getTroskovi());
-        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()+nalog.getTroskovi())*(1.0+PDV));
-        cijena+=nalog.getCijenaUsluge()+nalog.getTroskovi();
+        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);
+        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));
+        cijena+=nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/;
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
@@ -170,28 +170,31 @@ public class KnjigovodstvoLogika
         radniNaloziZaTabelu(filtriranaLista, tabela);
     }
     
-    public void pretraziNeplaceneFakturePoNazivu(HomeForm1 form, String naziv, String ime, String prezime){
+    public static void pretraziNeplaceneFakturePoNazivu(HomeForm1 form, String naziv, String ime, String prezime){
         KupacDTO kupac = null;
-        if(!"".equals(naziv)){
+        if(!"".equals(naziv))
+        {
             ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
             if(kupci.size()>0)
                 kupac = kupci.get(0);
-        }else{
-            kupac = DAOFactory.getDAOFactory().getKupacDAO().kupacImePrezime(ime, prezime);
         }
+        else
+            kupac = DAOFactory.getDAOFactory().getKupacDAO().kupacImePrezime(ime, prezime);
         ArrayList<VoziloDTO> vozila = null; 
         ArrayList<RadniNalogDTO> nalozi = new ArrayList<RadniNalogDTO>();
-        if(kupac != null){
+        if(kupac != null)
+        {
             vozila = DAOFactory.getDAOFactory().getVoziloDAO().vozila(kupac.getIdKupac());
             ArrayList<RadniNalogDTO> pom = null;
-            for(int i = 0; i < vozila.size(); i++){
+            for(int i = 0; i < vozila.size(); i++)
+            {
                 pom = DAOFactory.getDAOFactory().getRadniNalogDAO().radniNaloziVozila(vozila.get(i).getIdVozilo());
                 nalozi.addAll(pom);
             }
-            nefakturisaniRadniNalozi(nalozi, form.getTblNeplaceneFakture());
-        }else{
-            ((DefaultTableModel)form.getTblNeplaceneFakture().getModel()).setRowCount(0);
+            neplaceneFaktureZaPocetnuStranu(nalozi, form.getTblNeplaceneFakture());
         }
+        else
+            ((DefaultTableModel)form.getTblNeplaceneFakture().getModel()).setRowCount(0);
     }
     
     public static void nefakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
