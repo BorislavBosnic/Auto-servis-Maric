@@ -504,9 +504,10 @@ public class ProdajDioDialog extends javax.swing.JDialog {
            DioDTO prodajniDio = DAOFactory.getDAOFactory().getDioDAO().getDio((Integer)dtm.getValueAt(red, 0));
            prodajniDio.setKolicina(prodajniDio.getKolicina() - kolicina);
            DAOFactory.getDAOFactory().getDioDAO().azurirajDio(prodajniDio);
-           dtm.setValueAt(prodajniDio.getKolicina() - kolicina, red, 8);
+           dtm.setValueAt(prodajniDio.getKolicina(), red, 8);
            JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Uspješno ste prodali dio", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
        }
     }//GEN-LAST:event_btnProdajActionPerformed
 

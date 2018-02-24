@@ -227,12 +227,16 @@ public class StatistikaLogika {
 
         faktureChart = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
 
-        //OVAJ DIO OVDJE SAMO RADI PREGLEDA DOK SE NE UTVRDI DA LI TREBA, KAO PLACEHOLDER
-        pieChart.setValue("Placene", 10);
-        pieChart.setValue("Neplacene", 5);
+        pieChart.setValue("Placene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
+        pieChart.setValue("Neplacene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
 
         RingPlot fakturePlot = (RingPlot) faktureChart.getPlot();
         fakturePlot.setBackgroundPaint(new Color(207, 229, 235));
+        //fakturePlot.setSimpleLabels(true);
+        
+        PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
+                "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
+        fakturePlot.setLabelGenerator(gen);
 
         ChartPanel faktureBarPanel = new ChartPanel(faktureChart);
 
@@ -248,6 +252,7 @@ public class StatistikaLogika {
         loadZaradaUkupno(forma);
         loadZaradaDijelovi(forma);
         loadBrojPopravki(forma);
+        loadBrojFaktura(forma);
 
     }
 
@@ -256,7 +261,7 @@ public class StatistikaLogika {
         NumberFormat formatter = new DecimalFormat("#0.00");
 
         forma.getLabelDnevnaZarada().setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(), new Date())
-                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(), new Date())) + " KM");
+                + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(), new Date())) + " KM");
 
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
@@ -317,6 +322,27 @@ public class StatistikaLogika {
 
         forma.getLabelPopravkeGodina().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())) + "");
 
+    }
+    
+    void loadBrojFaktura(HomeForm1 forma){
+        forma.getLblBrojFaktura().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() + "");
+        forma.getLblBrojPlacenihFaktura().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura()+ "");
+        forma.getLblBrojNeplacenihFaktura().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura()+ "");
+
+    }
+    
+    public void loadInterval(HomeForm1 forma) {
+               // new StatistikaLogika(new java.sql.Date(jDateChooserDatumOd.getDate().getTime()), new java.sql.Date(jDateChooserDatumDo.getDate().getTime())).run();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        forma.getLabelIntervalZarada().setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime()))
+            + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime()))) + " KM");
+
+    forma.getLabelIntervalZaradaDijelovi().setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime()))) + " KM");
+
+    forma.getLabelPopravkeInterval().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime())) + "");
+    
+        
     }
     
     

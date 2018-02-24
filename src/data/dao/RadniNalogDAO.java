@@ -26,6 +26,10 @@ public interface RadniNalogDAO {
     public int getBrojAutaNaStanju();
     
     public int getBrojAutaKojaCekajuPopravku();
+    
+    public int getBrojPlacenihFaktura();
+    
+    public int getBrojFaktura();
 
     public ArrayList<RadniNalogDTO> getRadniNalozi();
 

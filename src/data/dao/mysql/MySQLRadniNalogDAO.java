@@ -32,7 +32,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
 
         String query = "select sum(CijenaUsluge) as suma from faktura inner join radni_nalog "
                 + "using (idRadniNalog)"
-                + "where DatumIzdavanja >= ? and DatumIzdavanja <=  ? ";
+                + "where Placeno=1 && DatumIzdavanja >= ? and DatumIzdavanja <=  ? ";
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
@@ -168,6 +168,60 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         return brojAutaKojaCekajuPopravku;
     }
 
+      public int getBrojPlacenihFaktura() {
+        int brojPlacenihFaktura = 0;
+        Connection conn = null;
+        Statement s = null;
+        ResultSet rs = null;
+
+        String query = "select count(*) as brojPlacenihFaktura from faktura inner join radni_nalog using (IdRadniNalog) where Placeno=1";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            s = conn.createStatement();
+            rs = s.executeQuery(query);
+
+            while (rs.next()) {
+                brojPlacenihFaktura = rs.getInt("brojPlacenihFaktura");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(s, rs);
+        }
+
+        return brojPlacenihFaktura;
+    }
+      
+      
+      public int getBrojFaktura() {
+        int brojFaktura = 0;
+        Connection conn = null;
+        Statement s = null;
+        ResultSet rs = null;
+
+        String query = "select count(*) as brojFaktura from faktura";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            s = conn.createStatement();
+            rs = s.executeQuery(query);
+
+            while (rs.next()) {
+                brojFaktura = rs.getInt("brojFaktura");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(s, rs);
+        }
+
+        return brojFaktura;
+    }
+      
+      
     @Override
     public ArrayList<RadniNalogDTO> getRadniNalozi() {
         ArrayList<RadniNalogDTO> retVal = new ArrayList<RadniNalogDTO>();
