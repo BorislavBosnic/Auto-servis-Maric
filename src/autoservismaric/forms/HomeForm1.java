@@ -18,15 +18,9 @@ import data.dao.*;
 import data.dto.DioDTO;
 import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
-import data.dto.RadniNalogDTO;
-import data.dto.TerminDTO;
 import data.dto.ZaposleniDTO;
 import java.io.*;
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,34 +43,33 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import poslovnalogika.DioLogika;
 import poslovnalogika.KnjigovodstvoLogika;
-import static poslovnalogika.KnjigovodstvoLogika.fakturisaniRadniNalozi;
-import static poslovnalogika.KnjigovodstvoLogika.fakturisi;
-import static poslovnalogika.KnjigovodstvoLogika.nefakturisaniRadniNalozi;
-import static poslovnalogika.KnjigovodstvoLogika.neplaceneFaktureZaPocetnuStranu;
-import static poslovnalogika.KnjigovodstvoLogika.plati;
-import static poslovnalogika.KnjigovodstvoLogika.poDatumuRadniNalozi;
-import static poslovnalogika.KnjigovodstvoLogika.poIDuRadniNalozi;
-import static poslovnalogika.ZakazivanjaLogika.filtrirajTermine;
-import static poslovnalogika.ZakazivanjaLogika.obrisiTermin;
 import static poslovnalogika.KnjigovodstvoLogika.prikaziFakturu;
-import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
-import static poslovnalogika.KnjigovodstvoLogika.radniNaloziZaTabelu;
 import static poslovnalogika.KnjigovodstvoLogika.stavkeSaNalogaZaTabelu;
 import poslovnalogika.ModelVozilaLogika;
 import poslovnalogika.PocetnaLogika;
 import poslovnalogika.ZaposleniLogika;
 import poslovnalogika.StatistikaLogika;
+import poslovnalogika.Usluge;
+import static poslovnalogika.Usluge.btnDodajTerminAkcija;
+import static poslovnalogika.Usluge.btnFakturisanoAkcija;
+import static poslovnalogika.Usluge.btnNefakturisanoAkcija;
+import static poslovnalogika.Usluge.btnPoDatumuAkcija;
+import static poslovnalogika.Usluge.btnPoIDuAkcija;
+import static poslovnalogika.Usluge.btnPonistiUnosePretragaAkcija;
+import static poslovnalogika.Usluge.btnPonistiUnoseTerminAkcija;
+import static poslovnalogika.Usluge.btnPrikaziSvePredracuneAkcija;
+import static poslovnalogika.Usluge.btnPronadjiTerminAkcija;
+import static poslovnalogika.Usluge.dodajPopupMeniPretragaRadniNaloga;
+import static poslovnalogika.Usluge.inicijalizacijaTabeleNeplacenihFaktura;
+import static poslovnalogika.Usluge.provjeraZaDugmiceZaTabeluNaloga;
+import static poslovnalogika.Usluge.uslugeKnjigovodstva;
+import static poslovnalogika.Usluge.uslugeZakazivanja;
 import poslovnalogika.VoziloKupacMeniLogika;
-import static poslovnalogika.ZakazivanjaLogika.dodajTermin;
-import static poslovnalogika.ZakazivanjaLogika.terminiZaTabelu;
 
 /**
  *
@@ -85,472 +78,6 @@ import static poslovnalogika.ZakazivanjaLogika.terminiZaTabelu;
 public class HomeForm1 extends javax.swing.JFrame {
 
     boolean flagVoziloVlasnik = true;
-    
-    /**
-     * Karpin kod*
-     */
-    private static HomeForm1 homeForm;
-
-    private void inicijalisuciKod() {
-        homeForm = this;
-        uslugeKnjigovodstva();
-        uslugeZakazivanja();
-        uslugePocetneStrane();
-    }
-
-    private void uslugeKnjigovodstva() {
-        inicijalizacijaTabelaKnjigovodstva();
-        brisanjeStarihVrijednostiPoljaKnjigovodstva();
-    }
-
-    private void uslugeZakazivanja() {
-        inicijalizacijaTabelaZakazivanja();
-    }
-
-    private void uslugePocetneStrane() {
-        inicijalizacijaTabeleNeplacenihFaktura();
-    }
-
-    private void inicijalizacijaTabelaKnjigovodstva() {
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        radniNaloziZaTabelu(lista, tblRadniNalozi);
-        stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-        if (tblRadniNalozi.getRowCount() > 0) {
-            tblRadniNalozi.setRowSelectionInterval(0, 0);
-        }
-        if (tblFaktura.getRowCount() > 0) {
-            tblFaktura.setRowSelectionInterval(0, 0);
-        }
-        provjeraZaDugmiceZaTabeluNaloga();
-        dodajIskacuciMeniUTabeluRadnihNaloga();
-    }
-
-    private void inicijalizacijaTabelaZakazivanja() {
-        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        terminiZaTabelu(lista, tblTermini);
-        if (tblTermini.getRowCount() > 0) {
-            tblTermini.setRowSelectionInterval(0, 0);
-        }
-        dodajIskacuciMeniUTabeluTermina();
-    }
-
-    private void inicijalizacijaTabeleNeplacenihFaktura() {
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        neplaceneFaktureZaPocetnuStranu(lista, tblNeplaceneFakture);
-        if (tblNeplaceneFakture.getRowCount() > 0) {
-            tblNeplaceneFakture.setRowSelectionInterval(0, 0);
-        }
-        dodajIskacuciMeniUTabeluNeplacenihFaktura();
-    }
-
-    private void provjeraZaDugmiceZaTabeluNaloga() {
-        if (tblRadniNalozi.getRowCount() > 0
-                && !("Nema fakture".equals((String) (tblRadniNalozi.getValueAt(tblRadniNalozi.getSelectedRow(), 4))))) {
-            btnRacun.setEnabled(true);
-            btnPredracun.setEnabled(false);
-        } else {
-            btnRacun.setEnabled(false);
-            btnPredracun.setEnabled(true);
-        }
-    }
-    
-    
-    
-    
-     private void dodajPopupMeniPretragaRadniNaloga() {
-        opcija = -1;
-        popupMenu = new JPopupMenu();
-        JMenuItem izmijeniItem = new JMenuItem("Izmijeni");
-        JMenuItem izbrisiItem = new JMenuItem("Izbriši");
-        JMenuItem zatvoriNalogItem = new JMenuItem("Zatvori radni nalog");
-
-
-        izmijeniItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Integer id = Integer.parseInt(tableRNalozi.getModel().getValueAt(selektovanRed, 0).toString());
-                new IzmijeniRadniNalogDialog(new JFrame(), true, id).setVisible(true);
-            }
-        });
-        popupMenu.add(izmijeniItem);
-
-        izbrisiItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                   Integer id = Integer.parseInt(tableRNalozi.getModel().getValueAt(selektovanRed, 0).toString());
-                   
-                    int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-                   
-                        
-                        DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(id);
-                        
-                        JOptionPane.showMessageDialog(new JFrame(), "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                            for (int i = tableRNalozi.getModel().getRowCount() - 1; i >= 0; i--) {
-                                if ((Integer.parseInt(tableRNalozi.getModel().getValueAt(i, 0).toString())) == id) {
-                                    ((DefaultTableModel) tableRNalozi.getModel()).removeRow(i);
-                                }
-                            }
-                        
-                    }
-                    else{
-                        
-                    }
-                   
-            }
-        });
-        popupMenu.add(izbrisiItem);
-        
-         zatvoriNalogItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Integer id = Integer.parseInt(tableRNalozi.getModel().getValueAt(selektovanRed, 0).toString());
-                if(DAOFactory.getDAOFactory().getRadniNalogDAO().zatvoriRadniNalog(id)){
-                    JOptionPane.showMessageDialog(new JFrame(), "Uspješno zatvoren radni nalog!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-   
-                } else {
-                    JOptionPane.showMessageDialog(new JFrame(), "Radni nalog već zatvoren!!", "Greška", JOptionPane.ERROR_MESSAGE);
-
-                }
-            }
-        });
-        popupMenu.add(zatvoriNalogItem);
-
-        tableRNalozi.setComponentPopupMenu(popupMenu);
-
-        popupMenu.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tableRNalozi.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tableRNalozi));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                       //selektovanRed = tableRNalozi.getSelectedRow(); //??
-                        String imeKolone = tableRNalozi.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-
-                        }
-                        if (rowAtPoint > -1) {
-                            tableRNalozi.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    private void brisanjeStarihVrijednostiPoljaKnjigovodstva() {
-        txtID.setText("");
-        dtmDatum.setDate(null);
-    }
-    private static int opcija = -1;
-
-    private void dodajIskacuciMeniUTabeluRadnihNaloga() {
-        opcija = -1;
-        popupMenu = new JPopupMenu();
-        JMenuItem detaljnoItem = new JMenuItem("Detaljno");
-        JMenuItem placenoItem = new JMenuItem("Plaćeno");
-        JMenuItem fakturisiItem = new JMenuItem("Fakturiši");
-
-        detaljnoItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0))));
-                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-                provjeraZaDugmiceZaTabeluNaloga();
-            }
-        });
-        popupMenu.add(detaljnoItem);
-
-        placenoItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int izbor = JOptionPane.showOptionDialog(
-                        new JFrame(),
-                        "Da li ste sigurni da je placeno?",
-                        "Da li ste sigurni?",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        new Object[]{"DA", "NE"},
-                        "NE"
-                );
-                if (izbor == JOptionPane.YES_OPTION) {
-                    plati(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)));
-                }
-                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-                provjeraZaDugmiceZaTabeluNaloga();
-                inicijalizacijaTabelaKnjigovodstva();
-            }
-        });
-        popupMenu.add(placenoItem);
-
-        fakturisiItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int izbor = JOptionPane.showOptionDialog(
-                        new JFrame(),
-                        "Da li ste sigurni da želite fakturisati?",
-                        "Da li ste sigurni?",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        new Object[]{"DA", "NE"},
-                        "NE"
-                );
-                if (izbor == JOptionPane.YES_OPTION) {
-                    fakturisi(Integer.parseInt((String) tblRadniNalozi.getValueAt(selektovanRed, 0)), txtUkupno);
-                }
-                stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-                provjeraZaDugmiceZaTabeluNaloga();
-                inicijalizacijaTabelaKnjigovodstva();
-            }
-        });
-        popupMenu.add(fakturisiItem);
-
-        tblRadniNalozi.setComponentPopupMenu(popupMenu);
-
-        popupMenu.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tblRadniNalozi.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblRadniNalozi));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                        //int row = tableVozila.getSelectedRow();
-                        String imeKolone = tblRadniNalozi.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-
-                        }
-                        if (rowAtPoint > -1) {
-                            tblRadniNalozi.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                        stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
-                        provjeraZaDugmiceZaTabeluNaloga();
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
-
-    private void dodajIskacuciMeniUTabeluTermina() {
-        opcija = -1;
-        popupMenu = new JPopupMenu();
-        JMenuItem obrisiItem = new JMenuItem("Obriši");
-
-        obrisiItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (obrisiTermin(
-                        (String) tblTermini.getValueAt(selektovanRed, 0),
-                        (String) tblTermini.getValueAt(selektovanRed, 1)
-                )) {
-                    JOptionPane.showMessageDialog(new JFrame(), "Termin je uklonjen.");
-                    ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-                    terminiZaTabelu(lista, tblTermini);
-                } else {
-                    JOptionPane.showMessageDialog(new JFrame(), "Termin nije uklonjen.");
-                }
-            }
-        });
-        popupMenu.add(obrisiItem);
-
-        tblTermini.setComponentPopupMenu(popupMenu);
-
-        popupMenu.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tblTermini.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblTermini));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                        //int row = tableVozila.getSelectedRow();
-                        String imeKolone = tblTermini.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-
-                        }
-                        if (rowAtPoint > -1) {
-                            tblTermini.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
-
-    private void dodajIskacuciMeniUTabeluNeplacenihFaktura() {
-        opcija = -1;
-        popupMenu = new JPopupMenu();
-        JMenuItem detaljnoItem = new JMenuItem("Detaljno");
-        JMenuItem placenoItem = new JMenuItem("Plaćeno");
-        JMenuItem fakturisiItem = new JMenuItem("Fakturiši");
-
-        detaljnoItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(new JFrame(), radniNalogIFakturaUTekst(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0))));
-            }
-        });
-        popupMenu.add(detaljnoItem);
-
-        placenoItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int izbor = JOptionPane.showOptionDialog(
-                        new JFrame(),
-                        "Da li ste sigurni da je placeno?",
-                        "Da li ste sigurni?",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        new Object[]{"DA", "NE"},
-                        "NE"
-                );
-                if (izbor == JOptionPane.YES_OPTION && selektovanRed>-1) {
-                    plati(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
-                }
-                inicijalizacijaTabeleNeplacenihFaktura();
-            }
-        });
-        popupMenu.add(placenoItem);
-
-        /*fakturisiItem.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int izbor = JOptionPane.showOptionDialog(
-                        new JFrame(),
-                        "Da li ste sigurni da želite fakturisati?",
-                        "Da li ste sigurni?",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        new Object[]{"DA", "NE"},
-                        "NE"
-                );
-                if (izbor == JOptionPane.YES_OPTION) {
-                    fakturisi(Integer.parseInt((String) tblNeplaceneFakture.getValueAt(selektovanRed, 0)));
-                }
-            }
-        });
-        popupMenu.add(fakturisiItem);*/
-
-        tblNeplaceneFakture.setComponentPopupMenu(popupMenu);
-
-        popupMenu.addPopupMenuListener(new PopupMenuListener() {
-
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rowAtPoint = tblNeplaceneFakture.rowAtPoint(SwingUtilities.convertPoint(popupMenu, new Point(0, 0), tblNeplaceneFakture));
-                        selektovanRed = rowAtPoint;
-                        int column = 0;
-                        //int row = tableVozila.getSelectedRow();
-                        String imeKolone = tblNeplaceneFakture.getModel().getColumnName(0);
-
-                        if (selektovanRed >= 0) {
-
-                        }
-                        if (rowAtPoint > -1) {
-                            tblNeplaceneFakture.setRowSelectionInterval(rowAtPoint, rowAtPoint);
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-    }
 
     public ButtonGroup getbGTraziVozilo() {
         return bGTraziVozilo;
@@ -661,7 +188,7 @@ public class HomeForm1 extends javax.swing.JFrame {
      */
     public HomeForm1() {
         initComponents();
-        
+        Usluge.inicijalisuciKod(this);
         //za slucaj da je dosla nova godina, automatski se dodaju nove vrijednosti u comboBoxGodina
         if(((trenutnaGodina-1)+"").equals(cbGodina.getItemAt(1))){
            // System.out.println(comboBoxGodina.getItemAt(1)+"");
@@ -733,14 +260,6 @@ public class HomeForm1 extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         inicijalizujZaposleniPanel();
-
-        /**
-         * Karpin kod*
-         */
-        inicijalisuciKod();
-        /**
-         * ***Kraj****
-         */
     }
 
     public AutoSuggestor ucitajPreporukeMarke() {
@@ -5493,8 +5012,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void pnlMeniRadniNaloziMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniRadniNaloziMouseClicked
         dodajPopupMeniPretragaRadniNaloga();
         menuItemClick(pnlMeniRadniNalozi, 1, pnlRadniNalozi);
-
-
     }//GEN-LAST:event_pnlMeniRadniNaloziMouseClicked
 
     private void pnlMeniRadniNaloziMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniRadniNaloziMouseEntered
@@ -6107,57 +5624,22 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnPronadjiTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPronadjiTerminActionPerformed
     {//GEN-HEADEREND:event_btnPronadjiTerminActionPerformed
-        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        Date datum = null;
-        if (dtmDatumPretraga.getDate() != null) {
-            dtmDatumPretraga.setCalendar(Calendar.getInstance());
-        }
-        filtrirajTermine(
-                lista,
-                tblTermini,
-                txtMarkaPretraga.getText(),
-                datum,
-                txtImePretraga.getText(),
-                txtPrezimePretraga.getText(),
-                txtBrojTelefonaPretraga.getText()
-        );
+        btnPronadjiTerminAkcija();
     }//GEN-LAST:event_btnPronadjiTerminActionPerformed
 
     private void btnPonistiUnosePretragaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPonistiUnosePretragaActionPerformed
     {//GEN-HEADEREND:event_btnPonistiUnosePretragaActionPerformed
-        txtMarkaPretraga.setText("");
-        dtmDatumPretraga.setDate(null);
-        txtImePretraga.setText("");
-        txtPrezimePretraga.setText("");
-        txtBrojTelefonaPretraga.setText("");
-        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        terminiZaTabelu(lista, tblTermini);
+        btnPonistiUnosePretragaAkcija();
     }//GEN-LAST:event_btnPonistiUnosePretragaActionPerformed
 
     private void btnDodajTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnDodajTerminActionPerformed
     {//GEN-HEADEREND:event_btnDodajTerminActionPerformed
-        Date datum = null;
-        if (dtmDatumTermina.getDate() != null) {
-            dtmDatumTermina.setCalendar(Calendar.getInstance());
-        }
-        boolean test = dodajTermin(
-                datum,
-                "" + (txtVrijemeTerminaSati.getValue()),
-                "" + (txtVrijemeTerminaMinuti.getValue()),
-                txtMarkaTermina.getText(),
-                txtModelTermina.getText(),
-                txtImeTermina.getText(),
-                txtPrezimeTermina.getText(),
-                txtBrojTelefonaTermina.getText()
-        );
-        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        terminiZaTabelu(lista, tblTermini);
+        btnDodajTerminAkcija();
     }//GEN-LAST:event_btnDodajTerminActionPerformed
 
     private void btnPonistiUnoseTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPonistiUnoseTerminActionPerformed
     {//GEN-HEADEREND:event_btnPonistiUnoseTerminActionPerformed
-        ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
-        terminiZaTabelu(lista, tblTermini);
+        btnPonistiUnoseTerminAkcija();
     }//GEN-LAST:event_btnPonistiUnoseTerminActionPerformed
 
     private void btnRacunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacunActionPerformed
@@ -6178,30 +5660,22 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnNefakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNefakturisanoActionPerformed
     {//GEN-HEADEREND:event_btnNefakturisanoActionPerformed
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        nefakturisaniRadniNalozi(lista, tblRadniNalozi);
-        lblRadniNalozi.setText("Nefakturisani radni nalozi:");
+        btnNefakturisanoAkcija();
     }//GEN-LAST:event_btnNefakturisanoActionPerformed
 
     private void btnFakturisanoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFakturisanoActionPerformed
     {//GEN-HEADEREND:event_btnFakturisanoActionPerformed
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        fakturisaniRadniNalozi(lista, tblRadniNalozi);
-        lblRadniNalozi.setText("Fakturisani radni nalozi:");
+        btnFakturisanoAkcija();
     }//GEN-LAST:event_btnFakturisanoActionPerformed
 
     private void btnPoIDuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoIDuActionPerformed
     {//GEN-HEADEREND:event_btnPoIDuActionPerformed
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        poIDuRadniNalozi(lista, tblRadniNalozi, txtID);
-        lblRadniNalozi.setText("Radni nalozi:");
+        btnPoIDuAkcija();
     }//GEN-LAST:event_btnPoIDuActionPerformed
 
     private void btnPoDatumuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoDatumuActionPerformed
     {//GEN-HEADEREND:event_btnPoDatumuActionPerformed
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        poDatumuRadniNalozi(lista, tblRadniNalozi, dtmDatum);
-        lblRadniNalozi.setText("Radni nalozi:");
+        btnPoDatumuAkcija();
     }//GEN-LAST:event_btnPoDatumuActionPerformed
 
     private void tblRadniNaloziMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblRadniNaloziMouseReleased
@@ -6363,11 +5837,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jrbPrivatnoActionPerformed
 
     private void btnPrikaziSvePredracuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSvePredracuneActionPerformed
-        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
-        neplaceneFaktureZaPocetnuStranu(lista, tblNeplaceneFakture);
-        if (tblNeplaceneFakture.getRowCount() > 0) {
-            tblNeplaceneFakture.setRowSelectionInterval(0, 0);
-        }
+        btnPrikaziSvePredracuneAkcija();
     }//GEN-LAST:event_btnPrikaziSvePredracuneActionPerformed
 
     private void btnPrikaziPredracuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziPredracuneActionPerformed
@@ -6618,13 +6088,13 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
     }
 
-    void inicijalizujZaposleniPanel() {
+    void inicijalizujZaposleniPanel()
+    {
         dateChooserDatumDoZaposlenog.setCalendar(Calendar.getInstance());
         dateChooserDatumOdZaposlenog.setCalendar(Calendar.getInstance());
         dateChooserDatumRodjenja.setCalendar(Calendar.getInstance());
         dateChooserDatumPrimanjaURadniOdnos.setCalendar(Calendar.getInstance());
         new ZaposleniLogika("svi").run();
-
     }
 
     public JComboBox<String> getComboBoxGodina() {
@@ -6795,14 +6265,6 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     public void setIdVlasnika(int idVlasnika) {
         this.idVlasnika = idVlasnika;
-    }
-
-    public static HomeForm1 getHomeForm() {
-        return homeForm;
-    }
-
-    public static int getOpcija() {
-        return opcija;
     }
 
     public AutoSuggestor getModelAU() {
