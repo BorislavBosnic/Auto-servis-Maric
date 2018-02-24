@@ -76,7 +76,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="menuPanel" min="-2" pref="275" max="-2" attributes="0"/>
+              <Component id="pnlMeni" min="-2" pref="275" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="2621" max="32767" attributes="0"/>
           </Group>
@@ -84,7 +84,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="menuPanel" pref="753" max="32767" attributes="0"/>
+          <Component id="pnlMeni" pref="753" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Component id="jScrollPane1" pref="742" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="menuPanel">
+    <Container class="javax.swing.JPanel" name="pnlMeni">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -114,17 +114,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="menu2jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniRadniNalozi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2jPanelMouseExited"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu2jPanelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniRadniNaloziMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniRadniNaloziMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniRadniNaloziMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniRadniNaloziMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -175,7 +175,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="pnlSlika">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
@@ -224,16 +224,16 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu3jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniVozila">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu3jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu3jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu3jPanelMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniVozilaMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniVozilaMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniVozilaMouseExited"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -284,16 +284,16 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu4jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniKnjigovodstvo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4jPanelMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniKnjigovodstvoMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniKnjigovodstvoMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniKnjigovodstvoMouseExited"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -344,17 +344,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu7jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniStatistika">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu7jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu7jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu7jPanelMouseExited"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu7jPanelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniStatistikaMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniStatistikaMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniStatistikaMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniStatistikaMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -421,17 +421,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="menu5jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniZaposleni">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu5jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu5jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu5jPanelMouseExited"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu5jPanelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZaposleniMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZaposleniMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZaposleniMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZaposleniMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -482,16 +482,16 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu6jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniDijelovi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu6jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu6jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu6jPanelMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniDijeloviMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniDijeloviMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniDijeloviMouseExited"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -554,17 +554,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu1jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniPocetnaStrana">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1jPanelMouseExited"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu1jPanelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniPocetnaStranaMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniPocetnaStranaMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniPocetnaStranaMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniPocetnaStranaMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -615,17 +615,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="menu8jPanel">
+        <Container class="javax.swing.JPanel" name="pnlMeniZakazivanja">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu8jPanelMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu8jPanelMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu8jPanelMouseExited"/>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu8jPanelMousePressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZakazivanjaMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZakazivanjaMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZakazivanjaMouseExited"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlMeniZakazivanjaMousePressed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -689,7 +689,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="parentPanel">
+        <Container class="javax.swing.JPanel" name="pnlParent">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -698,7 +698,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="pocetnajPanel">
+            <Container class="javax.swing.JPanel" name="pnlPocetna">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -1486,7 +1486,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="radniNaloziPanel">
+            <Container class="javax.swing.JPanel" name="pnlRadniNalozi">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card9"/>
@@ -2198,7 +2198,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="zakazivanjaPanel">
+            <Container class="javax.swing.JPanel" name="pnlZakazivanja">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                   <CardConstraints cardName="card8"/>
@@ -2871,7 +2871,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="vozilaPanel">
+            <Container class="javax.swing.JPanel" name="pnlVozila">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2889,20 +2889,20 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="panelAkcijeNaFormi" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnllAkcijeNaFormi" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="panelAkcijeNaFormi" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnllAkcijeNaFormi" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="panelAkcijeNaFormi">
+                <Container class="javax.swing.JPanel" name="pnllAkcijeNaFormi">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2924,7 +2924,7 @@
                                       <Component id="spVoziloPretraga" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="panelVozilo" min="-2" pref="1053" max="-2" attributes="0"/>
+                                          <Component id="pnlVozilo" min="-2" pref="1053" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -2940,7 +2940,7 @@
                                   <Component id="lblSlikaVozila" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelVozilo" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlVozilo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spVoziloPretraga" min="-2" pref="295" max="-2" attributes="0"/>
                               <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -2970,7 +2970,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Container class="javax.swing.JPanel" name="panelVozilo">
+                    <Container class="javax.swing.JPanel" name="pnlVozilo">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -2991,13 +2991,13 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel96" min="-2" max="-2" attributes="0"/>
-                                      <Component id="panelPronadjiVozilo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="pnllPronadjiVozilo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel97" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="panelPronadjiVlasnika" min="-2" max="-2" attributes="0"/>
+                                          <Component id="pnlPronadjiVlasnika" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="btnDodajVozilo" linkSize="11" pref="203" max="32767" attributes="0"/>
@@ -3022,8 +3022,8 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="panelPronadjiVozilo" max="32767" attributes="0"/>
-                                      <Component id="panelPronadjiVlasnika" max="32767" attributes="0"/>
+                                      <Component id="pnllPronadjiVozilo" max="32767" attributes="0"/>
+                                      <Component id="pnlPronadjiVlasnika" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="btnDodajVozilo" linkSize="13" min="-2" pref="56" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
@@ -3042,7 +3042,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="panelPronadjiVozilo">
+                        <Container class="javax.swing.JPanel" name="pnllPronadjiVozilo">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -3393,7 +3393,7 @@
                             <Property name="text" type="java.lang.String" value="Prona&#x111;i vlasnika:"/>
                           </Properties>
                         </Component>
-                        <Container class="javax.swing.JPanel" name="panelPronadjiVlasnika">
+                        <Container class="javax.swing.JPanel" name="pnlPronadjiVlasnika">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -3704,7 +3704,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="dijeloviPanel">
+            <Container class="javax.swing.JPanel" name="pnlDijelovi">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -4714,7 +4714,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="knjigovodstvoPanel">
+            <Container class="javax.swing.JPanel" name="pnlKnjigovodstvo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -5296,7 +5296,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="zaposleniPanel">
+            <Container class="javax.swing.JPanel" name="pnlZaposleni">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -6139,7 +6139,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="statistikajPanel">
+            <Container class="javax.swing.JPanel" name="pnlStatistika">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6156,12 +6156,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="statistikaHeaderjPanel" min="-2" pref="1200" max="-2" attributes="0"/>
+                              <Component id="pnlHeaderStatistika" min="-2" pref="1200" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTabbedPane1" min="-2" pref="729" max="-2" attributes="0"/>
+                                  <Component id="tabpnlGrafici" min="-2" pref="729" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="odabirMjesecaStatistikaPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlOdabirMjesecaStatistika" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="1966" max="32767" attributes="0"/>
@@ -6171,15 +6171,15 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="statistikaHeaderjPanel" min="-2" max="-2" attributes="0"/>
+                          <Component id="pnlHeaderStatistika" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jTabbedPane1" min="-2" pref="388" max="-2" attributes="0"/>
+                                  <Component id="tabpnlGrafici" min="-2" pref="388" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="odabirMjesecaStatistikaPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlOdabirMjesecaStatistika" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="2830" max="32767" attributes="0"/>
@@ -6188,7 +6188,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="statistikaHeaderjPanel">
+                <Container class="javax.swing.JPanel" name="pnlHeaderStatistika">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6211,7 +6211,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jPanel18" min="-2" pref="1046" max="-2" attributes="0"/>
+                                      <Component id="pnlKontrolnaTablaStatistika" min="-2" pref="1046" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="144" max="32767" attributes="0"/>
@@ -6227,14 +6227,14 @@
                                   <Component id="jLabel87" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jPanel18" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnlKontrolnaTablaStatistika" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel18">
+                    <Container class="javax.swing.JPanel" name="pnlKontrolnaTablaStatistika">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6259,15 +6259,15 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlOdabirIntervala" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel19" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlZaradaUkupno" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel30" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlZaradaDijelovi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel20" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlBrojPopravki" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPanel21" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnlFakture" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="140" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -6277,11 +6277,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPanel21" max="32767" attributes="0"/>
-                                      <Component id="jPanel20" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jPanel19" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jPanel8" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
-                                      <Component id="jPanel30" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="pnlFakture" max="32767" attributes="0"/>
+                                      <Component id="pnlBrojPopravki" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="pnlZaradaUkupno" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="pnlOdabirIntervala" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
+                                      <Component id="pnlZaradaDijelovi" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
@@ -6289,7 +6289,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel19">
+                        <Container class="javax.swing.JPanel" name="pnlZaradaUkupno">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6317,10 +6317,10 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="labelIntervalZarada" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelMjesecnaZarada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelGodisnjaZarada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelDnevnaZarada" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblIntervalZarada" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMjesecnaZarada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGodisnjaZarada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDnevnaZarada" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="20" max="32767" attributes="0"/>
                                   </Group>
@@ -6332,22 +6332,22 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel57" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelDnevnaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDnevnaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel58" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelMjesecnaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMjesecnaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel65" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelGodisnjaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGodisnjaZarada" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel88" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelIntervalZarada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblIntervalZarada" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -6388,7 +6388,7 @@
                                 <Property name="text" type="java.lang.String" value="Godi&#x161;nja:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelIntervalZarada">
+                            <Component class="javax.swing.JLabel" name="lblIntervalZarada">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6399,7 +6399,7 @@
                                 <Property name="text" type="java.lang.String" value=" KM"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelGodisnjaZarada">
+                            <Component class="javax.swing.JLabel" name="lblGodisnjaZarada">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6410,7 +6410,7 @@
                                 <Property name="text" type="java.lang.String" value=" KM"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelMjesecnaZarada">
+                            <Component class="javax.swing.JLabel" name="lblMjesecnaZarada">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6432,7 +6432,7 @@
                                 <Property name="text" type="java.lang.String" value="Interval:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelDnevnaZarada">
+                            <Component class="javax.swing.JLabel" name="lblDnevnaZarada">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6445,7 +6445,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel20">
+                        <Container class="javax.swing.JPanel" name="pnlBrojPopravki">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6473,10 +6473,10 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="labelPopravkeDanas" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeMjesec" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeGodina" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeInterval" min="-2" pref="32" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeDanas" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeMjesec" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeGodina" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeInterval" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                                   </Group>
@@ -6488,22 +6488,22 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel69" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeDanas" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeDanas" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel70" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeMjesec" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeMjesec" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel71" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeGodina" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeGodina" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel89" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelPopravkeInterval" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPopravkeInterval" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -6544,7 +6544,7 @@
                                 <Property name="text" type="java.lang.String" value="Godina:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelPopravkeDanas">
+                            <Component class="javax.swing.JLabel" name="lblPopravkeDanas">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6555,7 +6555,7 @@
                                 <Property name="text" type="java.lang.String" value="8"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelPopravkeGodina">
+                            <Component class="javax.swing.JLabel" name="lblPopravkeGodina">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6566,7 +6566,7 @@
                                 <Property name="text" type="java.lang.String" value="2542"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelPopravkeMjesec">
+                            <Component class="javax.swing.JLabel" name="lblPopravkeMjesec">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6588,7 +6588,7 @@
                                 <Property name="text" type="java.lang.String" value="Interval:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelPopravkeInterval">
+                            <Component class="javax.swing.JLabel" name="lblPopravkeInterval">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6601,7 +6601,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel21">
+                        <Container class="javax.swing.JPanel" name="pnlFakture">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6728,7 +6728,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel8">
+                        <Container class="javax.swing.JPanel" name="pnlOdabirIntervala">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6751,19 +6751,19 @@
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jDateChooserDatumDo" min="-2" pref="177" max="-2" attributes="0"/>
+                                              <Component id="dcDatumDo" min="-2" pref="177" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                              <Component id="jDateChooserDatumOd" min="-2" pref="177" max="-2" attributes="0"/>
+                                              <Component id="dcDatumOd" min="-2" pref="177" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="buttonPregled" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnPregled" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -6776,15 +6776,15 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel31" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jDateChooserDatumOd" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
+                                                  <Component id="dcDatumOd" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Component id="jDateChooserDatumDo" min="-2" pref="30" max="-2" attributes="0"/>
+                                              <Component id="dcDatumDo" min="-2" pref="30" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jLabel32" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="buttonPregled" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnPregled" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -6802,7 +6802,7 @@
                                 <Property name="text" type="java.lang.String" value="Do:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="buttonPregled">
+                            <Component class="javax.swing.JButton" name="btnPregled">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -6813,12 +6813,12 @@
                                 <Property name="text" type="java.lang.String" value="Pregled"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPregledActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPregledActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserDatumOd">
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumOd">
                             </Component>
-                            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserDatumDo">
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumDo">
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel31">
                               <Properties>
@@ -6833,7 +6833,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JPanel" name="jPanel30">
+                        <Container class="javax.swing.JPanel" name="pnlZaradaDijelovi">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -6861,10 +6861,10 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="labelIntervalZaradaDijelovi" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelMjesecnaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelGodisnjaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelDnevnaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblIntervalZaradaDijelovi" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMjesecnaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGodisnjaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDnevnaZaradaDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="20" max="32767" attributes="0"/>
                                   </Group>
@@ -6876,22 +6876,22 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel91" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelDnevnaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDnevnaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel93" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelMjesecnaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMjesecnaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel94" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelGodisnjaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGodisnjaZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel101" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="labelIntervalZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblIntervalZaradaDijelovi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -6932,7 +6932,7 @@
                                 <Property name="text" type="java.lang.String" value="Godi&#x161;nja:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelDnevnaZaradaDijelovi">
+                            <Component class="javax.swing.JLabel" name="lblDnevnaZaradaDijelovi">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6943,7 +6943,7 @@
                                 <Property name="text" type="java.lang.String" value=" KM"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelGodisnjaZaradaDijelovi">
+                            <Component class="javax.swing.JLabel" name="lblGodisnjaZaradaDijelovi">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6954,7 +6954,7 @@
                                 <Property name="text" type="java.lang.String" value=" KM"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelMjesecnaZaradaDijelovi">
+                            <Component class="javax.swing.JLabel" name="lblMjesecnaZaradaDijelovi">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -6976,7 +6976,7 @@
                                 <Property name="text" type="java.lang.String" value="Interval:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="labelIntervalZaradaDijelovi">
+                            <Component class="javax.swing.JLabel" name="lblIntervalZaradaDijelovi">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -7014,14 +7014,14 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+                <Container class="javax.swing.JTabbedPane" name="tabpnlGrafici">
                   <AccessibilityProperties>
                     <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Ukupni prihodi"/>
                   </AccessibilityProperties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="panelGrafikPrihodiUkupno">
+                    <Container class="javax.swing.JPanel" name="pnlGrafikPrihodiUkupno">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -7048,7 +7048,7 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="PanelGrafikPrihodiDijelovi">
+                    <Container class="javax.swing.JPanel" name="pnlGrafikPrihodiDijelovi">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -7075,7 +7075,7 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="panelGrafikAuta">
+                    <Container class="javax.swing.JPanel" name="pnlGrafikAuta">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -7102,7 +7102,7 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="panelGrafikFakture">
+                    <Container class="javax.swing.JPanel" name="pnlGrafikFakture">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -7129,7 +7129,7 @@
                         </DimensionLayout>
                       </Layout>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="panelGrafikPopravke">
+                    <Container class="javax.swing.JPanel" name="pnlGrafikPopravke">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -7158,7 +7158,7 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="odabirMjesecaStatistikaPanel">
+                <Container class="javax.swing.JPanel" name="pnlOdabirMjesecaStatistika">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -7185,13 +7185,13 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="comboBoxGodina" max="32767" attributes="0"/>
-                                          <Component id="comboBoxMjesec" min="-2" pref="110" max="-2" attributes="0"/>
+                                          <Component id="cbGodina" max="32767" attributes="0"/>
+                                          <Component id="cbMjesec" min="-2" pref="110" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                      <Component id="buttonPregledGrafik" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnPregledGrafik" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -7204,15 +7204,15 @@
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="comboBoxMjesec" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbMjesec" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="comboBoxGodina" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbGodina" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="buttonPregledGrafik" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPregledGrafik" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -7241,7 +7241,7 @@
                         <Property name="text" type="java.lang.String" value="Odaberite godinu:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxMjesec">
+                    <Component class="javax.swing.JComboBox" name="cbMjesec">
                       <Properties>
                         <Property name="maximumRowCount" type="int" value="13"/>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -7266,7 +7266,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JComboBox" name="comboBoxGodina">
+                    <Component class="javax.swing.JComboBox" name="cbGodina">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
@@ -7280,7 +7280,7 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="buttonPregledGrafik">
+                    <Component class="javax.swing.JButton" name="btnPregledGrafik">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="11" style="1"/>
@@ -7291,7 +7291,7 @@
                         <Property name="text" type="java.lang.String" value="Pregled"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPregledGrafikActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPregledGrafikActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>

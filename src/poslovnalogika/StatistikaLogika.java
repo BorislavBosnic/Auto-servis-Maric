@@ -51,32 +51,32 @@ public class StatistikaLogika {
         int godinaIndex = forma.getComboBoxGodina().getSelectedIndex();
         if (godinaIndex != 0) {
 
-            DefaultCategoryDataset prihodiUkupnoBarChart = new DefaultCategoryDataset();
-            DefaultCategoryDataset prihodiDijeloviBarChart = new DefaultCategoryDataset();
-            DefaultCategoryDataset popravkeBarChart = new DefaultCategoryDataset();
+            DefaultCategoryDataset barChartPrihodiUkupno = new DefaultCategoryDataset();
+            DefaultCategoryDataset barChartPrihodiDijelovi = new DefaultCategoryDataset();
+            DefaultCategoryDataset barChartPopravke = new DefaultCategoryDataset();
 
-            JFreeChart prihodiUkupnoChart = null;
-            JFreeChart prihodiDijeloviChart = null;
-            JFreeChart popravkeChart = null;
+            JFreeChart chartPrihodiUkupno = null;
+            JFreeChart chartPrihodiDijelovi = null;
+            JFreeChart chartPopravke = null;
 
             Calendar calendar1 = Calendar.getInstance();
             Calendar calendar2 = Calendar.getInstance();
             if (mjesecIndex == 0 && godinaIndex != 0) {
 
-                prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
-                prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Prihodi od dijelova", prihodiDijeloviBarChart);
-                popravkeChart = ChartFactory.createBarChart("Popravke u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Broj popravljenih auta", popravkeBarChart, PlotOrientation.VERTICAL, false, true, false);
+                chartPrihodiUkupno = ChartFactory.createLineChart("Prihodi u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Prihodi", barChartPrihodiUkupno, PlotOrientation.VERTICAL, false, true, false);
+                chartPrihodiDijelovi = ChartFactory.createLineChart("Prihodi od dijelova u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Prihodi od dijelova", barChartPrihodiDijelovi);
+                chartPopravke = ChartFactory.createBarChart("Popravke u " + (String) forma.getComboBoxGodina().getSelectedItem() + ". godini", "Mjesecno", "Broj popravljenih auta", barChartPopravke, PlotOrientation.VERTICAL, false, true, false);
 
                 for (int i = 0; i < 12; i++) {
 
                     calendar1.set(Integer.parseInt((String) forma.getComboBoxGodina().getSelectedItem()), i, 1);
                     calendar2.set(Integer.parseInt((String) forma.getComboBoxGodina().getSelectedItem()), i, 31);
-                    prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
+                    barChartPrihodiUkupno.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
                             + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", HomeForm1.mjeseci[i]);
 
-                    prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", HomeForm1.mjeseci[i]);
+                    barChartPrihodiDijelovi.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", HomeForm1.mjeseci[i]);
 
-                    popravkeBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", HomeForm1.mjeseci[i]);
+                    barChartPopravke.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", HomeForm1.mjeseci[i]);
 
                 }
 
@@ -130,92 +130,92 @@ public class StatistikaLogika {
                     kraj = 30;
                 }
 
-                prihodiUkupnoChart = ChartFactory.createLineChart("Prihodi za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Prihodi", prihodiUkupnoBarChart, PlotOrientation.VERTICAL, false, true, false);
-                prihodiDijeloviChart = ChartFactory.createLineChart("Prihodi od dijelova za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Prihodi od dijelova", prihodiDijeloviBarChart);
-                popravkeChart = ChartFactory.createBarChart("Popravke za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Broj popravljenih auta", popravkeBarChart, PlotOrientation.VERTICAL, false, true, false);
+                chartPrihodiUkupno = ChartFactory.createLineChart("Prihodi za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Prihodi", barChartPrihodiUkupno, PlotOrientation.VERTICAL, false, true, false);
+                chartPrihodiDijelovi = ChartFactory.createLineChart("Prihodi od dijelova za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Prihodi od dijelova", barChartPrihodiDijelovi);
+                chartPopravke = ChartFactory.createBarChart("Popravke za mjesec: " + (String) forma.getComboBoxMjesec().getSelectedItem(), "Dnevno", "Broj popravljenih auta", barChartPopravke, PlotOrientation.VERTICAL, false, true, false);
 
                 for (int i = 1; i <= kraj; i++) {
 
                     calendar1.set(Integer.parseInt((String) forma.getComboBoxGodina().getSelectedItem()), forma.getComboBoxMjesec().getSelectedIndex() - 1, i);
                     calendar2.set(Integer.parseInt((String) forma.getComboBoxGodina().getSelectedItem()), forma.getComboBoxMjesec().getSelectedIndex() - 1, i);
-                    prihodiUkupnoBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
+                    barChartPrihodiUkupno.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis()))
                             + DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaUsluga(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi", "" + i);
 
-                    prihodiDijeloviBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", "" + i);
+                    barChartPrihodiDijelovi.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Prihodi od dijelova", "" + i);
 
-                    popravkeBarChart.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", "" + i);
+                    barChartPopravke.setValue(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new Date(calendar1.getTimeInMillis()), new Date(calendar2.getTimeInMillis())), "Broj popravljenih auta", "" + i);
 
                 }
 
             }
 
             //JFreeChart myChart= ChartFactory.createBarChart("Prihodi u 2017. godini","Mjesecno","Prihodi", barChart,PlotOrientation.VERTICAL,false,true,false);
-            CategoryPlot prihodiUkupnoPlot = (CategoryPlot) prihodiUkupnoChart.getPlot();
-            prihodiUkupnoPlot.setRangeGridlinePaint(Color.BLUE);
-            prihodiUkupnoPlot.setBackgroundPaint(new Color(207, 229, 235));
+            CategoryPlot plotPrihodiUkupno = (CategoryPlot) chartPrihodiUkupno.getPlot();
+            plotPrihodiUkupno.setRangeGridlinePaint(Color.BLUE);
+            plotPrihodiUkupno.setBackgroundPaint(new Color(207, 229, 235));
 
-            CategoryPlot prihodiDijeloviPlot = (CategoryPlot) prihodiDijeloviChart.getPlot();
-            prihodiDijeloviPlot.setRangeGridlinePaint(Color.BLUE);
-            prihodiDijeloviPlot.setBackgroundPaint(new Color(207, 229, 235));
+            CategoryPlot plotPrihodiDijelovi = (CategoryPlot) chartPrihodiDijelovi.getPlot();
+            plotPrihodiDijelovi.setRangeGridlinePaint(Color.BLUE);
+            plotPrihodiDijelovi.setBackgroundPaint(new Color(207, 229, 235));
 
-            CategoryPlot popravkePlot = (CategoryPlot) popravkeChart.getPlot();
-            popravkePlot.setRangeGridlinePaint(Color.BLUE);
-            popravkePlot.setBackgroundPaint(new Color(207, 229, 235));
+            CategoryPlot plotPopravke = (CategoryPlot) chartPopravke.getPlot();
+            plotPopravke.setRangeGridlinePaint(Color.BLUE);
+            plotPopravke.setBackgroundPaint(new Color(207, 229, 235));
 
-            LineAndShapeRenderer prihodiUkupnoRenderer = (LineAndShapeRenderer) prihodiUkupnoPlot.getRenderer();
-            prihodiUkupnoRenderer.setSeriesPaint(0, new Color(40, 106, 155));
-            prihodiUkupnoRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
+            LineAndShapeRenderer barRendererPrihodiUkupno = (LineAndShapeRenderer) plotPrihodiUkupno.getRenderer();
+            barRendererPrihodiUkupno.setSeriesPaint(0, new Color(40, 106, 155));
+            barRendererPrihodiUkupno.setSeriesStroke(0, new BasicStroke(3.5f));
 
-            LineAndShapeRenderer prihodiDijeloviRenderer = (LineAndShapeRenderer) prihodiDijeloviPlot.getRenderer();
-            prihodiDijeloviRenderer.setSeriesPaint(0, new Color(40, 106, 155));
-            prihodiDijeloviRenderer.setSeriesStroke(0, new BasicStroke(3.5f));
+            LineAndShapeRenderer rendererPrihodiDijelovi = (LineAndShapeRenderer) plotPrihodiDijelovi.getRenderer();
+            rendererPrihodiDijelovi.setSeriesPaint(0, new Color(40, 106, 155));
+            rendererPrihodiDijelovi.setSeriesStroke(0, new BasicStroke(3.5f));
 
-            BarRenderer popravkeRenderer = (BarRenderer) popravkePlot.getRenderer();
-            popravkeRenderer.setSeriesPaint(0, new Color(40, 106, 155));
+            BarRenderer rendererPopravke = (BarRenderer) plotPopravke.getRenderer();
+            rendererPopravke.setSeriesPaint(0, new Color(40, 106, 155));
 
-            ChartPanel prihodiukupnoBarPanel = new ChartPanel(prihodiUkupnoChart);
-            ChartPanel prihodiDijeloviBarPanel = new ChartPanel(prihodiDijeloviChart);
-            ChartPanel popravkeBarPanel = new ChartPanel(popravkeChart);
+            ChartPanel barPanelPrihodiukupno = new ChartPanel(chartPrihodiUkupno);
+            ChartPanel barPanelPrihodiDijelovi = new ChartPanel(chartPrihodiDijelovi);
+            ChartPanel barPanelPopravke = new ChartPanel(chartPopravke);
 
             forma.getPanelGrafikPrihodiUkupno().setLayout(new java.awt.BorderLayout());
             forma.getPanelGrafikPrihodiUkupno().removeAll();
-            forma.getPanelGrafikPrihodiUkupno().add(prihodiukupnoBarPanel, BorderLayout.CENTER);
+            forma.getPanelGrafikPrihodiUkupno().add(barPanelPrihodiukupno, BorderLayout.CENTER);
             forma.getPanelGrafikPrihodiUkupno().validate();
 
             forma.getPanelGrafikPrihodiDijelovi().setLayout(new java.awt.BorderLayout());
             forma.getPanelGrafikPrihodiDijelovi().removeAll();
-            forma.getPanelGrafikPrihodiDijelovi().add(prihodiDijeloviBarPanel, BorderLayout.CENTER);
+            forma.getPanelGrafikPrihodiDijelovi().add(barPanelPrihodiDijelovi, BorderLayout.CENTER);
             forma.getPanelGrafikPrihodiDijelovi().validate();
 
             forma.getPanelGrafikPopravke().setLayout(new java.awt.BorderLayout());
             forma.getPanelGrafikPopravke().removeAll();
-            forma.getPanelGrafikPopravke().add(popravkeBarPanel, BorderLayout.CENTER);
+            forma.getPanelGrafikPopravke().add(barPanelPopravke, BorderLayout.CENTER);
             forma.getPanelGrafikPopravke().validate();
 
         }
     }
     
      void loadGraphAutaNaStanju(HomeForm1 forma) {
-        DefaultPieDataset autaPieChart = new DefaultPieDataset();
-        JFreeChart autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
-        autaPieChart.setValue("Popravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaNaStanju() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
-        autaPieChart.setValue("Nepopravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
-        autaChart = ChartFactory.createPieChart("Auta na stanju", autaPieChart);
-        PiePlot autaPlot = (PiePlot) autaChart.getPlot();
-        autaPlot.setBackgroundPaint(new Color(207, 229, 235));
+        DefaultPieDataset pieChartAuta = new DefaultPieDataset();
+        JFreeChart chartAuta = ChartFactory.createPieChart("Auta na stanju", pieChartAuta);
+        pieChartAuta.setValue("Popravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaNaStanju() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
+        pieChartAuta.setValue("Nepopravljena", (DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojAutaKojaCekajuPopravku()));
+        chartAuta = ChartFactory.createPieChart("Auta na stanju", pieChartAuta);
+        PiePlot plotAuta = (PiePlot) chartAuta.getPlot();
+        plotAuta.setBackgroundPaint(new Color(207, 229, 235));
         // autaPlot.setSectionPaint("Popravljeni", Color.green);// ne radi ovako!
         //autaPlot.setSectionPaint("Nepopravljeni", Color.yellow);
         //autaPlot.setExplodePercent("Nepopravljeni", 0.10);
-        autaPlot.setSimpleLabels(true);
+        plotAuta.setSimpleLabels(true);
 
         PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
                 "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
-        autaPlot.setLabelGenerator(gen);
+        plotAuta.setLabelGenerator(gen);
 
-        ChartPanel autaBarPanel = new ChartPanel(autaChart);
+        ChartPanel barPanelAuta = new ChartPanel(chartAuta);
         forma.getPanelGrafikAuta().setLayout(new java.awt.BorderLayout());
         forma.getPanelGrafikAuta().removeAll();
-        forma.getPanelGrafikAuta().add(autaBarPanel, BorderLayout.CENTER);
+        forma.getPanelGrafikAuta().add(barPanelAuta, BorderLayout.CENTER);
         forma.getPanelGrafikAuta().validate();
     }
 
@@ -223,26 +223,26 @@ public class StatistikaLogika {
 
         DefaultPieDataset pieChart = new DefaultPieDataset();
 
-        JFreeChart faktureChart = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
+        JFreeChart chartFakture = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
 
-        faktureChart = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
+        chartFakture = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
 
         pieChart.setValue("Placene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
         pieChart.setValue("Neplacene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
 
-        RingPlot fakturePlot = (RingPlot) faktureChart.getPlot();
-        fakturePlot.setBackgroundPaint(new Color(207, 229, 235));
+        RingPlot plotFakture = (RingPlot) chartFakture.getPlot();
+        plotFakture.setBackgroundPaint(new Color(207, 229, 235));
         //fakturePlot.setSimpleLabels(true);
         
         PieSectionLabelGenerator gen = new StandardPieSectionLabelGenerator(
                 "{0}: {1} ({2})", new DecimalFormat("0"), new DecimalFormat("0%"));
-        fakturePlot.setLabelGenerator(gen);
+        plotFakture.setLabelGenerator(gen);
 
-        ChartPanel faktureBarPanel = new ChartPanel(faktureChart);
+        ChartPanel barPanelFakture = new ChartPanel(chartFakture);
 
         forma.getPanelGrafikFakture().setLayout(new java.awt.BorderLayout());
         forma.getPanelGrafikFakture().removeAll();
-        forma.getPanelGrafikFakture().add(faktureBarPanel, BorderLayout.CENTER);
+        forma.getPanelGrafikFakture().add(barPanelFakture, BorderLayout.CENTER);
         forma.getPanelGrafikFakture().validate();
 
     }
