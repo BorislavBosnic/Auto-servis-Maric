@@ -48,4 +48,6 @@ public interface RadniNalogDAO {
     public RadniNalogDTO getRadniNalog(int id);
     
     public ArrayList<RezultatRNPretrazivanje> pretragaRadnihNaloga(RadniNalogParametri objekat);
+    
+    public boolean zatvoriRadniNalog(int id);
 }

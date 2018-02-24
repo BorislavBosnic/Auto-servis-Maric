@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -221,6 +222,32 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         }
 
         return brojFaktura;
+    }
+      
+       public boolean zatvoriRadniNalog(int id) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "update radni_nalog set DatumZatvaranjaNaloga = ? where IdRadniNalog = ? and DatumZatvaranjaNaloga is null";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setDate(1, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+            ps.setInt(2, id);
+
+             if(ps.executeUpdate() == 1)
+                 return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+          return false;
+
     }
       
       

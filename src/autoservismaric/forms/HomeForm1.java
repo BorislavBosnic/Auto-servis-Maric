@@ -166,6 +166,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         popupMenu = new JPopupMenu();
         JMenuItem izmijeniItem = new JMenuItem("Izmijeni");
         JMenuItem izbrisiItem = new JMenuItem("Izbriši");
+        JMenuItem zatvoriNalogItem = new JMenuItem("Zatvori radni nalog");
+
 
         izmijeniItem.addActionListener(new ActionListener() {
 
@@ -204,6 +206,22 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
         popupMenu.add(izbrisiItem);
+        
+         zatvoriNalogItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Integer id = Integer.parseInt(tableRNalozi.getModel().getValueAt(selektovanRed, 0).toString());
+                if(DAOFactory.getDAOFactory().getRadniNalogDAO().zatvoriRadniNalog(id)){
+                    JOptionPane.showMessageDialog(new JFrame(), "Uspješno zatvoren radni nalog!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+   
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Radni nalog već zatvoren!!", "Greška", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        popupMenu.add(zatvoriNalogItem);
 
         tableRNalozi.setComponentPopupMenu(popupMenu);
 
