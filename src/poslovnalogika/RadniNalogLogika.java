@@ -51,6 +51,7 @@ public class RadniNalogLogika {
         dijalog.getTabelaDijelovi().getTableHeader().setReorderingAllowed(false);
         dijalog.getTabelaIzabraniDijelovi().getTableHeader().setReorderingAllowed(false);
         VoziloDTO vozilo = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(dijalog.getIdVozila());
+        
         ModelVozilaDTO modelVozila = DAOFactory.getDAOFactory().getModelVozilaDAO().model(vozilo.getIdModelVozila());
 
         dijalog.getTfIdVozila().setText(new Integer(dijalog.getIdVozila()).toString());

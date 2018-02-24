@@ -8,6 +8,8 @@ package data.dao.mysql;
 import data.dao.RadniNalogDAO;
 import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
+import data.dto.RadniNalogParametri;
+import data.dto.RezultatRNPretrazivanje;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -479,4 +481,44 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         }
         return retVal;
     }
+
+    @Override
+    public ArrayList<RezultatRNPretrazivanje> pretragaRadnihNaloga(RadniNalogParametri objekat) {
+        ArrayList<RezultatRNPretrazivanje> retVal = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = objekat.kreirajIskaz();
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            System.out.println(ps.toString());
+            rs = ps.executeQuery();
+
+            
+            
+            while (rs.next()) {
+                String vlasnik="";
+                if(rs.getString("Ime") == null || "".equals(rs.getString("Ime"))){
+                    vlasnik = rs.getString("Naziv");
+                }
+                else{
+                    vlasnik = rs.getString("Ime") + " " + rs.getString("Prezime");
+                }
+                retVal.add(new RezultatRNPretrazivanje(rs.getInt("IdRadniNalog"), rs.getString("BrojRegistracije"), vlasnik, rs.getDate("DatumOtvaranjaNaloga"), 
+                        rs.getDate("DatumZatvaranjaNaloga"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("Troskovi"), rs.getDouble("CijenaUsluge"), rs.getBoolean("Placeno")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
+
+    
 }

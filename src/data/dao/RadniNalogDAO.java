@@ -8,6 +8,8 @@ package data.dao;
 import data.dto.RadniNalogDTO;
 import java.util.ArrayList;
 import java.util.Date;
+import data.dto.RadniNalogParametri;
+import data.dto.RezultatRNPretrazivanje;
 
 /**
  *
@@ -44,4 +46,6 @@ public interface RadniNalogDAO {
     public boolean azurirajRadniNalog(RadniNalogDTO nalog); 
     
     public RadniNalogDTO getRadniNalog(int id);
+    
+    public ArrayList<RezultatRNPretrazivanje> pretragaRadnihNaloga(RadniNalogParametri objekat);
 }

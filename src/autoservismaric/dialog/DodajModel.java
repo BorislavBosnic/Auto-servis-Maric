@@ -57,14 +57,14 @@ public class DodajModel extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        tfMarkaDodaj = new javax.swing.JTextField();
-        tfModel = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        pnlOsnovni = new javax.swing.JPanel();
+        txtMarkaDodaj = new javax.swing.JTextField();
+        txtModel = new javax.swing.JTextField();
+        lblMarka = new javax.swing.JLabel();
+        lblModel = new javax.swing.JLabel();
         btnDodaj = new javax.swing.JButton();
         btnOdustani = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblNaslov = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dodavanje tipa vozila");
@@ -73,28 +73,28 @@ public class DodajModel extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
-        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlOsnovni.setBackground(new java.awt.Color(102, 153, 255));
+        pnlOsnovni.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tfModel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tfModel.addActionListener(new java.awt.event.ActionListener() {
+        txtModel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfModelActionPerformed(evt);
+                txtModelActionPerformed(evt);
             }
         });
-        tfModel.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtModel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfModelKeyPressed(evt);
+                txtModelKeyPressed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Marka:");
+        lblMarka.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblMarka.setForeground(new java.awt.Color(255, 255, 255));
+        lblMarka.setText("Marka:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Model:");
+        lblModel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblModel.setForeground(new java.awt.Color(255, 255, 255));
+        lblModel.setText("Model:");
 
         btnDodaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
         btnDodaj.setText("Dodaj");
@@ -112,61 +112,61 @@ public class DodajModel extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Dodavanje modela vozila:");
-        jLabel3.setToolTipText("");
+        lblNaslov.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNaslov.setForeground(new java.awt.Color(255, 255, 255));
+        lblNaslov.setText("Dodavanje modela vozila:");
+        lblNaslov.setToolTipText("");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlOsnovniLayout = new javax.swing.GroupLayout(pnlOsnovni);
+        pnlOsnovni.setLayout(pnlOsnovniLayout);
+        pnlOsnovniLayout.setHorizontalGroup(
+            pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOsnovniLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfMarkaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 82, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOsnovniLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(btnOdustani)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDodaj)
                         .addGap(0, 64, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                    .addGroup(pnlOsnovniLayout.createSequentialGroup()
+                        .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlOsnovniLayout.createSequentialGroup()
+                                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMarka)
+                                    .addComponent(lblModel))
+                                .addGap(42, 42, 42)
+                                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMarkaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblNaslov))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDodaj, btnOdustani});
+        pnlOsnovniLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDodaj, btnOdustani});
 
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlOsnovniLayout.setVerticalGroup(
+            pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOsnovniLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel3)
+                .addComponent(lblNaslov)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfMarkaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMarkaDodaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMarka))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblModel)
+                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlOsnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
                     .addComponent(btnOdustani))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfMarkaDodaj, tfModel});
+        pnlOsnovniLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMarkaDodaj, txtModel});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,14 +174,14 @@ public class DodajModel extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlOsnovni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOsnovni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -210,15 +210,15 @@ public class DodajModel extends javax.swing.JDialog {
           modelVozilaLogika.dodajModel(this);
     }//GEN-LAST:event_btnDodajActionPerformed
 
-    private void tfModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfModelActionPerformed
+    private void txtModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfModelActionPerformed
+    }//GEN-LAST:event_txtModelActionPerformed
 
-    private void tfModelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfModelKeyPressed
+    private void txtModelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModelKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             btnDodaj.doClick();
         }
-    }//GEN-LAST:event_tfModelKeyPressed
+    }//GEN-LAST:event_txtModelKeyPressed
 
     public ModelVozilaDTO getM() {
         return m;
@@ -241,15 +241,15 @@ public class DodajModel extends javax.swing.JDialog {
     }
 
     public JLabel getjLabel1() {
-        return jLabel1;
+        return lblMarka;
     }
 
     public JLabel getjLabel2() {
-        return jLabel2;
+        return lblModel;
     }
 
     public JLabel getjLabel3() {
-        return jLabel3;
+        return lblNaslov;
     }
 
     public JPanel getjPanel1() {
@@ -257,15 +257,15 @@ public class DodajModel extends javax.swing.JDialog {
     }
 
     public JPanel getjPanel2() {
-        return jPanel2;
+        return pnlOsnovni;
     }
 
     public JTextField getTfMarkaDodaj() {
-        return tfMarkaDodaj;
+        return txtMarkaDodaj;
     }
 
     public JTextField getTfModel() {
-        return tfModel;
+        return txtModel;
     }
 
     public void setM(ModelVozilaDTO m) {
@@ -327,12 +327,12 @@ public class DodajModel extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
     private javax.swing.JButton btnOdustani;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField tfMarkaDodaj;
-    private javax.swing.JTextField tfModel;
+    private javax.swing.JLabel lblMarka;
+    private javax.swing.JLabel lblModel;
+    private javax.swing.JLabel lblNaslov;
+    private javax.swing.JPanel pnlOsnovni;
+    private javax.swing.JTextField txtMarkaDodaj;
+    private javax.swing.JTextField txtModel;
     // End of variables declaration//GEN-END:variables
 }

@@ -181,44 +181,44 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Kubikaža:");
 
-        lbBrojRegistracije.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbBrojRegistracije.setForeground(new java.awt.Color(255, 0, 0));
+        lbBrojRegistracije.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbBrojRegistracije.setForeground(new java.awt.Color(255, 255, 255));
         lbBrojRegistracije.setText("jLabel13");
 
-        lbVrstaGoriva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbVrstaGoriva.setForeground(new java.awt.Color(255, 0, 0));
+        lbVrstaGoriva.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbVrstaGoriva.setForeground(new java.awt.Color(255, 255, 255));
         lbVrstaGoriva.setText("jLabel14");
 
-        lbModelVozila.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbModelVozila.setForeground(new java.awt.Color(255, 0, 0));
+        lbModelVozila.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbModelVozila.setForeground(new java.awt.Color(255, 255, 255));
         lbModelVozila.setText("jLabel15");
 
-        lbKubikaza.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbKubikaza.setForeground(new java.awt.Color(255, 0, 0));
+        lbKubikaza.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbKubikaza.setForeground(new java.awt.Color(255, 255, 255));
         lbKubikaza.setText("jLabel14");
 
-        lbKilovati.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbKilovati.setForeground(new java.awt.Color(255, 0, 0));
+        lbKilovati.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbKilovati.setForeground(new java.awt.Color(255, 255, 255));
         lbKilovati.setText("jLabel13");
 
-        lbVlasnik.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbVlasnik.setForeground(new java.awt.Color(255, 0, 0));
+        lbVlasnik.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbVlasnik.setForeground(new java.awt.Color(255, 255, 255));
         lbVlasnik.setText("jLabel13");
 
-        lbTelefon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbTelefon.setForeground(new java.awt.Color(255, 0, 0));
+        lbTelefon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbTelefon.setForeground(new java.awt.Color(255, 255, 255));
         lbTelefon.setText("jLabel15");
 
-        lbAdresa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbAdresa.setForeground(new java.awt.Color(255, 0, 0));
+        lbAdresa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbAdresa.setForeground(new java.awt.Color(255, 255, 255));
         lbAdresa.setText("jLabel16");
 
-        lbGrad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbGrad.setForeground(new java.awt.Color(255, 0, 0));
+        lbGrad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbGrad.setForeground(new java.awt.Color(255, 255, 255));
         lbGrad.setText("jLabel17");
 
-        lbGodiste.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbGodiste.setForeground(new java.awt.Color(255, 0, 0));
+        lbGodiste.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbGodiste.setForeground(new java.awt.Color(255, 255, 255));
         lbGodiste.setText("jLabel13");
 
         javax.swing.GroupLayout panelTabelaLayout = new javax.swing.GroupLayout(panelTabela);

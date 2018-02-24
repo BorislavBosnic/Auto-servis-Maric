@@ -87,7 +87,7 @@ public class KupacLogika {
         dijalog.getBg().add(dijalog.getRbPrivatno());
  
         KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(dijalog.getIdVlasnika());
-        if(kupac.getNaziv() == null){
+        if(kupac.getNaziv() == null || "".equals(kupac.getNaziv())){
             
             for (Enumeration<AbstractButton> buttons = dijalog.getBg().getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -102,6 +102,8 @@ public class KupacLogika {
             dijalog.getTfNazivDodaj().setEditable(false);
             dijalog.getTfNazivDodaj().setBackground(Color.gray);
             dijalog.getTfNazivDodaj().setText("");
+            
+            
                   
         }
         else{
@@ -114,6 +116,7 @@ public class KupacLogika {
             }
  
             dijalog.getTfNazivDodaj().setText(kupac.getNaziv());
+            dijalog.getTfNazivDodaj().setEditable(true);
             dijalog.getTfImeDodaj().setText("");
             dijalog.getTfPrezimeDodaj().setText("");
             dijalog.getTfImeDodaj().setBackground(Color.gray);

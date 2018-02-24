@@ -1496,20 +1496,27 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panelOsnovniRN" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="spanelTabela" min="-2" pref="1077" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="3190" max="32767" attributes="0"/>
+                          <Component id="panelOsnovniRN" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="spanelTabela" min="-2" pref="321" max="-2" attributes="0"/>
+                          <EmptySpace pref="2825" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel10">
+                <Container class="javax.swing.JPanel" name="panelOsnovniRN">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -1521,14 +1528,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel26" max="32767" attributes="0"/>
+                              <Component id="panelOsnovniPretragaRN" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                              <Component id="jLabel26" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="lbRadniNaloziSlika" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbRadniNaloziNaslov" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="2994" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1538,18 +1545,18 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace pref="22" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel26" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="lbRadniNaloziNaslov" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbRadniNaloziSlika" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jPanel26" min="-2" max="-2" attributes="0"/>
+                              <Component id="panelOsnovniPretragaRN" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel26">
+                    <Container class="javax.swing.JPanel" name="panelOsnovniPretragaRN">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -1566,17 +1573,579 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="panelPretraga" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="btnNoviRadniNalog" min="-2" pref="207" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="235" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="panelPretraga" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                          <Component id="btnNoviRadniNalog" min="-2" pref="81" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JButton" name="btnNoviRadniNalog">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="14" style="0"/>
+                            </Property>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/autoservismaric/images/add-documents.png"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Novi radni nalog"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNoviRadniNalogActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Container class="javax.swing.JPanel" name="panelPretraga">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="99" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                                <EtchetBorder/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lblDatumOtvaranja" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="lblDatumOtvaranjaOD" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lblDatumZatvaranja" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="lblDatumZatvaranjaOD" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="lblPotrebnoZavrsiti" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="lblPotrebnoZavrsitiOD" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="cbDatumOtvaranja" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="cbPotrebnoZavrsiti" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="cbDatumZatvaranja" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace pref="71" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="lblDatumOtvaranjaDO" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblDatumZatvaranjaDO" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblPotrebnoZavrsitiDO" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="dcDatumOtvaranjaDO" alignment="0" pref="108" max="32767" attributes="0"/>
+                                          <Component id="dcDatumOtvaranjaOD" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dcPotrebnoZavrsitiOD" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dcPotrebnoZavrsitiDO" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dcDatumZatvaranjaOD" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="dcDatumZatvaranjaDO" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblPrezimeRN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblImeRN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblNazivRN" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblVlasnik" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="rbPrivatnoRadniNalog" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rbPravnoRadniNalog" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="cbSviRadniNalog" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="tfPrezimeRadniNalog" min="-2" pref="179" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                                  <Component id="btnPrikaziRadniNalog" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="tfNazivRadniNalog" alignment="1" min="-2" pref="179" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                                              <Component id="tfImeRadniNalog" min="-2" pref="179" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Component id="separatorRN" alignment="1" min="-2" pref="254" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jLabel84" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tfRegistracijaRadniNalog" min="-2" pref="176" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="dcDatumOtvaranjaOD" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="lblDatumOtvaranja" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblDatumOtvaranjaOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="dcDatumOtvaranjaDO" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="lblDatumOtvaranjaDO" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cbDatumOtvaranja" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="1" attributes="0">
+                                                          <Component id="dcPotrebnoZavrsitiOD" min="-2" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="3" attributes="0">
+                                                              <Component id="lblPotrebnoZavrsiti" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lblPotrebnoZavrsitiOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="dcPotrebnoZavrsitiDO" min="-2" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="3" attributes="0">
+                                                              <Component id="lblPotrebnoZavrsitiDO" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="cbPotrebnoZavrsiti" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                                      <Component id="dcDatumZatvaranjaOD" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                                      <Component id="lblDatumZatvaranjaOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblDatumZatvaranja" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="dcDatumZatvaranjaDO" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="lblDatumZatvaranjaDO" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="cbDatumZatvaranja" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="tfRegistracijaRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel84" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="separatorRN" min="-2" pref="10" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="rbPrivatnoRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rbPravnoRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblVlasnik" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="cbSviRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="lblPrezimeRN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="tfPrezimeRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="tfImeRadniNalog" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblImeRN" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblNazivRN" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="tfNazivRadniNalog" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btnPrikaziRadniNalog" min="-2" pref="46" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumOtvaranjaOD">
+                            </Component>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumOtvaranjaDO">
+                            </Component>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcPotrebnoZavrsitiOD">
+                            </Component>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcPotrebnoZavrsitiDO">
+                            </Component>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumZatvaranjaOD">
+                            </Component>
+                            <Component class="com.toedter.calendar.JDateChooser" name="dcDatumZatvaranjaDO">
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumOtvaranja">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Datum otvaranja:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumOtvaranjaOD">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="OD:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumOtvaranjaDO">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="DO:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblPotrebnoZavrsiti">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Potrebno zavr&#x161;iti:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblPotrebnoZavrsitiOD">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="OD:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblPotrebnoZavrsitiDO">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="DO:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumZatvaranjaOD">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="OD:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumZatvaranjaDO">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="DO:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblDatumZatvaranja">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Datum zatvaranja:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="cbDatumOtvaranja">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="Svi"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="cbPotrebnoZavrsiti">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="Svi"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="cbDatumZatvaranja">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="Svi"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btnPrikaziRadniNalog">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/autoservismaric/images/search.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Prika&#x17e;i radne naloge"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrikaziRadniNalogActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfRegistracijaRadniNalog">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="jLabel84">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Registracija:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfNazivRadniNalog">
+                              <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfImeRadniNalog">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="rbPravnoRadniNalog">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Pravno lice"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPravnoRadniNalogActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="rbPrivatnoRadniNalog">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="Privatno lice"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPrivatnoRadniNalogActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblVlasnik">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Vlasnik:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblPrezimeRN">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Prezime:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblImeRN">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Ime:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblNazivRN">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Naziv:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JSeparator" name="separatorRN">
+                            </Component>
+                            <Component class="javax.swing.JCheckBox" name="cbSviRadniNalog">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="66" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Svi"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSviRadniNalogActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="tfPrezimeRadniNalog">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="14" style="0"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel25">
+                    <Component class="javax.swing.JLabel" name="lbRadniNaloziNaslov">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1590,10 +2159,38 @@
                         <Property name="text" type="java.lang.String" value="&gt; Radni nalozi"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel26">
+                    <Component class="javax.swing.JLabel" name="lbRadniNaloziSlika">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/autoservismaric/images/Maintenance_20px_2.png"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JScrollPane" name="spanelTabela">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="99" red="66" type="rgb"/>
+                    </Property>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tableRNalozi">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="9" rowCount="0">
+                            <Column editable="false" title="ID" type="java.lang.String"/>
+                            <Column editable="false" title="Registracija vozila" type="java.lang.String"/>
+                            <Column editable="false" title="Vlasnik vozila" type="java.lang.String"/>
+                            <Column editable="false" title="Datum otvaranja" type="java.lang.Object"/>
+                            <Column editable="false" title="Potrebno zavr&#x161;iti do" type="java.lang.Object"/>
+                            <Column editable="false" title="Datum zatvaranja" type="java.lang.Object"/>
+                            <Column editable="false" title="Tro&#x161;kovi dijelova" type="java.lang.String"/>
+                            <Column editable="false" title="Cijena usluge" type="java.lang.String"/>
+                            <Column editable="false" title="Pla&#x107;eno" type="java.lang.String"/>
+                          </Table>
                         </Property>
                       </Properties>
                     </Component>
@@ -1620,7 +2217,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel23" pref="3489" max="32767" attributes="0"/>
+                          <Component id="jPanel23" pref="3512" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2319,9 +2916,9 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel95" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="lblSlikaVozila" min="-2" pref="27" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel92" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblNaslovVozila" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="spVoziloPretraga" alignment="0" max="32767" attributes="0"/>
@@ -2339,8 +2936,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel92" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel95" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="lblNaslovVozila" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSlikaVozila" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="panelVozilo" min="-2" max="-2" attributes="0"/>
@@ -2352,7 +2949,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="jLabel92">
+                    <Component class="javax.swing.JLabel" name="lblNaslovVozila">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -2366,7 +2963,7 @@
                         <Property name="text" type="java.lang.String" value="&gt;Vozila"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel95">
+                    <Component class="javax.swing.JLabel" name="lblSlikaVozila">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/autoservismaric/images/Car_32px.png"/>
@@ -2468,42 +3065,42 @@
                                           <Component id="btnPrikaziSvaVozila" max="32767" attributes="0"/>
                                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel105" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel106" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblRegistracijaVozila" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lblGodisteVozila" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnPonistiSve" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jLabel108" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPrezimeVozila" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tfImeVozilo" max="32767" attributes="0"/>
-                                          <Component id="tfNazivVozilo" max="32767" attributes="0"/>
-                                          <Component id="tfPrezimeVozilo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtImeVozilo" max="32767" attributes="0"/>
+                                          <Component id="txtNazivVozilo" max="32767" attributes="0"/>
+                                          <Component id="txtPrezimeVozilo" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               <Component id="btnPronadjiVozilo" min="-2" pref="112" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="tfGodisteTrazi" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtGodisteTrazi" alignment="0" max="32767" attributes="0"/>
                                                   <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="tfMarkaTrazi" max="32767" attributes="0"/>
+                                                      <Component id="txtMarkaTrazi" max="32767" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lblMarkaVozila" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                                      <Component id="tfModelTrazi" min="-2" pref="73" max="-2" attributes="0"/>
+                                                      <Component id="txtModelTrazi" min="-2" pref="73" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="rbPrivatnoLiceVozilo" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Component id="rbPravnoLiceVozilo" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Component id="tfRegistracijaTrazi" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="txtRegistracijaTrazi" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                                           </Group>
@@ -2522,20 +3119,20 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel105" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfRegistracijaTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblRegistracijaVozila" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtRegistracijaTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel106" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfGodisteTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGodisteVozila" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtGodisteTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel107" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfModelTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblMarkaVozila" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtModelTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfMarkaTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtMarkaTrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="cbSvi" min="-2" max="-2" attributes="0"/>
@@ -2547,17 +3144,17 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tfPrezimeVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel108" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtPrezimeVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPrezimeVozila" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tfImeVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtImeVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tfNazivVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtNazivVozilo" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -2575,7 +3172,7 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jLabel105">
+                            <Component class="javax.swing.JLabel" name="lblRegistracijaVozila">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -2586,7 +3183,7 @@
                                 <Property name="text" type="java.lang.String" value="Registracija:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel106">
+                            <Component class="javax.swing.JLabel" name="lblGodisteVozila">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -2597,7 +3194,7 @@
                                 <Property name="text" type="java.lang.String" value="Godi&#x161;te:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel107">
+                            <Component class="javax.swing.JLabel" name="lblMarkaVozila">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -2608,7 +3205,7 @@
                                 <Property name="text" type="java.lang.String" value="Model:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel108">
+                            <Component class="javax.swing.JLabel" name="lblPrezimeVozila">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
@@ -2619,17 +3216,17 @@
                                 <Property name="text" type="java.lang.String" value="Prezime:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfRegistracijaTrazi">
+                            <Component class="javax.swing.JTextField" name="txtRegistracijaTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfGodisteTrazi">
+                            <Component class="javax.swing.JTextField" name="txtGodisteTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfModelTrazi">
+                            <Component class="javax.swing.JTextField" name="txtModelTrazi">
                               <Events>
-                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tfModelTraziFocusGained"/>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfModelTraziActionPerformed"/>
+                                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtModelTraziFocusGained"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModelTraziActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfPrezimeVozilo">
+                            <Component class="javax.swing.JTextField" name="txtPrezimeVozilo">
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPronadjiVozilo">
                               <Properties>
@@ -2656,9 +3253,9 @@
                                 <Property name="text" type="java.lang.String" value="Marka:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfMarkaTrazi">
+                            <Component class="javax.swing.JTextField" name="txtMarkaTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfNazivVozilo">
+                            <Component class="javax.swing.JTextField" name="txtNazivVozilo">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                               </Properties>
@@ -2685,7 +3282,7 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPonistiSveActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfImeVozilo">
+                            <Component class="javax.swing.JTextField" name="txtImeVozilo">
                             </Component>
                             <Component class="javax.swing.JRadioButton" name="rbPrivatnoLiceVozilo">
                               <Properties>
@@ -2833,10 +3430,10 @@
                                                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                                                   <Component id="rbPravnoTrazi" linkSize="1" min="-2" max="-2" attributes="0"/>
                                                               </Group>
-                                                              <Component id="tfPrezimeTrazi" linkSize="3" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                                                              <Component id="txtPrezimeTrazi" linkSize="3" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
                                                           </Group>
-                                                          <Component id="tfNazivTrazi" linkSize="3" alignment="0" pref="187" max="32767" attributes="0"/>
-                                                          <Component id="tfImeTrazi" linkSize="3" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="txtNazivTrazi" linkSize="3" alignment="0" pref="187" max="32767" attributes="0"/>
+                                                          <Component id="txtImeTrazi" linkSize="3" alignment="0" max="32767" attributes="0"/>
                                                           <Component id="labelPoruka" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -2872,16 +3469,16 @@
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="jLabel110" linkSize="6" min="-2" max="-2" attributes="0"/>
-                                          <Component id="tfPrezimeTrazi" linkSize="4" min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Component id="txtPrezimeTrazi" linkSize="4" min="-2" pref="20" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tfImeTrazi" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtImeTrazi" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel109" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tfNazivTrazi" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtNazivTrazi" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel27" linkSize="6" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -2924,9 +3521,9 @@
                                 <Property name="text" type="java.lang.String" value="Prezime:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfImeTrazi">
+                            <Component class="javax.swing.JTextField" name="txtImeTrazi">
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfPrezimeTrazi">
+                            <Component class="javax.swing.JTextField" name="txtPrezimeTrazi">
                             </Component>
                             <Component class="javax.swing.JButton" name="btnTrazi">
                               <Properties>
@@ -2953,7 +3550,7 @@
                                 <Property name="text" type="java.lang.String" value="Naziv:"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JTextField" name="tfNazivTrazi">
+                            <Component class="javax.swing.JTextField" name="txtNazivTrazi">
                               <Properties>
                                 <Property name="editable" type="boolean" value="false"/>
                               </Properties>
@@ -4141,7 +4738,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel17" pref="2840" max="32767" attributes="0"/>
+                          <Component id="jPanel17" pref="2863" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="660" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -5557,13 +6154,17 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="statistikaHeaderjPanel" min="-2" pref="1200" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" min="-2" pref="729" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="odabirMjesecaStatistikaPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="statistikaHeaderjPanel" min="-2" pref="1200" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jTabbedPane1" min="-2" pref="729" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="odabirMjesecaStatistikaPanel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="1966" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
