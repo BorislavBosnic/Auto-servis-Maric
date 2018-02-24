@@ -30,6 +30,10 @@ public interface RadniNalogDAO {
     public ArrayList<RadniNalogDTO> getRadniNalozi();
 
     public ArrayList<RadniNalogDTO> getRadniNalozi(int id);
+    
+    public ArrayList<RadniNalogDTO> getRadniNalozi(Date dat1, Date dat2);
+    
+    public ArrayList<RadniNalogDTO> radniNaloziVozila(int idVozila);
 
     public boolean dodajRadniNalog(RadniNalogDTO nalog);
     

@@ -5,12 +5,26 @@
  */
 package poslovnalogika;
 
+import autoservismaric.dialog.IzmijeniDioDialog;
+import autoservismaric.dialog.ProdajDioDialog;
 import autoservismaric.forms.HomeForm1;
+import static autoservismaric.forms.HomeForm1.pdv;
+import static autoservismaric.forms.HomeForm1.selRedDio;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.DioModelVozilaDTO;
 import data.dto.ModelVozilaDTO;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,9 +34,18 @@ import javax.swing.table.DefaultTableModel;
 public class DioLogika {
     public boolean dodajDio(HomeForm1 form, String sifra, String naziv, String gorivo, Integer godiste, boolean stanje, 
             Double cijena, Integer kolicina, boolean zaSve,String marka, String model){
+        
         if(!stanje){
             sifra += "s";
         }
+        
+        DioDTO pom = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
+        if(pom != null){
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(form, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
         DioDTO noviDio = new DioDTO(sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, zaSve, marka, model);
             DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
             ModelVozilaDTO modVoz = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
@@ -51,5 +74,151 @@ public class DioLogika {
                 }
             }
             return true;
+    }
+    public void pretraziDijelove(HomeForm1 form,Integer id, String sifra, String naziv, String gorivo, Integer godiste, boolean stanje, 
+            Double cijena, boolean zaSve,String marka, String model){
+        
+        ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
+        if (id != 0) {
+            dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));
+        } else if (!"".equals(sifra)) {
+            dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(sifra));
+        } else if (!"".equals(naziv) && godiste != null && !"Svi".equals(marka) && !"Svi".equals(gorivo)) {
+            if ("Svi".equals(model)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, gorivo, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, model, gorivo, stanje);
+            }
+        } else if (!"".equals(naziv) && godiste != null && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(naziv, godiste, marka, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, marka, model, stanje);
+            }
+        } else if (!"".equals(naziv) && godiste != null) {
+            if (!"Svi".equals(gorivo)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, gorivo, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovi(naziv, godiste, stanje);
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(marka) && !"Svi".equals(gorivo)) {
+            if ("Svi".equals(model)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, marka, gorivo, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, model, gorivo, stanje);
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg(naziv, marka, model, stanje);
+            }
+        } else if (!"".equals(naziv) && !"Svi".equals(gorivo)) {
+            dijelovi = DAOFactory.getDAOFactory().getDioDAO().dijelovibg2(naziv, gorivo, stanje);
+        } else if (!"".equals(naziv)) {
+            dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviNaziv(naziv, stanje);
+        } else if (!"Svi".equals(gorivo) && !"Svi".equals(marka)) {
+            if ("Svi".equals(model)) {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, stanje);
+            } else {
+                dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, model, stanje);
+            }
+        } else {
+            dijelovi = null;
+        }
+
+        DefaultTableModel dtm = (DefaultTableModel) form.getJTable().getModel();
+        dtm.setRowCount(0);
+
+        int i = 0;
+        if (dijelovi != null) {
+            while (i < dijelovi.size()) {
+                DioDTO d = dijelovi.get(i);
+                dtm.addRow(new Object[]{d.getId(), d.getSifra(), d.getNaziv(), d.getMarka(), d.getModel(), d.getGodisteVozila(),
+                    d.getVrstaGoriva(), Math.round(d.getTrenutnaCijena() * 100) / 100, d.getKolicina(), d.getNovo() ? "Da" : "Ne"});
+                i++;
+            }
+        }
+    }
+        
+    public void ucitajPopupZaDijelove(HomeForm1 form) {
+        JTable jTable = form.getJTable();
+        JMenuItem prodaj = new JMenuItem("Prodaj");
+        prodaj.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ProdajDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow(), pdv, form).setVisible(true);
+            }
+        });
+        form.getPopupDio().add(prodaj);
+
+        JMenuItem azuriraj = new JMenuItem("Ažuriraj");
+        azuriraj.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new IzmijeniDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow(), form).setVisible(true);
+            }
+        });
+        form.getPopupDio().add(azuriraj);
+
+        JMenuItem obrisi = new JMenuItem("Obriši");
+        obrisi.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel dtm = (DefaultTableModel) jTable.getModel();
+                int id = (Integer) ((DefaultTableModel) jTable.getModel()).getValueAt(jTable.getSelectedRow(), 0);
+                if (DAOFactory.getDAOFactory().getDioModelVozilaDAO().obrisiDioModelVozila(id)
+                        && DAOFactory.getDAOFactory().getDioDAO().obrisiDio(id)) {
+                    dtm.removeRow(jTable.getSelectedRow());
+                    JOptionPane jop = new JOptionPane();
+                    jop.showMessageDialog(new JFrame(), "Uspješno obrisan dio", "Obavještenje",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        form.getPopupDio().add(obrisi);
+        jTable.setComponentPopupMenu(form.getPopupDio());
+
+       
+        form.getPopupDio().addPopupMenuListener(new PopupMenuListener() {
+
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        int rowAtPoint = jTable.rowAtPoint(SwingUtilities.convertPoint(form.getPopupDio(), new Point(0, 0), jTable));
+                        selRedDio = rowAtPoint;
+                        int column = 0;
+                        //int row = tableVozila.getSelectedRow();
+                        String imeKolone = jTable.getModel().getColumnName(0);
+
+                        if (selRedDio >= 0) {
+                            if ("Id".equals(imeKolone)) {
+                                int idDio = Integer.parseInt(jTable.getModel().getValueAt(selRedDio, column).toString());
+                            }
+                        }
+                        if (rowAtPoint > -1) {
+                            jTable.setRowSelectionInterval(rowAtPoint, rowAtPoint);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 }

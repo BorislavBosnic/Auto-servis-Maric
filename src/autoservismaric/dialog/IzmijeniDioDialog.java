@@ -21,7 +21,8 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
     /**
      * Creates new form IzmijeniDioDialog
      */
-    public IzmijeniDioDialog(DefaultTableModel dtm, int red) {
+    public IzmijeniDioDialog(DefaultTableModel dtm, int red, java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Ažuriranje dijelova");

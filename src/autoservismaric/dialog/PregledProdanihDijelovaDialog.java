@@ -21,7 +21,8 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
     /**
      * Creates new form PregledProdanihDijelovaDialog
      */
-    public PregledProdanihDijelovaDialog() {
+    public PregledProdanihDijelovaDialog(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         setTitle("Pregled prodanih dijelova");
         setLocationRelativeTo(null);

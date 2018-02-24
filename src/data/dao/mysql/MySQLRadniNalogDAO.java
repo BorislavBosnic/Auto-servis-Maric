@@ -196,7 +196,38 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         }
         return retVal;
     }
+    
+    @Override
+    public ArrayList<RadniNalogDTO> radniNaloziVozila(int idVozila){
+        ArrayList<RadniNalogDTO> retVal = new ArrayList<RadniNalogDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        String query = "SELECT IdRadniNalog, Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, OpisProblema, PredvidjenoVrijemeZavrsetka, CijenaUsluge, Izbrisano "
+                + "FROM radni_nalog "
+                + "WHERE IdVozilo=? AND Izbrisano!=true "
+                + "ORDER BY DatumOtvaranjaNaloga ASC ";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setObject(1, idVozila);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retVal.add(new RadniNalogDTO(rs.getBoolean("Placeno"), rs.getDate("DatumOtvaranjaNaloga"), rs.getDate("DatumZatvaranjaNaloga"), rs.getInt("IdVozilo"), rs.getDouble("Troskovi"), rs.getInt("Kilometraza"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("CijenaUsluge"), rs.getString("OpisProblema"), rs.getInt("IdRadniNalog"), rs.getBoolean("Izbrisano")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
+    
     @Override
     public ArrayList<RadniNalogDTO> getRadniNalozi(int id) {
         ArrayList<RadniNalogDTO> retVal = new ArrayList<RadniNalogDTO>();
@@ -228,6 +259,36 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         return retVal;
     }
 
+     @Override
+    public ArrayList<RadniNalogDTO> getRadniNalozi(Date dat1, Date dat2) {
+        ArrayList<RadniNalogDTO> retVal = new ArrayList<RadniNalogDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT IdRadniNalog, Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, OpisProblema, PredvidjenoVrijemeZavrsetka, CijenaUsluge, Izbrisano "
+                + "FROM radni_nalog WHERE PredvidjenoVrijemeZavrsetka>=? AND PredvidjenoVrijemeZavrsetka<=? "
+                + "ORDER BY DatumOtvaranjaNaloga ASC ";
+
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setDate(1, new java.sql.Date(dat1.getTime()));
+            ps.setDate(2, new java.sql.Date(dat2.getTime()));
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retVal.add(new RadniNalogDTO(rs.getBoolean("Placeno"), rs.getDate("DatumOtvaranjaNaloga"), rs.getDate("DatumZatvaranjaNaloga"), rs.getInt("IdVozilo"), rs.getDouble("Troskovi"), rs.getInt("Kilometraza"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("CijenaUsluge"), rs.getString("OpisProblema"), rs.getInt("IdRadniNalog"), rs.getBoolean("Izbrisano")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
     @Override
     public boolean dodajRadniNalog(RadniNalogDTO nalog) {
         boolean retVal = false;

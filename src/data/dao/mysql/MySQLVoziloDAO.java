@@ -35,7 +35,36 @@ public class MySQLVoziloDAO implements VoziloDAO {
         }
         return retVal;
     }
+    
+    @Override
+    public ArrayList<VoziloDTO> vozila(int idVlasnika){
+        ArrayList<VoziloDTO> retVal = new ArrayList<VoziloDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        String query = "SELECT IdVozilo, BrojRegistracije, Kilovat, Kubikaza, Godiste, IdKupac, IdModelVozila, VrstaGoriva "
+                + "FROM vozilo WHERE IdKupac=? AND Izbrisano!=true "
+                + "ORDER BY IdVozilo ASC ";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            ps.setObject(1, idVlasnika);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retVal.add(new VoziloDTO(rs.getInt("IdVozilo"), rs.getString("BrojRegistracije"), rs.getInt("Kilovat"), rs.getDouble("Kubikaza"), rs.getInt("Godiste"), rs.getInt("IdKupac"), rs.getInt("IdModelVozila"), rs.getString("VrstaGoriva")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
+    
     @Override
     public ArrayList<VoziloDTO> svaVozila() {
         ArrayList<VoziloDTO> retVal = new ArrayList<VoziloDTO>();

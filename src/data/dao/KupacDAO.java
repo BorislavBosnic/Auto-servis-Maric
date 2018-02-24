@@ -11,6 +11,8 @@ public interface KupacDAO {
         
         public ArrayList<KupacDTO> kupciIme(String ime);
         
+        public KupacDTO kupacImePrezime(String ime, String prezime);
+        
         public ArrayList<KupacDTO> sviPrivatni();
         
         public ArrayList<KupacDTO> sviPravni();

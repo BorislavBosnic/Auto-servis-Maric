@@ -41,6 +41,36 @@ public class MySQLKupacDAO implements KupacDAO{
 		}
 		return retVal;
     }
+    @Override
+    public KupacDTO kupacImePrezime(String ime, String prezime){
+        KupacDTO retVal = null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
+				+ "FROM kupac "
+                                + "WHERE Ime=? "
+                                + "AND Prezime=? AND Aktivan!=false "
+				+ "ORDER BY IdKupac ASC ";
+		try {
+			conn = ConnectionPool.getInstance().checkOut();
+			ps = conn.prepareStatement(query);
+                        ps.setString(1, ime);
+                        ps.setString(2, prezime);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				retVal = new KupacDTO(rs.getInt("IdKupac"), rs.getString("Ime"), rs.getString("Prezime"), rs.getString("Naziv"), rs.getString("Telefon"), rs.getString("Adresa"), rs.getString("Grad"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DBUtilities.getInstance().showSQLException(e);
+		} finally {
+			ConnectionPool.getInstance().checkIn(conn);
+			DBUtilities.getInstance().close(ps, rs);
+		}
+		return retVal;
+    }
 
     @Override
     public ArrayList<KupacDTO> kupciPravni(String naziv) {
@@ -51,7 +81,7 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Naziv LIKE ? WHERE Aktivan!=false "
+                                + "WHERE Naziv=? AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

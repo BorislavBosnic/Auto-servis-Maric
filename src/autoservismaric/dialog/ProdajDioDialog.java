@@ -25,7 +25,8 @@ public class ProdajDioDialog extends javax.swing.JDialog {
     /**
      * Creates new form ProdajDioDialog
      */
-    public ProdajDioDialog(DefaultTableModel dtm, int red, Double pdv) {
+    public ProdajDioDialog(DefaultTableModel dtm, int red, Double pdv, java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Prodaja dijelova");

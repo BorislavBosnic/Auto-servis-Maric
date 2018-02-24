@@ -5,12 +5,15 @@
  */
 package poslovnalogika;
 
+import autoservismaric.forms.HomeForm1;
 import com.toedter.calendar.JDateChooser;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.FakturaDTO;
+import data.dto.KupacDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.RadniNalogDioDTO;
+import data.dto.VoziloDTO;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -165,6 +168,30 @@ public class KnjigovodstvoLogika
                     DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(nalog.getIdRadniNalog())!=null)
                 filtriranaLista.add(nalog);
         radniNaloziZaTabelu(filtriranaLista, tabela);
+    }
+    
+    public void pretraziNeplaceneFakturePoNazivu(HomeForm1 form, String naziv, String ime, String prezime){
+        KupacDTO kupac = null;
+        if(!"".equals(naziv)){
+            ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
+            if(kupci.size()>0)
+                kupac = kupci.get(0);
+        }else{
+            kupac = DAOFactory.getDAOFactory().getKupacDAO().kupacImePrezime(ime, prezime);
+        }
+        ArrayList<VoziloDTO> vozila = null; 
+        ArrayList<RadniNalogDTO> nalozi = new ArrayList<RadniNalogDTO>();
+        if(kupac != null){
+            vozila = DAOFactory.getDAOFactory().getVoziloDAO().vozila(kupac.getIdKupac());
+            ArrayList<RadniNalogDTO> pom = null;
+            for(int i = 0; i < vozila.size(); i++){
+                pom = DAOFactory.getDAOFactory().getRadniNalogDAO().radniNaloziVozila(vozila.get(i).getIdVozilo());
+                nalozi.addAll(pom);
+            }
+            nefakturisaniRadniNalozi(nalozi, form.getTblNeplaceneFakture());
+        }else{
+            ((DefaultTableModel)form.getTblNeplaceneFakture().getModel()).setRowCount(0);
+        }
     }
     
     public static void nefakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)
