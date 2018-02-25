@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import com.toedter.calendar.JDateChooser;
 import data.dto.ZaposleniDTO;
 import java.awt.Color;
@@ -30,6 +31,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
     private int idVozila;
     public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
+    HomeForm1 forma;
 
     /**
      * Creates new form DodajRadniNalogDialog
@@ -50,6 +52,23 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         radniNalogLogika.inicijalizacijaDodajRadniNalog(this);
     }
 
+    public DodajRadniNalogDialog(java.awt.Frame parent, boolean modal, int idVozila, boolean flag, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.idVozila = idVozila;
+        cbPlaceno.setVisible(false);
+        this.forma = forma;
+        if(flag)
+            this.setTitle("Kreiranje ranog naloga 2/2");
+        radniNalogLogika.inicijalizacijaDodajRadniNalog(this);
+    }
+
+    public HomeForm1 getForma() {
+        return forma;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

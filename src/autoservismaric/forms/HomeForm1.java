@@ -125,6 +125,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public int idVlasnika = -1;
     public static int selektovanRed; //za popup
     public static int idVozila = -1; //za popup
+    public static int akcijaZaRefreshVozila = 0;
     
     
 
@@ -5269,6 +5270,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziActionPerformed
         voziloKupacMeniLogika.traziKupce(this);
+        akcijaZaRefreshVozila = 3;
         flagVoziloVlasnik = false;
     }//GEN-LAST:event_btnTraziActionPerformed
 
@@ -5277,6 +5279,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         izbrisiPopupZaVlasnike();
         ucitajPopupZaVlasnike();
         flagVoziloVlasnik = false;
+        akcijaZaRefreshVozila = 2;
         ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().sviKupci();
         prikaziKupceSveUTabeli(kupci);
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
@@ -5302,11 +5305,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajModel2ActionPerformed
 
     private void btnDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVlasnikaActionPerformed
-        new DodajVlasnikaDialog(this, true).setVisible(true);
+        new DodajVlasnikaDialog(this, true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
     private void btnDodajVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVoziloActionPerformed
-        new DodajVoziloDialog(this, true).setVisible(true);
+        new DodajVoziloDialog(this, true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajVoziloActionPerformed
 
     private void btnIzmijeniIzbrisiModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmijeniIzbrisiModelActionPerformed
@@ -5346,6 +5349,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         izbrisiPopupZaVozila();
         ucitajPopupZaVozila();
         flagVoziloVlasnik = true;
+        akcijaZaRefreshVozila = 0;
         voziloKupacMeniLogika.prikaziSvaVozila(this);
     }//GEN-LAST:event_btnPrikaziSvaVozilaActionPerformed
 
@@ -5397,6 +5401,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         izbrisiPopupZaVozila();
         ucitajPopupZaVozila();
         flagVoziloVlasnik = true;
+        akcijaZaRefreshVozila = 1;
         voziloKupacMeniLogika.pronadjiVozilo(this);
     }//GEN-LAST:event_btnPronadjiVoziloActionPerformed
 
@@ -5961,11 +5966,11 @@ public class HomeForm1 extends javax.swing.JFrame {
         //ucitavanje autosuggestora
         if (voziloPanelPrviPut == true) {
             voziloPanelPrviPut = false;
-            markeAU = ucitajPreporukeMarke();
-            registracijeAU = ucitajPreporukeRegistracija();
+            //markeAU = ucitajPreporukeMarke();
+            //registracijeAU = ucitajPreporukeRegistracija();
             //vlasnikAU = ucitajPreporukeVlasnik();
             //pravniNazivAU = ucitajPreporukePravniNaziv();
-            modelAU = ucitajPreporukeModel();
+            //modelAU = ucitajPreporukeModel();
         }
     }
 

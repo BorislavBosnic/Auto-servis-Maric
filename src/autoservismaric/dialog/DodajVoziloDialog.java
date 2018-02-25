@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.AutoSuggestor;
 import java.awt.Color;
 import java.awt.ScrollPane;
@@ -35,12 +36,24 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     ButtonGroup bg = new ButtonGroup();
     public AutoSuggestor model;
     public AutoSuggestor marka;
+    HomeForm1 forma;
+    public static int akcijaZaRefres = 0;
     
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         marka = voziloLogika.ucitajPreporukeMarke(this);
         model = voziloLogika.ucitajPreporukeModel(this);
+        voziloLogika.inicijalizacijaDodajDijaloga(this);
+        btnPrikaziSve.doClick();
+    }
+    
+    public DodajVoziloDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        marka = voziloLogika.ucitajPreporukeMarke(this);
+        model = voziloLogika.ucitajPreporukeModel(this);
+        this.forma = forma;
         voziloLogika.inicijalizacijaDodajDijaloga(this);
         btnPrikaziSve.doClick();
     }
@@ -510,10 +523,11 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVlasnikaActionPerformed
-        new DodajVlasnikaDialog(new JFrame(), true).setVisible(true);
+        new DodajVlasnikaDialog(new JFrame(), true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
     private void btnTraziVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziVlasnikaActionPerformed
+        akcijaZaRefres = 1;
         voziloLogika.traziVlasnika(this);
     }//GEN-LAST:event_btnTraziVlasnikaActionPerformed
 
@@ -522,6 +536,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddModelActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
+        akcijaZaRefres = 0;
         voziloLogika.prikaziSveVlasnike(this);
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
 
@@ -573,6 +588,16 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfGodisteActionPerformed
 
+    public static int getAkcijaZaRefres() {
+        return akcijaZaRefres;
+    }
+
+    
+    
+    public HomeForm1 getForma() {
+        return forma;
+    }
+    
     public VoziloLogika getVoziloLogika() {
         return voziloLogika;
     }

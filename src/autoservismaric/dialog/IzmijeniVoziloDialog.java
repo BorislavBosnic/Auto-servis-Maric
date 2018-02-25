@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.AutoSuggestor;
 import java.awt.Color;
 import java.awt.ScrollPane;
@@ -30,6 +31,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     public AutoSuggestor marke;
     public AutoSuggestor model;
     public VoziloLogika voziloLogika = new VoziloLogika();
+    HomeForm1 forma;
 
     /**
      * Creates new form IzmijeniVoziloDialog
@@ -43,6 +45,20 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.idVozila = idVozila;
+
+        bg = new ButtonGroup();
+        bg.add(rbPravni);
+        bg.add(rbPrivatni);
+        voziloLogika.inicijalizujIzmijeniDijaloga(this);
+        marke = voziloLogika.ucitajPreporukeMarke(this);
+        model = voziloLogika.ucitajPreporukeModel(this);
+    }
+    
+    public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal, int idVozila, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.idVozila = idVozila;
+        this.forma = forma;
 
         bg = new ButtonGroup();
         bg.add(rbPravni);
@@ -562,6 +578,10 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         new DodajVlasnikaDialog(new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
+    public HomeForm1 getForma() {
+        return forma;
+    }
+    
     public int getIdVozila() {
         return idVozila;
     }

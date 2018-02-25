@@ -21,7 +21,7 @@ public class MySQLKupacDAO implements KupacDAO{
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
                                 + "WHERE Ime LIKE ? "
-                                + "AND Prezime LIKE ? WHERE Aktivan!=false "
+                                + "AND Prezime LIKE ? AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();

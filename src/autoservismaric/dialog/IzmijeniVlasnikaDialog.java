@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
 import data.dto.KupacDTO;
 import java.awt.Color;
@@ -27,6 +28,7 @@ public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
     public int idVlasnika;
     ButtonGroup bg;
     public KupacLogika kupacLogika = new KupacLogika();
+    HomeForm1 forma;
     /**
      * Creates new form IzmijeniVlasnikaDialog
      */
@@ -36,11 +38,27 @@ public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
         kupacLogika.inicijalizacijaIzmijeniDijaloga(this);     
     }
     
+    public IzmijeniVlasnikaDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.forma = forma;
+        kupacLogika.inicijalizacijaIzmijeniDijaloga(this);     
+    }
+    
     public IzmijeniVlasnikaDialog(java.awt.Frame parent, boolean modal, int idVlasnika) {
         super(parent, modal);
         initComponents();
         this.idVlasnika = idVlasnika;
         bg = new ButtonGroup();
+        kupacLogika.inicijalizacijaIzmijeniDijaloga(this);
+    }
+    
+    public IzmijeniVlasnikaDialog(java.awt.Frame parent, boolean modal, int idVlasnika, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.idVlasnika = idVlasnika;
+        bg = new ButtonGroup();
+        this.forma = forma;
         kupacLogika.inicijalizacijaIzmijeniDijaloga(this);
     }
 
@@ -375,6 +393,9 @@ public class IzmijeniVlasnikaDialog extends javax.swing.JDialog {
         return tfTelefonDodaj;
     }
 
+    public HomeForm1 getForma() {
+        return forma;
+    }
     
     
     

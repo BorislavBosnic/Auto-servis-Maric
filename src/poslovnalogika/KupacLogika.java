@@ -45,6 +45,23 @@ public class KupacLogika {
                 if (DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno dodat vlasnik vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                     dijalog.setKup(kupac);
+
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 2) {
+                            dijalog.getForma().getBtnPrikaziSve().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 3) {
+                            dijalog.getForma().getBtnTrazi().doClick();
+                        }
+                    }
+                    
+                    if(dijalog.getDijalog() != null){
+                        if(dijalog.getDijalog().getAkcijaZaRefres() == 0)
+                            dijalog.getDijalog().getBtnPrikaziSve().doClick();
+                        else if(dijalog.getDijalog().getAkcijaZaRefres() ==1)
+                            dijalog.getDijalog().getBtnTraziVlasnika().doClick();
+                    }
+
                     dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Greška!", "Greška", JOptionPane.OK_OPTION);
@@ -71,6 +88,23 @@ public class KupacLogika {
                 if (DAOFactory.getDAOFactory().getKupacDAO().dodajKupca(kupac)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno dodat vlasnik vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                     dijalog.setKup(kupac);
+
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 2) {
+                            dijalog.getForma().getBtnPrikaziSve().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 3) {
+                            dijalog.getForma().getBtnTrazi().doClick();
+                        }
+                    }
+                    
+                    if(dijalog.getDijalog() != null){
+                        if(dijalog.getDijalog().getAkcijaZaRefres() == 0)
+                            dijalog.getDijalog().getBtnPrikaziSve().doClick();
+                        else if(dijalog.getDijalog().getAkcijaZaRefres() ==1)
+                            dijalog.getDijalog().getBtnTraziVlasnika().doClick();
+                    }
+
                     dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Greška!", "Greška", JOptionPane.OK_OPTION);
@@ -81,40 +115,37 @@ public class KupacLogika {
 
         }
     }
-    
-    public void inicijalizacijaIzmijeniDijaloga(IzmijeniVlasnikaDialog dijalog){
+
+    public void inicijalizacijaIzmijeniDijaloga(IzmijeniVlasnikaDialog dijalog) {
         dijalog.getBg().add(dijalog.getRbPravno());
         dijalog.getBg().add(dijalog.getRbPrivatno());
- 
-        KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(dijalog.getIdVlasnika());
-        if(kupac.getNaziv() == null || "".equals(kupac.getNaziv())){
-            
-            for (Enumeration<AbstractButton> buttons = dijalog.getBg().getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
 
-            if ("Privatno".equals(button.getText())) {
-                button.setSelected(true);
+        KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(dijalog.getIdVlasnika());
+        if (kupac.getNaziv() == null || "".equals(kupac.getNaziv())) {
+
+            for (Enumeration<AbstractButton> buttons = dijalog.getBg().getElements(); buttons.hasMoreElements();) {
+                AbstractButton button = buttons.nextElement();
+
+                if ("Privatno".equals(button.getText())) {
+                    button.setSelected(true);
+                }
             }
-            }
-            
+
             dijalog.getTfImeDodaj().setText(kupac.getIme());
-            dijalog.getTfPrezimeDodaj().setText(kupac.getPrezime()); 
+            dijalog.getTfPrezimeDodaj().setText(kupac.getPrezime());
             dijalog.getTfNazivDodaj().setEditable(false);
             dijalog.getTfNazivDodaj().setBackground(Color.gray);
             dijalog.getTfNazivDodaj().setText("");
-            
-            
-                  
-        }
-        else{
-            for (Enumeration<AbstractButton> buttons = dijalog.getBg().getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
 
-            if ("Pravno".equals(button.getText())) {
-                button.setSelected(true);
+        } else {
+            for (Enumeration<AbstractButton> buttons = dijalog.getBg().getElements(); buttons.hasMoreElements();) {
+                AbstractButton button = buttons.nextElement();
+
+                if ("Pravno".equals(button.getText())) {
+                    button.setSelected(true);
+                }
             }
-            }
- 
+
             dijalog.getTfNazivDodaj().setText(kupac.getNaziv());
             dijalog.getTfNazivDodaj().setEditable(true);
             dijalog.getTfImeDodaj().setText("");
@@ -128,10 +159,10 @@ public class KupacLogika {
         dijalog.getTfTelefonDodaj().setText(kupac.getTelefon());
         dijalog.getTfGradDodaj().setText(kupac.getGrad());
     }
-    
-    public void izmijeniKupca(IzmijeniVlasnikaDialog dijalog){
+
+    public void izmijeniKupca(IzmijeniVlasnikaDialog dijalog) {
         KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(dijalog.getIdVlasnika());
-         if (dijalog.getRbPravno().isSelected()) {
+        if (dijalog.getRbPravno().isSelected()) {
             String naziv = dijalog.getTfNazivDodaj().getText();
             String telefon = dijalog.getTfTelefonDodaj().getText();
             String adresa = dijalog.getTfGradDodaj().getText();
@@ -146,6 +177,16 @@ public class KupacLogika {
             if (naziv != null && !"".equals(naziv)) {
                 if (DAOFactory.getDAOFactory().getKupacDAO().azurirajKupca(kupac)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno izmijenjeni podaci o vlasniku vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 2) {
+                            dijalog.getForma().getBtnPrikaziSve().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 3) {
+                            dijalog.getForma().getBtnTrazi().doClick();
+                        }
+                    }
+                    
                     dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Greška!", "Greška", JOptionPane.OK_OPTION);
@@ -167,9 +208,19 @@ public class KupacLogika {
             kupac.setNaziv(null);
 
             if (ime != null && prezime != null && !"".equals(ime) && !"".equals(prezime)) {
-                
+
                 if (DAOFactory.getDAOFactory().getKupacDAO().azurirajKupca(kupac)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno izmijenjeni podaci podaci o vlasniku vozila!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                   
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 2) {
+                            dijalog.getForma().getBtnPrikaziSve().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 3) {
+                            dijalog.getForma().getBtnTrazi().doClick();
+                        }
+                    }
+                    
                     dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Greška!", "Greška", JOptionPane.OK_OPTION);

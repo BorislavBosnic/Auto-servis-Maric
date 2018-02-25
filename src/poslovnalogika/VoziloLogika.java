@@ -235,7 +235,19 @@ public class VoziloLogika {
                     dijalog.getTfVlasnikIme().setText("");
                     dijalog.getTfVlasnikPrezime().setText("");
                     dijalog.getTfVlasnikNaziv().setText("");
-                    dijalog.getBtnPrikaziSve().doClick();
+                    //dijalog.getBtnPrikaziSve().doClick();
+                    
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 0) {
+                            dijalog.getForma().getBtnPrikaziSvaVozila().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 1) {
+                            dijalog.getForma().getBtnPronadjiVozilo().doClick();
+                        }
+                    }
+                    
+                    
+                    dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Marka i model vozila ne postoje! \nPrvo ih dodajte, pa pokušajte ponovo!", "Greška", JOptionPane.OK_OPTION);
                     return;
@@ -442,6 +454,16 @@ public class VoziloLogika {
 
                 if (DAOFactory.getDAOFactory().getVoziloDAO().azurirajVozilo(vozilo)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno izmijenjeno vozilo!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                   
+                    if (dijalog.getForma() != null) {
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 0) {
+                            dijalog.getForma().getBtnPrikaziSvaVozila().doClick();
+                        }
+                        if (dijalog.getForma().akcijaZaRefreshVozila == 1) {
+                            dijalog.getForma().getBtnPronadjiVozilo().doClick();
+                        }
+                    }
+                    
                     dijalog.dispose();
                 } else {
                     JOptionPane.showMessageDialog(dijalog, "Marka i model vozila ne postoje! \nPrvo ih dodajte, pa pokušajte ponovo!", "Greška", JOptionPane.OK_OPTION);

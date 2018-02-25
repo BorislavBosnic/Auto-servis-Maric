@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.dto.KupacDTO;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
@@ -29,7 +30,18 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
      */
 
     DodajVoziloDialog dvd;
+    HomeForm1 forma;
+    DodajVoziloDialog dijalog;
 
+    public DodajVlasnikaDialog(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.dvd = dvd;
+        bg = new ButtonGroup();
+        this.forma = forma;
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
+    }
+    
     public DodajVlasnikaDialog(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -38,6 +50,23 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         kupacLogika.inicijalizacijaDodajDijaloga(this);
     }
 
+
+    public DodajVlasnikaDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        bg = new ButtonGroup();
+        this.forma = forma;
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
+    }
+    
+    public DodajVlasnikaDialog(java.awt.Frame parent, boolean modal, DodajVoziloDialog dijalog) {
+        super(parent, modal);
+        initComponents();
+        bg = new ButtonGroup();
+        this.dijalog = dijalog;
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
+    }
+    
     public DodajVlasnikaDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -79,6 +108,11 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         setTitle("Dodavanje vlasnika vozila");
         setPreferredSize(new java.awt.Dimension(429, 466));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelDodajVlasnika.setBackground(new java.awt.Color(102, 153, 255));
         panelDodajVlasnika.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -326,6 +360,16 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         kupacLogika.dodajKupca(this);
     }//GEN-LAST:event_btnDodajActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+                    
+    }//GEN-LAST:event_formWindowClosing
+
+    public DodajVoziloDialog getDijalog() {
+        return dijalog;
+    }
+
+    
+    
     public ButtonGroup getBg() {
         return bg;
     }
@@ -390,6 +434,10 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         this.kup = kup;
     }
 
+    public HomeForm1 getForma() {
+        return forma;
+    }
+    
     /**
      * @param args the command line arguments
      */

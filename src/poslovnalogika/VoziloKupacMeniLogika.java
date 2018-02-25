@@ -53,7 +53,7 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, forma.getIdVlasnika());
+                IzmijeniVlasnikaDialog iv = new IzmijeniVlasnikaDialog(new JFrame(), true, forma.getIdVlasnika(), forma);
 
                 iv.setVisible(true);
             }
@@ -145,7 +145,7 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DodajRadniNalogDialog(new JFrame(), true, idVozila, false).setVisible(true);
+                new DodajRadniNalogDialog(new JFrame(), true, idVozila, false, forma).setVisible(true);
             }
         });
         forma.getPopupMenu().add(noviRadniNalog);
@@ -154,7 +154,7 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new IzmijeniVoziloDialog(new JFrame(), true, idVozila).setVisible(true);
+                new IzmijeniVoziloDialog(new JFrame(), true, idVozila, forma).setVisible(true);
             }
         });
         forma.getPopupMenu().add(editItem);
