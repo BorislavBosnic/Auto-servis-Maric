@@ -42,8 +42,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        marka = voziloLogika.ucitajPreporukeMarke(this);
-        model = voziloLogika.ucitajPreporukeModel(this);
+        //marka = voziloLogika.ucitajPreporukeMarke(this);
+        //model = voziloLogika.ucitajPreporukeModel(this);
         voziloLogika.inicijalizacijaDodajDijaloga(this);
         btnPrikaziSve.doClick();
     }
@@ -51,8 +51,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
         super(parent, modal);
         initComponents();
-        marka = voziloLogika.ucitajPreporukeMarke(this);
-        model = voziloLogika.ucitajPreporukeModel(this);
+        //marka = voziloLogika.ucitajPreporukeMarke(this);
+        //model = voziloLogika.ucitajPreporukeModel(this);
         this.forma = forma;
         voziloLogika.inicijalizacijaDodajDijaloga(this);
         btnPrikaziSve.doClick();

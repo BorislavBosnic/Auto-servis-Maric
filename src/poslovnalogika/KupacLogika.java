@@ -61,6 +61,13 @@ public class KupacLogika {
                         else if(dijalog.getDijalog().getAkcijaZaRefres() ==1)
                             dijalog.getDijalog().getBtnTraziVlasnika().doClick();
                     }
+                    
+                    if(dijalog.getDijalogIzmijeni()!= null){
+                        if(dijalog.getDijalogIzmijeni().getAkcijaZaRefres() == 0)
+                            dijalog.getDijalogIzmijeni().getBtnPrikaziSve().doClick();
+                        else if(dijalog.getDijalogIzmijeni().getAkcijaZaRefres() ==1)
+                            dijalog.getDijalogIzmijeni().getBtnTraziVlasnika().doClick();
+                    }
 
                     dijalog.dispose();
                 } else {
@@ -103,6 +110,13 @@ public class KupacLogika {
                             dijalog.getDijalog().getBtnPrikaziSve().doClick();
                         else if(dijalog.getDijalog().getAkcijaZaRefres() ==1)
                             dijalog.getDijalog().getBtnTraziVlasnika().doClick();
+                    }
+                    
+                    if(dijalog.getDijalogIzmijeni()!= null){
+                        if(dijalog.getDijalogIzmijeni().getAkcijaZaRefres() == 0)
+                            dijalog.getDijalogIzmijeni().getBtnPrikaziSve().doClick();
+                        else if(dijalog.getDijalogIzmijeni().getAkcijaZaRefres() ==1)
+                            dijalog.getDijalogIzmijeni().getBtnTraziVlasnika().doClick();
                     }
 
                     dijalog.dispose();

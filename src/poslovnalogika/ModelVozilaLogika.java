@@ -77,15 +77,15 @@ public class ModelVozilaLogika {
                     if (dijalog.getDvd() != null) {
                         // dvd.ucitajPreporukeMarke();
                         //dvd.ucitajPreporukeModel();
-                        dijalog.getDvd().marka.addToDictionary(marka);
-                        dijalog.getDvd().model.addToDictionary(model);
+                        //dijalog.getDvd().marka.addToDictionary(marka);
+                        //dijalog.getDvd().model.addToDictionary(model);
                     }
 
                     if (dijalog.getIvd() != null) {
                         //ivd.ucitajPreporukeMarke();
                         //ivd.ucitajPreporukeModel();
-                        dijalog.getDvd().marka.addToDictionary(marka);
-                        dijalog.getDvd().model.addToDictionary(model);
+                        //dijalog.getDvd().marka.addToDictionary(marka);
+                        //dijalog.getDvd().model.addToDictionary(model);
 
                     }
 
@@ -146,8 +146,10 @@ public class ModelVozilaLogika {
         dijalog.setModeli(DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli());
         DefaultTableModel model = (DefaultTableModel) dijalog.getTabela().getModel();
         for (ModelVozilaDTO m : dijalog.getModeli()) {
+            if(!"Svi".equals(m.getMarka()) && !"Svi".equals(m.getModel())){
             Object[] objekat = {m.getMarka(), m.getModel()};
             model.addRow(objekat);
+            }
         }
 
         dijalog.getTabela().setModel(model);

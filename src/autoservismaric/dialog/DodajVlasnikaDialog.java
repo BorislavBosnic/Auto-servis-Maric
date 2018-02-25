@@ -32,6 +32,7 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
     DodajVoziloDialog dvd;
     HomeForm1 forma;
     DodajVoziloDialog dijalog;
+    IzmijeniVoziloDialog dijalogIzmijeni;
 
     public DodajVlasnikaDialog(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal, HomeForm1 forma) {
         super(parent, modal);
@@ -64,6 +65,14 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
         initComponents();
         bg = new ButtonGroup();
         this.dijalog = dijalog;
+        kupacLogika.inicijalizacijaDodajDijaloga(this);
+    }
+    
+    public DodajVlasnikaDialog(java.awt.Frame parent, boolean modal, IzmijeniVoziloDialog dijalog) {
+        super(parent, modal);
+        initComponents();
+        bg = new ButtonGroup();
+        this.dijalogIzmijeni = dijalog;
         kupacLogika.inicijalizacijaDodajDijaloga(this);
     }
     
@@ -366,6 +375,10 @@ public class DodajVlasnikaDialog extends javax.swing.JDialog {
 
     public DodajVoziloDialog getDijalog() {
         return dijalog;
+    }
+
+    public IzmijeniVoziloDialog getDijalogIzmijeni() {
+        return dijalogIzmijeni;
     }
 
     

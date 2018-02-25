@@ -23,60 +23,60 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VoziloLogika {
 
-    public AutoSuggestor ucitajPreporukeMarke(DodajVoziloDialog dijalog) {
+//    public AutoSuggestor ucitajPreporukeMarke(DodajVoziloDialog dijalog) {
+//
+//        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(dijalog.getTfMarka(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
+//            @Override
+//            public boolean wordTyped(String typedWord) {
+//                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+//                ArrayList<String> modeli = new ArrayList<>();
+//                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+//
+//                for (ModelVozilaDTO mv : lista) {
+//                    if (!modeli.contains(mv.getMarka())) {
+//                        modeli.add(mv.getMarka());
+//                    }
+//                }
+//
+//                setDictionary(modeli);
+//                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+//            }
+//        };
+//        return autoSuggestorMarke;
+//    }
 
-        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(dijalog.getTfMarka(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-
-                for (ModelVozilaDTO mv : lista) {
-                    if (!modeli.contains(mv.getMarka())) {
-                        modeli.add(mv.getMarka());
-                    }
-                }
-
-                setDictionary(modeli);
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-        return autoSuggestorMarke;
-    }
-
-    public AutoSuggestor ucitajPreporukeModel(DodajVoziloDialog dijalog) {
-
-        AutoSuggestor autoSuggestorModel = new AutoSuggestor(dijalog.getTfModel(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                String marka = dijalog.getTfMarka().getText();
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-
-                for (ModelVozilaDTO mv : lista) {
-                    if (dijalog.getTfModel().getText() != null && !"".equals(dijalog.getTfModel().getText())) {
-                        if (mv.getMarka().equals(marka.trim())) {
-                            modeli.add(mv.getModel());
-                        }
-                    } else if (dijalog.getTfModel().getText() == null || "".equals(dijalog.getTfModel().getText())) {
-                        modeli.add(mv.getModel());
-                    }
-                }
-
-                setDictionary(modeli);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorModel;
-    }
+//    public AutoSuggestor ucitajPreporukeModel(DodajVoziloDialog dijalog) {
+//
+//        AutoSuggestor autoSuggestorModel = new AutoSuggestor(dijalog.getTfModel(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
+//            @Override
+//            public boolean wordTyped(String typedWord) {
+//
+//                String marka = dijalog.getTfMarka().getText();
+//
+//                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+//                ArrayList<String> modeli = new ArrayList<>();
+//
+//                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+//
+//                for (ModelVozilaDTO mv : lista) {
+//                    if (dijalog.getTfModel().getText() != null && !"".equals(dijalog.getTfModel().getText())) {
+//                        if (mv.getMarka().equals(marka.trim())) {
+//                            modeli.add(mv.getModel());
+//                        }
+//                    } else if (dijalog.getTfModel().getText() == null || "".equals(dijalog.getTfModel().getText())) {
+//                        modeli.add(mv.getModel());
+//                    }
+//                }
+//
+//                setDictionary(modeli);
+//                //addToDictionary("bye");//adds a single word
+//
+//                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+//            }
+//        };
+//
+//        return autoSuggestorModel;
+//    }
 
     public void inicijalizacijaDodajDijaloga(DodajVoziloDialog dijalog) {
         dijalog.getBg().add(dijalog.getRbPravni());
@@ -322,59 +322,59 @@ public class VoziloLogika {
         }
     }
 
-    public AutoSuggestor ucitajPreporukeMarke(IzmijeniVoziloDialog dijalog) {
-
-        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(dijalog.getTfMarka(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-
-                for (ModelVozilaDTO mv : lista) {
-                    if (!modeli.contains(mv.getMarka())) {
-                        modeli.add(mv.getMarka());
-                    }
-                }
-
-                setDictionary(modeli);
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-        return autoSuggestorMarke;
-    }
-
-    public AutoSuggestor ucitajPreporukeModel(IzmijeniVoziloDialog dijalog) {
-
-        AutoSuggestor autoSuggestorModel = new AutoSuggestor(dijalog.getTfModel(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
-            @Override
-            public boolean wordTyped(String typedWord) {
-
-                String marka = dijalog.getTfMarka().getText();
-
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> modeli = new ArrayList<>();
-
-                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
-
-                for (ModelVozilaDTO mv : lista) {
-                    if (dijalog.getTfModel().getText() != null && !"".equals(dijalog.getTfModel().getText())) {
-                        if (mv.getMarka().equals(marka.trim())) {
-                            modeli.add(mv.getModel());
-                        }
-                    } else if (dijalog.getTfModel().getText() == null || "".equals(dijalog.getTfModel().getText())) {
-                        modeli.add(mv.getModel());
-                    }
-                }
-
-                setDictionary(modeli);
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-            }
-        };
-
-        return autoSuggestorModel;
-    }
+//    public AutoSuggestor ucitajPreporukeMarke(IzmijeniVoziloDialog dijalog) {
+//
+//        AutoSuggestor autoSuggestorMarke = new AutoSuggestor(dijalog.getTfMarka(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
+//            @Override
+//            public boolean wordTyped(String typedWord) {
+//                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+//                ArrayList<String> modeli = new ArrayList<>();
+//                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+//
+//                for (ModelVozilaDTO mv : lista) {
+//                    if (!modeli.contains(mv.getMarka())) {
+//                        modeli.add(mv.getMarka());
+//                    }
+//                }
+//
+//                setDictionary(modeli);
+//                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+//            }
+//        };
+//        return autoSuggestorMarke;
+//    }
+//
+//    public AutoSuggestor ucitajPreporukeModel(IzmijeniVoziloDialog dijalog) {
+//
+//        AutoSuggestor autoSuggestorModel = new AutoSuggestor(dijalog.getTfModel(), dijalog, null, Color.BLUE.brighter(), Color.WHITE, Color.RED, 0.75f) {
+//            @Override
+//            public boolean wordTyped(String typedWord) {
+//
+//                String marka = dijalog.getTfMarka().getText();
+//
+//                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+//                ArrayList<String> modeli = new ArrayList<>();
+//
+//                ArrayList<ModelVozilaDTO> lista = DAOFactory.getDAOFactory().getModelVozilaDAO().sviModeli();
+//
+//                for (ModelVozilaDTO mv : lista) {
+//                    if (dijalog.getTfModel().getText() != null && !"".equals(dijalog.getTfModel().getText())) {
+//                        if (mv.getMarka().equals(marka.trim())) {
+//                            modeli.add(mv.getModel());
+//                        }
+//                    } else if (dijalog.getTfModel().getText() == null || "".equals(dijalog.getTfModel().getText())) {
+//                        modeli.add(mv.getModel());
+//                    }
+//                }
+//
+//                setDictionary(modeli);
+//
+//                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+//            }
+//        };
+//
+//        return autoSuggestorModel;
+//    }
 
     public void izmijeniVozilo(IzmijeniVoziloDialog dijalog) {
         String registracija = dijalog.getTfRegistracija().getText();

@@ -32,6 +32,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     public AutoSuggestor model;
     public VoziloLogika voziloLogika = new VoziloLogika();
     HomeForm1 forma;
+    public static int akcijaZaRefres = 0;
 
     /**
      * Creates new form IzmijeniVoziloDialog
@@ -50,8 +51,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         bg.add(rbPravni);
         bg.add(rbPrivatni);
         voziloLogika.inicijalizujIzmijeniDijaloga(this);
-        marke = voziloLogika.ucitajPreporukeMarke(this);
-        model = voziloLogika.ucitajPreporukeModel(this);
+        //marke = voziloLogika.ucitajPreporukeMarke(this);
+        //model = voziloLogika.ucitajPreporukeModel(this);
     }
     
     public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal, int idVozila, HomeForm1 forma) {
@@ -64,8 +65,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         bg.add(rbPravni);
         bg.add(rbPrivatni);
         voziloLogika.inicijalizujIzmijeniDijaloga(this);
-        marke = voziloLogika.ucitajPreporukeMarke(this);
-        model = voziloLogika.ucitajPreporukeModel(this);
+        //marke = voziloLogika.ucitajPreporukeMarke(this);
+        //model = voziloLogika.ucitajPreporukeModel(this);
     }
 
     /**
@@ -563,6 +564,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziSveActionPerformed
+        akcijaZaRefres = 0;
         voziloLogika.prikaziSveVlasnike(this);
     }//GEN-LAST:event_btnPrikaziSveActionPerformed
 
@@ -571,15 +573,20 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAddModelActionPerformed
 
     private void btnTraziVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziVlasnikaActionPerformed
+        akcijaZaRefres = 1;
         voziloLogika.traziVlasnika(this);
     }//GEN-LAST:event_btnTraziVlasnikaActionPerformed
 
     private void btnDodajVlasnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajVlasnikaActionPerformed
-        new DodajVlasnikaDialog(new JFrame(), true).setVisible(true);
+        new DodajVlasnikaDialog(new JFrame(), true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
     public HomeForm1 getForma() {
         return forma;
+    }
+
+    public static int getAkcijaZaRefres() {
+        return akcijaZaRefres;
     }
     
     public int getIdVozila() {

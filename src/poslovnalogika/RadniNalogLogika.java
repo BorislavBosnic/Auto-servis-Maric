@@ -278,6 +278,9 @@ public class RadniNalogLogika {
                 DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
             }
 
+            if(dijalog.getForma() != null){
+                dijalog.getForma().getBtnPrikaziRadniNalog().doClick();
+            }
             JOptionPane.showMessageDialog(dijalog, "Uspješno dodat radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
             dijalog.dispose();
         } else {
@@ -632,6 +635,7 @@ public class RadniNalogLogika {
     }
     
     public void inicijalizacijaPregledIstorije(PregledIstorijePopravkiDialog dijalog){
+        dijalog.getTabela().getTableHeader().setReorderingAllowed(false);
         dijalog.getTabela().setDefaultEditor(Object.class, null);
         dijalog.getTabela().setAutoCreateRowSorter(true);
 

@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -33,6 +34,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
     
     private VoziloKupacMeniLogika voziloKupacMeniLogika = new VoziloKupacMeniLogika();
     ButtonGroup bGTraziVozilo;
+    HomeForm1 forma;
     int idVozila=-1;
     
     public IzaberiVoziloDialog(java.awt.Frame parent, boolean modal) {
@@ -53,7 +55,35 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
             public void valueChanged(ListSelectionEvent event) {
                 if (tableVozila.getSelectedRow() > -1) {
                     idVozila = Integer.parseInt(tableVozila.getValueAt(tableVozila.getSelectedRow(), 0).toString());
-                    System.out.println(tableVozila.getValueAt(tableVozila.getSelectedRow(), 0).toString());
+                    btnKreirajRadniNalog.setEnabled(true);
+                }
+                else{
+                    idVozila = -1;
+                    btnKreirajRadniNalog.setEnabled(false);
+                }
+            }
+        });
+    }
+    
+    public IzaberiVoziloDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
+        super(parent, modal);
+        initComponents();
+        this.forma = forma;
+        bGTraziVozilo = new ButtonGroup();
+        bGTraziVozilo.add(rbPravnoLiceVozilo);
+        bGTraziVozilo.add(rbPrivatnoLiceVozilo);
+        btnPrikaziSvaVozila.doClick();
+        tableVozila.getTableHeader().setReorderingAllowed(false);
+        tableVozila.setDefaultEditor(Object.class, null);
+
+        tableVozila.setAutoCreateRowSorter(true);
+        tableVozila.setAutoCreateRowSorter(true);
+        
+        tableVozila.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (tableVozila.getSelectedRow() > -1) {
+                    idVozila = Integer.parseInt(tableVozila.getValueAt(tableVozila.getSelectedRow(), 0).toString());
                     btnKreirajRadniNalog.setEnabled(true);
                 }
                 else{
@@ -379,7 +409,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
 
     private void btnKreirajRadniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajRadniNalogActionPerformed
         if(idVozila > -1){
-        new DodajRadniNalogDialog(new JFrame(), true, idVozila, true).setVisible(true);
+            new DodajRadniNalogDialog(new JFrame(), true, idVozila, true, forma).setVisible(true);
         }
         else
             JOptionPane.showMessageDialog(new JFrame(), "Morate odabrati vozilo iz tabele!", "Greška!", JOptionPane.ERROR_MESSAGE);

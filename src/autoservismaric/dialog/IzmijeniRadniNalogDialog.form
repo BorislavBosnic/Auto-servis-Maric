@@ -78,47 +78,44 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblNaslov" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNaslov" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblOpis" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="spnlProblem" alignment="0" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="lblIdVozila" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblOtvaranje" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblZavrsetak" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblTroskovi" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblKilometraza" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblZavrsiti" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lblCijena" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="cbPlaceno" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtIdVozila" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtTroskovi" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtKilometraza" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txtCijena" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="datumOtvaranjaNaloga" alignment="1" pref="147" max="32767" attributes="0"/>
-                                                      <Component id="datumZatvaranjaNaloga" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="potrebnoZavrsitiDo" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnOdustani" pref="144" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnAzurirajNalog" min="-2" pref="168" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblOpis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="spnlProblem" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblIdVozila" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblOtvaranje" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblZavrsetak" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTroskovi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblKilometraza" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblZavrsiti" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblCijena" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="cbPlaceno" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtIdVozila" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtTroskovi" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtKilometraza" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtCijena" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="datumOtvaranjaNaloga" alignment="1" pref="147" max="32767" attributes="0"/>
+                                              <Component id="datumZatvaranjaNaloga" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="potrebnoZavrsitiDo" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="btnAzurirajNalog" min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -184,14 +181,20 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="spnlProblem" min="-2" pref="146" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnAzurirajNalog" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="pnlPomocni2" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="pnlPomocni2" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="spnlProblem" min="-2" pref="146" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnAzurirajNalog" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="btnOdustani" alignment="3" min="-2" pref="67" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -347,12 +350,12 @@
             <Component class="javax.swing.JButton" name="btnAzurirajNalog">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="14" style="0"/>
+                  <Font name="Tahoma" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/autoservismaric/images/add-documents.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="A&#x17e;uriraj nalog"/>
+                <Property name="text" type="java.lang.String" value="Izmijeni nalog"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAzurirajNalogActionPerformed"/>
@@ -608,8 +611,8 @@
                                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                   <Component id="lblUloga" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="spnlUloga" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="spnlUloga" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnRazduzi" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -722,7 +725,7 @@
                         </Property>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="lineWrap" type="boolean" value="true"/>
-                        <Property name="rows" type="int" value="5"/>
+                        <Property name="rows" type="int" value="4"/>
                         <Property name="wrapStyleWord" type="boolean" value="true"/>
                       </Properties>
                     </Component>
@@ -744,6 +747,20 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnOdustani">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/autoservismaric/images/cancel (1).png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Odustani"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOdustaniActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

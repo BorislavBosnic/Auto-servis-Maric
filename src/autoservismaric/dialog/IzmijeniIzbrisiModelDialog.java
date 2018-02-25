@@ -72,7 +72,7 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Izmijeni/Izbrisi model");
+        setTitle("Izmijeni/Izbriši model");
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -243,7 +243,7 @@ public class IzmijeniIzbrisiModelDialog extends javax.swing.JDialog {
 
         btnAzuriraj.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAzuriraj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/refresh-button (1).png"))); // NOI18N
-        btnAzuriraj.setText("Ažuriraj");
+        btnAzuriraj.setText("Potvrdi");
         btnAzuriraj.setEnabled(false);
         btnAzuriraj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

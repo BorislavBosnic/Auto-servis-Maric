@@ -442,7 +442,6 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
             ps.setObject(7, nalog.getPredvidjenoVrijemeZavrsetka());
             ps.setObject(8, nalog.getCijenaUsluge());
             ps.setInt(9, nalog.getIdRadniNalog());
-            //System.out.println(ps.toString());
             retVal = ps.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -521,7 +520,6 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
-            System.out.println(ps.toString());
             rs = ps.executeQuery();
 
             

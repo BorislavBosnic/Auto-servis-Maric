@@ -3,7 +3,7 @@
 <Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Izmijeni/Izbrisi model"/>
+    <Property name="title" type="java.lang.String" value="Izmijeni/Izbri&#x161;i model"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -379,7 +379,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/autoservismaric/images/refresh-button (1).png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="A&#x17e;uriraj"/>
+                <Property name="text" type="java.lang.String" value="Potvrdi"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>

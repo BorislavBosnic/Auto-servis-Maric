@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Objects;
@@ -823,11 +824,13 @@ public class VoziloKupacMeniLogika {
         
         ArrayList<RezultatRNPretrazivanje> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().pretragaRadnihNaloga(parametri);
         
+        //String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
+        
         String[] columns = {"ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Rok za završetak", "Datum zatvaranja", "Troškovi dijela", "Cijena usluge", "Plaćeno"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableRNalozi().setModel(model);
         for (RezultatRNPretrazivanje k : lista) {
-            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja(), k.getDatumPotrebnoZavrsitiDo(), k.getDatumZatvaranja(), k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno()? "Da" : "Ne"};
+            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja()!=null? (new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumOtvaranja())):"", k.getDatumPotrebnoZavrsitiDo()!=null?(new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() !=null ? (new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumZatvaranja())) :"", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno()? "Da" : "Ne"};
             model.addRow(rowData);
         }
         forma.getTableRNalozi().setModel(model);

@@ -208,6 +208,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         }
         statistikaLogika = new StatistikaLogika();
         btnPrikaziSvaVozila.doClick();
+        btnPrikaziRadniNalog.doClick();
         dodajPopupMeniPretragaRadniNaloga();
         
         tabpnlGrafici.addChangeListener(new ChangeListener() {
@@ -507,6 +508,8 @@ public class HomeForm1 extends javax.swing.JFrame {
         btnDodajVlasnika = new javax.swing.JButton();
         btnDodajModel2 = new javax.swing.JButton();
         btnIzmijeniIzbrisiModel = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         spVoziloPretraga = new javax.swing.JScrollPane();
         tableVozila = new javax.swing.JTable();
         pnlDijelovi = new javax.swing.JPanel();
@@ -2789,6 +2792,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         });
 
+        btnIzmijeniIzbrisiModel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnIzmijeniIzbrisiModel.setText("Izmijeni/Izbriši model");
         btnIzmijeniIzbrisiModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2801,27 +2805,27 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlVoziloLayout.setHorizontalGroup(
             pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVoziloLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel96)
                     .addComponent(pnllPronadjiVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel97)
                     .addGroup(pnlVoziloLayout.createSequentialGroup()
                         .addComponent(pnlPronadjiVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDodajVozilo, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                            .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDodajVozilo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnDodajVlasnika)
                             .addComponent(btnDodajModel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(210, 210, 210))
+                        .addGap(358, 358, 358))
+                    .addGroup(pnlVoziloLayout.createSequentialGroup()
+                        .addComponent(jLabel97)
+                        .addGap(210, 210, 210))))
         );
-
-        pnlVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnDodajModel2, btnDodajVlasnika, btnDodajVozilo});
-
         pnlVoziloLayout.setVerticalGroup(
             pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVoziloLayout.createSequentialGroup()
@@ -2836,11 +2840,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addGroup(pnlVoziloLayout.createSequentialGroup()
                         .addComponent(btnDodajVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDodajVlasnika, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDodajModel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(btnDodajModel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnIzmijeniIzbrisiModel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5))
         );
@@ -2873,7 +2881,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnllAkcijeNaFormiLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(pnlVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(2103, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         pnllAkcijeNaFormiLayout.setVerticalGroup(
             pnllAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4574,7 +4582,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(pnlBrojPopravki, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaUkupno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -4806,6 +4814,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void pnlMeniRadniNaloziMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniRadniNaloziMouseClicked
         dodajPopupMeniPretragaRadniNaloga();
         menuItemClick(pnlMeniRadniNalozi, 1, pnlRadniNalozi);
+        tableRNalozi.getTableHeader().setReorderingAllowed(false);
+        tableRNalozi.setDefaultEditor(Object.class, null);
+        tableRNalozi.setAutoCreateRowSorter(true);
     }//GEN-LAST:event_pnlMeniRadniNaloziMouseClicked
 
     private void pnlMeniRadniNaloziMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniRadniNaloziMouseEntered
@@ -5503,7 +5514,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPrivatnoRadniNalogActionPerformed
 
     private void btnNoviRadniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoviRadniNalogActionPerformed
-        new IzaberiVoziloDialog(this, true).setVisible(true);
+        new IzaberiVoziloDialog(this, true, this).setVisible(true);
     }//GEN-LAST:event_btnNoviRadniNalogActionPerformed
 
     private void btnPrikaziRadniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziRadniNalogActionPerformed
@@ -7653,8 +7664,10 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollTabelaDijelovi;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator26;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable;
     public static javax.swing.JTable jTableZaposleni;
     private javax.swing.JLabel labelBrojRadnihNaloga;

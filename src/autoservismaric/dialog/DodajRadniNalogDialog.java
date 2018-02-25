@@ -32,6 +32,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     private int idVozila;
     public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
     HomeForm1 forma;
+    HomeForm1 formaRadniNalog;
 
     /**
      * Creates new form DodajRadniNalogDialog
@@ -46,6 +47,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.idVozila = idVozila;
+        this.formaRadniNalog = formaRadniNalog;
         cbPlaceno.setVisible(false);
         if(flag)
             this.setTitle("Kreiranje ranog naloga 2/2");
@@ -125,6 +127,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         lblSviRadnici = new javax.swing.JLabel();
         spnlIzabrani = new javax.swing.JScrollPane();
         listaZaposleniZaduzeni = new javax.swing.JList<>();
+        brnOdustani = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novi radni nalog");
@@ -181,7 +184,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         lblOpisProblema.setForeground(new java.awt.Color(255, 255, 255));
         lblOpisProblema.setText("Opis problema:");
 
-        btnKreirajNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnKreirajNalog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnKreirajNalog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add-documents.png"))); // NOI18N
         btnKreirajNalog.setText("Kreiraj nalog");
         btnKreirajNalog.addActionListener(new java.awt.event.ActionListener() {
@@ -343,7 +346,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         taUlogaRadnika.setBackground(new java.awt.Color(204, 204, 204));
         taUlogaRadnika.setColumns(20);
         taUlogaRadnika.setLineWrap(true);
-        taUlogaRadnika.setRows(5);
+        taUlogaRadnika.setRows(4);
         taUlogaRadnika.setWrapStyleWord(true);
         spnlUlogaRadnika.setViewportView(taUlogaRadnika);
 
@@ -398,50 +401,57 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                         .addGap(4, 4, 4)
                         .addComponent(lblUlogaRadnika)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spnlUlogaRadnika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spnlUlogaRadnika, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRazduzi)))
                 .addContainerGap())
         );
+
+        brnOdustani.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        brnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cancel (1).png"))); // NOI18N
+        brnOdustani.setText("Odustani");
+        brnOdustani.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brnOdustaniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlPodosnovniLayout = new javax.swing.GroupLayout(pnlPodosnovni);
         pnlPodosnovni.setLayout(pnlPodosnovniLayout);
         pnlPodosnovniLayout.setHorizontalGroup(
             pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPodosnovniLayout.createSequentialGroup()
-                .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNaslov)
                     .addGroup(pnlPodosnovniLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNaslov)
+                        .addGap(10, 10, 10)
+                        .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPodosnovniLayout.createSequentialGroup()
+                                .addComponent(brnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblOpisProblema)
+                            .addComponent(spnlProblem)
                             .addGroup(pnlPodosnovniLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblOpisProblema)
-                                    .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(spnlProblem)
-                                        .addGroup(pnlPodosnovniLayout.createSequentialGroup()
-                                            .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblIdVozila)
-                                                .addComponent(lblOtvaranje)
-                                                .addComponent(lblZatvaranje)
-                                                .addComponent(lblTroskovi)
-                                                .addComponent(lblKilometraza)
-                                                .addComponent(lblZavrsavanje)
-                                                .addComponent(lblCijenaUsluge))
-                                            .addGap(29, 29, 29)
-                                            .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cbPlaceno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(txtIdVozila)
-                                                .addComponent(txtTroskovi)
-                                                .addComponent(txtKilometraza)
-                                                .addComponent(txtCijena)
-                                                .addComponent(datumOtvaranjaNaloga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                                .addComponent(datumZatvaranjaNaloga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
-                    .addGroup(pnlPodosnovniLayout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lblIdVozila)
+                                    .addComponent(lblOtvaranje)
+                                    .addComponent(lblZatvaranje)
+                                    .addComponent(lblTroskovi)
+                                    .addComponent(lblKilometraza)
+                                    .addComponent(lblZavrsavanje)
+                                    .addComponent(lblCijenaUsluge))
+                                .addGap(29, 29, 29)
+                                .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbPlaceno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtIdVozila)
+                                    .addComponent(txtTroskovi)
+                                    .addComponent(txtKilometraza)
+                                    .addComponent(txtCijena)
+                                    .addComponent(datumOtvaranjaNaloga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                                    .addComponent(datumZatvaranjaNaloga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(37, 37, 37)
                 .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPodosnovniLayout.createSequentialGroup()
@@ -497,14 +507,19 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPodosnovniLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(pnlPodosnovniLayout.createSequentialGroup()
                         .addComponent(spnlProblem, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnKreirajNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnKreirajNalog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                            .addComponent(brnOdustani, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
 
         pnlPodosnovniLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblCijenaUsluge, lblIdVozila, lblKilometraza, lblOtvaranje, lblTroskovi, lblZatvaranje, lblZavrsavanje});
+
+        pnlPodosnovniLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {brnOdustani, btnKreirajNalog});
 
         javax.swing.GroupLayout pnlOsnovniLayout = new javax.swing.GroupLayout(pnlOsnovni);
         pnlOsnovni.setLayout(pnlOsnovniLayout);
@@ -593,8 +608,16 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     private void listaZaposleniZaduzeniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaposleniZaduzeniValueChanged
     }//GEN-LAST:event_listaZaposleniZaduzeniValueChanged
 
+    private void brnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnOdustaniActionPerformed
+        dispose();
+    }//GEN-LAST:event_brnOdustaniActionPerformed
+
     public int getIdVozila() {
         return idVozila;
+    }
+
+    public HomeForm1 getFormaRadniNalog() {
+        return formaRadniNalog;
     }
 
     public RadniNalogLogika getRadniNalogLogika() {
@@ -764,6 +787,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton brnOdustani;
     private javax.swing.JButton btnDodajDio;
     private javax.swing.JButton btnKreirajNalog;
     private javax.swing.JButton btnRazduzi;
