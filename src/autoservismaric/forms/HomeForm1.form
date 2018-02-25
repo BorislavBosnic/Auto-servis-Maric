@@ -1547,7 +1547,7 @@
                               <Component id="lbRadniNaloziSlika" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lbRadniNaloziNaslov" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="2994" max="32767" attributes="0"/>
+                              <EmptySpace pref="3004" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2221,7 +2221,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pnlOsnovniZakazivanja" min="-2" pref="3042" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="124" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="134" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2939,7 +2939,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="25" max="32767" attributes="0"/>
+                              <EmptySpace pref="2113" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -3753,7 +3753,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollTabelaDijelovi" min="-2" pref="1048" max="-2" attributes="0"/>
-                          <EmptySpace pref="2108" max="32767" attributes="0"/>
+                          <EmptySpace pref="2118" max="32767" attributes="0"/>
                       </Group>
                       <Component id="pnlOsnovnoDijelovi" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -4756,7 +4756,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pnlOsnovniKnjigovodstvo" min="-2" pref="1065" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="2101" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="2111" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5337,7 +5337,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel27" pref="3156" max="32767" attributes="0"/>
+                          <Component id="jPanel27" pref="3166" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -5365,18 +5365,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jPanel28" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel149" min="-2" pref="27" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel148" min="-2" pref="106" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane13" alignment="0" min="-2" pref="1078" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane13" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="2068" max="32767" attributes="0"/>
+                              <EmptySpace pref="2074" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5438,7 +5438,7 @@
                                                       <Component id="jLabel119" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="dateChooserDatumDoZaposlenog" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <EmptySpace pref="20" max="32767" attributes="0"/>
                                                   <Component id="btnTraziRadneNalogeRadnika" min="-2" pref="106" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                                   <Component id="btnPrikazSvihBivsihZaposlenih" min="-2" max="-2" attributes="0"/>
@@ -5729,9 +5729,10 @@
                                                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="textFieldStrucnaSprema" max="32767" attributes="0"/>
-                                                  <Component id="dateChooserDatumRodjenja" max="32767" attributes="0"/>
+                                                  <Component id="dateChooserDatumRodjenja" pref="178" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
@@ -6187,7 +6188,7 @@
                                   <Component id="pnlOdabirMjesecaStatistika" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="1966" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="1976" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

@@ -1916,7 +1916,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addComponent(lbRadniNaloziSlika, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbRadniNaloziNaslov)
-                .addContainerGap(2994, Short.MAX_VALUE))
+                .addContainerGap(3004, Short.MAX_VALUE))
         );
         panelOsnovniRNLayout.setVerticalGroup(
             panelOsnovniRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2374,7 +2374,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             pnlZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlZakazivanjaLayout.createSequentialGroup()
                 .addComponent(pnlOsnovniZakazivanja, javax.swing.GroupLayout.PREFERRED_SIZE, 3042, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 124, Short.MAX_VALUE))
+                .addGap(0, 134, Short.MAX_VALUE))
         );
         pnlZakazivanjaLayout.setVerticalGroup(
             pnlZakazivanjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2878,7 +2878,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnllAkcijeNaFormiLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(pnlVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(2113, Short.MAX_VALUE))
         );
         pnllAkcijeNaFormiLayout.setVerticalGroup(
             pnllAkcijeNaFormiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3386,7 +3386,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(pnlDijeloviLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollTabelaDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2108, Short.MAX_VALUE))
+                .addContainerGap(2118, Short.MAX_VALUE))
             .addComponent(pnlOsnovnoDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlDijeloviLayout.setVerticalGroup(
@@ -3788,7 +3788,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             pnlKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKnjigovodstvoLayout.createSequentialGroup()
                 .addComponent(pnlOsnovniKnjigovodstvo, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2101, Short.MAX_VALUE))
+                .addGap(0, 2111, Short.MAX_VALUE))
         );
         pnlKnjigovodstvoLayout.setVerticalGroup(
             pnlKnjigovodstvoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3959,9 +3959,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                             .addGroup(jPanel29Layout.createSequentialGroup()
                                 .addComponent(jLabel153)
                                 .addGap(14, 14, 14)))
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(textFieldStrucnaSprema)
-                            .addComponent(dateChooserDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(dateChooserDatumRodjenja, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel129)
@@ -4070,7 +4071,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel119)
                                     .addComponent(dateChooserDatumDoZaposlenog, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                 .addComponent(btnTraziRadneNalogeRadnika, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
                                 .addComponent(btnPrikazSvihBivsihZaposlenih)))
@@ -4164,14 +4165,14 @@ public class HomeForm1 extends javax.swing.JFrame {
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel27Layout.createSequentialGroup()
                         .addComponent(jLabel149, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel148, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(2068, Short.MAX_VALUE))
+                    .addComponent(jScrollPane13))
+                .addContainerGap(2074, Short.MAX_VALUE))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4192,7 +4193,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         pnlZaposleniLayout.setHorizontalGroup(
             pnlZaposleniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlZaposleniLayout.createSequentialGroup()
-                .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, 3156, Short.MAX_VALUE)
+                .addComponent(jPanel27, javax.swing.GroupLayout.DEFAULT_SIZE, 3166, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlZaposleniLayout.setVerticalGroup(
@@ -4774,7 +4775,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                         .addComponent(tabpnlGrafici, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlOdabirMjesecaStatistika, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 1966, Short.MAX_VALUE))
+                .addGap(0, 1976, Short.MAX_VALUE))
         );
         pnlStatistikaLayout.setVerticalGroup(
             pnlStatistikaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
