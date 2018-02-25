@@ -16,8 +16,8 @@ import static autoservismaric.forms.HomeForm1.jTableZaposleni;
 import static autoservismaric.forms.HomeForm1.tableRadniNalozi;
 import data.dto.ZaposleniPomocniDTO;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JLabel;
-import javax.swing.JTable;
 
 /**
  *
@@ -97,8 +97,7 @@ public class ZaposleniLogika extends Thread{
        ZaposleniDTO rez=new ZaposleniDTO();
        while(i.hasNext()){
            rez=i.next();
-           table.addRow(new Object[]{rez.getIme(),rez.getPrezime(),rez.getImeOca(),rez.getAdresa(),rez.getTelefon()
-           ,rez.getBrojLicneKarte(),rez.getStrucnaSprema(),rez.getDatumRodjenja(),rez.getDatumOd(),rez.getDatumDo(),rez.getFunkcija()});
+           table.addRow(new Object[]{rez.getIme(),rez.getImeOca(),rez.getPrezime(),rez.getTelefon()});
        }
    }
    
@@ -112,15 +111,19 @@ public class ZaposleniLogika extends Thread{
             Iterator<ZaposleniPomocniDTO> i=lista.iterator();
             table.setRowCount(0);//brise sadrzaj tabele
             ZaposleniPomocniDTO rez=new ZaposleniPomocniDTO();
+            Double ukupanProfit=0.0;
+            Integer brojNaloga=0;
             while(i.hasNext()){
                rez=i.next();
                table.addRow(new Object[]{rez.getMarka()
                             ,rez.getModel(),rez.getBrojRegistracije(),
                             rez.getDatumZatvaranjaNaloga()
-                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge(),rez.getProfit()});
+                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge(),rez.getCijenaUsluge()-rez.getTroskovi()});
+               brojNaloga++;
+               ukupanProfit+=(rez.getCijenaUsluge()-rez.getTroskovi());
            }
-            labelRadniNalog.setText("Radni nalozi: "+rez.getBrojRadnihnaloga());
-            labelProfit.setText("Ostvareni profit radnika: "+rez.getProfit()+" KM");
+            labelRadniNalog.setText("Radni nalozi: "+brojNaloga);
+            labelProfit.setText("Ostvareni profit radnika: "+ukupanProfit+" KM");
         }else{
             JOptionPane.showMessageDialog(null, "Niste odabrali zaposlenog.", "Problem", JOptionPane.ERROR_MESSAGE);
         }
@@ -141,4 +144,5 @@ public class ZaposleniLogika extends Thread{
                }
            }
    }
+
 }

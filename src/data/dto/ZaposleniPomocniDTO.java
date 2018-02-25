@@ -25,7 +25,7 @@ public class ZaposleniPomocniDTO {
     public ZaposleniPomocniDTO() {
     }
 
-    public ZaposleniPomocniDTO(String marka, String model, String brojRegistracije, Date datumZatvaranjaNaloga, String opis, Double troskovi, Double cijenaUsluge, Double profit, Integer brojRadnihnaloga) {
+    public ZaposleniPomocniDTO(String marka, String model, String brojRegistracije, Date datumZatvaranjaNaloga, String opis, Double troskovi, Double cijenaUsluge) {
         this.marka = marka;
         this.model = model;
         this.brojRegistracije = brojRegistracije;
@@ -33,8 +33,6 @@ public class ZaposleniPomocniDTO {
         this.opis = opis;
         this.troskovi = troskovi;
         this.cijenaUsluge = cijenaUsluge;
-        this.profit = profit;
-        this.brojRadnihnaloga = brojRadnihnaloga;
     }
 
     public String getMarka() {

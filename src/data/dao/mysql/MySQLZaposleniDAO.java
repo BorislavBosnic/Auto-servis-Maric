@@ -193,21 +193,19 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
 		}
 		return retVal;
     }
-    
+
     @Override
-    public List<ZaposleniPomocniDTO> sviRadniNaloziZaposlenog(ZaposleniDTO zaposleni,Date datumOd,Date datumDo){
+    public List<ZaposleniPomocniDTO> sviRadniNaloziZaposlenog(ZaposleniDTO zaposleni,java.sql.Date datumOd,java.sql.Date datumDo){
         List<ZaposleniPomocniDTO> retVal = new ArrayList<ZaposleniPomocniDTO>();
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		String query ="SELECT DatumZatvaranjaNaloga,Troskovi,CijenaUsluge,Marka,Model,BrojRegistracije,COUNT(*) AS 'Broj radnih naloga',\n" +
-                                "SUM(CijenaUsluge) AS 'Profit',Opis\n" +
-                                "FROM radnik r INNER JOIN radni_nalog_radnik rnr ON r.IdRadnik=rnr.IdRadnik\n" +
-                                "INNER JOIN radni_nalog rn ON rnr.IdRadniNalog=rn.IdRadniNalog\n" +
-                                "INNER JOIN vozilo v ON rn.IdVozilo=v.IdVozilo\n" +
-                                "INNER JOIN model_vozila mv ON v.IdModelVozila=mv.IdModelVozila\n" +
-                                "WHERE r.IdRadnik=? AND rn.DatumZatvaranjaNaloga BETWEEN ? AND ?;";
+		String query ="SELECT DatumZatvaranjaNaloga,Troskovi,Opis,CijenaUsluge,Marka,Model,BrojRegistracije\n" +
+"from radnik r  inner join radni_nalog_radnik rnr on r.IdRadnik=rnr.IdRadnik\n" +
+"inner join radni_nalog rn on rnr.IdRadniNalog=rn.IdRadniNalog\n" +
+"inner join vozilo v on rn.IdVozilo=v.IdVozilo\n" +
+"inner join model_vozila mv on v.IdModelVozila=mv.IdModelVozila\n" +
+"where r.IdRadnik=? AND rn.DatumZatvaranjaNaloga BETWEEN ? AND ?";
 		try{
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
@@ -216,11 +214,10 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
                         ps.setDate(3,datumDo);
 			rs = ps.executeQuery();
 
-			while (rs.next()){
-                            retVal.add(new ZaposleniPomocniDTO(rs.getString("Marka")
-                            ,rs.getString("Model"),rs.getString("BrojRegistracije"),
-                            rs.getDate("DatumZatvaranjaNaloga")
-                            ,rs.getString("Opis"),rs.getDouble("Troskovi"),rs.getDouble("CijenaUsluge"),rs.getDouble("Profit"),rs.getInt("Broj radnih naloga")));
+			while(rs.next()){
+                            retVal.add(new ZaposleniPomocniDTO(rs.getString("Marka"),
+                            rs.getString("Model"),rs.getString("BrojRegistracije"),rs.getDate("DatumZatvaranjaNaloga"),
+                            rs.getString("Opis"),rs.getDouble("Troskovi"),rs.getDouble("CijenaUsluge")));
                         }
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,7 +228,6 @@ public class MySQLZaposleniDAO implements ZaposleniDAO{
 		}
 		return retVal;
     }
-
     @Override
     public ZaposleniDTO zaposleniPoImenu(String ime, String prezime, String imeOca) {
                 ZaposleniDTO retVal = null;
