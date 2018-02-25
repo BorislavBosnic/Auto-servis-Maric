@@ -5,11 +5,8 @@
  */
 package poslovnalogika;
 
-import autoservismaric.dialog.IzmijeniDioDialog;
 import autoservismaric.dialog.OpisDialog;
-import autoservismaric.dialog.ProdajDioDialog;
 import autoservismaric.forms.HomeForm1;
-import static autoservismaric.forms.HomeForm1.pdv;
 import static autoservismaric.forms.HomeForm1.selRedDio;
 import static autoservismaric.forms.HomeForm1.selektovanRed;
 import data.dao.DAOFactory;
@@ -19,12 +16,12 @@ import data.dto.VoziloDTO;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
@@ -33,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
 import static poslovnalogika.KnjigovodstvoLogika.plati;
 import static poslovnalogika.KnjigovodstvoLogika.radniNalogIFakturaUTekst;
 import static poslovnalogika.Usluge.forma;
-import static poslovnalogika.Usluge.inicijalizacijaTabeleNeplacenihFaktura;
 
 /**
  *
@@ -64,7 +60,7 @@ public class PocetnaLogika {
                 }else
                     naziv = kupac.getNaziv();
                 
-                dtm.addRow(new Object[]{d.getIdRadniNalog(), naziv, vozilo.getBrojRegistracije(),d.getDatumOtvaranjaNaloga(), d.getPredvidjenoVrijemeZavrsetka()});
+                dtm.addRow(new Object[]{d.getIdRadniNalog(), naziv, vozilo.getBrojRegistracije(),new SimpleDateFormat("dd.MM.yyyy.").format(d.getDatumOtvaranjaNaloga()), new SimpleDateFormat("dd.MM.yyyy.").format(d.getPredvidjenoVrijemeZavrsetka())});
                 i++;
             }
         }

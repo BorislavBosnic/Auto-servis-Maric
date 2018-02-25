@@ -23,6 +23,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -39,6 +41,8 @@ public class KnjigovodstvoLogika
     public static String ADRESA_PRODAVCA="Marka Markovića 33";
     public static String GRAD_PRODAVCA="Prnjavor";
     public static String EMAIL_PRODAVCA="maricmaric@teol.net";
+    public static String NEFAKTURISAN="Nije fakturisan";
+    public static String NEFAKTURISAN_DATUM="xxx";
     static{
         try
         {
@@ -71,13 +75,13 @@ public class KnjigovodstvoLogika
             else
                 sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
-            sve[i][3]=String.valueOf(lista.get(i).getDatumOtvaranjaNaloga());
+            sve[i][3]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
-                sve[i][4]="Nije fakturisan";
-                sve[i][5]="xxx";
+                sve[i][4]=NEFAKTURISAN;
+                sve[i][5]=NEFAKTURISAN_DATUM;
             if(faktura!=null)
             {
-                sve[i][4]=String.valueOf(faktura.getDatumIzdavanja());
+                sve[i][4]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()));
                 sve[i][5]=String.valueOf(faktura.getIznos());
             }
             sve[i][6]=Boolean.valueOf(DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(lista.get(i).getIdRadniNalog()).isPlaceno());
@@ -114,9 +118,9 @@ public class KnjigovodstvoLogika
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
-        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);
-        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));
-        cijena+=nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/;
+        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()+nalog.getTroskovi());//vezano za troškove
+        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()+nalog.getTroskovi())*(1.0+PDV));//vezano za troškove
+        cijena+=nalog.getCijenaUsluge()+nalog.getTroskovi();//vezano za troškove
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
@@ -138,7 +142,8 @@ public class KnjigovodstvoLogika
                 (
                         stavke,
                         KnjigovodstvoLogika.PDV,
-                        DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
+                        //DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1, //auto ID
+                        Integer.parseInt((String)(fakture.getValueAt(selectedRow,0))),
                         KnjigovodstvoLogika.IME_PRODAVCA,
                         KnjigovodstvoLogika.ADRESA_PRODAVCA,
                         KnjigovodstvoLogika.GRAD_PRODAVCA,
@@ -180,8 +185,8 @@ public class KnjigovodstvoLogika
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
             sve[i][3]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
-                sve[i][4]="Nije fakturisan";
-                sve[i][5]="xxx";
+                sve[i][4]=NEFAKTURISAN;
+                sve[i][5]=NEFAKTURISAN_DATUM;
             if(faktura!=null)
             {
                 sve[i][4]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()));
@@ -244,12 +249,15 @@ public class KnjigovodstvoLogika
         int id=0;
         try
         {
-            id=Integer.parseInt(txtID.getText());
+            if("".equals(txtID.getText()))
+                id=-1;
+            else
+                id=Integer.parseInt(txtID.getText());
         }
         catch(Exception e)
         {
             id=-1;
-            //odraditi neki popup
+            JOptionPane.showMessageDialog(new JFrame(), "Greška!", "Niste izabrali radni nalog ili ste unijeli netačan ID!", JOptionPane.ERROR_MESSAGE);
         }
         ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
         for(RadniNalogDTO nalog:lista)
@@ -267,7 +275,7 @@ public class KnjigovodstvoLogika
         }
         catch(Exception e)
         {
-            //odraditi neki popup
+            JOptionPane.showMessageDialog(new JFrame(), "Niste izabrali radni nalog ili datum nije uredu!", "Greška!", JOptionPane.ERROR_MESSAGE);
         }
         ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
         for(RadniNalogDTO nalog:lista)
@@ -279,7 +287,11 @@ public class KnjigovodstvoLogika
     public static boolean plati(int id)
     {
         RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
-        if(nalog.isPlaceno())return false;
+        if(nalog.isPlaceno())
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Iznos je već plaćen!", "Greška!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         nalog.setPlaceno(true);
         DAOFactory.getDAOFactory().getRadniNalogDAO().azurirajRadniNalog(nalog);
         return true;
@@ -287,7 +299,16 @@ public class KnjigovodstvoLogika
     public static boolean fakturisi(int id, JTextField txtUkupno)
     {
         RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
-        if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id)!=null)return false;
+        if(nalog.getDatumZatvaranjaNaloga()==null)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Nalog nije zatvoren!", "Greška!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(id)!=null)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Nalog je već fakturisan!", "Greška!", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         //double iznos=0;
         //ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(id);
         //for(RadniNalogDioDTO item:lista)iznos+=item.getCijena()*item.getKolicina();
@@ -324,12 +345,12 @@ public class KnjigovodstvoLogika
         
         String rez="ID naloga: "+nalog.getIdRadniNalog()
                 +"\nOpis problema: "+opis
-                +"\nDatum otvaranja naloga: "+nalog.getDatumOtvaranjaNaloga()
-                +"\nDatum zatvaranja naloga: "+nalog.getDatumZatvaranjaNaloga();
+                +"\nDatum otvaranja naloga: "+new SimpleDateFormat("dd.MM.yyyy.").format(nalog.getDatumOtvaranjaNaloga())
+                +"\nDatum zatvaranja naloga: "+new SimpleDateFormat("dd.MM.yyyy.").format(nalog.getDatumZatvaranjaNaloga());
         if(faktura!=null)
             rez+="\nFakturisano:"
                 +"\nID fakture: "+faktura.getIdFaktura()
-                +"\nDatum izdavanja: "+faktura.getDatumIzdavanja().toString()
+                +"\nDatum izdavanja: "+new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja().toString())
                 +"\nVrijeme rada: "+faktura.getVrijemeRada()
                 +"\nIznos: "+faktura.getIznos();
         return rez;

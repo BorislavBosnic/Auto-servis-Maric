@@ -102,7 +102,7 @@ public class Usluge
 
     public static void provjeraZaDugmiceZaTabeluNaloga() {
         if (forma.getTblRadniNalozi().getRowCount() > 0
-                && !("Nema fakture".equals((String) (forma.getTblRadniNalozi().getValueAt(forma.getTblRadniNalozi().getSelectedRow(), 4))))) {
+                && !(KnjigovodstvoLogika.NEFAKTURISAN.equals((String) (forma.getTblRadniNalozi().getValueAt(forma.getTblRadniNalozi().getSelectedRow(), 4))))) {
             forma.getBtnRacun().setEnabled(true);
             forma.getBtnPredracun().setEnabled(false);
         } else {
@@ -513,6 +513,12 @@ public class Usluge
         forma.getLblRadniNalozi().setText("Radni nalozi:");
     }
     
+    public static void btnSviNaloziAkcija()                                            
+    {                           
+        forma.getTxtID().setText("");
+        btnPoIDuAkcija();
+    }
+    
     public static void btnPrikaziSvePredracuneAkcija()
     {                                                        
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
@@ -526,9 +532,13 @@ public class Usluge
     {                                                      
         ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         Date datum = null;
-        if (forma.getDtmDatumPretraga().getDate() != null) {
+        /*if (forma.getDtmDatumPretraga().getDate() == null) {
             forma.getDtmDatumPretraga().setCalendar(Calendar.getInstance());
-        }
+        }*/
+        if(forma.getDtmDatumPretraga().getDate()==null)
+            datum=null;
+        else
+            datum=new Date(forma.getDtmDatumPretraga().getDate().getTime());
         filtrirajTermine(
                 lista,
                 forma.getTblTermini(),
@@ -553,12 +563,11 @@ public class Usluge
     
     public static void btnDodajTerminAkcija()                                            
     {                                                   
-        Date datum = null;
-        if (forma.getDtmDatumTermina().getDate() != null) {
+        if (forma.getDtmDatumTermina().getDate() == null) {
             forma.getDtmDatumTermina().setCalendar(Calendar.getInstance());
         }
         boolean test = dodajTermin(
-                datum,
+                new Date(forma.getDtmDatumTermina().getDate().getTime()),
                 "" + (forma.getTxtVrijemeTerminaSati().getValue()),
                 "" + (forma.getTxtVrijemeTerminaMinuti().getValue()),
                 forma.getTxtMarkaTermina().getText(),

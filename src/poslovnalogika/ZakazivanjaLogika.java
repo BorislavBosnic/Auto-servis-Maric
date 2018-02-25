@@ -9,6 +9,7 @@ import data.dao.DAOFactory;
 import data.dto.TerminDTO;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JTable;
@@ -27,9 +28,9 @@ public class ZakazivanjaLogika
         Object[][] sve=new Object[lista.size()][8];
         for(int i=0;i<lista.size();++i)
         {
-            sve[i][0]=String.valueOf(lista.get(i).getDatum());
+            sve[i][0]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatum()));
             sve[i][1]=String.valueOf(lista.get(i).getVrijeme());
-            sve[i][2]=String.valueOf(lista.get(i).getDatumZakazivanja());
+            sve[i][2]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumZakazivanja()));
             sve[i][3]=String.valueOf(lista.get(i).getMarka());
             sve[i][4]=String.valueOf(lista.get(i).getModel());
             sve[i][5]=String.valueOf(lista.get(i).getIme());
@@ -85,12 +86,14 @@ public class ZakazivanjaLogika
     
     public static boolean obrisiTermin(String datum, String vrijeme)
     {
-        System.out.println(datum+" "+vrijeme);
         Date datumSQL=new Date
         (
-                Integer.parseInt(datum.split("-")[0])-1900,
+                /*Integer.parseInt(datum.split("-")[0])-1900,
                 Integer.parseInt(datum.split("-")[1])-1,
-                Integer.parseInt(datum.split("-")[2])
+                Integer.parseInt(datum.split("-")[2])*/
+                Integer.parseInt(datum.split("\\.")[2])-1900,
+                Integer.parseInt(datum.split("\\.")[1])-1,
+                Integer.parseInt(datum.split("\\.")[0])
         );
         Time vrijemeSQL=new Time
         (
@@ -98,7 +101,6 @@ public class ZakazivanjaLogika
                 Integer.parseInt(vrijeme.split(":")[1]),
                 Integer.parseInt(vrijeme.split(":")[2])
         );
-        System.out.println(datumSQL.toString()+" "+vrijemeSQL.toString());
         return DAOFactory.getDAOFactory().getTerminDAO().obrisiTerminDatumVrijeme(datumSQL, vrijemeSQL);
     }
 }
