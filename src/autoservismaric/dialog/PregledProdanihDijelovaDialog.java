@@ -8,6 +8,7 @@ package autoservismaric.dialog;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.ProdanDioDTO;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -38,53 +39,53 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pnlProdaniDijelovi = new javax.swing.JPanel();
+        pnlProdaniMenu = new javax.swing.JPanel();
+        lblId = new javax.swing.JLabel();
+        lblSifra = new javax.swing.JLabel();
+        lblNaziv = new javax.swing.JLabel();
+        btnPretrazi = new javax.swing.JButton();
+        btnOdustani = new javax.swing.JButton();
         btnSvi = new javax.swing.JButton();
-        jtfId = new javax.swing.JTextField();
-        jtfSifra = new javax.swing.JTextField();
-        jtfNaziv = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabela = new javax.swing.JTable();
+        tfId = new javax.swing.JTextField();
+        tfSifra = new javax.swing.JTextField();
+        tfNaziv = new javax.swing.JTextField();
+        lblPregledProdanihDijelova = new javax.swing.JLabel();
+        pnlTabelaProdanihDijelova = new javax.swing.JPanel();
+        jScrollProdaniDijelovi = new javax.swing.JScrollPane();
+        tblProdaniDijelovi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        pnlProdaniDijelovi.setBackground(new java.awt.Color(102, 153, 255));
 
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
+        pnlProdaniMenu.setBackground(new java.awt.Color(102, 153, 255));
+        pnlProdaniMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 240, 240)));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel2.setText("Id:");
+        lblId.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblId.setForeground(new java.awt.Color(240, 240, 240));
+        lblId.setText("Id:");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel3.setText("Šifra:");
+        lblSifra.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblSifra.setForeground(new java.awt.Color(240, 240, 240));
+        lblSifra.setText("Šifra:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel4.setText("Naziv:");
+        lblNaziv.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblNaziv.setForeground(new java.awt.Color(240, 240, 240));
+        lblNaziv.setText("Naziv:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Pretraži");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPretrazi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPretrazi.setText("Pretraži");
+        btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPretraziActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Odustani");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnOdustani.setText("Odustani");
+        btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnOdustaniActionPerformed(evt);
             }
         });
 
@@ -95,80 +96,80 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlProdaniMenuLayout = new javax.swing.GroupLayout(pnlProdaniMenu);
+        pnlProdaniMenu.setLayout(pnlProdaniMenuLayout);
+        pnlProdaniMenuLayout.setHorizontalGroup(
+            pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProdaniMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProdaniMenuLayout.createSequentialGroup()
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(96, 96, 96)
-                        .addComponent(jLabel3))
+                        .addComponent(lblSifra))
                     .addComponent(btnSvi))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdaniMenuLayout.createSequentialGroup()
+                        .addComponent(lblNaziv)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnOdustani, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(21, 21, 21))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlProdaniMenuLayout.setVerticalGroup(
+            pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProdaniMenuLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(lblSifra)
+                    .addComponent(lblNaziv)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jButton2)
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnOdustani)
                     .addComponent(btnSvi))
                 .addContainerGap())
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel1.setText("Pregled prodanih dijelova:");
+        lblPregledProdanihDijelova.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblPregledProdanihDijelova.setForeground(new java.awt.Color(240, 240, 240));
+        lblPregledProdanihDijelova.setText("Pregled prodanih dijelova:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlProdaniDijeloviLayout = new javax.swing.GroupLayout(pnlProdaniDijelovi);
+        pnlProdaniDijelovi.setLayout(pnlProdaniDijeloviLayout);
+        pnlProdaniDijeloviLayout.setHorizontalGroup(
+            pnlProdaniDijeloviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProdaniDijeloviLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                .addGroup(pnlProdaniDijeloviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProdaniDijeloviLayout.createSequentialGroup()
+                        .addComponent(lblPregledProdanihDijelova)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlProdaniMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        pnlProdaniDijeloviLayout.setVerticalGroup(
+            pnlProdaniDijeloviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdaniDijeloviLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblPregledProdanihDijelova)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlProdaniMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
 
-        tabela.setModel(new javax.swing.table.DefaultTableModel(
+        tblProdaniDijelovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -177,7 +178,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -191,19 +192,28 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabela);
+        tblProdaniDijelovi.getTableHeader().setReorderingAllowed(false);
+        jScrollProdaniDijelovi.setViewportView(tblProdaniDijelovi);
+        if (tblProdaniDijelovi.getColumnModel().getColumnCount() > 0) {
+            tblProdaniDijelovi.getColumnModel().getColumn(0).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(1).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(2).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(3).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(4).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(5).setResizable(false);
+        }
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlTabelaProdanihDijelovaLayout = new javax.swing.GroupLayout(pnlTabelaProdanihDijelova);
+        pnlTabelaProdanihDijelova.setLayout(pnlTabelaProdanihDijelovaLayout);
+        pnlTabelaProdanihDijelovaLayout.setHorizontalGroup(
+            pnlTabelaProdanihDijelovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlTabelaProdanihDijelovaLayout.setVerticalGroup(
+            pnlTabelaProdanihDijelovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTabelaProdanihDijelovaLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,34 +221,34 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlProdaniDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTabelaProdanihDijelova, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlProdaniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlTabelaProdanihDijelova, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
         Integer id = null;
         try{
-            id = Integer.parseInt(jtfId.getText());
+            id = Integer.parseInt(tfId.getText());
         }catch(NumberFormatException e){
-            if(!"".equals(jtfId.getText())){
+            if(!"".equals(tfId.getText())){
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);      
             }
             id = null;
             //flag = true;
         }
-        String naziv = jtfNaziv.getText();
-        String sifra = jtfSifra.getText();
+        String naziv = tfNaziv.getText();
+        String sifra = tfSifra.getText();
         ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
         ArrayList<DioDTO> dijelovi2 = new ArrayList<DioDTO>();
         if(id != null){
@@ -252,7 +262,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             dijelovi2 = DAOFactory.getDAOFactory().getDioDAO().getDijeloviNaziv(naziv, false);
         }
         
-        DefaultTableModel dtm = (DefaultTableModel)tabela.getModel();
+        DefaultTableModel dtm = (DefaultTableModel)tblProdaniDijelovi.getModel();
         dtm.setRowCount(0);
         
         ArrayList<ProdanDioDTO> prodani = new ArrayList<ProdanDioDTO>();
@@ -265,7 +275,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             for(int j = 0; j < prodani.size(); j++){
                 ProdanDioDTO prod = prodani.get(j);
                 dtm.addRow(new Object[]{dio.getId(), dio.getSifra(), dio.getNaziv(),prod.getCijena(),prod.getKolicina()
-                            ,prod.getDatum()});
+                            ,new SimpleDateFormat("dd.MM.yyyy.").format(prod.getDatum())});
             }
         }
         for(int i = 0; i < dijelovi2.size(); i++){
@@ -274,27 +284,27 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             for(int j = 0; j < prodani.size(); j++){
                 ProdanDioDTO prod = prodani.get(j);
                 dtm.addRow(new Object[]{dio.getId(), dio.getSifra(), dio.getNaziv(),prod.getCijena(),prod.getKolicina()
-                            ,prod.getDatum()});
+                            ,new SimpleDateFormat("dd.MM.yyyy.").format(prod.getDatum())});
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPretraziActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnSviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSviActionPerformed
         ArrayList<ProdanDioDTO> prodani = new ArrayList<ProdanDioDTO>();
         prodani = DAOFactory.getDAOFactory().getProdanDioDAO().getSviProdaniDijelovi();
         
-        DefaultTableModel dtm = (DefaultTableModel)tabela.getModel();
+        DefaultTableModel dtm = (DefaultTableModel)tblProdaniDijelovi.getModel();
         
         for(int i = 0; i < prodani.size(); i++){
             ProdanDioDTO prod = prodani.get(i);
             DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().getDio(prod.getIdDio());
             if(dio != null){
                 dtm.addRow(new Object[]{dio.getId(), dio.getSifra(), dio.getNaziv(),prod.getCijena(),prod.getKolicina()
-                            ,prod.getDatum()});
+                            ,new SimpleDateFormat("dd.MM.yyyy.").format(prod.getDatum())});
             }
         }
     }//GEN-LAST:event_btnSviActionPerformed
@@ -307,20 +317,20 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOdustani;
+    private javax.swing.JButton btnPretrazi;
     private javax.swing.JButton btnSvi;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtfId;
-    private javax.swing.JTextField jtfNaziv;
-    private javax.swing.JTextField jtfSifra;
-    private javax.swing.JTable tabela;
+    private javax.swing.JScrollPane jScrollProdaniDijelovi;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblNaziv;
+    private javax.swing.JLabel lblPregledProdanihDijelova;
+    private javax.swing.JLabel lblSifra;
+    private javax.swing.JPanel pnlProdaniDijelovi;
+    private javax.swing.JPanel pnlProdaniMenu;
+    private javax.swing.JPanel pnlTabelaProdanihDijelova;
+    private javax.swing.JTable tblProdaniDijelovi;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfNaziv;
+    private javax.swing.JTextField tfSifra;
     // End of variables declaration//GEN-END:variables
 }

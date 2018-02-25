@@ -32,8 +32,84 @@ import javax.swing.table.DefaultTableModel;
  * @author Aco
  */
 public class DioLogika {
-    public boolean dodajDio(HomeForm1 form, String sifra, String naziv, String gorivo, Integer godiste, boolean stanje, 
-            Double cijena, Integer kolicina, boolean zaSve,String marka, String model){
+    public void dodajDio(HomeForm1 form){
+        String sifra = "";
+        String naziv = "";
+        Double cijena = null;
+        Integer godiste = null;
+        boolean stanje;
+        String gorivo = "";
+        String marka = "";
+        String model = "";
+        Integer kolicina = null;
+        boolean zaSve = false;
+        boolean flag = false;
+
+        sifra = form.getTfSifraDio().getText();
+        if ("".equals(sifra)) {
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(form, "Unesite šifru", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            flag = true;
+            return;
+        }
+        naziv = form.getTfNazivDio().getText();
+        if ("".equals(naziv)) {
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(form, "Unesite naziv", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            flag = true;
+            return;
+        }
+        try {
+            cijena = Double.parseDouble(form.getTfCijenaDio().getText());
+        } catch (NumberFormatException e) {
+            if (!"".equals(form.getTfCijenaDio().getText())) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
+                return;
+            } else {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Unesite cijenu!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
+                return;
+            }
+        }
+        try {
+            godiste = Integer.parseInt(form.getTfGodisteDio().getText());
+        } catch (NumberFormatException e) {
+            if (!"".equals(form.getTfGodisteDio().getText())) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Nepravilan format godišta!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
+                return;
+            }
+            godiste = null;
+        }
+        stanje = form.getCbStanje().isSelected();
+        gorivo = (String) form.getCbGorivoDio().getSelectedItem();
+        marka = (String) form.getCbMarkaDio().getSelectedItem();
+        model = (String) form.getCbModelDio().getSelectedItem();
+        try {
+            kolicina = Integer.parseInt(form.getTfKolicinaDio().getText());
+            if(kolicina < 1) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Količina mora biti pozitivan broj", "Greška", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            if (!"".equals(form.getTfKolicinaDio().getText())) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Nepravilan format količine!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
+                return;
+            } else {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Unesite količinu!", "Greška", JOptionPane.ERROR_MESSAGE);
+                flag = true;
+                return;
+            }
+        }
+        if(flag) return;
         
         if(!stanje){
             sifra += "s";
@@ -43,9 +119,9 @@ public class DioLogika {
         if(pom != null){
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(form, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-            return false;
+            return;
         }
-        
+        if("Svi".equals(marka)) zaSve = true;
         DioDTO noviDio = new DioDTO(sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, zaSve, marka, model);
             DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
             ModelVozilaDTO modVoz = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
@@ -73,11 +149,48 @@ public class DioLogika {
                     dtm.addRow(new Object[]{dioo.getId(), sifra, naziv, marka, model, godiste, gorivo, cijena, kolicina, stanje ? "Da" : "Ne"});
                 }
             }
-            return true;
+            //return true;
     }
-    public void pretraziDijelove(HomeForm1 form,Integer id, String sifra, String naziv, String gorivo, Integer godiste, boolean stanje, 
-            Double cijena, boolean zaSve,String marka, String model){
+    public void pretraziDijelove(HomeForm1 form){
         
+        String sifra = "";
+        String naziv = "";
+        Double cijena = null;
+        Integer godiste = null;
+        boolean stanje;
+        String gorivo = "";
+        String marka = "";
+        String model = "";
+        Integer kolicina = null;
+        boolean flag = false;
+        Integer id = null;
+
+        sifra = form.getTfSifra().getText();
+        naziv = form.getTfNaziv().getText();
+        try {
+            id = Integer.parseInt(form.getTfId().getText());
+        } catch (NumberFormatException e) {
+            if (!"".equals(form.getTfId().getText())) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Nepravilan format cijene!", "Greška", JOptionPane.ERROR_MESSAGE);
+            }
+            id = 0;
+            //flag = true;
+        }
+        try {
+            godiste = Integer.parseInt(form.getTfGodiste().getText());
+        } catch (NumberFormatException e) {
+            if (!"".equals(form.getTfGodiste().getText())) {
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Nepravilan format godišta!!!", "Greška", JOptionPane.ERROR_MESSAGE);
+                //flag = true;
+            }
+            godiste = null;
+        }
+        stanje = form.getCbNovo().isSelected();
+        gorivo = (String) form.getCbGorivo().getSelectedItem();
+        marka = (String) form.getCbMarka().getSelectedItem();
+        model = (String) form.getCbModel().getSelectedItem();
         ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
         if (id != 0) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));

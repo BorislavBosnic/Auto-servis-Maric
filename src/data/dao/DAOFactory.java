@@ -14,8 +14,6 @@ public abstract class DAOFactory {
     
     public abstract ZaposleniDAO getZaposleniDAO();
     
-    public abstract StatistikaDAO getStatistikaDAO();
-    
     public abstract RadniNalogDAO getRadniNalogDAO();
 
     public abstract DioDAO getDioDAO();

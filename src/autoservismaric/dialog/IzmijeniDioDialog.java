@@ -55,20 +55,20 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         panelzmijeniDio = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel111 = new javax.swing.JLabel();
-        jLabel112 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel113 = new javax.swing.JLabel();
-        jLabel115 = new javax.swing.JLabel();
-        jLabel114 = new javax.swing.JLabel();
+        pnlAzurirajDio = new javax.swing.JPanel();
+        lblNaziv = new javax.swing.JLabel();
+        lblMarka = new javax.swing.JLabel();
+        lblModel = new javax.swing.JLabel();
+        lblGorivo = new javax.swing.JLabel();
+        lblCijena = new javax.swing.JLabel();
+        lblKolicina = new javax.swing.JLabel();
         btnAzuriraj = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         btnOdustani = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblSifra = new javax.swing.JLabel();
+        lblNovo = new javax.swing.JLabel();
+        lblGodiste = new javax.swing.JLabel();
         tfId = new javax.swing.JTextField();
         tfSifra = new javax.swing.JTextField();
         tfNaziv = new javax.swing.JTextField();
@@ -85,33 +85,33 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
         panelzmijeniDio.setBackground(new java.awt.Color(102, 153, 255));
         panelzmijeniDio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setPreferredSize(new java.awt.Dimension(476, 482));
+        pnlAzurirajDio.setBackground(new java.awt.Color(102, 153, 255));
+        pnlAzurirajDio.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlAzurirajDio.setPreferredSize(new java.awt.Dimension(476, 482));
 
-        jLabel111.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel111.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel111.setText("Naziv:");
+        lblNaziv.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNaziv.setForeground(new java.awt.Color(255, 255, 255));
+        lblNaziv.setText("Naziv:");
 
-        jLabel112.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel112.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel112.setText("Marka:");
+        lblMarka.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblMarka.setForeground(new java.awt.Color(255, 255, 255));
+        lblMarka.setText("Marka:");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Model:");
+        lblModel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblModel.setForeground(new java.awt.Color(255, 255, 255));
+        lblModel.setText("Model:");
 
-        jLabel113.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel113.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel113.setText("Vrsta goriva:");
+        lblGorivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblGorivo.setForeground(new java.awt.Color(255, 255, 255));
+        lblGorivo.setText("Vrsta goriva:");
 
-        jLabel115.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel115.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel115.setText("Cijena");
+        lblCijena.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblCijena.setForeground(new java.awt.Color(255, 255, 255));
+        lblCijena.setText("Cijena");
 
-        jLabel114.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel114.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel114.setText("Količina:");
+        lblKolicina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblKolicina.setForeground(new java.awt.Color(255, 255, 255));
+        lblKolicina.setText("Količina:");
 
         btnAzuriraj.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAzuriraj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/refresh-button (1).png"))); // NOI18N
@@ -127,9 +127,9 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ažuriraj podatke o dijelu:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Id:");
+        lblId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblId.setForeground(new java.awt.Color(255, 255, 255));
+        lblId.setText("Id:");
 
         btnOdustani.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cancel (1).png"))); // NOI18N
@@ -140,17 +140,17 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Šifra:");
+        lblSifra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSifra.setForeground(new java.awt.Color(255, 255, 255));
+        lblSifra.setText("Šifra:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Novo:");
+        lblNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNovo.setForeground(new java.awt.Color(255, 255, 255));
+        lblNovo.setText("Novo:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Godište:");
+        lblGodiste.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblGodiste.setForeground(new java.awt.Color(255, 255, 255));
+        lblGodiste.setText("Godište:");
 
         tfId.setEditable(false);
 
@@ -172,112 +172,112 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
 
         tfGodiste.setNextFocusableComponent(btnAzuriraj);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlAzurirajDioLayout = new javax.swing.GroupLayout(pnlAzurirajDio);
+        pnlAzurirajDio.setLayout(pnlAzurirajDioLayout);
+        pnlAzurirajDioLayout.setHorizontalGroup(
+            pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAzurirajDioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAzurirajDioLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(btnOdustani)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAzuriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel112, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                                .addComponent(jLabel111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAzurirajDioLayout.createSequentialGroup()
+                            .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblMarka, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                                .addComponent(lblNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblSifra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(40, 40, 40)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(tfId)
                                 .addComponent(tfSifra)
                                 .addComponent(tfNaziv)
                                 .addComponent(tfMarka, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAzurirajDioLayout.createSequentialGroup()
+                            .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(40, 40, 40)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(tfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfGodiste)
                                     .addComponent(tfNovo))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel113, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel115)
-                                    .addComponent(jLabel114))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAzurirajDioLayout.createSequentialGroup()
+                                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblGorivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblCijena)
+                                    .addComponent(lblKolicina))
                                 .addGap(40, 40, 40)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfGorivo, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                                     .addComponent(tfCijena))))))
                 .addGap(8, 150, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfCijena, tfGodiste, tfGorivo, tfId, tfKolicina, tfMarka, tfModel, tfNaziv, tfNovo, tfSifra});
+        pnlAzurirajDioLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfCijena, tfGodiste, tfGorivo, tfId, tfKolicina, tfMarka, tfModel, tfNaziv, tfNovo, tfSifra});
 
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlAzurirajDioLayout.setVerticalGroup(
+            pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAzurirajDioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
                     .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSifra)
                     .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel111)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNaziv)
                     .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel112)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMarka)
                     .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblModel)
                     .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel113)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGorivo)
                     .addComponent(tfGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel115)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCijena)
                     .addComponent(tfCijena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel114)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblKolicina)
                     .addComponent(tfKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNovo)
                     .addComponent(tfNovo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGodiste)
                     .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlAzurirajDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAzuriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOdustani, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(103, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfCijena, tfGodiste, tfGorivo, tfId, tfKolicina, tfMarka, tfModel, tfNaziv, tfNovo, tfSifra});
+        pnlAzurirajDioLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfCijena, tfGodiste, tfGorivo, tfId, tfKolicina, tfMarka, tfModel, tfNaziv, tfNovo, tfSifra});
 
         javax.swing.GroupLayout panelzmijeniDioLayout = new javax.swing.GroupLayout(panelzmijeniDio);
         panelzmijeniDio.setLayout(panelzmijeniDioLayout);
@@ -285,14 +285,14 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelzmijeniDioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlAzurirajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelzmijeniDioLayout.setVerticalGroup(
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelzmijeniDioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(pnlAzurirajDio, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -444,18 +444,18 @@ public class IzmijeniDioDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnAzuriraj;
     private javax.swing.JButton btnOdustani;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel111;
-    private javax.swing.JLabel jLabel112;
-    private javax.swing.JLabel jLabel113;
-    private javax.swing.JLabel jLabel114;
-    private javax.swing.JLabel jLabel115;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCijena;
+    private javax.swing.JLabel lblGodiste;
+    private javax.swing.JLabel lblGorivo;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblKolicina;
+    private javax.swing.JLabel lblMarka;
+    private javax.swing.JLabel lblModel;
+    private javax.swing.JLabel lblNaziv;
+    private javax.swing.JLabel lblNovo;
+    private javax.swing.JLabel lblSifra;
     private javax.swing.JPanel panelzmijeniDio;
+    private javax.swing.JPanel pnlAzurirajDio;
     private javax.swing.JTextField tfCijena;
     private javax.swing.JTextField tfGodiste;
     private javax.swing.JTextField tfGorivo;

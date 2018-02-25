@@ -55,7 +55,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jPanel1" min="-2" pref="453" max="-2" attributes="0"/>
+                  <Component id="pnlAzurirajDio" min="-2" pref="453" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -64,14 +64,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel1" pref="490" max="32767" attributes="0"/>
+                  <Component id="pnlAzurirajDio" pref="490" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="pnlAzurirajDio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="66" type="rgb"/>
@@ -102,11 +102,11 @@
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel24" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel112" alignment="0" pref="78" max="32767" attributes="0"/>
-                                      <Component id="jLabel111" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblId" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblModel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblMarka" alignment="0" pref="78" max="32767" attributes="0"/>
+                                      <Component id="lblNaziv" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblSifra" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -118,8 +118,8 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="lblNovo" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="lblGodiste" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -134,9 +134,9 @@
                                   <Component id="tfModel" linkSize="1" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel113" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel115" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel114" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblGorivo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblCijena" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblKolicina" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -158,52 +158,52 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfId" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSifra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfSifra" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel111" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNaziv" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfNaziv" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel112" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMarka" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfMarka" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblModel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfModel" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel113" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGorivo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfGorivo" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel115" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCijena" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfCijena" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel114" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblKolicina" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfKolicina" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfNovo" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGodiste" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfGodiste" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -217,7 +217,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel111">
+            <Component class="javax.swing.JLabel" name="lblNaziv">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -228,7 +228,7 @@
                 <Property name="text" type="java.lang.String" value="Naziv:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel112">
+            <Component class="javax.swing.JLabel" name="lblMarka">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -239,7 +239,7 @@
                 <Property name="text" type="java.lang.String" value="Marka:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel24">
+            <Component class="javax.swing.JLabel" name="lblModel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -250,7 +250,7 @@
                 <Property name="text" type="java.lang.String" value="Model:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel113">
+            <Component class="javax.swing.JLabel" name="lblGorivo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -261,7 +261,7 @@
                 <Property name="text" type="java.lang.String" value="Vrsta goriva:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel115">
+            <Component class="javax.swing.JLabel" name="lblCijena">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -272,7 +272,7 @@
                 <Property name="text" type="java.lang.String" value="Cijena"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel114">
+            <Component class="javax.swing.JLabel" name="lblKolicina">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -311,7 +311,7 @@
                 <Property name="text" type="java.lang.String" value="A&#x17e;uriraj podatke o dijelu:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="lblId">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -336,7 +336,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOdustaniActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="lblSifra">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -347,7 +347,7 @@
                 <Property name="text" type="java.lang.String" value="&#x160;ifra:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="lblNovo">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -358,7 +358,7 @@
                 <Property name="text" type="java.lang.String" value="Novo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
+            <Component class="javax.swing.JLabel" name="lblGodiste">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>

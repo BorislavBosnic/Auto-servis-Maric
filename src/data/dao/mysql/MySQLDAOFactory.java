@@ -10,7 +10,6 @@ import data.dao.ProdanDioDAO;
 import data.dao.RadniNalogDAO;
 import data.dao.RadniNalogDioDAO;
 import data.dao.RadniNalogRadnikDAO;
-import data.dao.StatistikaDAO;
 import data.dao.TerminDAO;
 import data.dao.VoziloDAO;
 import data.dao.ZaposleniDAO;
@@ -35,11 +34,6 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public ZaposleniDAO getZaposleniDAO(){
         return new MySQLZaposleniDAO();
-    }
-    
-    @Override
-    public StatistikaDAO getStatistikaDAO(){
-        return new MySQLStatistikaDAO();
     }
     
     @Override

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JTable;
@@ -160,6 +161,38 @@ public class KnjigovodstvoLogika
                 filtriranaLista.add(nalog);
         radniNaloziZaTabelu(filtriranaLista, tabela);
     }
+    public static void radniNaloziZaPocetnuTabelu(ArrayList<RadniNalogDTO>lista, JTable tabela)
+    {
+        DefaultTableModel dtm = (DefaultTableModel)tabela.getModel();
+        Object[][] sve=new Object[lista.size()][6];
+        for(int i=0;i<lista.size();++i)
+        {
+            sve[i][0]=String.valueOf(lista.get(i).getIdRadniNalog());
+                int idVozila=lista.get(i).getIdVozilo();
+                int idMarkeVozila=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdModelVozila().intValue();
+            sve[i][1]=DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getMarka()
+                    +DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
+                int idKupca=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdKupac();
+            if("".equals(DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()))
+                sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()+" ";
+            else
+                sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
+                    +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
+            sve[i][3]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
+                FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
+                sve[i][4]="Nije fakturisan";
+                sve[i][5]="xxx";
+            if(faktura!=null)
+            {
+                sve[i][4]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()));
+                sve[i][5]=String.valueOf(faktura.getIznos());
+            }
+            //sve[i][6]=Boolean.valueOf(DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(lista.get(i).getIdRadniNalog()).isPlaceno());
+        }
+        String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos"};
+        dtm.setDataVector(sve,nazivi);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
     public static void neplaceneFaktureZaPocetnuStranu(ArrayList<RadniNalogDTO>lista, JTable tabela)
     {
         ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
@@ -167,7 +200,7 @@ public class KnjigovodstvoLogika
             if((!nalog.isPlaceno())&&
                     DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(nalog.getIdRadniNalog())!=null)
                 filtriranaLista.add(nalog);
-        radniNaloziZaTabelu(filtriranaLista, tabela);
+        radniNaloziZaPocetnuTabelu(filtriranaLista, tabela);
     }
     
     public static void pretraziNeplaceneFakturePoNazivu(HomeForm1 form, String naziv, String ime, String prezime){

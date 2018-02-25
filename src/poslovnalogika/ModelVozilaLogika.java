@@ -27,14 +27,14 @@ public class ModelVozilaLogika {
         ArrayList<String> modeli = new ArrayList<String>();
         modeli.add("Svi");
 
-        form.getJcbModel().removeAllItems();
-        form.getJcbModel().addItem("Svi");
+        form.getCbModelDio().removeAllItems();
+        form.getCbModelDio().addItem("Svi");
 
         if (list != null) {
             for (ModelVozilaDTO d : list) {
                 if (!modeli.contains(d.getModel())) {
                     modeli.add(d.getModel());
-                    form.getJcbModel().addItem(d.getModel());
+                    form.getCbModelDio().addItem(d.getModel());
                 }
             }
         }
