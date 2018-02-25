@@ -26,6 +26,10 @@ public class ZaposleniLogika extends Thread{
     private String opcija;
     private HomeForm1 homeForm;
 
+    public ZaposleniLogika(String opcija){
+        this.opcija=opcija;
+    }
+    
     public ZaposleniLogika(String opcija,HomeForm1 homeForm){
         this.opcija=opcija;
         this.homeForm=homeForm;
