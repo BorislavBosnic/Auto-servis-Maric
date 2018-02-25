@@ -41,7 +41,7 @@ public class ZaposleniLogika extends Thread{
            popuniTabeluRadnika();
        }else if("statistika".equals(opcija)){
            popuniTabeluRadnihNaloga();
-       }else if("izmjena".equals(opcija)){
+       }else if("izmjeni".equals(opcija)){
            izmjeniRadnika();
        }else if("otpusti".equals(opcija)){
            otpustiRadnika();

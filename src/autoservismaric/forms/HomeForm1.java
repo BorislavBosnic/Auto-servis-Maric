@@ -630,7 +630,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         jLabel148 = new javax.swing.JLabel();
         jLabel149 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        tableRadniNalozi = new javax.swing.JTable();
+        tbRadniNalozi = new javax.swing.JTable();
         pnlStatistika = new javax.swing.JPanel();
         pnlHeaderStatistika = new javax.swing.JPanel();
         pnlKontrolnaTablaStatistika = new javax.swing.JPanel();
@@ -3849,6 +3849,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             tbZaposleni.getColumnModel().getColumn(1).setResizable(false);
         }
         tbZaposleni.getTableHeader().setReorderingAllowed(false);
+        tbZaposleni.setDefaultEditor(Object.class, null);
+        tbZaposleni.setAutoCreateRowSorter(true);
 
         lbBrojRadnihNaloga.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lbBrojRadnihNaloga.setForeground(new java.awt.Color(255, 255, 255));
@@ -4118,8 +4120,8 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         jLabel149.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/User_20px_1.png"))); // NOI18N
 
-        tableRadniNalozi.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        tableRadniNalozi.setModel(new javax.swing.table.DefaultTableModel(
+        tbRadniNalozi.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        tbRadniNalozi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", "", null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -4151,7 +4153,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                 "Marka", "Model", "Registracija", "Datum popravka", "Opis popravke", "Cijena troskova", "Cijena naplate", "Profit"
             }
         ));
-        jScrollPane13.setViewportView(tableRadniNalozi);
+        jScrollPane13.setViewportView(tbRadniNalozi);
+        tbRadniNalozi.getTableHeader().setReorderingAllowed(false);
+        tbRadniNalozi.setDefaultEditor(Object.class, null);
+        tbRadniNalozi.setAutoCreateRowSorter(true);
 
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
@@ -6479,7 +6484,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }
 
     public JTable getTableRadniNalozi() {
-        return tableRadniNalozi;
+        return tbRadniNalozi;
     }
 
     public JTable getTableVozila() {
@@ -7781,9 +7786,9 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane spVoziloPretraga;
     private javax.swing.JScrollPane spanelTabela;
     private javax.swing.JTable tableRNalozi;
-    private javax.swing.JTable tableRadniNalozi;
     private javax.swing.JTable tableVozila;
     private javax.swing.JTabbedPane tabpnlGrafici;
+    private javax.swing.JTable tbRadniNalozi;
     private javax.swing.JTable tbZaposleni;
     private javax.swing.JTable tblAktivnosti;
     private javax.swing.JTable tblFaktura;
