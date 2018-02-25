@@ -2,18 +2,13 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JLabel" name="jLabel59">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel59"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JPopupMenu" name="popupMenuZaposleni">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemDetaljniOpis">
+        <MenuItem class="javax.swing.JMenuItem" name="mnItDetaljniOpis">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -24,10 +19,10 @@
             <Property name="text" type="java.lang.String" value="Detaljan opis"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemDetaljniOpisActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnItDetaljniOpisActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemIzmjeniRadnika">
+        <MenuItem class="javax.swing.JMenuItem" name="mnItIzmjeniRadnika">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/autoservismaric/images/Settings_32px_3.png"/>
@@ -35,10 +30,10 @@
             <Property name="text" type="java.lang.String" value="Izmjeni radnika"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemIzmjeniRadnikaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnItIzmjeniRadnikaActionPerformed"/>
           </Events>
         </MenuItem>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemOtpustiRadnika">
+        <MenuItem class="javax.swing.JMenuItem" name="mnItOtpustiRadnika">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/autoservismaric/images/icon.png"/>
@@ -46,7 +41,7 @@
             <Property name="text" type="java.lang.String" value="Otpusti radnika"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemOtpustiRadnikaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnItOtpustiRadnikaActionPerformed"/>
           </Events>
         </MenuItem>
       </SubComponents>
@@ -5350,8 +5345,8 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel27" min="-2" pref="801" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="2699" max="32767" attributes="0"/>
+                          <Component id="jPanel27" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="2723" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -5370,22 +5365,18 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jScrollPane13" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel149" min="-2" pref="27" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel149" min="-2" pref="27" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabel148" min="-2" pref="106" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel148" min="-2" pref="106" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jScrollPane13" alignment="0" min="-2" pref="1078" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="2066" max="32767" attributes="0"/>
+                              <EmptySpace pref="2068" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5400,8 +5391,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jPanel28" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane13" min="-2" pref="404" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane13" min="-2" pref="146" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="163" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5447,18 +5438,18 @@
                                                       <Component id="jLabel119" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="dateChooserDatumDoZaposlenog" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace pref="18" max="32767" attributes="0"/>
-                                                  <Component id="buttonTraziRadneNalogeRadnika" min="-2" pref="106" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="btnTraziRadneNalogeRadnika" min="-2" pref="106" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                                                  <Component id="buttonPrikazSvihBivsihRadnika" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnPrikazSvihBivsihZaposlenih" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="labelBrojRadnihNaloga" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbBrojRadnihNaloga" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
-                                          <Component id="labelOstvareniProfitRadnika" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbOstvareniProfitRadnika" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -5488,8 +5479,8 @@
                                                   <Component id="dateChooserDatumDoZaposlenog" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                                  <Component id="buttonTraziRadneNalogeRadnika" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="buttonPrikazSvihBivsihRadnika" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                                                  <Component id="btnTraziRadneNalogeRadnika" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnPrikazSvihBivsihZaposlenih" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -5498,8 +5489,8 @@
                                   <Component id="jSeparator26" min="-2" pref="7" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="labelBrojRadnihNaloga" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelOstvareniProfitRadnika" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbBrojRadnihNaloga" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbOstvareniProfitRadnika" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -5536,7 +5527,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTableZaposleni">
+                            <Component class="javax.swing.JTable" name="tbZaposleni">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Times New Roman" size="16" style="0"/>
@@ -5600,7 +5591,7 @@
                                     </Column>
                                   </Table>
                                 </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tbZaposleni.getTableHeader().setReorderingAllowed(false);">
                                   <TableColumnModel selectionModel="0">
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                       <Title/>
@@ -5629,15 +5620,12 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableZaposleniMouseReleased"/>
+                                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbZaposleniMouseReleased"/>
                               </Events>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JLabel" name="labelBrojRadnihNaloga">
+                        <Component class="javax.swing.JLabel" name="lbBrojRadnihNaloga">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="18" style="1"/>
@@ -5671,7 +5659,7 @@
                             <Property name="text" type="java.lang.String" value="Od datuma:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="buttonTraziRadneNalogeRadnika">
+                        <Component class="javax.swing.JButton" name="btnTraziRadneNalogeRadnika">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
@@ -5682,10 +5670,10 @@
                             <Property name="text" type="java.lang.String" value="Tra&#x17e;i"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTraziRadneNalogeRadnikaActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTraziRadneNalogeRadnikaActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="labelOstvareniProfitRadnika">
+                        <Component class="javax.swing.JLabel" name="lbOstvareniProfitRadnika">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="14" style="1"/>
@@ -5718,29 +5706,17 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel129" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel137" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jLabel151" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jLabel146" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jLabel150" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="textFieldAdresa" min="-2" pref="170" max="-2" attributes="0"/>
-                                                      <Component id="textFieldTelefon" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                                      <Component id="textFieldPrezime" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                                      <Component id="textFieldIme" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                                      <Component id="textFieldImeOca" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel152" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="textFieldBrojLicneKarte" min="-2" pref="170" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel154" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel155" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="btnDodajZaposlenog" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="textFieldFunkcijaRadnika" max="32767" attributes="0"/>
+                                                  <Component id="dateChooserDatumPrimanjaURadniOdnos" alignment="0" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -5753,24 +5729,44 @@
                                                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                  <Component id="dateChooserDatumRodjenja" pref="170" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="textFieldStrucnaSprema" max="32767" attributes="0"/>
+                                                  <Component id="dateChooserDatumRodjenja" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel154" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel155" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="buttonDodajZaposlenog" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="textFieldFunkcijaRadnika" max="32767" attributes="0"/>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="dateChooserDatumPrimanjaURadniOdnos" min="-2" pref="169" max="-2" attributes="0"/>
-                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel129" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel137" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jLabel151" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel146" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel150" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Group type="102" alignment="0" attributes="0">
+                                                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="textFieldAdresa" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                                                                  <Component id="textFieldTelefon" min="-2" pref="178" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <EmptySpace max="32767" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                  <Component id="textFieldIme" alignment="1" pref="178" max="32767" attributes="0"/>
+                                                                  <Component id="textFieldPrezime" max="32767" attributes="0"/>
+                                                                  <Component id="textFieldImeOca" max="32767" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                      </Group>
                                                   </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabel152" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="textFieldBrojLicneKarte" min="-2" pref="178" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -5833,7 +5829,7 @@
                                           <Component id="textFieldFunkcijaRadnika" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="buttonDodajZaposlenog" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnDodajZaposlenog" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -5903,7 +5899,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="textFieldBrojLicneKarte">
                             </Component>
-                            <Component class="javax.swing.JButton" name="buttonDodajZaposlenog">
+                            <Component class="javax.swing.JButton" name="btnDodajZaposlenog">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="12" style="1"/>
@@ -5914,7 +5910,7 @@
                                 <Property name="text" type="java.lang.String" value="Dodaj zaposlenog"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDodajZaposlenogActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDodajZaposlenogActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel150">
@@ -6001,7 +5997,7 @@
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="dateChooserDatumDoZaposlenog">
                         </Component>
-                        <Component class="javax.swing.JButton" name="buttonPrikazSvihBivsihRadnika">
+                        <Component class="javax.swing.JButton" name="btnPrikazSvihBivsihZaposlenih">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
@@ -6009,7 +6005,7 @@
                             <Property name="text" type="java.lang.String" value="Prikaz svih biv&#x161;ih zaposlenih"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPrikazSvihBivsihRadnikaActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrikazSvihBivsihZaposlenihActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -6159,9 +6155,6 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
