@@ -7,18 +7,21 @@ package autoservismaric.dialog;
 
 import data.dao.DAOFactory;
 import data.dto.RadniNalogDTO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Aco
  */
 public class OpisDialog extends javax.swing.JDialog {
-
+    int id;
     /**
      * Creates new form OpisDialog
      */
     public OpisDialog(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
+        this.id = id;
         initComponents();
         setTitle("Opis posla");
         RadniNalogDTO nalog = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
@@ -41,6 +44,7 @@ public class OpisDialog extends javax.swing.JDialog {
         textArea = new javax.swing.JTextArea();
         lblOpisPosla = new javax.swing.JLabel();
         btnNazad = new javax.swing.JButton();
+        btnPromjeniOpis = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,6 +91,13 @@ public class OpisDialog extends javax.swing.JDialog {
             }
         });
 
+        btnPromjeniOpis.setText("Promjeni opis");
+        btnPromjeniOpis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromjeniOpisActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlOpisLayout = new javax.swing.GroupLayout(pnlOpis);
         pnlOpis.setLayout(pnlOpisLayout);
         pnlOpisLayout.setHorizontalGroup(
@@ -97,7 +108,9 @@ public class OpisDialog extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOpisLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNazad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPromjeniOpis)
+                .addGap(18, 18, 18)
+                .addComponent(btnNazad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         pnlOpisLayout.setVerticalGroup(
@@ -106,7 +119,9 @@ public class OpisDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnlOsnovno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNazad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlOpisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNazad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPromjeniOpis, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -130,6 +145,19 @@ public class OpisDialog extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnNazadActionPerformed
 
+    private void btnPromjeniOpisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromjeniOpisActionPerformed
+        RadniNalogDTO nalog = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(id);
+        String opis = textArea.getText();
+        nalog.setOpisProblema(opis);
+        if(DAOFactory.getDAOFactory().getRadniNalogDAO().azurirajRadniNalog(nalog)){
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(new JFrame(), "Uspješno ste promjenili opis posla.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE); 
+        }else{
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(new JFrame(), "Nije moguce promjeniti opis posla.", "Greška", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPromjeniOpisActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -137,6 +165,7 @@ public class OpisDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
+    private javax.swing.JButton btnPromjeniOpis;
     private javax.swing.JScrollPane jScrollOpisPosla;
     private javax.swing.JLabel lblOpisPosla;
     private javax.swing.JPanel pnlOpis;
