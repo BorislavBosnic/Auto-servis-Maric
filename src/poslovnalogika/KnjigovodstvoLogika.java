@@ -118,9 +118,9 @@ public class KnjigovodstvoLogika
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
-        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()+nalog.getTroskovi());//vezano za troškove
-        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()+nalog.getTroskovi())*(1.0+PDV));//vezano za troškove
-        cijena+=nalog.getCijenaUsluge()+nalog.getTroskovi();//vezano za troškove
+        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);//vezano za troškove
+        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
+        cijena+=nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/;//vezano za troškove
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
@@ -138,20 +138,37 @@ public class KnjigovodstvoLogika
         {
             public void run()
             {
+                int brojFakture=Integer.parseInt((String)(fakture.getValueAt(selectedRow,0)));
+                FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().faktura(brojFakture);
+                RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(faktura.getIdRadniNalog());
+                VoziloDTO vozilo=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(nalog.getIdVozilo());
+                KupacDTO kupac=DAOFactory.getDAOFactory().getKupacDAO().kupac(vozilo.getIdKupac());
+                String ime=kupac.getNaziv();
+                if(ime==null)ime="";
+                else ime+=" ";
+                ime+=kupac.getIme();
+                ime+=" "+kupac.getPrezime();
+                String adresa=kupac.getAdresa();
+                String grad=kupac.getGrad();
+                //String email=kupac.getEmail();
                 FakturaLogika.create
                 (
                         stavke,
                         KnjigovodstvoLogika.PDV,
                         //DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1, //auto ID
-                        Integer.parseInt((String)(fakture.getValueAt(selectedRow,0))),
+                        brojFakture,
                         KnjigovodstvoLogika.IME_PRODAVCA,
                         KnjigovodstvoLogika.ADRESA_PRODAVCA,
                         KnjigovodstvoLogika.GRAD_PRODAVCA,
                         KnjigovodstvoLogika.EMAIL_PRODAVCA,
-                        (String)(fakture.getValueAt(selectedRow,2)),
+                        /*(String)(fakture.getValueAt(selectedRow,2)),
                         "test",
                         "test",
-                        "test",
+                        "test",*/
+                        ime,
+                        adresa,
+                        grad,
+                        ""/*email*/,
                         fakturaIliRacun
                 );
             }

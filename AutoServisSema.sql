@@ -264,8 +264,15 @@ INSERT INTO prodan_dio VALUES (1, 1, 30, 2, '2017-10-10');
 INSERT INTO prodan_dio VALUES (2, 2, 20, 3, '2017-10-22');
 INSERT INTO prodan_dio VALUES (3, 3, 15, 1, '2017-11-08');
 INSERT INTO prodan_dio VALUES (4, 4, 80, 1, '2017-11-09');
+INSERT INTO prodan_dio VALUES (5, 1, 30, 2, '2018-01-06');
+INSERT INTO prodan_dio VALUES (6, 2, 20, 3, '2018-01-28');
+INSERT INTO prodan_dio VALUES (7, 3, 15, 1, '2018-02-03');
+INSERT INTO prodan_dio VALUES (8, 4, 80, 1, '2018-02-05');
+INSERT INTO prodan_dio VALUES (9, 2, 20, 3, '2018-02-17');
+INSERT INTO prodan_dio VALUES (10, 3, 15, 1, '2018-02-19');
+INSERT INTO prodan_dio VALUES (11, 4, 80, 1, '2018-02-26');
 
-
+/*IdKupac, Naziv, Telefon, Adresa, Grad, Ime, Prezime, Aktivan*/
 INSERT INTO kupac VALUES (1,null,"065/995-599","Eustahija Brzića 33","Prnjavor","Miloš","Mišić", true);
 
 INSERT INTO model_vozila VALUES (1,"BMW","X6", true);
@@ -281,6 +288,10 @@ INSERT INTO radni_nalog VALUES (2, true, '2017-11-23', '2018-01-14', 1, 70, 2500
 INSERT INTO radni_nalog VALUES (3, false, '2017-12-24', '2018-02-15', 1, 30, 100000, "Tu nešto piše tri", '2018-02-27', 65, false);
 INSERT INTO radni_nalog VALUES (4, false, '2017-12-25', '2018-02-20', 1, 60, 20000, "Tu nešto piše četiri", '2018-02-24', 125, false);
 INSERT INTO radni_nalog VALUES (5, false, '2017-12-25', null, 1, 70, 250000, "Tu nešto piše pet", '2018-02-25', 130, false);
+INSERT INTO radni_nalog VALUES (6, true, '2018-01-17', '2018-01-26', 2, 70, 250000, "Tu nešto piše sest", '2018-01-29', 140, false);
+INSERT INTO radni_nalog VALUES (7, false, '2018-02-04', '2018-02-06', 2, 30, 100000, "Tu nešto piše sedam", '2018-02-07', 65, false);
+INSERT INTO radni_nalog VALUES (8, false, '2018-02-07', '2018-02-25', 2, 60, 20000, "Tu nešto piše osam", '2018-02-16', 125, false);
+
 
 
 /*IdFaktura, DatumIzdavanja, IdRadniNalog, Iznos, VrijemeRada*/
@@ -288,6 +299,9 @@ INSERT INTO faktura VALUES (1, '2017-11-02', 1, (150+45.4)*1.17, 2);
 INSERT INTO faktura VALUES (2, '2018-02-25', 4, 185*1.17, 1);
 INSERT INTO faktura VALUES (3, '2018-02-17', 3, 95*1.17, 2);
 INSERT INTO faktura VALUES (4, '2018-01-16', 2, 210*1.17, 1);
+INSERT INTO faktura VALUES (5, '2018-01-28', 6, 210*1.17, 1);
+
+
 
 
 /*IdRadniNalog, IdDio, Cijena, Kolicina*/
@@ -309,6 +323,10 @@ INSERT INTO radni_nalog_radnik VALUES (1,1,"Ima neki opis broj jedan");
 INSERT INTO radni_nalog_radnik VALUES (2,1,"Ima neki opis broj dva");
 INSERT INTO radni_nalog_radnik VALUES (3,1,"Ima neki opis broj tri");
 INSERT INTO radni_nalog_radnik VALUES (4,1,"Ima neki opis broj četiri");
+INSERT INTO radni_nalog_radnik VALUES (5,1,"Ima neki opis broj pet");
+INSERT INTO radni_nalog_radnik VALUES (6,1,"Ima neki opis broj sest");
+INSERT INTO radni_nalog_radnik VALUES (7,1,"Ima neki opis broj sedam");
+INSERT INTO radni_nalog_radnik VALUES (8,1,"Ima neki opis broj osam");
 
 INSERT INTO termin VALUES (1,'2017-8-10','9:00',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-7-4');
 INSERT INTO termin VALUES (2,'2017-9-11','9:30',"BMW","X6","Nemanja","Bosnić","065/112-224",'2017-9-8');
