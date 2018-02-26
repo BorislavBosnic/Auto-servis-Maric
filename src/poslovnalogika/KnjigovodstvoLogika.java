@@ -111,24 +111,24 @@ public class KnjigovodstvoLogika
                         " "+dio.getVrstaGoriva()+" "+dio.getGodisteVozila());
                 sve[i][2]=String.valueOf(lista.get(i).getKolicina());
                 sve[i][3]=String.valueOf(lista.get(i).getCijena());
-                sve[i][4]=String.valueOf((double)Math.round(((lista.get(i).getCijena()*(1.0+PDV))*100d))/100d);
+                sve[i][4]=String.format("%.2f", (lista.get(i).getCijena()*(1.0+PDV)));
                 
                 cijena+=lista.get(i).getCijena()*lista.get(i).getKolicina();
         }
         sve[lista.size()][0]=String.valueOf(0);
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
-        sve[lista.size()][3]=String.valueOf(nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);//vezano za troškove
-        sve[lista.size()][4]=String.valueOf((nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
+        sve[lista.size()][3]=String.format("%.2f", nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);//vezano za troškove
+        sve[lista.size()][4]=String.format("%.2f", (nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
         cijena+=nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/;//vezano za troškove
         
         String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
         dtm.setDataVector(sve,nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-        txtBezPDV.setText(""+(double)Math.round(cijena * 100d) / 100d);
-        txtPDV.setText(""+(double)Math.round(cijena * PDV * 100d) / 100d);
-        txtUkupno.setText(""+(double)Math.round(cijena * (1+PDV) * 100d) / 100d);
+        txtBezPDV.setText(String.format("%.2f", cijena));
+        txtPDV.setText(String.format("%.2f", cijena * PDV));
+        txtUkupno.setText(String.format("%.2f", cijena * (1+PDV)));
     }
     public static void prikaziFakturu(JTable fakture, JTable stavke, String fakturaIliRacun)
     {
