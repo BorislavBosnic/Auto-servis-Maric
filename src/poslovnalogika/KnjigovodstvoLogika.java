@@ -367,7 +367,7 @@ public class KnjigovodstvoLogika
         if(faktura!=null)
             rez+="\nFakturisano:"
                 +"\nID fakture: "+faktura.getIdFaktura()
-                +"\nDatum izdavanja: "+new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja().toString())
+                +"\nDatum izdavanja: "+new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()).toString()
                 +"\nVrijeme rada: "+faktura.getVrijemeRada()
                 +"\nIznos: "+faktura.getIznos();
         return rez;
