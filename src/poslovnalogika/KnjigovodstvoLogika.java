@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import static java.lang.Math.abs;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -138,9 +139,10 @@ public class KnjigovodstvoLogika
         {
             public void run()
             {
-                int brojFakture=Integer.parseInt((String)(fakture.getValueAt(selectedRow,0)));
-                FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().faktura(brojFakture);
-                RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(faktura.getIdRadniNalog());
+                int brojNaloga=Integer.parseInt((String)(fakture.getValueAt(selectedRow,0)));
+                FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(brojNaloga);
+                System.out.println(faktura);
+                RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(brojNaloga);
                 VoziloDTO vozilo=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(nalog.getIdVozilo());
                 KupacDTO kupac=DAOFactory.getDAOFactory().getKupacDAO().kupac(vozilo.getIdKupac());
                 String ime=kupac.getNaziv();
@@ -156,7 +158,7 @@ public class KnjigovodstvoLogika
                         stavke,
                         KnjigovodstvoLogika.PDV,
                         //DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1, //auto ID
-                        brojFakture,
+                        (faktura!=null)?faktura.getIdFaktura():nalog.getIdRadniNalog(),
                         KnjigovodstvoLogika.IME_PRODAVCA,
                         KnjigovodstvoLogika.ADRESA_PRODAVCA,
                         KnjigovodstvoLogika.GRAD_PRODAVCA,
@@ -295,8 +297,9 @@ public class KnjigovodstvoLogika
             JOptionPane.showMessageDialog(new JFrame(), "Niste izabrali radni nalog ili datum nije uredu!", "Greška!", JOptionPane.ERROR_MESSAGE);
         }
         ArrayList<RadniNalogDTO>filtriranaLista=new ArrayList<>();
+        long day=1000*60*60*24;
         for(RadniNalogDTO nalog:lista)
-            if(datum==null || nalog.getDatumOtvaranjaNaloga().equals(datum))
+            if(datum==null || abs(nalog.getDatumOtvaranjaNaloga().getTime()-datum.getTime())<day)
                 filtriranaLista.add(nalog);
         radniNaloziZaTabelu(filtriranaLista, tabela);
     }
