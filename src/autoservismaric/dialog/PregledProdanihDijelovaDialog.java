@@ -75,6 +75,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         lblNaziv.setText("Naziv:");
 
         btnPretrazi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPretrazi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/search.png"))); // NOI18N
         btnPretrazi.setText("Pretraži");
         btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +83,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             }
         });
 
+        btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/fast-backward-double-left-arrow-symbol.png"))); // NOI18N
         btnOdustani.setText("Odustani");
         btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,10 +113,10 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                         .addComponent(lblSifra))
                     .addComponent(btnSvi))
                 .addGap(18, 18, 18)
-                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfSifra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfSifra, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                    .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdaniMenuLayout.createSequentialGroup()
                         .addComponent(lblNaziv)
@@ -136,7 +138,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
                     .addComponent(tfNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(pnlProdaniMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnOdustani)
                     .addComponent(btnSvi))
                 .addContainerGap())
@@ -174,7 +176,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "IdDio", "Sifra", "Naziv", "Prodajna cijena/kom", "Kolicina", "Datum"
+                "IdDio", "Sifra", "Naziv", "Prodajna cijena/kom (KM/kom)", "Kolicina", "Datum"
             }
         ) {
             Class[] types = new Class [] {
@@ -196,6 +198,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         jScrollProdaniDijelovi.setViewportView(tblProdaniDijelovi);
         if (tblProdaniDijelovi.getColumnModel().getColumnCount() > 0) {
             tblProdaniDijelovi.getColumnModel().getColumn(0).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(0).setPreferredWidth(25);
             tblProdaniDijelovi.getColumnModel().getColumn(1).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(2).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(3).setResizable(false);
@@ -207,14 +210,11 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         pnlTabelaProdanihDijelova.setLayout(pnlTabelaProdanihDijelovaLayout);
         pnlTabelaProdanihDijelovaLayout.setHorizontalGroup(
             pnlTabelaProdanihDijelovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+            .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
         );
         pnlTabelaProdanihDijelovaLayout.setVerticalGroup(
             pnlTabelaProdanihDijelovaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTabelaProdanihDijelovaLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollProdaniDijelovi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
