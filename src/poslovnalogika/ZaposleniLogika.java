@@ -6,6 +6,7 @@
 package poslovnalogika;
 
 import autoservismaric.dialog.DetaljiZaposlenogDialog;
+import autoservismaric.dialog.DodajZaposlenogDialog;
 import autoservismaric.dialog.OtpustiRadnikaDialog;
 import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import data.dto.ZaposleniPomocniDTO;
 import java.util.ArrayList;
+import javax.swing.JDialog;
 
 /**
  *
@@ -25,6 +27,7 @@ public class ZaposleniLogika extends Thread{
     
     private String opcija;
     private HomeForm1 homeForm;
+    private DodajZaposlenogDialog dodajZaposlenogDialog;
 
     public ZaposleniLogika(String opcija){
         this.opcija=opcija;
@@ -35,6 +38,10 @@ public class ZaposleniLogika extends Thread{
         this.homeForm=homeForm;
     }
   
+    public ZaposleniLogika(String opcija,DodajZaposlenogDialog dialog){
+        this.opcija=opcija;
+        this.dodajZaposlenogDialog=dialog;
+    }
    @Override
    public void run(){
         if("insert".equals(opcija)){
@@ -49,6 +56,7 @@ public class ZaposleniLogika extends Thread{
            izmjeniRadnika();
        }else if("otpusti".equals(opcija)){
            otpustiRadnika();
+           homeForm.inicijalizujZaposleniPanel();
        }
    }
    
@@ -127,20 +135,20 @@ public class ZaposleniLogika extends Thread{
    
    private void dodajZaposlenog(){
        //provjera imena zaposlenog
-       String ime=homeForm.getTextFieldIme().getText();
-       String prezime=homeForm.getTextFieldPrezime().getText();
+       String ime=dodajZaposlenogDialog.getTextFieldIme().getText();
+       String prezime=dodajZaposlenogDialog.getTextFieldPrezime().getText();
            if("".equals(ime) || "".equals(prezime)){
                JOptionPane.showMessageDialog(null,"Ime i prezime zaposlenog moraju biti uneseni!", "Problem", JOptionPane.ERROR_MESSAGE);
            }else{
                //polja za unos podataka
-               String telefon=homeForm.getTextFieldTelefon().getText();
-               String adresa=homeForm.getTextFieldAdresa().getText();
-               String strucnaSprema=homeForm.getTextFieldStrucnaSprema().getText();
-               String imeOca=homeForm.getTextFieldImeOca().getText();
-               String brojLicneKarte=homeForm.getTextFieldBrojLicneKarte().getText();
-               java.util.Date datumRodjenja=homeForm.getDateChooserDatumRodjenja().getDate();
-               java.util.Date datumPrimanja=homeForm.getDateChooserDatumPrimanjaURadniOdnos().getDate();
-               String funkcija=homeForm.getTextFieldFunkcijaRadnika().getText();
+               String telefon=dodajZaposlenogDialog.getTextFieldTelefon().getText();
+               String adresa=dodajZaposlenogDialog.getTextFieldAdresa().getText();
+               String strucnaSprema=dodajZaposlenogDialog.getTextFieldStrucnaSprema().getText();
+               String imeOca=dodajZaposlenogDialog.getTextFieldImeOca().getText();
+               String brojLicneKarte=dodajZaposlenogDialog.getTextFieldBrojLicneKarte().getText();
+               java.util.Date datumRodjenja=dodajZaposlenogDialog.getDateChooserDatumRodjenja().getDate();
+               java.util.Date datumPrimanja=dodajZaposlenogDialog.getDateChooserDatumPrimanjaURadniOdnos().getDate();
+               String funkcija=dodajZaposlenogDialog.getTextFieldFunkcijaRadnika().getText();
                //dodajemo zaposlenog
                ZaposleniDTO zaposleni=new ZaposleniDTO(ime, prezime, telefon, adresa, strucnaSprema, imeOca, brojLicneKarte, new java.sql.Date(datumRodjenja.getTime()),funkcija,new java.sql.Date(datumPrimanja.getTime()),null);
                if(DAOFactory.getDAOFactory().getZaposleniDAO().dodajZaposlenog(zaposleni)){

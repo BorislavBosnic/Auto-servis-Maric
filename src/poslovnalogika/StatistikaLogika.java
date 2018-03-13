@@ -227,8 +227,9 @@ public class StatistikaLogika {
 
         chartFakture = ChartFactory.createRingChart("Fakture", pieChart, true, true, Locale.ITALY);
 
+         pieChart.setValue("Neplacene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
         pieChart.setValue("Placene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
-        pieChart.setValue("Neplacene", DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojFaktura() - DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPlacenihFaktura());
+       
 
         RingPlot plotFakture = (RingPlot) chartFakture.getPlot();
         plotFakture.setBackgroundPaint(new Color(207, 229, 235));
@@ -340,8 +341,14 @@ public class StatistikaLogika {
 
     forma.getLabelIntervalZaradaDijelovi().setText(formatter.format(DAOFactory.getDAOFactory().getRadniNalogDAO().getSumaCijenaDijelova(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime()))) + " KM");
 
-    forma.getLabelPopravkeInterval().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime())) + "");
+    forma.getLabelPopravkeInterval().setText(DAOFactory.getDAOFactory().getRadniNalogDAO().getBrojPopravki(new java.sql.Date(forma.getjDateChooserDatumOd().getDate().getTime()), new java.sql.Date(forma.getjDateChooserDatumDo().getDate().getTime())) + "");    
+    }
     
-        
+    public void inicijalizujStatistikaPanel(HomeForm1 homeForm){
+        Calendar cal=Calendar.getInstance();
+        cal.add(Calendar.YEAR, -1);
+        homeForm.getDcDatumOd().setCalendar(cal);
+        homeForm.getDcDatumDo().setCalendar(Calendar.getInstance());
+        homeForm.getBtnPregled().doClick();
     }
 }
