@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import data.dto.ZaposleniPomocniDTO;
 import java.util.ArrayList;
-import javax.swing.JDialog;
+import java.util.Calendar;
 
 /**
  *
@@ -38,9 +38,10 @@ public class ZaposleniLogika extends Thread{
         this.homeForm=homeForm;
     }
   
-    public ZaposleniLogika(String opcija,DodajZaposlenogDialog dialog){
+    public ZaposleniLogika(String opcija,DodajZaposlenogDialog dialog,HomeForm1 homeForm){
         this.opcija=opcija;
         this.dodajZaposlenogDialog=dialog;
+         this.homeForm=homeForm;
     }
    @Override
    public void run(){
@@ -105,12 +106,19 @@ public class ZaposleniLogika extends Thread{
    
    private void popuniTabeluRadnihNaloga(){  
         int redniBroj=homeForm.getTableZaposleni().getSelectedRow();
+        java.sql.Date datumOd=null;
+        java.sql.Date datumDo=null;
+        try{
+            datumOd=new java.sql.Date(homeForm.getDateChooserDatumOdZaposlenog().getDate().getTime());
+            datumDo=new java.sql.Date(homeForm.getDateChooserDatumDoZaposlenog().getDate().getTime());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Datum nije odabran.", "Problem", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if(redniBroj!=-1){
             ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviZaposleni());
             ZaposleniDTO selektovanRadnik=zaposleni.get(redniBroj);
-            DefaultTableModel table=(DefaultTableModel)homeForm.getTableRadniNalozi().getModel();
-            java.sql.Date datumOd=new java.sql.Date(homeForm.getDateChooserDatumOdZaposlenog().getDate().getTime());
-            java.sql.Date datumDo=new java.sql.Date(homeForm.getDateChooserDatumDoZaposlenog().getDate().getTime());
+            DefaultTableModel table=(DefaultTableModel)homeForm.getTableRadniNalozi().getModel(); 
             List<ZaposleniPomocniDTO> lista=DAOFactory.getDAOFactory().getZaposleniDAO().sviRadniNaloziZaposlenog(selektovanRadnik,datumOd,datumDo);
             Iterator<ZaposleniPomocniDTO> i=lista.iterator();
             table.setRowCount(0);//brise sadrzaj tabele
@@ -149,8 +157,18 @@ public class ZaposleniLogika extends Thread{
                java.util.Date datumRodjenja=dodajZaposlenogDialog.getDateChooserDatumRodjenja().getDate();
                java.util.Date datumPrimanja=dodajZaposlenogDialog.getDateChooserDatumPrimanjaURadniOdnos().getDate();
                String funkcija=dodajZaposlenogDialog.getTextFieldFunkcijaRadnika().getText();
+               //ako datumi nisu uneseni moramo napraviti da su null
+               java.sql.Date datumRodjenjaSQL=null;
+               java.sql.Date datumPrimanjaSQL=null;
+                 try{
+                    datumRodjenjaSQL=new java.sql.Date(datumRodjenja.getTime());
+                    datumPrimanjaSQL=new java.sql.Date(datumPrimanja.getTime());
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Datum nije odabran.", "Problem", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                //dodajemo zaposlenog
-               ZaposleniDTO zaposleni=new ZaposleniDTO(ime, prezime, telefon, adresa, strucnaSprema, imeOca, brojLicneKarte, new java.sql.Date(datumRodjenja.getTime()),funkcija,new java.sql.Date(datumPrimanja.getTime()),null);
+               ZaposleniDTO zaposleni=new ZaposleniDTO(ime, prezime, telefon, adresa, strucnaSprema, imeOca, brojLicneKarte, datumRodjenjaSQL,funkcija,datumPrimanjaSQL,null);
                if(DAOFactory.getDAOFactory().getZaposleniDAO().dodajZaposlenog(zaposleni)){
                    JOptionPane.showMessageDialog(null, "Uspješno dodan zaposleni.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                    popuniTabeluRadnika();

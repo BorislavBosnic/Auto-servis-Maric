@@ -205,6 +205,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             tblProdaniDijelovi.getColumnModel().getColumn(4).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(5).setResizable(false);
         }
+        tblProdaniDijelovi.setAutoCreateRowSorter(true);
 
         javax.swing.GroupLayout pnlTabelaProdanihDijelovaLayout = new javax.swing.GroupLayout(pnlTabelaProdanihDijelova);
         pnlTabelaProdanihDijelova.setLayout(pnlTabelaProdanihDijelovaLayout);

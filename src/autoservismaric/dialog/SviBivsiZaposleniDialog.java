@@ -77,6 +77,7 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(tableBivsiZaposleni);
+        tableBivsiZaposleni.setAutoCreateRowSorter(true);
 
         buttonVratiZaposlenog.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         buttonVratiZaposlenog.setText("Vrati zaposlenog");

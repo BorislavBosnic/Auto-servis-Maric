@@ -69,7 +69,7 @@ public class KnjigovodstvoLogika
                 int idVozila=lista.get(i).getIdVozilo();
                 int idMarkeVozila=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdModelVozila().intValue();
             sve[i][1]=DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getMarka()
-                    +DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
+                    +"  "+DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
                 int idKupca=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdKupac();
             if("".equals(DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()))
                 sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()+" ";
@@ -135,7 +135,7 @@ public class KnjigovodstvoLogika
     {
         int selectedRow=fakture.getSelectedRow();
         
-        new Thread()
+        Thread t=new Thread()
         {
             public void run()
             {
@@ -174,7 +174,8 @@ public class KnjigovodstvoLogika
                         fakturaIliRacun
                 );
             }
-        }.start();
+        };
+        t.start();
     }
     
     public static void fakturisaniRadniNalozi(ArrayList<RadniNalogDTO>lista, JTable tabela)

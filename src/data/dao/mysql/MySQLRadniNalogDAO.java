@@ -6,7 +6,6 @@
 package data.dao.mysql;
 
 import data.dao.RadniNalogDAO;
-import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.RadniNalogParametri;
 import data.dto.RezultatRNPretrazivanje;

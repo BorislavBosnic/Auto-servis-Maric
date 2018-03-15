@@ -465,6 +465,12 @@ public class ProdajDioDialog extends javax.swing.JDialog {
        boolean flag = false;
        Integer kolNaStanju = (Integer) dtm.getValueAt(red, 8);
        
+       try{
+           pdv=Double.parseDouble(jtfPDV.getText());
+       }catch(NumberFormatException e){
+           jtfPDV.setText("0");
+           pdv=0.0;
+       }
        try {
             kolicina = Integer.parseInt(tfKolicinaProdaja.getText());
             if(kolicina > kolNaStanju || kolicina < 0){
@@ -496,9 +502,12 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             flag = true;
             cijena = null;
         }
+       if(cijena==null || kolicina==null || pdv==null){
+           JOptionPane.showMessageDialog(this, "Unesite cijenu,kolicinu i PDV!", "Greška", JOptionPane.ERROR_MESSAGE);
+           return;
+       }
        if(!flag){
            Date datum = new Date(System.currentTimeMillis());
-           System.out.println("datum " +datum);
            ProdanDioDTO dio = new ProdanDioDTO((Integer)dtm.getValueAt(red, 0), cijena, kolicina, datum);
            DAOFactory.getDAOFactory().getProdanDioDAO().dodajProdanDio(dio);
            DioDTO prodajniDio = DAOFactory.getDAOFactory().getDioDAO().getDio((Integer)dtm.getValueAt(red, 0));
@@ -519,6 +528,12 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         boolean flag = false;
        Integer kolNaStanju = (Integer) dtm.getValueAt(red, 8);
        
+       try{
+           pdv=Double.parseDouble(jtfPDV.getText());
+       }catch(NumberFormatException e){
+           jtfPDV.setText("0");
+           pdv=0.0;
+       }
        try {
             kolicina = Integer.parseInt(tfKolicinaProdaja.getText());
             if(kolicina > kolNaStanju || kolicina < 0){
@@ -554,7 +569,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
              Double rez = (cijena + pdv*cijena/100)* kolicina;
             tfUkupno.setText(String.format("%.2f", rez));
         }else{
-            tfUkupno.setText("0");
+            tfUkupno.setText("ERROR");
         }
     }//GEN-LAST:event_btnUkupnoActionPerformed
 

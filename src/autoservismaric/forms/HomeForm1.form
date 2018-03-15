@@ -46,6 +46,25 @@
         </MenuItem>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPopupMenu" name="popUpMenuRadniNaloziZaposlenog">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="menuItemOpisRadnogNaloga">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/autoservismaric/images/document.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Opis radnog naloga"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemOpisRadnogNalogaActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -1150,10 +1169,7 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblBaza" max="32767" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="lblBaza" alignment="0" max="32767" attributes="0"/>
                                           <Component id="lblPoslednjiPut" alignment="0" pref="220" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="btnBaza" min="-2" pref="208" max="-2" attributes="0"/>
@@ -2868,6 +2884,9 @@
                                   <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
                                 </Property>
                               </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblTermini.setAutoCreateRowSorter(true);"/>
+                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -4662,7 +4681,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable">
+                    <Component class="javax.swing.JTable" name="tblDijelovi">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="0"/>
@@ -4681,9 +4700,9 @@
                             <Column editable="false" title="Novo" type="java.lang.String"/>
                           </Table>
                         </Property>
-                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" preCode="tblDijelovi.setAutoCreateRowSorter(true);">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="15" resizable="true">
                               <Title/>
                               <Editor/>
                               <Renderer/>
@@ -4740,7 +4759,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableMouseClicked"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDijeloviMouseClicked"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -4814,9 +4833,9 @@
                                   <Component id="txtSlikaKnjigovodstvo" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                   <Component id="txtKnjigovodstvo" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="pnlOkvirKnjigovodstvo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="2165" max="32767" attributes="0"/>
+                              <EmptySpace pref="2154" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -4843,39 +4862,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="lblRadniNalozi" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
-                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="btnPoDatumu" min="-2" pref="117" max="-2" attributes="0"/>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                          <Component id="dtmDatum" min="-2" pref="125" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Group type="102" attributes="0">
-                                                              <Component id="btnPoIDu" min="-2" pref="117" max="-2" attributes="0"/>
-                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="txtID" min="-2" pref="125" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Group type="102" alignment="0" attributes="0">
-                                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Component id="btnFakturisano" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
-                                                                  <Component id="btnNefakturisano" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Component id="btnSviNalozi" max="32767" attributes="0"/>
-                                                          </Group>
-                                                      </Group>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="lblRadniNalozi" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
@@ -4889,25 +4877,56 @@
                                           <Component id="jLabel165" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtBezPDV" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="jLabel163" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtPDV" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace pref="244" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="194" max="32767" attributes="0"/>
                                           <Component id="jLabel161" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtUkupno" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel162" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="btnFakturisano" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                                                      <Component id="btnNefakturisano" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="btnSviNalozi" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="btnPoDatumu" max="32767" attributes="0"/>
+                                                      <Component id="btnPoIDu" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="12" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="txtID" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
+                                                      <Component id="dtmDatum" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
-                                  <Component id="btnPredracun" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnRacun" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                                  <Component id="btnPredracun" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                  <Component id="btnRacun" min="-2" pref="143" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -4917,8 +4936,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblRadniNalozi" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
@@ -4942,17 +4961,17 @@
                                               <Component id="dtmDatum" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
+                                      <Component id="pnlNaloziKnjigovodstvo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnPredracun" pref="50" max="32767" attributes="0"/>
-                                      <Component id="btnRacun" pref="50" max="32767" attributes="0"/>
+                                      <Component id="btnPredracun" pref="48" max="32767" attributes="0"/>
+                                      <Component id="btnRacun" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jSeparator2" min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Component id="jSeparator2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="pnlTabelaKnjigovodstvo" min="-2" pref="294" max="-2" attributes="0"/>
+                                  <Component id="pnlTabelaKnjigovodstvo" min="-2" pref="224" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel164" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -4963,8 +4982,10 @@
                                       <Component id="jLabel161" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtUkupno" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                                       <Component id="jLabel162" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="22" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4987,6 +5008,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/autoservismaric/images/receipt.png"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Predra&#x10d;un"/>
                           </Properties>
@@ -5020,7 +5044,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="pnlRadniNaloziKnjigovodstvo" pref="0" max="32767" attributes="0"/>
+                                      <Component id="pnlRadniNaloziKnjigovodstvo" pref="235" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -5047,7 +5071,7 @@
                                         <Column editable="false" title="Vlasnik" type="java.lang.Object"/>
                                         <Column editable="false" title="Datum otvaranja" type="java.lang.Object"/>
                                         <Column editable="false" title="Datum fakturisanja" type="java.lang.Object"/>
-                                        <Column editable="false" title="Iznos" type="java.lang.Object"/>
+                                        <Column editable="false" title="Iznos(KM)" type="java.lang.Object"/>
                                         <Column editable="false" title="Pla&#x107;eno" type="java.lang.Boolean"/>
                                       </Table>
                                     </Property>
@@ -5149,13 +5173,13 @@
                                     <Column editable="false" title="ID" type="java.lang.Object"/>
                                     <Column editable="false" title="Naziv" type="java.lang.Object"/>
                                     <Column editable="false" title="Koli&#x10d;ina" type="java.lang.Object"/>
-                                    <Column editable="false" title="Osnovica" type="java.lang.Object"/>
-                                    <Column editable="false" title="Cijena sa PDV" type="java.lang.Object"/>
+                                    <Column editable="false" title="Osnovica(KM)" type="java.lang.Object"/>
+                                    <Column editable="false" title="Cijena sa PDV(KM)" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblFaktura.setAutoCreateRowSorter(true);">
                                   <TableColumnModel selectionModel="0">
-                                    <Column maxWidth="40" minWidth="-1" prefWidth="40" resizable="true">
+                                    <Column maxWidth="15" minWidth="15" prefWidth="15" resizable="true">
                                       <Title/>
                                       <Editor/>
                                       <Renderer/>
@@ -5202,6 +5226,9 @@
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/autoservismaric/images/money-bag.png"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Ra&#x10d;un"/>
                             <Property name="enabled" type="boolean" value="false"/>
@@ -5317,6 +5344,28 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSviNaloziActionPerformed"/>
                           </Events>
                         </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel4">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="KM"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel11">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="%"/>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Component class="javax.swing.JLabel" name="txtKnjigovodstvo">
@@ -5396,10 +5445,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel148" min="-2" pref="106" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jPanel28" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane13" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jPanel28" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="2082" max="32767" attributes="0"/>
+                              <EmptySpace pref="2076" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -5468,15 +5517,15 @@
                                               </Group>
                                               <Component id="jLabel117" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jScrollPane12" min="-2" pref="843" max="-2" attributes="0"/>
+                                                  <Component id="jScrollPane12" min="-2" pref="831" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="btnPrikazSvihBivsihZaposlenih" max="32767" attributes="0"/>
-                                                      <Component id="btnDodajZaposlenog" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="btnPrikazSvihBivsihZaposlenih" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDodajZaposlenog" min="-2" pref="231" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -5492,7 +5541,7 @@
                                       <Component id="jScrollPane12" min="-2" pref="182" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="btnPrikazSvihBivsihZaposlenih" min="-2" pref="49" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnDodajZaposlenog" min="-2" pref="47" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -5722,6 +5771,9 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="12" style="1"/>
                             </Property>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/autoservismaric/images/lista zaposlenih.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Prikaz svih biv&#x161;ih zaposlenih"/>
                           </Properties>
                           <Events>
@@ -5889,6 +5941,9 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbRadniNaloziMouseReleased"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

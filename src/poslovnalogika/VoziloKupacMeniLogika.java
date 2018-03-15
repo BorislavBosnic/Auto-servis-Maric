@@ -639,7 +639,8 @@ public class VoziloKupacMeniLogika {
         dijalog.getTableVozila().setModel(model);
     }
     
-     public void pronadjiVozilo(IzaberiVoziloDialog forma) {
+     
+    public void pronadjiVozilo(IzaberiVoziloDialog forma) {
         String registracija = forma.getTfRegistracijaTrazi().getText();
         Integer godiste = 0;
 
