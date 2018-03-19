@@ -154,8 +154,7 @@ public class RadniNalogParametri {
     
     
     
-    public String kreirajIskaz(){
-        System.out.println(ime+"  "+prezime);
+   /* public String kreirajIskaz(){
         String iskaz = "SELECT * FROM radni_nalog r INNER JOIN vozilo v ON r.IdVozilo=v.IdVozilo INNER JOIN kupac k ON v.IdKupac=k.IdKupac WHERE r.Izbrisano!=true AND ";
         if(datumOtvaranjaOD != null){
             iskaz+="DatumOtvaranjaNaloga>='" + datumOtvaranjaOD + "' AND ";
@@ -177,9 +176,7 @@ public class RadniNalogParametri {
         }
         if(registracija != null){
             iskaz+="BrojRegistracije LIKE '" + registracija + "' AND ";
-        }
-        if(!svi){
-            
+        }  
             if(privatni){
                 iskaz+="(Naziv is null OR Naziv LIKE '') AND ";
                 if(ime != null){
@@ -195,15 +192,12 @@ public class RadniNalogParametri {
                     iskaz+="Naziv LIKE '" + naziv+"'";
                 }
             }
-            
-        }
         
         if(iskaz.endsWith("WHERE "))
             iskaz = iskaz.replaceAll("WHERE ", "");
         if(iskaz.endsWith("AND ")){
             iskaz = iskaz.substring(0, iskaz.length()-4);
         }
-        System.out.println(iskaz);
         return iskaz;
-    }
+    }*/
 }

@@ -7,7 +7,6 @@ package poslovnalogika;
 
 import autoservismaric.dialog.DodajVoziloDialog;
 import autoservismaric.dialog.IzmijeniVoziloDialog;
-import data.AutoSuggestor;
 import data.dao.DAOFactory;
 import data.dto.KupacDTO;
 import data.dto.ModelVozilaDTO;
@@ -156,8 +155,8 @@ public class VoziloLogika {
             return;
         }
 
-        String marka = dijalog.getTfMarka().getText();
-        String model = dijalog.getTfModel().getText();
+        String marka = dijalog.getCbMarkaVozila().getSelectedItem().toString();
+        String model = dijalog.getCbModelVozila().getSelectedItem().toString();
 
         if (model == null || "".equals(model)) {
             JOptionPane.showMessageDialog(dijalog, "Morate unnijei model vozila!", "Greška", JOptionPane.OK_OPTION);
@@ -169,7 +168,7 @@ public class VoziloLogika {
             return;
         }
 
-        String gorivo = dijalog.getTfGorivo().getText();
+        String gorivo = dijalog.getCbGorivo().getSelectedItem().toString();
         Integer godiste = null, kilovati = null;
         Double kubikaza = null;
         if (dijalog.getTfGodiste().getText() != null && !"".equals(dijalog.getTfGodiste().getText())) {
@@ -226,10 +225,10 @@ public class VoziloLogika {
                 if (DAOFactory.getDAOFactory().getVoziloDAO().dodajVozilo(vozilo)) {
                     JOptionPane.showMessageDialog(dijalog, "Uspješno dodato vozilo!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                     dijalog.getTfRegistracija().setText("");
-                    dijalog.getTfMarka().setText("");
-                    dijalog.getTfModel().setText("");
+                    dijalog.getCbMarkaVozila().setSelectedIndex(0);
+                    dijalog.getCbModelVozila().setSelectedIndex(0);
                     dijalog.getTfGodiste().setText("");
-                    dijalog.getTfGorivo().setText("");
+                    dijalog.getCbGorivo().setSelectedIndex(0);
                     dijalog.getTfKilovat().setText("");
                     dijalog.getTfKubikaza().setText("");
                     dijalog.getTfVlasnikIme().setText("");
@@ -269,8 +268,8 @@ public class VoziloLogika {
         KupacDTO kupac = DAOFactory.getDAOFactory().getKupacDAO().kupac(vozilo.getIdKupac());
 
         dijalog.getTfRegistracija().setText(vozilo.getBrojRegistracije());
-        dijalog.getTfMarka().setText(model.getMarka());
-        dijalog.getTfModel().setText(model.getModel());
+        dijalog.getCbMarkaVozila().setSelectedItem(model.getMarka());
+        dijalog.getCbMarkaVozila().setSelectedItem(model.getModel());
         dijalog.getTfGodiste().setText(vozilo.getGodiste().toString());
         dijalog.getTfKilovat().setText(vozilo.getKilovat().toString());
         dijalog.getTfKubikaza().setText(vozilo.getKubikaza().toString());
@@ -378,9 +377,9 @@ public class VoziloLogika {
 
     public void izmijeniVozilo(IzmijeniVoziloDialog dijalog) {
         String registracija = dijalog.getTfRegistracija().getText();
-        String marka = dijalog.getTfMarka().getText();
-        String model = dijalog.getTfModel().getText();
-        String gorivo = dijalog.getTfGorivo().getText();
+        String marka = dijalog.getCbMarkaVozila().getSelectedItem().toString();
+        String model = dijalog.getCbModelVozila().getSelectedItem().toString();
+        String gorivo = dijalog.getCbGorivo().getSelectedItem().toString();
         Integer godiste = null, kilovati = null;
         Double kubikaza = null;
 

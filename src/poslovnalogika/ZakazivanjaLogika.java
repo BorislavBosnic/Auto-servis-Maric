@@ -28,9 +28,9 @@ public class ZakazivanjaLogika
         Object[][] sve=new Object[lista.size()][8];
         for(int i=0;i<lista.size();++i)
         {
-            sve[i][0]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatum()));
+            sve[i][0]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(lista.get(i).getDatum()));
             sve[i][1]=String.valueOf(lista.get(i).getVrijeme());
-            sve[i][2]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumZakazivanja()));
+            sve[i][2]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(lista.get(i).getDatumZakazivanja()));
             sve[i][3]=String.valueOf(lista.get(i).getMarka());
             sve[i][4]=String.valueOf(lista.get(i).getModel());
             sve[i][5]=String.valueOf(lista.get(i).getIme());

@@ -208,7 +208,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         statistikaLogika = new StatistikaLogika();
         btnPrikaziSvaVozila.doClick();
         btnPrikaziRadniNalog.doClick();
-        dodajPopupMeniPretragaRadniNaloga();
+        dodajPopupMeniPretragaRadniNaloga(this);
         
         tabpnlGrafici.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -1311,10 +1311,10 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlCuvanjePodatakaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblBaza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPoslednjiPut, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(lblPoslednjiPut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlCuvanjePodatakaLayout.createSequentialGroup()
                         .addComponent(btnBaza, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlCuvanjePodatakaLayout.setVerticalGroup(
@@ -1427,6 +1427,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             tblNeplaceneFakture.getColumnModel().getColumn(5).setResizable(false);
             tblNeplaceneFakture.getColumnModel().getColumn(5).setPreferredWidth(20);
         }
+        tblNeplaceneFakture.setAutoCreateRowSorter(true);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(240, 240, 240));
@@ -1439,7 +1440,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addGroup(Napomene2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Napomene2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane8))
                 .addContainerGap())
         );
@@ -1495,6 +1496,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             tblAktivnosti.getColumnModel().getColumn(3).setResizable(false);
             tblAktivnosti.getColumnModel().getColumn(4).setResizable(false);
         }
+        tblAktivnosti.setAutoCreateRowSorter(true);
 
         javax.swing.GroupLayout danasnjeAktivnostiPanelLayout = new javax.swing.GroupLayout(danasnjeAktivnostiPanel);
         danasnjeAktivnostiPanel.setLayout(danasnjeAktivnostiPanelLayout);
@@ -1526,17 +1528,17 @@ public class HomeForm1 extends javax.swing.JFrame {
             pnlOsnovnoPocetnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOsnovnoPocetnaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlOsnovnoPocetnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlOsnovnoPocetnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlOsnovnoPocetnaLayout.createSequentialGroup()
                         .addComponent(lblDat2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDatt))
+                        .addComponent(lblDatt)
+                        .addContainerGap(888, Short.MAX_VALUE))
                     .addGroup(pnlOsnovnoPocetnaLayout.createSequentialGroup()
                         .addComponent(danasnjeAktivnostiPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Napomene2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlPocetnaMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                        .addComponent(Napomene2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlPocetnaMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         pnlOsnovnoPocetnaLayout.setVerticalGroup(
             pnlOsnovnoPocetnaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1877,7 +1879,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addComponent(panelPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnNoviRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         panelOsnovniPretragaRNLayout.setVerticalGroup(
             panelOsnovniPretragaRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1961,8 +1963,8 @@ public class HomeForm1 extends javax.swing.JFrame {
             .addComponent(panelOsnovniRN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlRadniNaloziLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spanelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(2114, Short.MAX_VALUE))
+                .addComponent(spanelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(2096, Short.MAX_VALUE))
         );
         pnlRadniNaloziLayout.setVerticalGroup(
             pnlRadniNaloziLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2984,7 +2986,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         lblModelDio.setPreferredSize(new java.awt.Dimension(60, 20));
 
         cbGorivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbGorivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svi", "Benzin", "Dizel" }));
+        cbGorivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svi", "Benzin", "Dizel", "Plin" }));
         cbGorivo.setMinimumSize(new java.awt.Dimension(60, 20));
         cbGorivo.setPreferredSize(new java.awt.Dimension(81, 20));
 
@@ -3131,7 +3133,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         lblStanjeDodajDio.setPreferredSize(new java.awt.Dimension(60, 20));
 
         cbGorivoDio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbGorivoDio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svi", "Benzin", "Dizel" }));
+        cbGorivoDio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svi", "Benzin", "Dizel", "Plin" }));
         cbGorivoDio.setMinimumSize(new java.awt.Dimension(60, 20));
         cbGorivoDio.setPreferredSize(new java.awt.Dimension(81, 20));
 
@@ -4472,7 +4474,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(pnlBrojPopravki, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaUkupno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -4705,7 +4707,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pnlMeniRadniNaloziMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniRadniNaloziMouseClicked
-        dodajPopupMeniPretragaRadniNaloga();
+        dodajPopupMeniPretragaRadniNaloga(this);
         menuItemClick(pnlMeniRadniNalozi, 1, pnlRadniNalozi);
         tableRNalozi.getTableHeader().setReorderingAllowed(false);
         tableRNalozi.setDefaultEditor(Object.class, null);

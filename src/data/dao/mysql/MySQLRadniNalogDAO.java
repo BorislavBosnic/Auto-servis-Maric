@@ -514,15 +514,91 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String query = objekat.kreirajIskaz();
+        String query = "SELECT * FROM radni_nalog r INNER JOIN vozilo v ON r.IdVozilo=v.IdVozilo INNER JOIN kupac k ON v.IdKupac=k.IdKupac WHERE r.Izbrisano!=true";
 
+        if (objekat.getDatumOtvaranjaOD() != null) {
+            query += " AND DatumOtvaranjaNaloga>= ?";
+        }
+        if (objekat.getDatumOtvaranjaDO() != null) {
+            query += " AND DatumOtvaranjaNaloga<=?";
+        }
+        if (objekat.getDatumZatvaranjaOD() != null) {
+            query += " AND DatumZatvaranjaNaloga>=?";
+        }
+        if (objekat.getDatumZatvaranjaDO() != null) {
+            query += " AND DatumZatvaranjaNaloga<=?";
+        }
+        if (objekat.getDatumPotrebnoZavrsitiOD() != null) {
+            query += " AND PredvidjenoVrijemeZavrsetka>=?";
+        }
+        if (objekat.getDatumPotrebnoZavrsitiDO() != null) {
+            query += " AND PredvidjenoVrijemeZavrsetka<=?";
+        }
+        if (objekat.getRegistracija() != null) {
+            query += " AND BrojRegistracije LIKE ?";
+        }
+        if (objekat.isPrivatni()) {
+            query += " AND Naziv is NULL";
+            if (objekat.getIme() != null) {
+                query += " AND Ime LIKE ?";
+            } else if (objekat.getPrezime() != null) {
+                query += " AND Prezime LIKE ?";
+            }
+        } else if (objekat.isPravni()) {
+            query += " AND Ime is NULL AND Prezime is NULL";
+            if (objekat.getNaziv() != null) {
+                query += " AND Naziv LIKE ?";
+            }
+        }
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-
-            
-            
+            //stavljamo parametre
+            int brojac = 1;
+            if (objekat.getDatumOtvaranjaOD() != null) {
+                ps.setDate(brojac, objekat.getDatumOtvaranjaOD());
+                brojac++;
+            }
+            if (objekat.getDatumOtvaranjaDO() != null) {
+                ps.setDate(brojac, objekat.getDatumOtvaranjaDO());
+                brojac++;
+            }
+            if (objekat.getDatumZatvaranjaOD() != null) {
+                ps.setDate(brojac, objekat.getDatumZatvaranjaOD());
+                brojac++;
+            }
+            if (objekat.getDatumZatvaranjaDO() != null) {
+                ps.setDate(brojac, objekat.getDatumZatvaranjaDO());
+                brojac++;
+            }
+            if (objekat.getDatumPotrebnoZavrsitiOD() != null) {
+                ps.setDate(brojac, objekat.getDatumPotrebnoZavrsitiOD());
+                brojac++;
+            }
+            if (objekat.getDatumPotrebnoZavrsitiDO() != null) {
+                ps.setDate(brojac, objekat.getDatumPotrebnoZavrsitiDO());
+                brojac++;
+            }
+            if (objekat.getRegistracija() != null) {
+                ps.setString(brojac, "%"+objekat.getRegistracija()+"%");
+                brojac++;
+            }
+            if (objekat.isPrivatni()) {
+                if (objekat.getIme() != null) {
+                    ps.setString(brojac,"%"+ objekat.getIme()+"%");
+                    brojac++;
+                } else if (objekat.getPrezime() != null) {
+                    ps.setString(brojac, "%"+objekat.getPrezime()+"%");
+                    brojac++;
+                }
+            } else if (objekat.isPravni()) {
+                if (objekat.getNaziv() != null) {
+                    ps.setString(brojac, "%"+objekat.getNaziv()+"%");
+                    brojac++;
+                }
+            }
+            query+=";";
+            rs = ps.executeQuery();   
             while (rs.next()) {
                 String vlasnik="";
                 if(rs.getString("Ime") == null || "".equals(rs.getString("Ime"))){

@@ -8,6 +8,7 @@ package poslovnalogika;
 import autoservismaric.dialog.DodajRadniNalogDialog;
 import autoservismaric.dialog.IzmijeniRadniNalogDialog;
 import autoservismaric.dialog.PregledIstorijePopravkiDialog;
+import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.KupacDTO;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javafx.scene.paint.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -289,7 +289,7 @@ public class RadniNalogLogika {
         }
     }
 
-    public void inicijalizujIzmijeniRadniNalog(IzmijeniRadniNalogDialog dijalog) {
+    public void inicijalizujIzmijeniRadniNalog(IzmijeniRadniNalogDialog dijalog,HomeForm1 homeForm) {
         RadniNalogDTO rn = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(dijalog.getIdRadnogNaloga());
 
         dijalog.getDatumOtvaranjaNaloga().setDate(rn.getDatumOtvaranjaNaloga());
@@ -438,7 +438,7 @@ public class RadniNalogLogika {
         dijalog.getSpinnerKolicina().setValue(1);
     }
 
-    public void azurirajNalog(IzmijeniRadniNalogDialog dijalog) {
+    public void azurirajNalog(IzmijeniRadniNalogDialog dijalog,HomeForm1 homeForm) {
         Date datumOtvaranja = dijalog.getDatumOtvaranjaNaloga().getDate();
         java.sql.Date o = new java.sql.Date(datumOtvaranja.getTime());
 
@@ -591,7 +591,8 @@ public class RadniNalogLogika {
 
                 DAOFactory.getDAOFactory().getDioDAO().azurirajDio(dio);
             }
-
+            
+            homeForm.getBtnPrikaziRadniNalog().doClick();
             JOptionPane.showMessageDialog(dijalog, "Uspješno ažuriran radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
             dijalog.dispose();
         } else {

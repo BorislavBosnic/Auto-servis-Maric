@@ -156,11 +156,11 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
         lblTroskovi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTroskovi.setForeground(new java.awt.Color(255, 255, 255));
-        lblTroskovi.setText("Troškovi:");
+        lblTroskovi.setText("Troškovi(KM):");
 
         lblKilometraza.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblKilometraza.setForeground(new java.awt.Color(255, 255, 255));
-        lblKilometraza.setText("Kilometraža:");
+        lblKilometraza.setText("Kilometraža(km):");
 
         lblZavrsavanje.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblZavrsavanje.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,7 +168,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
         lblCijenaUsluge.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCijenaUsluge.setForeground(new java.awt.Color(255, 255, 255));
-        lblCijenaUsluge.setText("Cijena usluge:");
+        lblCijenaUsluge.setText("Cijena usluge(KM):");
 
         cbPlaceno.setBackground(new java.awt.Color(102, 153, 255));
         cbPlaceno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

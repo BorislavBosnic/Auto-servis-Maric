@@ -41,4 +41,6 @@ public interface DioDAO {
     public boolean obrisiDio(int id);
     
     public ArrayList<DioDTO> getDijeloviZaPonudu(String marka, String model);
+    
+    public ArrayList<DioDTO> getDijeloviZaBiloKojiParametar(DioDTO dio);
 }

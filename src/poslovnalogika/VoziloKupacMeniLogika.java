@@ -137,7 +137,7 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PregledIstorijePopravkiDialog(new JFrame(), true, idVozila).setVisible(true);
+                new PregledIstorijePopravkiDialog(new JFrame(), true, idVozila,forma).setVisible(true);
             }
         });
         forma.getPopupMenu().add(pogledajIstorijuPopravki);
@@ -652,8 +652,8 @@ public class VoziloKupacMeniLogika {
             }
         }
 
-        String marka = forma.getTfMarkaTrazi().getText();
-        String model = forma.getTfModelTrazi().getText();
+        String marka = forma.getCbMarkaVozila().getSelectedItem().toString();
+        String model = forma.getCbModelVozila().getSelectedItem().toString();
         boolean svi = forma.getCbSvi().isSelected();
 
         if (svi) {
@@ -779,7 +779,7 @@ public class VoziloKupacMeniLogika {
      }
         
         public void prikaziRadneNaloge(HomeForm1 forma){
-            RadniNalogParametri parametri = new RadniNalogParametri();
+        RadniNalogParametri parametri = new RadniNalogParametri();
         
         if(!forma.getCbDatumOtvaranja().isSelected()){
             if(forma.getDcDatumOtvaranjaOD().getDate() != null)
@@ -827,11 +827,13 @@ public class VoziloKupacMeniLogika {
         
         //String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
         
-        String[] columns = {"ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Rok za završetak", "Datum zatvaranja", "Troškovi dijela", "Cijena usluge", "Plaćeno"};
+        String[] columns = {"ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Rok za završetak", "Datum zatvaranja", "Troškovi dijelova(KM)", "Cijena usluge(KM)", "Plaćeno"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableRNalozi().setModel(model);
+        forma.getTableRNalozi().getColumnModel().getColumn(0).setMaxWidth(45);
+        forma.getTableRNalozi().getColumnModel().getColumn(8).setMaxWidth(70);
         for (RezultatRNPretrazivanje k : lista) {
-            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja()!=null? (new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumOtvaranja())):"", k.getDatumPotrebnoZavrsitiDo()!=null?(new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() !=null ? (new SimpleDateFormat("dd.MM.yyyy.").format(k.getDatumZatvaranja())) :"", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno()? "Da" : "Ne"};
+            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja()!=null? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumOtvaranja())):"", k.getDatumPotrebnoZavrsitiDo()!=null?(new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() !=null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumZatvaranja())) :"", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno()? "Da" : "Ne"};
             model.addRow(rowData);
         }
         forma.getTableRNalozi().setModel(model);

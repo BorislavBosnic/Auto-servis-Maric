@@ -1,19 +1,11 @@
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import com.toedter.calendar.JDateChooser;
-import data.dao.DAOFactory;
-import data.dto.DioDTO;
-import data.dto.ModelVozilaDTO;
 import data.dto.RadniNalogDTO;
-import data.dto.RadniNalogDioDTO;
-import data.dto.RadniNalogRadnikDTO;
-import data.dto.VoziloDTO;
 import data.dto.ZaposleniDTO;
 import java.awt.Color;
 import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,10 +18,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import poslovnalogika.RadniNalogLogika;
 
 /*
@@ -50,20 +38,22 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
     private int idVozila;
     private RadniNalogDTO nalog;
     public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
-
+    private HomeForm1 homeForm;
+    
     public IzmijeniRadniNalogDialog(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
         cbPlaceno.setVisible(false);
     }
 
-    public IzmijeniRadniNalogDialog(java.awt.Frame parent, boolean modal, int idRadnogNaloga) {
+    public IzmijeniRadniNalogDialog(java.awt.Frame parent, boolean modal, int idRadnogNaloga,HomeForm1 homeForm) {
         super(parent, modal);
         initComponents();
         
+        this.homeForm=homeForm;
         cbPlaceno.setVisible(false);
         this.idRadnogNaloga = idRadnogNaloga;
-        radniNalogLogika.inicijalizujIzmijeniRadniNalog(this);
+        radniNalogLogika.inicijalizujIzmijeniRadniNalog(this,homeForm);
     }
 
     /**
@@ -581,7 +571,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRazduziActionPerformed
 
     private void btnAzurirajNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajNalogActionPerformed
-        radniNalogLogika.azurirajNalog(this);
+        radniNalogLogika.azurirajNalog(this,homeForm);
     }//GEN-LAST:event_btnAzurirajNalogActionPerformed
 
     private void btnUkloniDioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUkloniDioActionPerformed

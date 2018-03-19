@@ -92,6 +92,92 @@ public class MySQLDioDAO implements DioDAO {
     }
 
     @Override
+    public ArrayList<DioDTO> getDijeloviZaBiloKojiParametar(DioDTO dio){
+       ArrayList<DioDTO> retVal = new ArrayList<DioDTO>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "
+                + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n"
+                + "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila WHERE";
+         //uvijek mora biti novo ili polovno
+        //gorivo uvijek mora biti benzin,dizel ili svi
+        query+=" d.Novo=?";
+        if(!"Svi".equals(dio.getVrstaGoriva())){
+            query+=" AND d.VrstaGoriva=?";
+        }
+        if(dio.getId()!=0){
+            query+=" AND d.IdDio=?";
+        }
+        if(!"".equals(dio.getSifra())){
+            query+=" AND d.Sifra LIKE ?";
+        }
+        if(!"".equals(dio.getNaziv())){
+            query+=" AND d.Naziv LIKE ?";
+        }
+        if(dio.getGodisteVozila()!=null){
+            query+=" AND d.GodisteVozila=?";
+        }      
+        if(!"Svi".equals(dio.getModel())){
+            query+=" AND mv.Model=?";
+        }
+        if(!"Svi".equals(dio.getMarka())){
+            query+=" AND mv.Marka=?";
+        }
+        query+=";";
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            //stavljamo parametre
+            ps.setBoolean(1,dio.getNovo());
+            int brojac=2;
+            if(!"Svi".equals(dio.getVrstaGoriva())){
+                ps.setString(brojac,dio.getVrstaGoriva());
+                brojac++;
+            }
+            if(dio.getId()!=0){
+                ps.setInt(brojac,dio.getId());
+                brojac++;
+            }
+            if(!"".equals(dio.getSifra())){
+                ps.setString(brojac,"%"+dio.getSifra()+"%");
+                brojac++;
+            }
+            if(!"".equals(dio.getNaziv())){
+                ps.setString(brojac,"%"+dio.getNaziv()+"%");
+                brojac++;
+            }
+            if(dio.getGodisteVozila()!=null){
+                ps.setInt(brojac,dio.getGodisteVozila());
+                brojac++;
+            }      
+            if(!"Svi".equals(dio.getModel())){
+                ps.setString(brojac,dio.getModel());
+                brojac++;
+            }
+            if(!"Svi".equals(dio.getMarka())){
+                ps.setString(brojac,dio.getMarka());
+                brojac++;
+            }
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retVal.add(new DioDTO(rs.getInt("d.IdDio"), rs.getString("d.Sifra"), rs.getString("d.Naziv"),
+                        rs.getString("d.VrstaGoriva"), rs.getInt("d.GodisteVozila"), rs.getBoolean("d.Novo"),
+                        rs.getDouble("d.TrenutnaCijena"), rs.getInt("d.Kolicina"), rs.getBoolean("d.ZaSve"),
+                        rs.getString("mv.Marka"), rs.getString("mv.Model")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+   }
+    @Override
     public DioDTO getDio(String sifra) {
         DioDTO retVal = null;
         Connection conn = null;

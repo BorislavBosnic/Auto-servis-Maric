@@ -111,7 +111,7 @@ public class Usluge
         }
     }
     
-     public static void dodajPopupMeniPretragaRadniNaloga() {
+     public static void dodajPopupMeniPretragaRadniNaloga(HomeForm1 homeForm) {
         opcija = -1;
         forma.setPopupMenu(new JPopupMenu());
         JMenuItem izmijeniItem = new JMenuItem("Izmijeni");
@@ -124,7 +124,7 @@ public class Usluge
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
-                new IzmijeniRadniNalogDialog(new JFrame(), true, id).setVisible(true);
+                new IzmijeniRadniNalogDialog(new JFrame(), true, id,homeForm).setVisible(true);
             }
         });
         forma.getPopupMenu().add(izmijeniItem);

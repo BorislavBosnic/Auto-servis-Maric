@@ -749,20 +749,20 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="lblDat2" min="-2" pref="27" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblDatt" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="888" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="danasnjeAktivnostiPanel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Napomene2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="Napomene2" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="pnlPocetnaMenu" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="134" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1170,10 +1170,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblBaza" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblPoslednjiPut" alignment="0" pref="220" max="32767" attributes="0"/>
+                                          <Component id="lblPoslednjiPut" alignment="0" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="btnBaza" min="-2" pref="208" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -1299,7 +1299,7 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel18" pref="510" max="32767" attributes="0"/>
+                                      <Component id="jLabel18" max="32767" attributes="0"/>
                                       <Component id="jScrollPane8" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1338,7 +1338,7 @@
                                     <Column editable="false" title="Iznos" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblNeplaceneFakture.setAutoCreateRowSorter(true);">
                                   <TableColumnModel selectionModel="0">
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                                       <Title/>
@@ -1473,7 +1473,7 @@
                                     <Column editable="false" title="Rok" type="java.lang.String"/>
                                   </Table>
                                 </Property>
-                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblAktivnosti.setAutoCreateRowSorter(true);">
                                   <TableColumnModel selectionModel="0">
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
                                       <Title/>
@@ -1533,8 +1533,8 @@
                       <Component id="panelOsnovniRN" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="spanelTabela" min="-2" pref="1052" max="-2" attributes="0"/>
-                          <EmptySpace pref="2114" max="32767" attributes="0"/>
+                          <Component id="spanelTabela" min="-2" pref="1070" max="-2" attributes="0"/>
+                          <EmptySpace pref="2096" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1615,7 +1615,7 @@
                                   <Component id="panelPretraga" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="btnNoviRadniNalog" min="-2" pref="207" max="-2" attributes="0"/>
-                                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                                  <EmptySpace pref="143" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -4212,10 +4212,11 @@
                                   <Font name="Tahoma" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Svi"/>
                                     <StringItem index="1" value="Benzin"/>
                                     <StringItem index="2" value="Dizel"/>
+                                    <StringItem index="3" value="Plin"/>
                                   </StringArray>
                                 </Property>
                                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -4475,10 +4476,11 @@
                                   <Font name="Tahoma" size="14" style="0"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                  <StringArray count="3">
+                                  <StringArray count="4">
                                     <StringItem index="0" value="Svi"/>
                                     <StringItem index="1" value="Benzin"/>
                                     <StringItem index="2" value="Dizel"/>
+                                    <StringItem index="3" value="Plin"/>
                                   </StringArray>
                                 </Property>
                                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

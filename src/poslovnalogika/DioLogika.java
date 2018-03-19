@@ -167,6 +167,7 @@ public class DioLogika {
 
         sifra = form.getTfSifra().getText();
         naziv = form.getTfNaziv().getText();
+        stanje=form.getCbNovo().isSelected();
         try {
             id = Integer.parseInt(form.getTfId().getText());
         } catch (NumberFormatException e) {
@@ -191,8 +192,9 @@ public class DioLogika {
         gorivo = (String) form.getCbGorivo().getSelectedItem();
         marka = (String) form.getCbMarka().getSelectedItem();
         model = (String) form.getCbModel().getSelectedItem();
-        ArrayList<DioDTO> dijelovi = new ArrayList<DioDTO>();
-        if (id != 0) {
+        DioDTO dio=new DioDTO(id,sifra,naziv,gorivo,godiste,stanje,cijena,kolicina,true,marka,model);
+        ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaBiloKojiParametar(dio);
+        /*if (id != 0) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));
         } else if (!"".equals(sifra)) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(sifra));
@@ -237,8 +239,9 @@ public class DioLogika {
                 dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(gorivo, marka, model, stanje);
             }
         } else {
+            JOptionPane.showMessageDialog(null,"Polja za pretragu su prazna.Popunite još neka polja pa ponovite pretragu", "Problem", JOptionPane.ERROR_MESSAGE);
             dijelovi = null;
-        }
+        }*/
 
         DefaultTableModel dtm = (DefaultTableModel) form.getJTable().getModel();
         dtm.setRowCount(0);

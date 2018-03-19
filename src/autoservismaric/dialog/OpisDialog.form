@@ -53,7 +53,7 @@
                       <Component id="pnlOsnovno" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btnPromjeniOpis" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="btnPromjeniOpis" min="-2" pref="156" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnNazad" min="-2" pref="112" max="-2" attributes="0"/>
                       </Group>

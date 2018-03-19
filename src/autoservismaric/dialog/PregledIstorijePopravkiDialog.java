@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,21 +28,23 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     private int idVozila;
     public static Integer IdRadnogNaloga;
     public RadniNalogLogika radniNalogLogika = new RadniNalogLogika();
-
+    private HomeForm1 homeForm;
     /**
      * Creates new form PregledIstorijePopravkiDialog
      */
-    public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal) {
+    public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal,HomeForm1 homeForm) {
         super(parent, modal);
         initComponents();
 
+        this.homeForm=homeForm;
         tabela.setDefaultEditor(Object.class, null);
         tabela.setAutoCreateRowSorter(true);
     }
 
-    public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal, int idVozila) {
+    public PregledIstorijePopravkiDialog(java.awt.Frame parent, boolean modal, int idVozila,HomeForm1 homeForm) {
         super(parent, modal);
         initComponents();
+        this.homeForm=homeForm;
         this.idVozila = idVozila;
         
         radniNalogLogika.inicijalizacijaPregledIstorije(this);
@@ -526,7 +529,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
     private void btnAzurirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzurirajActionPerformed
         Integer IdNaloga = Integer.parseInt(tbIdNaloga.getText());
 
-        new IzmijeniRadniNalogDialog(new JFrame(), true, IdNaloga).setVisible(true);
+        new IzmijeniRadniNalogDialog(new JFrame(), true, IdNaloga,homeForm).setVisible(true);
 
     }//GEN-LAST:event_btnAzurirajActionPerformed
 
@@ -686,9 +689,9 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PregledIstorijePopravkiDialog dialog = new PregledIstorijePopravkiDialog(new javax.swing.JFrame(), true);
+                PregledIstorijePopravkiDialog dialog = new PregledIstorijePopravkiDialog(new javax.swing.JFrame(), true,homeForm);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -697,7 +700,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
                 });
                 dialog.setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

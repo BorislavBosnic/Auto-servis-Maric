@@ -9,8 +9,10 @@ import autoservismaric.forms.HomeForm1;
 import data.AutoSuggestor;
 import java.awt.Color;
 import java.awt.ScrollPane;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import poslovnalogika.MarkaIModelUcitavanje;
 import poslovnalogika.VoziloLogika;
 
 /**
@@ -40,6 +43,10 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
+        for(int i=0;i<marke.size();i++){
+            cbMarkaVozila.addItem(marke.get(i));
+        }
     }
 
     public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal, int idVozila) {
@@ -51,6 +58,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         bg.add(rbPravni);
         bg.add(rbPrivatni);
         voziloLogika.inicijalizujIzmijeniDijaloga(this);
+        ucitajMarkuVozila();
         //marke = voziloLogika.ucitajPreporukeMarke(this);
         //model = voziloLogika.ucitajPreporukeModel(this);
     }
@@ -81,7 +89,6 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         panelDodajVozilo = new javax.swing.JPanel();
         tfRegistracija = new javax.swing.JTextField();
-        tfMarka = new javax.swing.JTextField();
         tfGodiste = new javax.swing.JTextField();
         jLabel98 = new javax.swing.JLabel();
         jLabel99 = new javax.swing.JLabel();
@@ -92,13 +99,11 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         tfKubikaza = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        tfGorivo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnIzmijeni = new javax.swing.JButton();
         btnOdustani = new javax.swing.JButton();
         btnAddModel = new javax.swing.JButton();
-        tfModel = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfKilovat = new javax.swing.JTextField();
@@ -117,6 +122,9 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         btnPrikaziSve = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         rbPrivatni = new javax.swing.JRadioButton();
+        cbGorivo = new javax.swing.JComboBox<>();
+        cbMarkaVozila = new javax.swing.JComboBox<>();
+        cbModelVozila = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Izmijeni podatke o vozilu");
@@ -148,7 +156,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Kubikaza:");
+        jLabel22.setText("Kubikaza(ccm):");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -349,6 +357,14 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfVlasnikIme, tfVlasnikNaziv, tfVlasnikPrezime});
 
+        cbGorivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svi", "Dizel", "Benzin", "Plin" }));
+
+        cbMarkaVozila.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMarkaVozilaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDodajVoziloLayout = new javax.swing.GroupLayout(panelDodajVozilo);
         panelDodajVozilo.setLayout(panelDodajVoziloLayout);
         panelDodajVoziloLayout.setHorizontalGroup(
@@ -362,42 +378,43 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel98)
                                     .addComponent(jLabel100))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                        .addGap(100, 100, 100)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnOdustani)
                                         .addGap(31, 31, 31)
                                         .addComponent(btnIzmijeni))
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(tfRegistracija, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(35, 35, 35)
+                                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel5)
                                                     .addComponent(jLabel6))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(tfModel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                                                    .addComponent(tfMarka, javax.swing.GroupLayout.Alignment.TRAILING))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnAddModel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(42, 42, 42)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cbMarkaVozila, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cbModelVozila, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnAddModel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(tfRegistracija))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel23)
-                                            .addComponent(jLabel22)
-                                            .addComponent(jLabel99)
+                                            .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel99)
+                                                .addComponent(jLabel23))
                                             .addComponent(jLabel101))
                                         .addGap(18, 18, 18)
-                                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfGorivo)
+                                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(tfKubikaza)
-                                            .addComponent(tfKilovat, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfGodiste))))
-                                .addGap(213, 213, 213))
+                                            .addComponent(tfKilovat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                            .addComponent(tfGodiste)
+                                            .addComponent(cbGorivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(150, 150, 150))
                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(109, 109, 109)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,60 +428,49 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        panelDodajVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfGodiste, tfGorivo, tfKilovat, tfKubikaza, tfRegistracija});
+        panelDodajVoziloLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tfGodiste, tfKilovat, tfKubikaza, tfRegistracija});
 
         panelDodajVoziloLayout.setVerticalGroup(
             panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel98)
+                    .addComponent(jLabel23)
+                    .addComponent(cbGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddModel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel98))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddModel, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel100)
-                                        .addComponent(jLabel5))
-                                    .addComponent(tfMarka, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(tfModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel99)
+                            .addComponent(tfKilovat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(tfKubikaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(tfKilovat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfKubikaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel23)
-                                    .addComponent(tfGorivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabel99)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel22)))))
+                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel100)
+                            .addComponent(jLabel5)
+                            .addComponent(cbMarkaVozila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(cbModelVozila, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)))
                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel101)))
+                        .addGap(9, 9, 9)
+                        .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfGodiste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel101))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -481,7 +487,7 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
                         .addContainerGap())))
         );
 
-        panelDodajVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfGodiste, tfGorivo, tfKilovat, tfKubikaza, tfRegistracija});
+        panelDodajVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfGodiste, tfKilovat, tfKubikaza, tfRegistracija});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -581,6 +587,20 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         new DodajVlasnikaDialog(new JFrame(), true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
+    private void cbMarkaVozilaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarkaVozilaItemStateChanged
+        ArrayList<String> model=MarkaIModelUcitavanje.ucitajSveModele(cbMarkaVozila.getSelectedItem().toString());
+        cbModelVozila.removeAllItems();
+        for(int i=0;i<model.size();i++){
+            cbModelVozila.addItem(model.get(i));
+        }
+    }//GEN-LAST:event_cbMarkaVozilaItemStateChanged
+
+    public void ucitajMarkuVozila(){
+        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
+        for(int i=0;i<marke.size();i++){
+            cbMarkaVozila.addItem(marke.get(i));
+        }
+    }
     public HomeForm1 getForma() {
         return forma;
     }
@@ -673,10 +693,15 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         return tfGodiste;
     }
 
-    public JTextField getTfGorivo() {
-        return tfGorivo;
+    public JComboBox<String> getCbGorivo() {
+        return cbGorivo;
     }
 
+    public void setCbGorivo(JComboBox<String> cbGorivo) {
+        this.cbGorivo = cbGorivo;
+    }
+
+    
     public JTextField getTfKilovat() {
         return tfKilovat;
     }
@@ -685,13 +710,23 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         return tfKubikaza;
     }
 
-    public JTextField getTfMarka() {
-        return tfMarka;
+    public JComboBox<String> getCbMarkaVozila() {
+        return cbMarkaVozila;
     }
 
-    public JTextField getTfModel() {
-        return tfModel;
+    public void setCbMarkaVozila(JComboBox<String> cbMarkaVozila) {
+        this.cbMarkaVozila = cbMarkaVozila;
     }
+
+    public JComboBox<String> getCbModelVozila() {
+        return cbModelVozila;
+    }
+
+    public void setCbModelVozila(JComboBox<String> cbModelVozila) {
+        this.cbModelVozila = cbModelVozila;
+    }
+
+    
 
     public JTextField getTfRegistracija() {
         return tfRegistracija;
@@ -758,6 +793,9 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnOdustani;
     private javax.swing.JButton btnPrikaziSve;
     private javax.swing.JButton btnTraziVlasnika;
+    private javax.swing.JComboBox<String> cbGorivo;
+    private javax.swing.JComboBox<String> cbMarkaVozila;
+    private javax.swing.JComboBox<String> cbModelVozila;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -782,11 +820,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     private java.awt.ScrollPane scrollPane1;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField tfGodiste;
-    private javax.swing.JTextField tfGorivo;
     private javax.swing.JTextField tfKilovat;
     private javax.swing.JTextField tfKubikaza;
-    private javax.swing.JTextField tfMarka;
-    private javax.swing.JTextField tfModel;
     private javax.swing.JTextField tfRegistracija;
     private javax.swing.JTextField tfVlasnikIme;
     private javax.swing.JTextField tfVlasnikNaziv;
