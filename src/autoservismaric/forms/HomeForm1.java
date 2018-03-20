@@ -5461,7 +5461,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             Double cijena=Double.parseDouble(txtBezPDV.getText());
             Double pdv=Double.parseDouble(txtPDV.getText());
             Double ukupno=cijena*(1+pdv/100);
-            txtUkupno.setText(ukupno.toString());
+            txtUkupno.setText(String.format("%.2f",ukupno));
         }
     }//GEN-LAST:event_txtPDVActionPerformed
 

@@ -115,11 +115,11 @@ public class KnjigovodstvoLogika
         Double ukupnaCijena=(cijena*Math.round(1+PDV/100));
         String[] nazivi={"ID","Naziv","Količina","Cijena(KM)"};
         dtm.setDataVector(sve,nazivi);
-        dtm.addRow(new Object[]{"-","Troskovi","1",nalog.getTroskovi()});
+        dtm.addRow(new Object[]{"-", "Troskovi", "1", nalog.getTroskovi()});
+        
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         txtBezPDV.setText(String.format("%.2f", cijena));
-        System.out.println(ukupnaCijena);
         txtUkupno.setText(String.format("%.2f", ukupnaCijena));
     }
     public static void prikaziFakturu(JTable fakture, JTable stavke,Double PDV, String fakturaIliRacun)
