@@ -14,11 +14,6 @@ import data.dto.KupacDTO;
 import data.dto.RadniNalogDTO;
 import data.dto.RadniNalogDioDTO;
 import data.dto.VoziloDTO;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import static java.lang.Math.abs;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -37,28 +32,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class KnjigovodstvoLogika
 {
-    public static double PDV;
     public static String IME_PRODAVCA="Auto Servis Marić";
     public static String ADRESA_PRODAVCA="Marka Markovića 33";
     public static String GRAD_PRODAVCA="Prnjavor";
     public static String EMAIL_PRODAVCA="maricmaric@teol.net";
     public static String NEFAKTURISAN="Nije fakturisan";
     public static String NEFAKTURISAN_DATUM="xxx";
-    static{
-        try
-        {
-            FileInputStream fileIn =
-            new FileInputStream("Data.data");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            PDV=in.readDouble();
-            in.close();
-            fileIn.close();
-        }
-        catch (IOException i)
-        {
-            i.printStackTrace();
-        }
-    }
+    
+  
     public static void radniNaloziZaTabelu(ArrayList<RadniNalogDTO>lista, JTable tabela)
     {
         DefaultTableModel dtm = (DefaultTableModel)tabela.getModel();
@@ -76,24 +57,31 @@ public class KnjigovodstvoLogika
             else
                 sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
-            sve[i][3]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
+            sve[i][3]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(lista.get(i).getDatumOtvaranjaNaloga()));
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
                 sve[i][4]=NEFAKTURISAN;
                 sve[i][5]=NEFAKTURISAN_DATUM;
             if(faktura!=null)
             {
-                sve[i][4]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()));
+                sve[i][4]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(faktura.getDatumIzdavanja()));
                 sve[i][5]=String.valueOf(faktura.getIznos());
             }
             sve[i][6]=Boolean.valueOf(DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(lista.get(i).getIdRadniNalog()).isPlaceno());
         }
-        String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos","Plaćeno"};
+        String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos(KM)","Plaćeno"};
         dtm.setDataVector(sve,nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     public static void stavkeSaNalogaZaTabelu(JTable tabela, JTable nalozi,
             JTextField  txtBezPDV, JTextField txtPDV, JTextField txtUkupno)
     {
+        Double PDV;
+        try{
+            PDV=Double.valueOf(txtPDV.getText());
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, "PDV nije uredu!","Problem", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int row = nalozi.convertRowIndexToModel(nalozi.getSelectedRow());
         if(row<0)row=0;
         int idRadnogNaloga=Integer.parseInt((String)nalozi.getValueAt(row, 0));
@@ -112,7 +100,7 @@ public class KnjigovodstvoLogika
                         " "+dio.getVrstaGoriva()+" "+dio.getGodisteVozila());
                 sve[i][2]=String.valueOf(lista.get(i).getKolicina());
                 sve[i][3]=String.valueOf(lista.get(i).getCijena());
-                sve[i][4]=String.format("%.2f", (lista.get(i).getCijena()*(1.0+PDV)));
+                //sve[i][4]=String.format("%.2f", (lista.get(i).getCijena()*(1.0+PDV)));
                 
                 cijena+=lista.get(i).getCijena()*lista.get(i).getKolicina();
         }
@@ -120,28 +108,29 @@ public class KnjigovodstvoLogika
         sve[lista.size()][1]="Rad";
         sve[lista.size()][2]="1";
         sve[lista.size()][3]=String.format("%.2f", nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);//vezano za troškove
-        sve[lista.size()][4]=String.format("%.2f", (nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
-        cijena+=nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/;//vezano za troškove
+        //sve[lista.size()][4]=String.format("%.2f", (nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
+        cijena+=nalog.getCijenaUsluge()+nalog.getTroskovi();//vezano za troškove
         
-        String[] nazivi={"ID","Naziv","Količina","Osnovica","Cijena sa PDV-om"};
+        
+        Double ukupnaCijena=(cijena*Math.round(1+PDV/100));
+        String[] nazivi={"ID","Naziv","Količina","Cijena(KM)"};
         dtm.setDataVector(sve,nazivi);
+        dtm.addRow(new Object[]{"-","Troskovi","1",nalog.getTroskovi()});
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         txtBezPDV.setText(String.format("%.2f", cijena));
-        txtPDV.setText(String.format("%.2f", cijena * PDV));
-        txtUkupno.setText(String.format("%.2f", cijena * (1+PDV)));
+        System.out.println(ukupnaCijena);
+        txtUkupno.setText(String.format("%.2f", ukupnaCijena));
     }
-    public static void prikaziFakturu(JTable fakture, JTable stavke, String fakturaIliRacun)
+    public static void prikaziFakturu(JTable fakture, JTable stavke,Double PDV, String fakturaIliRacun)
     {
         int selectedRow=fakture.getSelectedRow();
-        
         Thread t=new Thread()
         {
             public void run()
             {
                 int brojNaloga=Integer.parseInt((String)(fakture.getValueAt(selectedRow,0)));
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(brojNaloga);
-                System.out.println(faktura);
                 RadniNalogDTO nalog=DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(brojNaloga);
                 VoziloDTO vozilo=DAOFactory.getDAOFactory().getVoziloDAO().vozilo(nalog.getIdVozilo());
                 KupacDTO kupac=DAOFactory.getDAOFactory().getKupacDAO().kupac(vozilo.getIdKupac());
@@ -156,7 +145,7 @@ public class KnjigovodstvoLogika
                 FakturaLogika.create
                 (
                         stavke,
-                        KnjigovodstvoLogika.PDV,
+                        PDV/100,
                         //DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1, //auto ID
                         (faktura!=null)?faktura.getIdFaktura():nalog.getIdRadniNalog(),
                         KnjigovodstvoLogika.IME_PRODAVCA,
@@ -203,18 +192,18 @@ public class KnjigovodstvoLogika
             else
                 sve[i][2]=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme()+" "
                     +DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getPrezime();
-            sve[i][3]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
+            sve[i][3]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(lista.get(i).getDatumOtvaranjaNaloga()));
                 FakturaDTO faktura=DAOFactory.getDAOFactory().getFakturaDAO().fakturaRadniNalog(lista.get(i).getIdRadniNalog());
                 sve[i][4]=NEFAKTURISAN;
                 sve[i][5]=NEFAKTURISAN_DATUM;
             if(faktura!=null)
             {
-                sve[i][4]=String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(faktura.getDatumIzdavanja()));
+                sve[i][4]=String.valueOf(new SimpleDateFormat("yyyy.MM.dd").format(faktura.getDatumIzdavanja()));
                 sve[i][5]=String.valueOf(faktura.getIznos());
             }
             //sve[i][6]=Boolean.valueOf(DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalog(lista.get(i).getIdRadniNalog()).isPlaceno());
         }
-        String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos"};
+        String[] nazivi={"ID","Automobil","Vlasnik","Datum otvaranja","Datum fakturisanja","Iznos(KM)"};
         dtm.setDataVector(sve,nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -330,15 +319,14 @@ public class KnjigovodstvoLogika
             JOptionPane.showMessageDialog(new JFrame(), "Nalog je već fakturisan!", "Greška!", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        //double iznos=0;
-        //ArrayList<RadniNalogDioDTO>lista=DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(id);
-        //for(RadniNalogDioDTO item:lista)iznos+=item.getCijena()*item.getKolicina();
+        
+        
         FakturaDTO faktura=new FakturaDTO
         (
                 DAOFactory.getDAOFactory().getFakturaDAO().getMaxID()+1,
                 new Date(Calendar.getInstance().getTime().getTime()),
                 id,
-                Double.parseDouble(txtUkupno.getText())/*(iznos+nalog.getCijenaUsluge()+nalog.getTroskovi())*(PDV+1)*/,
+                Double.valueOf(txtUkupno.getText())/*(iznos+nalog.getCijenaUsluge()+nalog.getTroskovi())*(PDV+1)*/,
                 (int)(nalog.getTroskovi()/30)
         );
         DAOFactory.getDAOFactory().getFakturaDAO().dodajFakturu(faktura);
@@ -367,7 +355,7 @@ public class KnjigovodstvoLogika
         String rez="ID naloga: "+nalog.getIdRadniNalog()
                 +"\nOpis problema: "+opis
                 +"\nDatum otvaranja naloga: "+new SimpleDateFormat("dd.MM.yyyy.").format(nalog.getDatumOtvaranjaNaloga())
-                +"\nDatum zatvaranja naloga: "+new SimpleDateFormat("dd.MM.yyyy.").format(nalog.getDatumZatvaranjaNaloga());
+                +"\nDatum zatvaranja naloga: "+((nalog.getDatumZatvaranjaNaloga()!=null)?new SimpleDateFormat("dd.MM.yyyy.").format(nalog.getDatumZatvaranjaNaloga()):"Nalog nije zatvoren");
         if(faktura!=null)
             rez+="\nFakturisano:"
                 +"\nID fakture: "+faktura.getIdFaktura()
@@ -377,7 +365,7 @@ public class KnjigovodstvoLogika
         return rez;
     }
     
-    public static void main(String[] args)
+    /*public static void main(String[] args)
     {
         try
         {
@@ -392,5 +380,5 @@ public class KnjigovodstvoLogika
         {
             i.printStackTrace();
         }
-    }
+    }*/
 }

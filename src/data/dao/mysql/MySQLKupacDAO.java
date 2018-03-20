@@ -26,8 +26,8 @@ public class MySQLKupacDAO implements KupacDAO{
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-                        ps.setString(1, ime);
-                        ps.setString(2, prezime);
+                        ps.setString(1,"%"+ ime+"%");
+                        ps.setString(2,"%"+ prezime+"%");
 			rs = ps.executeQuery();
 
 			while (rs.next())
@@ -81,12 +81,12 @@ public class MySQLKupacDAO implements KupacDAO{
 
 		String query = "SELECT IdKupac, Naziv, Ime, Prezime, Telefon, Adresa, Grad "
 				+ "FROM kupac "
-                                + "WHERE Naziv=? AND Aktivan!=false "
+                                + "WHERE Naziv LIKE ? AND Aktivan!=false "
 				+ "ORDER BY IdKupac ASC ";
 		try {
 			conn = ConnectionPool.getInstance().checkOut();
 			ps = conn.prepareStatement(query);
-                        ps.setString(1, naziv);
+                        ps.setString(1,"%"+ naziv+"%");
 			rs = ps.executeQuery();
 
 			while (rs.next())

@@ -140,7 +140,7 @@ public class PocetnaLogika {
             public void actionPerformed(ActionEvent e) {
                 int izbor = JOptionPane.showOptionDialog(
                         new JFrame(),
-                        "Da li ste sigurni da je placeno?",
+                        "Da li ste sigurni da je plaćeno?",
                         "Da li ste sigurni?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE,

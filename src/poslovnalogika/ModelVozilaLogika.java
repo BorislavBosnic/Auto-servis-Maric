@@ -73,7 +73,12 @@ public class ModelVozilaLogika {
                     //lbPoruka.setText("Uspješno dodato.");
 
                     JOptionPane.showMessageDialog(dijalog, "Uspješno dodat model", "Obavješenje", JOptionPane.INFORMATION_MESSAGE);
-
+                    if(dijalog.getDvd()!=null){
+                        dijalog.getDvd().autoCompleteMarkaIModel();
+                    }
+                    if(dijalog.getIvd()!=null){
+                        dijalog.getIvd().ucitajMarkuVozila();
+                    }
                     if (dijalog.getDvd() != null) {
                         // dvd.ucitajPreporukeMarke();
                         //dvd.ucitajPreporukeModel();

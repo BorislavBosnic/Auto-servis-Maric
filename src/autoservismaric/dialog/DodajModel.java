@@ -30,8 +30,7 @@ public class DodajModel extends javax.swing.JDialog {
     public DodajModel(DodajVoziloDialog dvd, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.dvd = dvd;
-        
+        this.dvd = dvd;        
     }
     
     public DodajModel(IzmijeniVoziloDialog ivd, java.awt.Frame parent, boolean modal) {

@@ -38,7 +38,7 @@ public class FakturaLogika {
            Item item=new Item();
            item.setDescription((String)tabela.getValueAt(i, 1));
            item.setQuantity(Integer.valueOf((String)tabela.getValueAt(i, 2)));
-           item.setUnitprice(BigDecimal.valueOf(Double.valueOf((String)tabela.getValueAt(i, 3))));
+           item.setUnitprice(BigDecimal.valueOf(Double.valueOf(tabela.getValueAt(i, 3).toString())));
            items.add(item);
        }
        /**Prodavac**/
@@ -134,12 +134,12 @@ public class FakturaLogika {
          .setFixedWidth(250);
       TextColumnBuilder<Integer> quantityColumn = col.column("Količina", "quantity", type.integerType())
          .setHorizontalAlignment(HorizontalAlignment.CENTER);
-      TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Cijena", "unitprice", type.bigDecimalType());
+      TextColumnBuilder<BigDecimal> unitPriceColumn = col.column("Cijena(KM)", "unitprice", type.bigDecimalType());
       TextColumnBuilder<String> taxColumn = col.column("Porez", exp.text("17%"))
          .setFixedColumns(3);
       //price = unitPrice * quantity
       TextColumnBuilder<BigDecimal> priceColumn = unitPriceColumn.multiply(quantityColumn)
-         .setTitle("Cijena")
+         .setTitle("Cijena(KM)")
          .setDataType(type.bigDecimalType());
       //vat = price * tax
 
@@ -148,17 +148,17 @@ public class FakturaLogika {
       data.getInvoice().setShipping(BigDecimal.ZERO);
 
       TextColumnBuilder<BigDecimal> vatColumn = priceColumn.multiply(data.getInvoice().getTax())
-         .setTitle("PDV")
+         .setTitle("PDV ("+(pdv*100)+"%)")
          .setDataType(type.bigDecimalType());
       //total = price + vat
       TextColumnBuilder<BigDecimal> totalColumn = priceColumn.add(vatColumn)
-         .setTitle("Ukupno")
+         .setTitle("Ukupno(KM)")
          .setDataType(type.bigDecimalType())
          .setRows(2)
          .setStyle(subtotalStyle);
       //init subtotals
       totalSum = sbt.sum(totalColumn)
-         .setLabel("Iznos:")
+         .setLabel("Iznos(KM):")
          .setLabelStyle(Templates.boldStyle);
 
       //configure report
@@ -194,10 +194,10 @@ public class FakturaLogika {
          .summary(
             /*cmp.text(data.getInvoice().getShipping()).setValueFormatter(Templates.createCurrencyValueFormatter("Dostava:")).setStyle(shippingStyle),*/
             cmp.horizontalList(
-               cmp.text("Rok za plaćanje: 30 dana").setStyle(Templates.bold12CenteredStyle),
+               cmp.text("Rok za uplatu: 30 dana").setStyle(Templates.bold12CenteredStyle),
                cmp.text(new TotalPaymentExpression()).setStyle(Templates.bold22CenteredStyle.setHorizontalTextAlignment(HorizontalTextAlignment.RIGHT))),
             cmp.verticalGap(30),
-            cmp.text("Hvala Vam na povjerenju i dođite nam opet.").setStyle(Templates.bold12CenteredStyle))
+            cmp.text("Hvala Vam na povjerenju.").setStyle(Templates.bold12CenteredStyle))
          .setDataSource(data.createDataSource());
 
       return report;
@@ -227,7 +227,7 @@ public class FakturaLogika {
       public String evaluate(ReportParameters reportParameters) {
          BigDecimal total = reportParameters.getValue(totalSum);
          BigDecimal shipping = total.add(data.getInvoice().getShipping());
-         return "Iznos: " + type.bigDecimalType().valueToString(shipping, reportParameters.getLocale());
+         return "Iznos(KM): " + type.bigDecimalType().valueToString(shipping, reportParameters.getLocale());
       }
    }
 }

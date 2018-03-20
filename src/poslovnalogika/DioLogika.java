@@ -8,7 +8,6 @@ package poslovnalogika;
 import autoservismaric.dialog.IzmijeniDioDialog;
 import autoservismaric.dialog.ProdajDioDialog;
 import autoservismaric.forms.HomeForm1;
-import static autoservismaric.forms.HomeForm1.pdv;
 import static autoservismaric.forms.HomeForm1.selRedDio;
 import data.dao.DAOFactory;
 import data.dto.DioDTO;
@@ -264,7 +263,7 @@ public class DioLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProdajDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow(), pdv, form).setVisible(true);
+                new ProdajDioDialog((DefaultTableModel) jTable.getModel(), jTable.getSelectedRow(), 0.0, form).setVisible(true);
             }
         });
         form.getPopupDio().add(prodaj);

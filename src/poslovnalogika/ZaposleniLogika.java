@@ -16,8 +16,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import data.dto.ZaposleniPomocniDTO;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  *
@@ -129,7 +129,7 @@ public class ZaposleniLogika extends Thread{
                rez=i.next();
                table.addRow(new Object[]{rez.getMarka()
                             ,rez.getModel(),rez.getBrojRegistracije(),
-                            rez.getDatumZatvaranjaNaloga()
+                            new SimpleDateFormat("yyyy.MM.dd").format(rez.getDatumZatvaranjaNaloga())
                             ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge(),rez.getCijenaUsluge()-rez.getTroskovi()});
                brojNaloga++;
                ukupanProfit+=(rez.getCijenaUsluge()-rez.getTroskovi());

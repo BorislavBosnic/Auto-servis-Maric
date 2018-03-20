@@ -69,6 +69,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         this.idVozila = idVozila;
         this.forma = forma;
 
+        ucitajMarkuVozila();
+        
         bg = new ButtonGroup();
         bg.add(rbPravni);
         bg.add(rbPrivatni);
@@ -377,7 +379,11 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel98)
-                                    .addComponent(jLabel100))
+                                    .addGroup(panelDodajVoziloLayout.createSequentialGroup()
+                                        .addComponent(jLabel100)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel5))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -385,13 +391,9 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
                                         .addGap(31, 31, 31)
                                         .addComponent(btnIzmijeni))
                                     .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                        .addGap(35, 35, 35)
+                                        .addGap(4, 4, 4)
                                         .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(panelDodajVoziloLayout.createSequentialGroup()
-                                                .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(jLabel6))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(cbMarkaVozila, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(cbModelVozila, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

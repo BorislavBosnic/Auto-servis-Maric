@@ -140,7 +140,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
 
         lblTroskovi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTroskovi.setForeground(new java.awt.Color(255, 255, 255));
-        lblTroskovi.setText("Troškovi:");
+        lblTroskovi.setText("Troškovi(KM):");
 
         lblKilometraza.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblKilometraza.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,7 +152,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
 
         lblCijena.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCijena.setForeground(new java.awt.Color(255, 255, 255));
-        lblCijena.setText("Cijena usluge:");
+        lblCijena.setText("Cijena usluge(KM):");
 
         cbPlaceno.setBackground(new java.awt.Color(102, 153, 255));
         cbPlaceno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -191,7 +191,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
 
         lblCijenaDijela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCijenaDijela.setForeground(new java.awt.Color(255, 255, 255));
-        lblCijenaDijela.setText("Cijena dijela:");
+        lblCijenaDijela.setText("Cijena dijela(KM):");
 
         lblKolicina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblKolicina.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,26 +256,26 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
             pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPomocni1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblListaDijelova)
                     .addGroup(pnlPomocni1Layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
+                        .addGap(202, 202, 202)
                         .addComponent(lblCijenaDijela)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblKolicina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDodajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlPomocni1Layout.createSequentialGroup()
                         .addComponent(spnlIzabraniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUkloniDio))
                     .addComponent(lblIzabraniDijelovi)
-                    .addComponent(spnlLista))
-                .addGap(29, 29, 29))
+                    .addComponent(spnlLista, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPomocni1Layout.setVerticalGroup(
             pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,7 +372,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
                 .addGap(9, 9, 9)
                 .addGroup(pnlPomocni2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Zaduzeni)
-                    .addComponent(spnlZaduzeni, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(spnlZaduzeni, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlPomocni2Layout.setVerticalGroup(
@@ -447,10 +447,13 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
                                         .addComponent(datumZatvaranjaNaloga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(potrebnoZavrsitiDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addGap(37, 37, 37)
-                .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlPomocni1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlPomocni2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGroup(pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPodosnovniLayout.createSequentialGroup()
+                        .addComponent(pnlPomocni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 36, Short.MAX_VALUE))
+                    .addGroup(pnlPodosnovniLayout.createSequentialGroup()
+                        .addComponent(pnlPomocni1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         pnlPodosnovniLayout.setVerticalGroup(
             pnlPodosnovniLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,7 +532,9 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlOsnovni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlOsnovni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

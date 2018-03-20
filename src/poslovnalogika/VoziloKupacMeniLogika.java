@@ -496,10 +496,9 @@ public class VoziloKupacMeniLogika {
 
         if (svi) {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
-
             ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
             for (VoziloDTO v : vozila) {
 
@@ -541,7 +540,7 @@ public class VoziloKupacMeniLogika {
             }
         } else {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
 

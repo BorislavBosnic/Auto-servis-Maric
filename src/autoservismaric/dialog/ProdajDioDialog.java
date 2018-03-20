@@ -98,6 +98,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         jSeparator11 = new javax.swing.JSeparator();
         tfUkupno = new javax.swing.JTextField();
         btnUkupno = new javax.swing.JButton();
+        lblCijenaKol1 = new javax.swing.JLabel();
         lblPodaciProdaja = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -144,7 +145,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
 
         lblCijena.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCijena.setForeground(new java.awt.Color(255, 255, 255));
-        lblCijena.setText("Cijena");
+        lblCijena.setText("Cijena(KM):");
 
         lblKolicina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblKolicina.setForeground(new java.awt.Color(255, 255, 255));
@@ -287,7 +288,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
 
         lblCijenaProdaja.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCijenaProdaja.setForeground(new java.awt.Color(255, 255, 255));
-        lblCijenaProdaja.setText("Cijena:");
+        lblCijenaProdaja.setText("Cijena(KM):");
 
         lblCijenaKol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCijenaKol.setForeground(new java.awt.Color(240, 240, 240));
@@ -333,6 +334,10 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             }
         });
 
+        lblCijenaKol1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblCijenaKol1.setForeground(new java.awt.Color(240, 240, 240));
+        lblCijenaKol1.setText("KM");
+
         javax.swing.GroupLayout pnlProdajaLayout = new javax.swing.GroupLayout(pnlProdaja);
         pnlProdaja.setLayout(pnlProdajaLayout);
         pnlProdajaLayout.setHorizontalGroup(
@@ -340,9 +345,22 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             .addGroup(pnlProdajaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlProdajaLayout.createSequentialGroup()
-                        .addComponent(jSeparator11)
-                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdajaLayout.createSequentialGroup()
+                        .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUkupno)
+                            .addComponent(btnOdustani))
+                        .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlProdajaLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfUkupno, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCijenaKol1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7))
+                            .addGroup(pnlProdajaLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnProdaj, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 11, Short.MAX_VALUE))))
+                    .addComponent(jSeparator11)
                     .addGroup(pnlProdajaLayout.createSequentialGroup()
                         .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPdv)
@@ -353,16 +371,8 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                             .addComponent(tfKolicinaProdaja, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(ttfCijenaProdaja, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(jtfPDV, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProdajaLayout.createSequentialGroup()
-                        .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUkupno)
-                            .addComponent(btnOdustani))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnProdaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfUkupno, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
-                        .addGap(20, 20, 20))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlProdajaLayout.setVerticalGroup(
             pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,7 +394,8 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfUkupno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUkupno))
+                    .addComponent(btnUkupno)
+                    .addComponent(lblCijenaKol1))
                 .addGap(27, 27, 27)
                 .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,6 +604,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lbPoruka;
     private javax.swing.JLabel lblCijena;
     private javax.swing.JLabel lblCijenaKol;
+    private javax.swing.JLabel lblCijenaKol1;
     private javax.swing.JLabel lblCijenaProdaja;
     private javax.swing.JLabel lblGodiste;
     private javax.swing.JLabel lblGorivo;
