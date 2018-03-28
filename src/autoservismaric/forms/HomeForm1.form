@@ -57,7 +57,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/autoservismaric/images/document.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Opis radnog naloga"/>
+            <Property name="text" type="java.lang.String" value="Opis posla radnika"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemOpisPoslaActionPerformed"/>
@@ -5913,7 +5913,7 @@
                                 <Column editable="true" title="Registracija" type="java.lang.Object"/>
                                 <Column editable="true" title="Datum popravka" type="java.lang.Object"/>
                                 <Column editable="true" title="Opis uloge radnika" type="java.lang.Object"/>
-                                <Column editable="true" title="Cijena troskova(KM)" type="java.lang.Object"/>
+                                <Column editable="true" title="Cijena tro&#x161;kova(KM)" type="java.lang.Object"/>
                                 <Column editable="true" title="Cijena naplate(KM)" type="java.lang.Object"/>
                                 <Column editable="true" title="Profit(KM)" type="java.lang.Object"/>
                               </Table>

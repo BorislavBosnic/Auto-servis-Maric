@@ -299,7 +299,7 @@ public class MySQLDioDAO implements DioDAO {
 
         String query = "SELECT d.IdDio, Naziv, Sifra, GodisteVozila, Novo, VrstaGoriva, TrenutnaCijena, Kolicina, ZaSve, "
                 + "mv.IdModelVozila, Marka, Model FROM dio d INNER JOIN dio_model_vozila dmv ON d.IdDio=dmv.IdDio\n"
-                + "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila";
+                + "INNER JOIN model_vozila mv ON dmv.IdModelVozila=mv.IdModelVozila WHERE Kolicina>0";
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);

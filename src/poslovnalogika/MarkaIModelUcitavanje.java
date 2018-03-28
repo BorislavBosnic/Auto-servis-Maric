@@ -73,6 +73,7 @@ public class MarkaIModelUcitavanje {
     }
 
     public static void staviSveMarkeUComboBox(JComboBox<String> marka, JComboBox<String> model) {
+       
         ArrayList<String> marke = ucitajSveMarke();
         marka.addItem("");
         for (int i = 0; i < marke.size(); i++) {

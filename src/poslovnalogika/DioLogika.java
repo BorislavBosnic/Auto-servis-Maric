@@ -351,6 +351,7 @@ public class DioLogika {
     public void prikazSvihProdanihDijelova(PregledProdanihDijelovaDialog parent) {
         ArrayList<ProdanDioDTO> lista = DAOFactory.getDAOFactory().getProdanDioDAO().getSviProdaniDijelovi();
         DefaultTableModel table = (DefaultTableModel) parent.getTblProdaniDijelovi().getModel();
+        table.setRowCount(0);
         ProdanDioDTO d=new ProdanDioDTO();
         for (int i = 0; i < lista.size(); i++) {
             d = lista.get(i);

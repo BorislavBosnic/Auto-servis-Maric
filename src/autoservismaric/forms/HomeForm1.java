@@ -703,7 +703,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         popupMenuZaposleni.add(mnItOtpustiRadnika);
 
         menuItemOpisPosla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
-        menuItemOpisPosla.setText("Opis radnog naloga");
+        menuItemOpisPosla.setText("Opis posla radnika");
         menuItemOpisPosla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemOpisPoslaActionPerformed(evt);
@@ -4039,7 +4039,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Marka", "Model", "Registracija", "Datum popravka", "Opis uloge radnika", "Cijena troskova(KM)", "Cijena naplate(KM)", "Profit(KM)"
+                "Marka", "Model", "Registracija", "Datum popravka", "Opis uloge radnika", "Cijena troškova(KM)", "Cijena naplate(KM)", "Profit(KM)"
             }
         ));
         tbRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -4481,7 +4481,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(pnlBrojPopravki, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaUkupno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 

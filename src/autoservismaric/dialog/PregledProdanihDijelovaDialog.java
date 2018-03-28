@@ -7,12 +7,9 @@ package autoservismaric.dialog;
 
 import autoservismaric.forms.HomeForm1;
 import com.toedter.calendar.JDateChooser;
-import javax.accessibility.AccessibleContext;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -34,7 +31,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         initComponents();
         this.homeForm=homeForm;
         setLocationRelativeTo(null);
-        btnSviProdaniDijeloviActionPerformed(null);
+        btnSviProdaniDijelovi.doClick();
     }
 
     /**
@@ -66,6 +63,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
         tblProdaniDijelovi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Prodani djelovi");
 
         pnlProdaniDijelovi.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -146,6 +144,7 @@ public class PregledProdanihDijelovaDialog extends javax.swing.JDialog {
             tblProdaniDijelovi.getColumnModel().getColumn(1).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(2).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(3).setResizable(false);
+            tblProdaniDijelovi.getColumnModel().getColumn(3).setPreferredWidth(80);
             tblProdaniDijelovi.getColumnModel().getColumn(4).setResizable(false);
             tblProdaniDijelovi.getColumnModel().getColumn(5).setResizable(false);
         }

@@ -49,7 +49,7 @@ public class KnjigovodstvoLogika {
             sve[i][1] = DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getMarka()
                     + "  " + DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
             int idKupca = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdKupac();
-            if ("".equals(DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv())) {
+            if (DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv()!=null) {
                 sve[i][2] = DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv() + " ";
             } else {
                 sve[i][2] = DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme() + " "
