@@ -15,7 +15,5 @@ import java.util.ArrayList;
 public interface ProdanDioDAO {
     public boolean dodajProdanDio(ProdanDioDTO dio);
     public ArrayList<ProdanDioDTO> getSviProdaniDijelovi();
-    public ArrayList<ProdanDioDTO> getProdaniDijelovi(Integer idDio);
-    
-    
+    public ArrayList<ProdanDioDTO> traziProdanDio(ProdanDioDTO parametri);  
 }

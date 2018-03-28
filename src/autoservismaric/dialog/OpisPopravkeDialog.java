@@ -40,12 +40,13 @@ public class OpisPopravkeDialog extends javax.swing.JDialog {
         btnNazad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Opis radnog naloga");
+        setTitle("Opis uloge radnika na radnom nalogu");
         setBackground(new java.awt.Color(102, 153, 255));
 
         pnlOsnovno.setBackground(new java.awt.Color(102, 153, 255));
         pnlOsnovno.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        textArea.setEditable(false);
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollOpisPosla.setViewportView(textArea);

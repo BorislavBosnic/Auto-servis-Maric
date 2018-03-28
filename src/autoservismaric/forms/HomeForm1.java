@@ -97,10 +97,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JPopupMenu getPopupDio() {
         return popupDio;
     }
-    
+
     public JPopupMenu getPopupAktivnosti() {
         return popupAktivnosti;
     }
+
     public JPopupMenu getPopupPredracuni() {
         return popupPredracuni;
     }
@@ -129,17 +130,15 @@ public class HomeForm1 extends javax.swing.JFrame {
     public static int selektovanRed; //za popup
     public static int idVozila = -1; //za popup
     public static int akcijaZaRefreshVozila = 0;
-    
-    
 
     public void izbrisiPopupZaVozila() {
         popupMenu.removeAll();
-       // tableVozila.setComponentPopupMenu(popupMenu);
+        // tableVozila.setComponentPopupMenu(popupMenu);
     }
 
     public void izbrisiPopupZaVlasnike() {
         popupMenuVlasnik.removeAll();
-    //    tableVozila.setComponentPopupMenu(popupMenuVlasnik);
+        //    tableVozila.setComponentPopupMenu(popupMenuVlasnik);
     }
 
     public void setPopupMenu(JPopupMenu popupMenu) {
@@ -153,10 +152,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     public void setPopupDio(JPopupMenu popupDio) {
         this.popupDio = popupDio;
     }
-    
+
     public void setPopupAktivnosti(JPopupMenu popupAktivnosti) {
         this.popupAktivnosti = popupAktivnosti;
     }
+
     public void setPopupPredracuni(JPopupMenu popupPredracuni) {
         this.popupPredracuni = popupPredracuni;
     }
@@ -169,15 +169,16 @@ public class HomeForm1 extends javax.swing.JFrame {
     public void ucitajPopupZaVlasnike() {
         voziloKupacMeniLogika.ucitajPopupZaVlasnike(this);
     }
-    
-    public void ucitajPopupZaAktivnosti(){
+
+    public void ucitajPopupZaAktivnosti() {
         pocetnaLogika.ucitajPopupZaAktivnosti();
     }
-    public void ucitajPopupZaPredracune(){
+
+    public void ucitajPopupZaPredracune() {
         pocetnaLogika.ucitajPopupZaPredracune();
     }
-    
-    public void ucitajPopupZaDijelove(){
+
+    public void ucitajPopupZaDijelove() {
         dioLogika.ucitajPopupZaDijelove(this);
     }
 
@@ -189,7 +190,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public static String[] mjeseci = {"Januar", "Februar", "Mart", "April", "Maj", "Jun", "Jul", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar"};
     public static boolean menu[] = new boolean[numberOfItems];
     public StatistikaLogika statistikaLogika;
-    public static int trenutnaGodina=Calendar.getInstance().get(Calendar.YEAR);
+    public static int trenutnaGodina = Calendar.getInstance().get(Calendar.YEAR);
 
     // public static JPanel employeePanel=new EmployeesForm().getPanel();
     // public static JPanel partsPanel=new PartsForm().getPanel();
@@ -200,16 +201,16 @@ public class HomeForm1 extends javax.swing.JFrame {
         initComponents();
         Usluge.inicijalisuciKod(this);
         //za slucaj da je dosla nova godina, automatski se dodaju nove vrijednosti u comboBoxGodina
-        if(((trenutnaGodina-1)+"").equals(cbGodina.getItemAt(1))){
-           // System.out.println(comboBoxGodina.getItemAt(1)+"");
-            cbGodina.insertItemAt(Calendar.getInstance().get(Calendar.YEAR)+"",1);
-       
+        if (((trenutnaGodina - 1) + "").equals(cbGodina.getItemAt(1))) {
+            // System.out.println(comboBoxGodina.getItemAt(1)+"");
+            cbGodina.insertItemAt(Calendar.getInstance().get(Calendar.YEAR) + "", 1);
+
         }
         statistikaLogika = new StatistikaLogika();
         btnPrikaziSvaVozila.doClick();
         btnPrikaziRadniNalog.doClick();
         dodajPopupMeniPretragaRadniNaloga(this);
-        
+
         tabpnlGrafici.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 if (tabpnlGrafici.getSelectedIndex() == 2 || tabpnlGrafici.getSelectedIndex() == 3) {
@@ -232,7 +233,7 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         tfNazivPocetna.setBackground(Color.gray);
         tfNazivPocetna.setEditable(false);
-        
+
         txtNazivTrazi.setBackground(Color.gray);
         txtNazivVozilo.setBackground(Color.gray);
         txtNazivVozilo.setEditable(false);
@@ -245,7 +246,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         bGTraziRadniNalog = new ButtonGroup();
         bGTraziRadniNalog.add(rbPravnoRadniNalog);
         bGTraziRadniNalog.add(rbPrivatnoRadniNalog);
-        
+
         bGTraziVozilo = new ButtonGroup();
         bGTraziVozilo.add(rbPravnoLiceVozilo);
         bGTraziVozilo.add(rbPrivatnoLiceVozilo);
@@ -253,15 +254,12 @@ public class HomeForm1 extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(getClass().getResource("/autoservismaric/images/ikona2.png")).getImage());
 
-        lblAktivnostiOdDo.setText("Aktivnosti: " + new SimpleDateFormat("dd.MM.yyyy.").format(Calendar.getInstance().getTime()));
-
         //mjesec dana ranije
-        Calendar cal=Calendar.getInstance();
-        cal.add(Calendar.MONTH,-1);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
         dcAktivnosti1.setCalendar(cal);
         dcAktivnosti2.setCalendar(Calendar.getInstance());
         btnPrikazii.doClick();
-        lblAktivnostiOdDo.setText("Aktivnosti: " + new SimpleDateFormat("dd.MM.yyyy").format((java.util.Date) dcAktivnosti1.getDate()));
 
         ObjectInputStream ois = null;
         try {
@@ -312,7 +310,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         mnItIzmjeniRadnika = new javax.swing.JMenuItem();
         mnItOtpustiRadnika = new javax.swing.JMenuItem();
         popUpMenuRadniNaloziZaposlenog = new javax.swing.JPopupMenu();
-        menuItemOpisRadnogNaloga = new javax.swing.JMenuItem();
+        menuItemOpisPosla = new javax.swing.JMenuItem();
         pnlMeni = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlMeniRadniNalozi = new javax.swing.JPanel();
@@ -419,6 +417,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         separatorRN = new javax.swing.JSeparator();
         cbSviRadniNalog = new javax.swing.JCheckBox();
         tfPrezimeRadniNalog = new javax.swing.JTextField();
+        btnPrikaziNezatvoreneRadneNaloge = new javax.swing.JButton();
         lbRadniNaloziNaslov = new javax.swing.JLabel();
         lbRadniNaloziSlika = new javax.swing.JLabel();
         spanelTabela = new javax.swing.JScrollPane();
@@ -703,14 +702,14 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
         popupMenuZaposleni.add(mnItOtpustiRadnika);
 
-        menuItemOpisRadnogNaloga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
-        menuItemOpisRadnogNaloga.setText("Opis radnog naloga");
-        menuItemOpisRadnogNaloga.addActionListener(new java.awt.event.ActionListener() {
+        menuItemOpisPosla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
+        menuItemOpisPosla.setText("Opis radnog naloga");
+        menuItemOpisPosla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemOpisRadnogNalogaActionPerformed(evt);
+                menuItemOpisPoslaActionPerformed(evt);
             }
         });
-        popUpMenuRadniNaloziZaposlenog.add(menuItemOpisRadnogNaloga);
+        popUpMenuRadniNaloziZaposlenog.add(menuItemOpisPosla);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AUTO-SERVIS");
@@ -1405,6 +1404,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblNeplaceneFakture.setToolTipText("Neplaćene fakture.");
         tblNeplaceneFakture.getTableHeader().setResizingAllowed(false);
         tblNeplaceneFakture.getTableHeader().setReorderingAllowed(false);
         tblNeplaceneFakture.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1461,7 +1461,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         lblAktivnostiOdDo.setBackground(new java.awt.Color(255, 255, 255));
         lblAktivnostiOdDo.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblAktivnostiOdDo.setForeground(new java.awt.Color(240, 240, 240));
-        lblAktivnostiOdDo.setText("Aktivnosti: ");
+        lblAktivnostiOdDo.setText("Aktivnosti:");
 
         tblAktivnosti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1486,6 +1486,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAktivnosti.setToolTipText("Radni nalozi koji su plaćeni u odabranom periodu.");
         tblAktivnosti.getTableHeader().setReorderingAllowed(false);
         jScrollAktivnosti.setViewportView(tblAktivnosti);
         if (tblAktivnosti.getColumnModel().getColumnCount() > 0) {
@@ -1682,7 +1683,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         rbPrivatnoRadniNalog.setBackground(new java.awt.Color(102, 153, 255));
         rbPrivatnoRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPrivatnoRadniNalog.setForeground(new java.awt.Color(255, 255, 255));
-        rbPrivatnoRadniNalog.setSelected(true);
         rbPrivatnoRadniNalog.setText("Privatno lice");
         rbPrivatnoRadniNalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1709,6 +1709,7 @@ public class HomeForm1 extends javax.swing.JFrame {
         cbSviRadniNalog.setBackground(new java.awt.Color(102, 153, 255));
         cbSviRadniNalog.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbSviRadniNalog.setForeground(new java.awt.Color(255, 255, 255));
+        cbSviRadniNalog.setSelected(true);
         cbSviRadniNalog.setText("Svi");
         cbSviRadniNalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1870,6 +1871,15 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnPrikaziNezatvoreneRadneNaloge.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPrikaziNezatvoreneRadneNaloge.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/document.png"))); // NOI18N
+        btnPrikaziNezatvoreneRadneNaloge.setText("Prikaži nezatvorene naloge");
+        btnPrikaziNezatvoreneRadneNaloge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrikaziNezatvoreneRadneNalogeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelOsnovniPretragaRNLayout = new javax.swing.GroupLayout(panelOsnovniPretragaRN);
         panelOsnovniPretragaRN.setLayout(panelOsnovniPretragaRNLayout);
         panelOsnovniPretragaRNLayout.setHorizontalGroup(
@@ -1878,19 +1888,23 @@ public class HomeForm1 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(panelPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btnNoviRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelOsnovniPretragaRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNoviRadniNalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrikaziNezatvoreneRadneNaloge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         panelOsnovniPretragaRNLayout.setVerticalGroup(
             panelOsnovniPretragaRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOsnovniPretragaRNLayout.createSequentialGroup()
-                .addGroup(panelOsnovniPretragaRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelOsnovniPretragaRNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelOsnovniPretragaRNLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panelPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelOsnovniPretragaRNLayout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(btnNoviRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNoviRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPrikaziNezatvoreneRadneNaloge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1940,7 +1954,7 @@ public class HomeForm1 extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
@@ -4025,7 +4039,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Marka", "Model", "Registracija", "Datum popravka", "Opis popravke", "Cijena troskova(KM)", "Cijena naplate(KM)", "Profit(KM)"
+                "Marka", "Model", "Registracija", "Datum popravka", "Opis uloge radnika", "Cijena troskova(KM)", "Cijena naplate(KM)", "Profit(KM)"
             }
         ));
         tbRadniNalozi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -4467,7 +4481,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                     .addComponent(pnlBrojPopravki, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaUkupno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlZaradaDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.PREFERRED_SIZE, 176, Short.MAX_VALUE))
+                    .addComponent(pnlOdabirIntervala, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -4731,11 +4745,12 @@ public class HomeForm1 extends javax.swing.JFrame {
 
         tableVozila.setAutoCreateRowSorter(true);
         tableVozila.setAutoCreateRowSorter(true);
-       
-        if(flagVoziloVlasnik)
+
+        if (flagVoziloVlasnik) {
             ucitajPopupZaVozila();
-        else
+        } else {
             ucitajPopupZaVlasnike();
+        }
     }//GEN-LAST:event_pnlMeniVozilaMouseClicked
 
     private void pnlMeniVozilaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniVozilaMouseEntered
@@ -4809,23 +4824,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pnlMeniZaposleniMousePressed
 
-    private void pnlMeniDijeloviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseClicked
-
-        menuItemClick(pnlMeniDijelovi, 5, pnlDijelovi);
-        loadDijeloviForm();
-
-    }//GEN-LAST:event_pnlMeniDijeloviMouseClicked
-
-    private void pnlMeniDijeloviMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseEntered
-        setColor(pnlMeniDijelovi);
-    }//GEN-LAST:event_pnlMeniDijeloviMouseEntered
-
-    private void pnlMeniDijeloviMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseExited
-        if (!menu[5]) {
-            resetColor(pnlMeniDijelovi);
-        }
-    }//GEN-LAST:event_pnlMeniDijeloviMouseExited
-
     private void pnlMeniPocetnaStranaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniPocetnaStranaMouseClicked
 
         menuItemClick(pnlMeniPocetnaStrana, 0, pnlPocetna);
@@ -4883,15 +4881,15 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_tbZaposleniMouseReleased
 
     private void mnItDetaljniOpisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItDetaljniOpisActionPerformed
-        new ZaposleniLogika("detaljan opis",this).run();
+        new ZaposleniLogika("detaljan opis", this).run();
     }//GEN-LAST:event_mnItDetaljniOpisActionPerformed
 
     private void mnItIzmjeniRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItIzmjeniRadnikaActionPerformed
-        new ZaposleniLogika("izmjeni",this).run();
+        new ZaposleniLogika("izmjeni", this).run();
     }//GEN-LAST:event_mnItIzmjeniRadnikaActionPerformed
 
     private void mnItOtpustiRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItOtpustiRadnikaActionPerformed
-        new ZaposleniLogika("otpusti",this).run();
+        new ZaposleniLogika("otpusti", this).run();
     }//GEN-LAST:event_mnItOtpustiRadnikaActionPerformed
 
     private void btnPrikazSvihBivsihZaposlenihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikazSvihBivsihZaposlenihActionPerformed
@@ -4899,7 +4897,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrikazSvihBivsihZaposlenihActionPerformed
 
     private void btnTraziRadneNalogeRadnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraziRadneNalogeRadnikaActionPerformed
-        new ZaposleniLogika("statistika",this).run();
+        new ZaposleniLogika("statistika", this).run();
     }//GEN-LAST:event_btnTraziRadneNalogeRadnikaActionPerformed
 
     private void rbPravnoTraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPravnoTraziActionPerformed
@@ -5109,7 +5107,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSviDijeloviActionPerformed
 
     private void btnProdaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdaniActionPerformed
-        new PregledProdanihDijelovaDialog(this).setVisible(true);
+        new PregledProdanihDijelovaDialog(this,this).setVisible(true);
     }//GEN-LAST:event_btnProdaniActionPerformed
 
     private void btnPronadjiTerminActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPronadjiTerminActionPerformed
@@ -5134,32 +5132,36 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnRacunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRacunActionPerformed
     {//GEN-HEADEREND:event_btnRacunActionPerformed
-       double PDV;
-        try{
-            PDV=Double.parseDouble(txtPDV.getText());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "PDV nije uredu!","Problem", JOptionPane.ERROR_MESSAGE);
+        double PDV;
+        try {
+            PDV = Double.parseDouble(txtPDV.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PDV nije uredu!", "Problem", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        prikaziFakturu(tblRadniNalozi, tblFaktura,PDV, "Račun");
+        prikaziFakturu(tblRadniNalozi, tblFaktura, PDV, "Račun");
     }//GEN-LAST:event_btnRacunActionPerformed
 
     private void btnPredracunActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPredracunActionPerformed
     {//GEN-HEADEREND:event_btnPredracunActionPerformed
         Double PDV;
-        try{
-            PDV=Double.parseDouble(txtPDV.getText());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "PDV nije uredu!","Problem", JOptionPane.ERROR_MESSAGE);
+        try {
+            PDV = Double.parseDouble(txtPDV.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PDV nije uredu!", "Problem", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        prikaziFakturu(tblRadniNalozi, tblFaktura,PDV, "Faktura");
+        prikaziFakturu(tblRadniNalozi, tblFaktura, PDV, "Faktura");
     }//GEN-LAST:event_btnPredracunActionPerformed
 
     private void tblRadniNaloziMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblRadniNaloziMouseClicked
     {//GEN-HEADEREND:event_tblRadniNaloziMouseClicked
-        if ("".equals(txtPDV.getText())) {
-            txtPDV.setText("0.0");
+        Double PDV;
+        try {
+            PDV = Double.parseDouble(txtPDV.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PDV nije uredu!", "Problem", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         stavkeSaNalogaZaTabelu(tblFaktura, tblRadniNalozi, txtBezPDV, txtPDV, txtUkupno);
         provjeraZaDugmiceZaTabeluNaloga();
@@ -5220,7 +5222,7 @@ public class HomeForm1 extends javax.swing.JFrame {
                 if (!dat1.after(dat2)) {
                     lblAktivnostiOdDo.setText("Aktivnosti: " + sdf.format(dat1) + "-" + sdf.format(dat2));
                     pocetnaLogika.prikaziAktivnosti(dat1, dat2);
-                } else if(dat1.equals(dat2)){                    
+                } else if (dat1.equals(dat2)) {
                     pocetnaLogika.prikaziAktivnosti(dat1, dat1);
                     lblAktivnostiOdDo.setText("Aktivnosti: " + sdf.format(dat1));
                 }
@@ -5238,35 +5240,35 @@ public class HomeForm1 extends javax.swing.JFrame {
 
     private void btnBazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBazaActionPerformed
         // treba serijalizovati datum u file baza.ser
-         JFileChooser fc = new JFileChooser();
+        JFileChooser fc = new JFileChooser();
         fc.showSaveDialog(this);
         String path = "";
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
-        
+
         try {
-            File f =fc.getSelectedFile();
+            File f = fc.getSelectedFile();
             path = f.getAbsolutePath();
             path = path.replace('\\', '/');
             path = path + "_" + date + ".sql";
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
- Process p=null;
+        Process p = null;
         try {
             Runtime runtime = Runtime.getRuntime();
-            p=runtime.exec("C:/Program Files/MySQL/MySQL Server 5.7/bin/mysqldump.exe -uroot -proot --add-drop-database -B autoservismaric -r"+path);
-            
+            p = runtime.exec("C:/Program Files/MySQL/MySQL Server 5.7/bin/mysqldump.exe -uroot -proot --add-drop-database -B autoservismaric -r" + path);
+
             int processComplete = p.waitFor();
-            if (processComplete==0) {
+            if (processComplete == 0) {
                 jLabel1.setText("Backup Created Succuss");
                 File f = new File("baza.ser");
                 java.util.Date datum = new java.util.Date();
                 ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
                 oos.writeObject(datum);
-                lblBaza.setText(new SimpleDateFormat("dd.MM.yyyy.").format(datum));                
-            }else{
+                lblBaza.setText(new SimpleDateFormat("dd.MM.yyyy.").format(datum));
+            } else {
                 jLabel1.setText("Can't Create backup");
             }
         } catch (Exception e) {
@@ -5356,8 +5358,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     private void btnPrikaziPredracuneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziPredracuneActionPerformed
         //KnjigovodstvoLogika knjLogika = new KnjigovodstvoLogika();
         //if(!"".equals(tfNazivv.getText()))
-            //knjLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivv.getText(), tfImee.getText(), tfPrezimee.getText());
-            KnjigovodstvoLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivPocetna.getText(), tfImePocetna.getText(), tfPrezimePocetna.getText());
+        //knjLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivv.getText(), tfImee.getText(), tfPrezimee.getText());
+        KnjigovodstvoLogika.pretraziNeplaceneFakturePoNazivu(this, tfNazivPocetna.getText(), tfImePocetna.getText(), tfPrezimePocetna.getText());
     }//GEN-LAST:event_btnPrikaziPredracuneActionPerformed
 
     private void btnPregledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPregledActionPerformed
@@ -5427,7 +5429,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSviNaloziActionPerformed
 
     private void btnDodajZaposlenogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajZaposlenogActionPerformed
-        new DodajZaposlenogDialog(this,true,this).setVisible(true);
+        new DodajZaposlenogDialog(this, true, this).setVisible(true);
     }//GEN-LAST:event_btnDodajZaposlenogActionPerformed
 
     private void tbRadniNaloziMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRadniNaloziMouseReleased
@@ -5447,23 +5449,48 @@ public class HomeForm1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbRadniNaloziMouseReleased
 
-    private void menuItemOpisRadnogNalogaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpisRadnogNalogaActionPerformed
+    private void menuItemOpisPoslaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpisPoslaActionPerformed
         String value = tbRadniNalozi.getModel().getValueAt(tbRadniNalozi.getSelectedRow(), 4).toString();
-        if(value!=null){
-            new OpisPopravkeDialog(this,true,value).show();
-        }else{
+        if (value != null) {
+            new OpisPopravkeDialog(this, true, value).show();
+        } else {
             JOptionPane.showMessageDialog(null, "Nema opisa", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_menuItemOpisRadnogNalogaActionPerformed
+    }//GEN-LAST:event_menuItemOpisPoslaActionPerformed
 
     private void txtPDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPDVActionPerformed
-        if(!"".equals(txtPDV.getText()) && !"".equals(txtBezPDV.getText())){
-            Double cijena=Double.parseDouble(txtBezPDV.getText());
-            Double pdv=Double.parseDouble(txtPDV.getText());
-            Double ukupno=cijena*(1+pdv/100);
-            txtUkupno.setText(String.format("%.2f",ukupno));
+        try {
+            if (!"".equals(txtPDV.getText()) && !"".equals(txtBezPDV.getText())) {
+                Double cijena = Double.parseDouble(txtBezPDV.getText());
+                Double pdv = Double.parseDouble(txtPDV.getText());
+                Double ukupno = cijena * (1 + pdv / 100);
+                txtUkupno.setText(String.format("%.2f", ukupno));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cijena ili/i PDV nisu uredu!", "Problem", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_txtPDVActionPerformed
+
+    private void pnlMeniDijeloviMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseExited
+        if (!menu[5]) {
+            resetColor(pnlMeniDijelovi);
+        }
+    }//GEN-LAST:event_pnlMeniDijeloviMouseExited
+
+    private void pnlMeniDijeloviMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseEntered
+        setColor(pnlMeniDijelovi);
+    }//GEN-LAST:event_pnlMeniDijeloviMouseEntered
+
+    private void pnlMeniDijeloviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlMeniDijeloviMouseClicked
+
+        menuItemClick(pnlMeniDijelovi, 5, pnlDijelovi);
+        loadDijeloviForm();
+    }//GEN-LAST:event_pnlMeniDijeloviMouseClicked
+
+    private void btnPrikaziNezatvoreneRadneNalogeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrikaziNezatvoreneRadneNalogeActionPerformed
+        voziloKupacMeniLogika.prikaziNezatvoreneRadneNaloge(this);
+    }//GEN-LAST:event_btnPrikaziNezatvoreneRadneNalogeActionPerformed
 
     public void prikaziKupceSveUTabeli(ArrayList<KupacDTO> kupci) {
         voziloKupacMeniLogika.prikaziKupceSveUTabeli(kupci, this);
@@ -5645,18 +5672,18 @@ public class HomeForm1 extends javax.swing.JFrame {
         });
     }
 
-    public void inicijalizujZaposleniPanel()
-    {
+    public void inicijalizujZaposleniPanel() {
         dateChooserDatumDoZaposlenog.setCalendar(Calendar.getInstance());
-        Calendar cal=Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
         dateChooserDatumOdZaposlenog.setCalendar(cal);
-        new ZaposleniLogika("svi",this).run();
+        new ZaposleniLogika("svi", this).run();
     }
 
-    private void inicijalizujStatistikaPanel(){
+    private void inicijalizujStatistikaPanel() {
         new StatistikaLogika().inicijalizujStatistikaPanel(this);
     }
+
     public JComboBox<String> getComboBoxGodina() {
         return cbGodina;
     }
@@ -5804,9 +5831,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JLabel getLblBrojPlacenihFaktura() {
         return lblBrojPlacenihFaktura;
     }
-    
-    
-   
+
     public JPanel getPanelGrafikAuta() {
         return pnlGrafikAuta;
     }
@@ -5902,7 +5927,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public static int getSelRedDio() {
         return selRedDio;
     }
-    
+
     public static int getSelektovanRed() {
         return selektovanRed;
     }
@@ -6305,9 +6330,11 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JTextField getTfSifraDio() {
         return tfSifraDio;
     }
-    public JCheckBox getStanje(){
+
+    public JCheckBox getStanje() {
         return cbStanje;
     }
+
     public JPanel getKnjigovodstvoPanel() {
         return pnlKnjigovodstvo;
     }
@@ -6399,7 +6426,6 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JPanel getPocetnajPanel() {
         return pnlPocetna;
     }
-    
 
     public JPopupMenu getPopupMenuZaposleni() {
         return popupMenuZaposleni;
@@ -6464,7 +6490,8 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JTable getTblTermini() {
         return tblTermini;
     }
-    public JTable getJTable(){
+
+    public JTable getJTable() {
         return tblDijelovi;
     }
 
@@ -6847,7 +6874,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JLabel getjLabel136() {
         return jLabel136;
     }
-    
+
     public JLabel getjLabel138() {
         return txtZakazivanja;
     }
@@ -7111,7 +7138,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     public JLabel getjLabel58() {
         return jLabel58;
     }
-    
+
     public JLabel getjLabel6() {
         return jLabel6;
     }
@@ -7360,8 +7387,6 @@ public class HomeForm1 extends javax.swing.JFrame {
         return tfRegistracijaRadniNalog;
     }
 
-    
-    
     public JPanel getZakazivanjaPanel() {
         return pnlZakazivanja;
     }
@@ -7396,6 +7421,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JButton btnPregledGrafik;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JButton btnPrikazSvihBivsihZaposlenih;
+    private javax.swing.JButton btnPrikaziNezatvoreneRadneNaloge;
     private javax.swing.JButton btnPrikaziPredracune;
     private javax.swing.JButton btnPrikaziRadniNalog;
     private javax.swing.JButton btnPrikaziSvaVozila;
@@ -7607,7 +7633,7 @@ public class HomeForm1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblStanjeDodajDio;
     private javax.swing.JLabel lblVlasnik;
     private javax.swing.JLabel lblVlasnikPocetna;
-    private javax.swing.JMenuItem menuItemOpisRadnogNaloga;
+    private javax.swing.JMenuItem menuItemOpisPosla;
     private javax.swing.JMenuItem mnItDetaljniOpis;
     private javax.swing.JMenuItem mnItIzmjeniRadnika;
     private javax.swing.JMenuItem mnItOtpustiRadnika;

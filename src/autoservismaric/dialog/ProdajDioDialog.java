@@ -296,7 +296,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
 
         lblPdv.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPdv.setForeground(new java.awt.Color(240, 240, 240));
-        lblPdv.setText("Vrijednost PDV-a:");
+        lblPdv.setText("Vrijednost PDV-a(%):");
 
         btnOdustani.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnOdustani.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/cancel (1).png"))); // NOI18N
@@ -359,7 +359,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                             .addGroup(pnlProdajaLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(btnProdaj, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 11, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jSeparator11)
                     .addGroup(pnlProdajaLayout.createSequentialGroup()
                         .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +369,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(pnlProdajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfKolicinaProdaja, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(ttfCijenaProdaja, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                            .addComponent(ttfCijenaProdaja)
                             .addComponent(jtfPDV, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -424,7 +424,7 @@ public class ProdajDioDialog extends javax.swing.JDialog {
                         .addComponent(lblPodaciProdaja)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(pnlProdaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(4, 4, 4))
         );
         pnlOsnovnoLayout.setVerticalGroup(
             pnlOsnovnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,8 +446,8 @@ public class ProdajDioDialog extends javax.swing.JDialog {
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelzmijeniDioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlOsnovno, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlOsnovno, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelzmijeniDioLayout.setVerticalGroup(
             panelzmijeniDioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +461,9 @@ public class ProdajDioDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelzmijeniDio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelzmijeniDio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,13 +543,16 @@ public class ProdajDioDialog extends javax.swing.JDialog {
        
        try{
            pdv=Double.parseDouble(jtfPDV.getText());
+           if(pdv<0){
+               throw new NumberFormatException();
+           }
        }catch(NumberFormatException e){
            jtfPDV.setText("0");
            pdv=0.0;
        }
        try {
             kolicina = Integer.parseInt(tfKolicinaProdaja.getText());
-            if(kolicina > kolNaStanju || kolicina < 0){
+            if(kolicina > kolNaStanju || kolicina <= 0){
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(this, "Na stanju imate "+kolNaStanju + ", a želite da prodate "+kolicina,
                         "Greška", JOptionPane.ERROR_MESSAGE);
@@ -565,6 +570,10 @@ public class ProdajDioDialog extends javax.swing.JDialog {
        
        try{
             cijena = Double.parseDouble(ttfCijenaProdaja.getText());
+            if(cijena<0){
+                JOptionPane.showMessageDialog(this, "Nepravilan format cijene.", "Greška", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }catch(NumberFormatException e){
             if(!"".equals(ttfCijenaProdaja.getText())){
                 JOptionPane jop = new JOptionPane();

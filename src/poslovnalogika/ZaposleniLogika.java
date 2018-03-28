@@ -28,10 +28,6 @@ public class ZaposleniLogika extends Thread{
     private String opcija;
     private HomeForm1 homeForm;
     private DodajZaposlenogDialog dodajZaposlenogDialog;
-
-    public ZaposleniLogika(String opcija){
-        this.opcija=opcija;
-    }
     
     public ZaposleniLogika(String opcija,HomeForm1 homeForm){
         this.opcija=opcija;
@@ -130,9 +126,9 @@ public class ZaposleniLogika extends Thread{
                table.addRow(new Object[]{rez.getMarka()
                             ,rez.getModel(),rez.getBrojRegistracije(),
                             new SimpleDateFormat("yyyy.MM.dd").format(rez.getDatumZatvaranjaNaloga())
-                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge(),rez.getCijenaUsluge()-rez.getTroskovi()});
+                            ,rez.getOpis(),rez.getTroskovi(),rez.getCijenaUsluge()+rez.getTroskovi(),rez.getCijenaUsluge()});
                brojNaloga++;
-               ukupanProfit+=(rez.getCijenaUsluge()-rez.getTroskovi());
+               ukupanProfit+=rez.getCijenaUsluge();
            }
             homeForm.getLabelBrojRadnihNaloga().setText("Radni nalozi: "+brojNaloga);
             homeForm.getLabelOstvareniProfitRadnika().setText("Ostvareni profit radnika: "+ukupanProfit+" KM");

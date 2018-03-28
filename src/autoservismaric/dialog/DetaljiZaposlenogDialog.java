@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
 import data.dto.ZaposleniDTO;
 import javax.swing.JOptionPane;
@@ -19,10 +20,11 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
     /**
      * Creates new form DetaljiZaposlenogDialog
      */
-    public DetaljiZaposlenogDialog(java.awt.Frame parent, boolean modal,boolean izmjena,ZaposleniDTO zaposleni) {
+    public DetaljiZaposlenogDialog(HomeForm1 parent, boolean modal,boolean izmjena,ZaposleniDTO zaposleni) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.homeForm=parent;
         if(!izmjena){
             buttonIzmjeni.setVisible(false);
             textFieldIme.setEditable(false);
@@ -304,7 +306,7 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
             System.out.println(dateChooserDatumDo.getDate()==null);
             if(DAOFactory.getDAOFactory().getZaposleniDAO().azurirajZaposlenog(zaposleni)){
                 JOptionPane.showMessageDialog(this, "Uspješno ažuriranje radnika "+zaposleni.getIme()+".", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                 new ZaposleniLogika("svi").run();
+                 new ZaposleniLogika("svi",homeForm).run();
             }else{
                 JOptionPane.showConfirmDialog(this, "Neuspješno ažuriranje radnika "+zaposleni.getIme()+".", "Problem", JOptionPane.ERROR);
             }
@@ -367,6 +369,7 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
     }
     //moja polja
     private ZaposleniDTO zaposleni;
+    private HomeForm1 homeForm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonIzmjeni;
     private com.toedter.calendar.JDateChooser dateChooserDatumDo;

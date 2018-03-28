@@ -34,7 +34,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
 
         String query = "select sum(CijenaUsluge) as suma from faktura inner join radni_nalog "
                 + "using (idRadniNalog)"
-                + "where Placeno=1 && DatumIzdavanja >= ? and DatumIzdavanja <=  ? ";
+                + "where Placeno=1 && DatumIzdavanja >= ? and DatumIzdavanja <=  ?";
         try {
             conn = ConnectionPool.getInstance().checkOut();
             ps = conn.prepareStatement(query);
@@ -349,7 +349,7 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         ResultSet rs = null;
 
         String query = "SELECT IdRadniNalog, Placeno, DatumOtvaranjaNaloga, DatumZatvaranjaNaloga, IdVozilo, Troskovi, Kilometraza, OpisProblema, PredvidjenoVrijemeZavrsetka, CijenaUsluge, Izbrisano "
-                + "FROM radni_nalog WHERE PredvidjenoVrijemeZavrsetka>=? AND PredvidjenoVrijemeZavrsetka<=? "
+                + "FROM radni_nalog WHERE DatumOtvaranjaNaloga>=? AND DatumOtvaranjaNaloga<=? AND Izbrisano!=true "
                 + "ORDER BY DatumOtvaranjaNaloga ASC ";
 
         try {
@@ -620,5 +620,38 @@ public class MySQLRadniNalogDAO implements RadniNalogDAO {
         return retVal;
     }
 
-    
+    @Override
+    public ArrayList<RezultatRNPretrazivanje> nezatvoreniRadniNaloziVozila() {
+        ArrayList<RezultatRNPretrazivanje> retVal = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String query = "SELECT * FROM radni_nalog r INNER JOIN vozilo v ON r.IdVozilo=v.IdVozilo INNER JOIN kupac k ON v.IdKupac=k.IdKupac WHERE r.Izbrisano!=true AND DatumZatvaranjaNaloga IS null";
+
+       
+        try {
+            conn = ConnectionPool.getInstance().checkOut();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();   
+            while (rs.next()) {
+                String vlasnik="";
+                if(rs.getString("Ime") == null || "".equals(rs.getString("Ime"))){
+                    vlasnik = rs.getString("Naziv");
+                }
+                else{
+                    vlasnik = rs.getString("Ime") + " " + rs.getString("Prezime");
+                }
+                retVal.add(new RezultatRNPretrazivanje(rs.getInt("IdRadniNalog"), rs.getString("BrojRegistracije"), vlasnik, rs.getDate("DatumOtvaranjaNaloga"), 
+                        rs.getDate("DatumZatvaranjaNaloga"), rs.getDate("PredvidjenoVrijemeZavrsetka"), rs.getDouble("Troskovi"), rs.getDouble("CijenaUsluge"), rs.getBoolean("Placeno")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            DBUtilities.getInstance().showSQLException(e);
+        } finally {
+            ConnectionPool.getInstance().checkIn(conn);
+            DBUtilities.getInstance().close(ps, rs);
+        }
+        return retVal;
+    }
 }

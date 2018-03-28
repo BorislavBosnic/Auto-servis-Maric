@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
 import data.dto.ZaposleniDTO;
 import java.util.Calendar;
@@ -21,10 +22,11 @@ public class OtpustiRadnikaDialog extends javax.swing.JDialog {
     /**
      * Creates new form OtpustiRadnikaDialog
      */
-    public OtpustiRadnikaDialog(java.awt.Frame parent, boolean modal,ZaposleniDTO zaposleni) {
+    public OtpustiRadnikaDialog(HomeForm1 parent, boolean modal,ZaposleniDTO zaposleni) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.homeForm=parent;
         dateChooserDatumOtpustanja.setCalendar(Calendar.getInstance());
         this.zaposleni=zaposleni;
     }
@@ -115,7 +117,7 @@ public class OtpustiRadnikaDialog extends javax.swing.JDialog {
         zaposleni.setDatumDo(new java.sql.Date(dateChooserDatumOtpustanja.getDate().getTime()));
         if(DAOFactory.getDAOFactory().getZaposleniDAO().azurirajZaposlenog(zaposleni)){
             JOptionPane.showMessageDialog(this, "Uspješno otpuštanje radnika "+zaposleni.getIme()+".", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-             new ZaposleniLogika("svi").run();
+             new ZaposleniLogika("svi",homeForm).run();
         }else{
             JOptionPane.showConfirmDialog(this, "Neuspješno otpuštanje radnika "+zaposleni.getIme()+".", "Problem", JOptionPane.ERROR);
         }
@@ -166,6 +168,7 @@ public class OtpustiRadnikaDialog extends javax.swing.JDialog {
     
     //moja polja
     private ZaposleniDTO zaposleni;
+    private HomeForm1 homeForm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonOtpustiRadnika;
     private com.toedter.calendar.JDateChooser dateChooserDatumOtpustanja;

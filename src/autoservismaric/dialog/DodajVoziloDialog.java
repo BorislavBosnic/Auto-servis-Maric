@@ -46,7 +46,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        autoCompleteMarkaIModel();
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
         
         //marka = voziloLogika.ucitajPreporukeMarke(this);
         //model = voziloLogika.ucitajPreporukeModel(this);
@@ -57,21 +58,15 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     public DodajVoziloDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
         super(parent, modal);
         initComponents();
-        autoCompleteMarkaIModel();
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
         //marka = voziloLogika.ucitajPreporukeMarke(this);
         //model = voziloLogika.ucitajPreporukeModel(this);
         this.forma = forma;
         voziloLogika.inicijalizacijaDodajDijaloga(this);
         btnPrikaziSve.doClick();
     }
-    
-    public void autoCompleteMarkaIModel(){
-        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
-        for(int i=0;i<marke.size();i++){
-            cbMarkaVozila.addItem(marke.get(i));
-        }
-        AutoCompleteDecorator.decorate(cbMarkaVozila);
-    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -481,8 +476,7 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
                             .addComponent(lbPoruka, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDodajVoziloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnDodaj)
-                                .addComponent(btnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(btnOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
 
         panelDodajVoziloLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnDodaj, btnOdustani});
@@ -582,10 +576,8 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tfGodisteActionPerformed
 
     private void cbMarkaVozilaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarkaVozilaItemStateChanged
-        ArrayList<String> model=MarkaIModelUcitavanje.ucitajSveModele(cbMarkaVozila.getSelectedItem().toString());
-        cbModelVozila.removeAllItems();
-        for(int i=0;i<model.size();i++){
-            cbModelVozila.addItem(model.get(i));
+        if(cbMarkaVozila.getSelectedIndex()!=-1){
+            MarkaIModelUcitavanje.staviSveModeleUComboBox(cbMarkaVozila.getSelectedItem().toString(), cbModelVozila);
         }
     }//GEN-LAST:event_cbMarkaVozilaItemStateChanged
 
@@ -593,6 +585,10 @@ public class DodajVoziloDialog extends javax.swing.JDialog {
         return akcijaZaRefres;
     }
 
+    public void autoCompleteMarkaIModel(){
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
+    }
     
     
     public HomeForm1 getForma() {

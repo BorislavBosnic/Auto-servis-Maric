@@ -122,7 +122,7 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Datum otvaranja naloga", "Datum zatvaranja naloga", "Datum potrebnog završetka", "Placeno"
+                "Id", "Datum otvaranja naloga", "Datum zatvaranja naloga", "Datum potrebnog završetka", "Plaćeno"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -178,11 +178,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Kilovati:");
+        jLabel11.setText("Kilovat(kW):");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Kubikaža:");
+        jLabel12.setText("Kubikaža(ccm):");
 
         lbBrojRegistracije.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbBrojRegistracije.setForeground(new java.awt.Color(255, 255, 255));
@@ -325,11 +325,11 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         panelAzurirajRadniNalog.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         panelAzurirajRadniNalog.setForeground(new java.awt.Color(102, 153, 255));
 
+        tbIdNaloga.setEditable(false);
         tbIdNaloga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tbIdNaloga.setEnabled(false);
 
+        tbTroskovi.setEditable(false);
         tbTroskovi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tbTroskovi.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,14 +361,14 @@ public class PregledIstorijePopravkiDialog extends javax.swing.JDialog {
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Cijena usluge:");
 
+        tbCijena.setEditable(false);
         tbCijena.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tbCijena.setEnabled(false);
 
+        taProblem.setEditable(false);
         taProblem.setColumns(20);
         taProblem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         taProblem.setLineWrap(true);
         taProblem.setRows(5);
-        taProblem.setEnabled(false);
         jScrollPane1.setViewportView(taProblem);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

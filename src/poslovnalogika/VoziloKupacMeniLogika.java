@@ -137,7 +137,7 @@ public class VoziloKupacMeniLogika {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new PregledIstorijePopravkiDialog(new JFrame(), true, idVozila,forma).setVisible(true);
+                new PregledIstorijePopravkiDialog(new JFrame(), true, idVozila, forma).setVisible(true);
             }
         });
         forma.getPopupMenu().add(pogledajIstorijuPopravki);
@@ -222,7 +222,7 @@ public class VoziloKupacMeniLogika {
                         int column = 0;
                         //int row = forma.getTableVozila().getSelectedRow();
                         String imeKolone = forma.getTableVozila().getModel().getColumnName(0);
-                        
+
                         if (selektovanRed >= 0) {
                             if ("ID".equals(imeKolone)) {
                                 idVozila = Integer.parseInt(forma.getTableVozila().getModel().getValueAt(selektovanRed, column).toString());
@@ -457,7 +457,7 @@ public class VoziloKupacMeniLogika {
 
     public void prikaziSvaVozila(HomeForm1 forma) {
         ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
-        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableVozila().setModel(model);
 
@@ -496,7 +496,7 @@ public class VoziloKupacMeniLogika {
 
         if (svi) {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža(ccm)"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
             ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
@@ -540,7 +540,7 @@ public class VoziloKupacMeniLogika {
             }
         } else {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža(ccm)"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
 
@@ -614,10 +614,10 @@ public class VoziloKupacMeniLogika {
 
         }
     }
-    
+
     public void prikaziSvaVozila(IzaberiVoziloDialog dijalog) {
         ArrayList<VoziloDTO> vozila = DAOFactory.getDAOFactory().getVoziloDAO().svaVozila();
-        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+        String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         dijalog.getTableVozila().setModel(model);
 
@@ -637,8 +637,7 @@ public class VoziloKupacMeniLogika {
 
         dijalog.getTableVozila().setModel(model);
     }
-    
-     
+
     public void pronadjiVozilo(IzaberiVoziloDialog forma) {
         String registracija = forma.getTfRegistracijaTrazi().getText();
         Integer godiste = 0;
@@ -651,13 +650,25 @@ public class VoziloKupacMeniLogika {
             }
         }
 
-        String marka = forma.getCbMarkaVozila().getSelectedItem().toString();
-        String model = forma.getCbModelVozila().getSelectedItem().toString();
+        String marka;
+        try {
+            marka = forma.getCbMarkaVozila().getSelectedItem().toString();
+        } catch (Exception e) {
+            marka = "";
+        }
+
+        String model;
+        try {
+            model = forma.getCbModelVozila().getSelectedItem().toString();
+        } catch (Exception e) {
+            model = "";
+        }
+
         boolean svi = forma.getCbSvi().isSelected();
 
         if (svi) {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
 
@@ -702,7 +713,7 @@ public class VoziloKupacMeniLogika {
             }
         } else {
 
-            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat", "Kubikaža"};
+            String[] columns = {"ID", "Registracija", "Marka", "Model", "Godište", "Prezime", "Ime", "Naziv", "Gorivo", "Kilovat(kW)", "Kubikaža(ccm)"};
             DefaultTableModel modell = new DefaultTableModel(columns, 0);
             forma.getTableVozila().setModel(modell);
 
@@ -775,67 +786,88 @@ public class VoziloKupacMeniLogika {
             }
 
         }
-     }
-        
-        public void prikaziRadneNaloge(HomeForm1 forma){
-        RadniNalogParametri parametri = new RadniNalogParametri();
-        
-        if(!forma.getCbDatumOtvaranja().isSelected()){
-            if(forma.getDcDatumOtvaranjaOD().getDate() != null)
-                parametri.setDatumOtvaranjaOD(new java.sql.Date(forma.getDcDatumOtvaranjaOD().getDate().getTime()));
-            if(forma.getDcDatumOtvaranjaDO().getDate() != null)
-                parametri.setDatumOtvaranjaDO(new java.sql.Date(forma.getDcDatumOtvaranjaDO().getDate().getTime()));
-        }
-        
-        if(!forma.getCbDatumZatvaranja().isSelected()){
-            if(forma.getDcDatumZatvaranjaOD().getDate() != null)
-                parametri.setDatumZatvaranjaOD(new java.sql.Date(forma.getDcDatumZatvaranjaOD().getDate().getTime()));
-            if(forma.getDcDatumZatvaranjaDO().getDate() != null)
-                parametri.setDatumZatvaranjaDO(new java.sql.Date(forma.getDcDatumZatvaranjaDO().getDate().getTime()));
-        }
-        
-        if(!forma.getCbPotrebnoZavrsiti().isSelected()){
-            if(forma.getDcPotrebnoZavrsitiOD().getDate() != null)
-                parametri.setDatumPotrebnoZavrsitiOD(new java.sql.Date(forma.getDcPotrebnoZavrsitiOD().getDate().getTime()));
-            if(forma.getDcPotrebnoZavrsitiDO().getDate() != null){
-                parametri.setDatumPotrebnoZavrsitiDO(new java.sql.Date(forma.getDcPotrebnoZavrsitiDO().getDate().getTime()));
-            }
-        }
-        
-        String registracija = forma.getTfRegistracijaRadniNalog().getText();
-        if(registracija != null && !"".equals(registracija))
-        parametri.setRegistracija(registracija);
-        String prezime = forma.getTfPrezimeRadniNalog().getText();
-        if(prezime != null && !"".equals(prezime))
-        parametri.setPrezime(prezime);
-        String ime = forma.getTfImeRadniNalog().getText();
-        if(ime != null && !"".equals(ime))
-        parametri.setIme(ime);
-        String naziv = forma.getTfNazivRadniNalog().getText();
-        if(naziv != null && !"".equals(naziv))
-        parametri.setNaziv(naziv);
-        
-        boolean privatni = forma.getRbPrivatnoRadniNalog().isSelected();
-        boolean pravno = forma.getRbPravnoRadniNalog().isSelected();
-        boolean svi = forma.getCbSviRadniNalog().isSelected();
-        parametri.setPrivatni(privatni);
-        parametri.setSvi(svi);
-        parametri.setPravni(pravno);
-        
-        ArrayList<RezultatRNPretrazivanje> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().pretragaRadnihNaloga(parametri);
-        
-        //String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
-        
+    }
+
+    public void prikaziNezatvoreneRadneNaloge(HomeForm1 forma){
+        ArrayList<RezultatRNPretrazivanje> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().nezatvoreniRadniNaloziVozila();
         String[] columns = {"ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Rok za završetak", "Datum zatvaranja", "Troškovi dijelova(KM)", "Cijena usluge(KM)", "Plaćeno"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         forma.getTableRNalozi().setModel(model);
         forma.getTableRNalozi().getColumnModel().getColumn(0).setMaxWidth(45);
         forma.getTableRNalozi().getColumnModel().getColumn(8).setMaxWidth(70);
         for (RezultatRNPretrazivanje k : lista) {
-            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja()!=null? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumOtvaranja())):"", k.getDatumPotrebnoZavrsitiDo()!=null?(new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() !=null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumZatvaranja())) :"", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno()? "Da" : "Ne"};
+            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumOtvaranja())) : "", k.getDatumPotrebnoZavrsitiDo() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumZatvaranja())) : "", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno() ? "Da" : "Ne"};
             model.addRow(rowData);
         }
         forma.getTableRNalozi().setModel(model);
-        }
-        
     }
+    public void prikaziRadneNaloge(HomeForm1 forma) {
+        RadniNalogParametri parametri = new RadniNalogParametri();
+
+        if (!forma.getCbDatumOtvaranja().isSelected()) {
+            if (forma.getDcDatumOtvaranjaOD().getDate() != null) {
+                parametri.setDatumOtvaranjaOD(new java.sql.Date(forma.getDcDatumOtvaranjaOD().getDate().getTime()));
+            }
+            if (forma.getDcDatumOtvaranjaDO().getDate() != null) {
+                parametri.setDatumOtvaranjaDO(new java.sql.Date(forma.getDcDatumOtvaranjaDO().getDate().getTime()));
+            }
+        }
+
+        if (!forma.getCbDatumZatvaranja().isSelected()) {
+            if (forma.getDcDatumZatvaranjaOD().getDate() != null) {
+                parametri.setDatumZatvaranjaOD(new java.sql.Date(forma.getDcDatumZatvaranjaOD().getDate().getTime()));
+            }
+            if (forma.getDcDatumZatvaranjaDO().getDate() != null) {
+                parametri.setDatumZatvaranjaDO(new java.sql.Date(forma.getDcDatumZatvaranjaDO().getDate().getTime()));
+            }
+        }
+
+        if (!forma.getCbPotrebnoZavrsiti().isSelected()) {
+            if (forma.getDcPotrebnoZavrsitiOD().getDate() != null) {
+                parametri.setDatumPotrebnoZavrsitiOD(new java.sql.Date(forma.getDcPotrebnoZavrsitiOD().getDate().getTime()));
+            }
+            if (forma.getDcPotrebnoZavrsitiDO().getDate() != null) {
+                parametri.setDatumPotrebnoZavrsitiDO(new java.sql.Date(forma.getDcPotrebnoZavrsitiDO().getDate().getTime()));
+            }
+        }
+
+        String registracija = forma.getTfRegistracijaRadniNalog().getText();
+        if (registracija != null && !"".equals(registracija)) {
+            parametri.setRegistracija(registracija);
+        }
+        String prezime = forma.getTfPrezimeRadniNalog().getText();
+        if (prezime != null && !"".equals(prezime)) {
+            parametri.setPrezime(prezime);
+        }
+        String ime = forma.getTfImeRadniNalog().getText();
+        if (ime != null && !"".equals(ime)) {
+            parametri.setIme(ime);
+        }
+        String naziv = forma.getTfNazivRadniNalog().getText();
+        if (naziv != null && !"".equals(naziv)) {
+            parametri.setNaziv(naziv);
+        }
+
+        boolean privatni = forma.getRbPrivatnoRadniNalog().isSelected();
+        boolean pravno = forma.getRbPravnoRadniNalog().isSelected();
+        boolean svi = forma.getCbSviRadniNalog().isSelected();
+        parametri.setPrivatni(privatni);
+        parametri.setSvi(svi);
+        parametri.setPravni(pravno);
+
+        ArrayList<RezultatRNPretrazivanje> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().pretragaRadnihNaloga(parametri);
+
+        //String.valueOf(new SimpleDateFormat("dd.MM.yyyy.").format(lista.get(i).getDatumOtvaranjaNaloga()));
+        String[] columns = {"ID", "Registracija vozila", "Vlasnik vozila", "Datum otvaranja", "Rok za završetak", "Datum zatvaranja", "Troškovi dijelova(KM)", "Cijena usluge(KM)", "Plaćeno"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        forma.getTableRNalozi().setModel(model);
+        forma.getTableRNalozi().getColumnModel().getColumn(0).setMaxWidth(45);
+        forma.getTableRNalozi().getColumnModel().getColumn(8).setMaxWidth(70);
+        for (RezultatRNPretrazivanje k : lista) {
+            Object[] rowData = {k.getId(), k.getRegistracija(), k.getVlasnik(), k.getDatumOtvaranja() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumOtvaranja())) : "", k.getDatumPotrebnoZavrsitiDo() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumPotrebnoZavrsitiDo())) : "", k.getDatumZatvaranja() != null ? (new SimpleDateFormat("yyyy.MM.dd").format(k.getDatumZatvaranja())) : "", k.getTroskoviDijelova(), k.getCijenaUsluge(), k.isPlaceno() ? "Da" : "Ne"};
+            model.addRow(rowData);
+        }
+        forma.getTableRNalozi().setModel(model);
+    }
+
+}

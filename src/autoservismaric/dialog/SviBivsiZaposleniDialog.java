@@ -5,6 +5,7 @@
  */
 package autoservismaric.dialog;
 
+import autoservismaric.forms.HomeForm1;
 import data.dao.DAOFactory;
 import data.dto.ZaposleniDTO;
 import java.util.ArrayList;
@@ -24,9 +25,10 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
     /**
      * Creates new form SviBivsiZaposleniDialog
      */
-    public SviBivsiZaposleniDialog(java.awt.Frame parent, boolean modal) {
+    public SviBivsiZaposleniDialog(HomeForm1 parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.homeForm=parent;
         this.setLocationRelativeTo(null);
         dateChooserDatumVracanja.setCalendar(Calendar.getInstance());
         prikazSvihBivsihZaposlenih();
@@ -144,11 +146,11 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
             selektovanRadnik.setDatumOd(new java.sql.Date(dateChooserDatumVracanja.getDate().getTime()));
             boolean flag=DAOFactory.getDAOFactory().getZaposleniDAO().ponistiOtkaz(selektovanRadnik);
             if(flag){
-                JOptionPane.showMessageDialog(null,"Uspjesno ponistavanja otkaza!","Obavjestenje",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Uspjesno poništavanja otkaza!","Obavjestenje",JOptionPane.INFORMATION_MESSAGE);
                  prikazSvihBivsihZaposlenih();
-                 new ZaposleniLogika("svi").run();
+                 new ZaposleniLogika("svi",homeForm).run();
             }else{
-                 JOptionPane.showMessageDialog(null,"Neuspjesno ponistavanje otkaza!","Problem",JOptionPane.ERROR_MESSAGE);
+                 JOptionPane.showMessageDialog(null,"Neuspješno poništavanje otkaza!","Problem",JOptionPane.ERROR_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null,"Niste odabrali zaposlenog!","Problem",JOptionPane.ERROR_MESSAGE);
@@ -183,7 +185,7 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 SviBivsiZaposleniDialog dialog = new SviBivsiZaposleniDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -194,7 +196,7 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
                 });
                 dialog.setVisible(true);
             }
-        });
+        });*/
     }
 
     private void prikazSvihBivsihZaposlenih(){
@@ -212,6 +214,7 @@ public class SviBivsiZaposleniDialog extends javax.swing.JDialog {
     
     //moja polja
     private ArrayList<ZaposleniDTO> zaposleni=new ArrayList<ZaposleniDTO>(DAOFactory.getDAOFactory().getZaposleniDAO().sviBivsiZaposleni());
+    private HomeForm1 homeForm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonVratiZaposlenog;
     private com.toedter.calendar.JDateChooser dateChooserDatumVracanja;

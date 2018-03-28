@@ -43,10 +43,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
-        for(int i=0;i<marke.size();i++){
-            cbMarkaVozila.addItem(marke.get(i));
-        }
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
     }
 
     public IzmijeniVoziloDialog(java.awt.Frame parent, boolean modal, int idVozila) {
@@ -58,7 +56,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         bg.add(rbPravni);
         bg.add(rbPrivatni);
         voziloLogika.inicijalizujIzmijeniDijaloga(this);
-        ucitajMarkuVozila();
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
         //marke = voziloLogika.ucitajPreporukeMarke(this);
         //model = voziloLogika.ucitajPreporukeModel(this);
     }
@@ -69,7 +68,8 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
         this.idVozila = idVozila;
         this.forma = forma;
 
-        ucitajMarkuVozila();
+       //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
         
         bg = new ButtonGroup();
         bg.add(rbPravni);
@@ -590,18 +590,13 @@ public class IzmijeniVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDodajVlasnikaActionPerformed
 
     private void cbMarkaVozilaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarkaVozilaItemStateChanged
-        ArrayList<String> model=MarkaIModelUcitavanje.ucitajSveModele(cbMarkaVozila.getSelectedItem().toString());
-        cbModelVozila.removeAllItems();
-        for(int i=0;i<model.size();i++){
-            cbModelVozila.addItem(model.get(i));
-        }
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
     }//GEN-LAST:event_cbMarkaVozilaItemStateChanged
 
     public void ucitajMarkuVozila(){
-        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
-        for(int i=0;i<marke.size();i++){
-            cbMarkaVozila.addItem(marke.get(i));
-        }
+        //AUTO DECORATOR
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
     }
     public HomeForm1 getForma() {
         return forma;

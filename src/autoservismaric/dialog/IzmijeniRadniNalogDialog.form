@@ -24,10 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="pnlOsnovni" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="pnlOsnovni" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -128,7 +125,7 @@
                               <EmptySpace min="0" pref="36" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="pnlPomocni1" pref="0" max="32767" attributes="0"/>
+                              <Component id="pnlPomocni1" pref="682" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -388,25 +385,28 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblListaDijelova" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Component id="lblCijenaDijela" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtCijenaDijela" min="-2" pref="69" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="lblKolicina" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="spinnerKolicina" min="-2" pref="73" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnDodajDio" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="spnlIzabraniDijelovi" min="-2" pref="411" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnUkloniDio" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="lblIzabraniDijelovi" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="spnlLista" alignment="0" min="-2" pref="665" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
+                                          <Component id="lblCijenaDijela" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtCijenaDijela" min="-2" pref="69" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="lblKolicina" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="spinnerKolicina" min="-2" pref="73" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="spnlIzabraniDijelovi" pref="519" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnUkloniDio" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnDodajDio" min="-2" pref="106" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -474,7 +474,7 @@
                             <Column editable="true" title="Naziv" type="java.lang.Object"/>
                             <Column editable="true" title="&#x160;ifra" type="java.lang.Object"/>
                             <Column editable="true" title="Koli&#x10d;ina" type="java.lang.Object"/>
-                            <Column editable="true" title="Cijena" type="java.lang.Object"/>
+                            <Column editable="true" title="Cijena/kom(KM)" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>

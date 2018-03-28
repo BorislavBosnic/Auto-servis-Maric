@@ -68,7 +68,7 @@ public class RadniNalogLogika {
         dijalog.getListaZaposleni().setModel(model);
         dijalog.getListaZaposleni().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        String[] columns = {"Naziv", "Šifra", "Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina", "Cijena"};
+        String[] columns = {"Naziv", "Šifra", "Godište vozila", "Novo", "Vrsta goriva", "Dostupna količina", "Cijena(KM)"};
         DefaultTableModel modelDijelovi = new DefaultTableModel(columns, 0);
         dijalog.getTabelaDijelovi().setModel(modelDijelovi);
 
@@ -124,9 +124,12 @@ public class RadniNalogLogika {
                 return;
             }
 
+           //samo kada povecavamo velicinu
             for (int i = 0; i < dijalog.getTabelaIzabraniDijelovi().getRowCount(); i++) {
                 if (sifra.equals(dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 1))) {
-                    dijalog.getTabelaIzabraniDijelovi().getModel().setValueAt((Integer) dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 2) + dodajKolicinu, i, 2);
+                    int novaKolicina=(Integer) dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 2) + dodajKolicinu;
+                    dijalog.getTabelaIzabraniDijelovi().getModel().setValueAt(novaKolicina, i, 2);
+                    dijalog.getTabelaIzabraniDijelovi().getModel().setValueAt(novaKolicina*cijena, i, 3);
                     postoji = true;
                 }
             }
@@ -134,10 +137,10 @@ public class RadniNalogLogika {
             if (!postoji) {
 
                 DefaultTableModel dtm = (DefaultTableModel) dijalog.getTabelaIzabraniDijelovi().getModel();
-
-                Object[] rowData = {naziv, sifra, dodajKolicinu, cijena};
+                Object[] rowData = {naziv, sifra, dodajKolicinu, cijena*dodajKolicinu};
                 dtm.addRow(rowData);
-            }
+           }
+            
 
             if (dijalog.getTfTroskovi().getText() != null && !"".equals(dijalog.getTfTroskovi().getText())) {
                 Double trenutnaCijena = Double.parseDouble(dijalog.getTfTroskovi().getText());
@@ -152,6 +155,7 @@ public class RadniNalogLogika {
             }
 
             dijalog.getTabelaDijelovi().getModel().setValueAt(Integer.parseInt(dijalog.getTabelaDijelovi().getModel().getValueAt(red, 5).toString()) - dodajKolicinu, red, 5);
+            
             dijalog.getSpinnerKolicina().setValue(1);
         } else {
             JOptionPane.showMessageDialog(dijalog, "Izaberite dio koji želite dodati!", "Greška", JOptionPane.OK_OPTION);
@@ -409,7 +413,8 @@ public class RadniNalogLogika {
 
         for (int i = 0; i < dijalog.getTabelaIzabraniDijelovi().getRowCount(); i++) {
             if (sifra.equals(dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 1))) {
-                dijalog.getTabelaIzabraniDijelovi().getModel().setValueAt((Integer) dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 2) + dodajKolicinu, i, 2);
+                int novaKolicina= (Integer)dijalog.getTabelaIzabraniDijelovi().getModel().getValueAt(i, 2) + dodajKolicinu;
+                dijalog.getTabelaIzabraniDijelovi().getModel().setValueAt(novaKolicina, i, 2);
                 postoji = true;
             }
         }

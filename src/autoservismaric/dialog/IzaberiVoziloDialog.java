@@ -35,12 +35,11 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
     /**
      * Creates new form IzaberiVoziloDialog
      */
-    
     private VoziloKupacMeniLogika voziloKupacMeniLogika = new VoziloKupacMeniLogika();
     ButtonGroup bGTraziVozilo;
     HomeForm1 forma;
-    int idVozila=-1;
-    
+    int idVozila = -1;
+
     public IzaberiVoziloDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -53,23 +52,22 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
 
         tableVozila.setAutoCreateRowSorter(true);
         tableVozila.setAutoCreateRowSorter(true);
-        
+
         tableVozila.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (tableVozila.getSelectedRow() > -1) {
                     idVozila = Integer.parseInt(tableVozila.getValueAt(tableVozila.getSelectedRow(), 0).toString());
                     btnKreirajRadniNalog.setEnabled(true);
-                }
-                else{
+                } else {
                     idVozila = -1;
                     btnKreirajRadniNalog.setEnabled(false);
                 }
             }
         });
-        autoSuggestorMarkaIModelVozila();
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);
     }
-    
+
     public IzaberiVoziloDialog(java.awt.Frame parent, boolean modal, HomeForm1 forma) {
         super(parent, modal);
         initComponents();
@@ -83,33 +81,23 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
 
         tableVozila.setAutoCreateRowSorter(true);
         tableVozila.setAutoCreateRowSorter(true);
-        
+
         tableVozila.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 if (tableVozila.getSelectedRow() > -1) {
                     idVozila = Integer.parseInt(tableVozila.getValueAt(tableVozila.getSelectedRow(), 0).toString());
                     btnKreirajRadniNalog.setEnabled(true);
-                }
-                else{
+                } else {
                     idVozila = -1;
                     btnKreirajRadniNalog.setEnabled(false);
                 }
             }
         });
-        
-       autoSuggestorMarkaIModelVozila();
+
+        MarkaIModelUcitavanje.staviSveMarkeUComboBox(cbMarkaVozila, cbModelVozila);;
     }
 
-    private void autoSuggestorMarkaIModelVozila(){
-         //auto suggestor
-        ArrayList<String> marke=MarkaIModelUcitavanje.ucitajSveMarke();
-        cbMarkaVozila.addItem("");
-        for(int i=0;i<marke.size();i++){
-            cbMarkaVozila.addItem(marke.get(i));
-        }
-        AutoCompleteDecorator.decorate(cbMarkaVozila);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,7 +269,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         panelPretragaLayout.setHorizontalGroup(
             panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPretragaLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPretragaLayout.createSequentialGroup()
                         .addComponent(btnPrikaziSvaVozila, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +311,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cbSvi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnPronadjiVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         panelPretragaLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnPonistiSve, btnPrikaziSvaVozila});
@@ -416,11 +404,11 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKreirajRadniNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKreirajRadniNalogActionPerformed
-        if(idVozila > -1){
+        if (idVozila > -1) {
             new DodajRadniNalogDialog(new JFrame(), true, idVozila, true, forma).setVisible(true);
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(new JFrame(), "Morate odabrati vozilo iz tabele!", "Greška!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnKreirajRadniNalogActionPerformed
 
     private void btnPronadjiVoziloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiVoziloActionPerformed
@@ -502,14 +490,9 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbSviActionPerformed
 
     private void cbMarkaVozilaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMarkaVozilaItemStateChanged
-        if (cbMarkaVozila.getSelectedIndex()!=-1 && cbMarkaVozila.getSelectedIndex()!=0) {
-            System.out.println(cbMarkaVozila.getSelectedIndex());
-            ArrayList<String> model = MarkaIModelUcitavanje.ucitajSveModele(cbMarkaVozila.getSelectedItem().toString());
-            cbModelVozila.removeAllItems();
-            cbModelVozila.addItem("");
-            for (int i = 0; i < model.size(); i++) {
-                cbModelVozila.addItem(model.get(i));
-            }
+        //AUTO DECORATOR
+        if (cbMarkaVozila.getSelectedIndex() != -1) {
+            MarkaIModelUcitavanje.staviSveModeleUComboBox(cbMarkaVozila.getSelectedItem().toString(), cbModelVozila);
         }
     }//GEN-LAST:event_cbMarkaVozilaItemStateChanged
 
@@ -671,12 +654,9 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         return panelOsnovni;
     }
 
-    
-
     public JScrollPane getjScrollPane1() {
         return panelTabela;
     }
-
 
     public JRadioButton getRbPravnoLiceVozilo() {
         return rbPravnoLiceVozilo;
@@ -689,8 +669,6 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
     public JRadioButton getRbPrivatnoLiceVozilo() {
         return rbPrivatnoLiceVozilo;
     }
-
- 
 
     public JTextField getTfGodisteTrazi() {
         return tfGodisteTrazi;
@@ -728,8 +706,6 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         this.cbModelVozila = cbModelVozila;
     }
 
-    
-
     public JTextField getTfNazivVozilo() {
         return tfNazivVozilo;
     }
@@ -754,8 +730,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         this.tfRegistracijaTrazi = tfRegistracijaTrazi;
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreirajRadniNalog;
     private javax.swing.JButton btnPonistiSve;

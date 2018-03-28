@@ -211,6 +211,8 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         lblIzabraniDijelovi.setForeground(new java.awt.Color(255, 255, 255));
         lblIzabraniDijelovi.setText("Izabrani dijelovi:");
 
+        pnlDijelovi.setToolTipText("Prikaz djelova koja odgovaraju ovom vozilu.\nU tu grupu spadaju dijelovi koji su dodani za sva vozila ili za ovo konkretno vozilo(marka i model).");
+
         tblDijelovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -228,7 +230,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
         lblListaDijelova.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblListaDijelova.setForeground(new java.awt.Color(240, 240, 240));
-        lblListaDijelova.setText("Lista dijelova:");
+        lblListaDijelova.setText("Lista dijelova za izabrano vozilo:");
 
         btnDodajDio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDodajDio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/add (1).png"))); // NOI18N
@@ -248,7 +250,7 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Naziv", "Šifra", "Količina", "Cijena"
+                "Naziv", "Šifra", "Količina", "Cijena(KM)"
             }
         ));
         pnlIzabraniDijelovi.setViewportView(tblIzabraniDijelovi);
@@ -262,56 +264,54 @@ public class DodajRadniNalogDialog extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lblIzabraniDijelovi)
+                .addGap(180, 180, 180)
+                .addComponent(lblCijenaDijela)
+                .addGap(27, 27, 27)
+                .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblKolicina)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDodajDio)
+                .addGap(12, 12, 12))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlDijelovi)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(pnlIzabraniDijelovi)
                         .addGap(18, 18, 18)
-                        .addComponent(btnUkloniDio)))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblListaDijelova)
+                        .addComponent(btnUkloniDio))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblIzabraniDijelovi)
-                        .addGap(180, 180, 180)
-                        .addComponent(lblCijenaDijela)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblKolicina)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDodajDio)
-                .addGap(12, 12, 12))
+                        .addComponent(lblListaDijelova)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblListaDijelova)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblIzabraniDijelovi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlIzabraniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUkloniDio))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCijenaDijela)
-                            .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblKolicina)
-                            .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDodajDio))
-                        .addGap(126, 126, 126))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIzabraniDijelovi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlIzabraniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUkloniDio))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(153, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCijenaDijela)
+                    .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblKolicina)
+                    .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDodajDio))
+                .addGap(126, 126, 126))
         );
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));

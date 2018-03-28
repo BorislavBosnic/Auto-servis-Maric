@@ -171,7 +171,7 @@ public class ModelVozilaLogika {
             JOptionPane.showMessageDialog(dijalog, "Postoje vozila koja ovog tipa u sistemu. Brisanje nije moguće dok oni postoje.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
         } else {
             if (DAOFactory.getDAOFactory().getModelVozilaDAO().obrisiModel(mv)) {
-                JOptionPane.showMessageDialog(dijalog, "Uspješno izbrisan radni nalog", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(dijalog, "Uspješno izbrisan model vozila", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = dijalog.getTabela().getModel().getRowCount() - 1; i >= 0; i--) {
                     if ((dijalog.getTabela().getModel().getValueAt(i, 0).toString().toLowerCase()).equals(marka.toLowerCase()) && (dijalog.getTabela().getModel().getValueAt(i, 1).toString().toLowerCase()).equals(model.toLowerCase())) {
                         ((DefaultTableModel) dijalog.getTabela().getModel()).removeRow(i);

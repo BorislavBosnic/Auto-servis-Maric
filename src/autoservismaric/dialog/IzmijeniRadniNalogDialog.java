@@ -202,7 +202,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Naziv", "Šifra", "Količina", "Cijena"
+                "Naziv", "Šifra", "Količina", "Cijena/kom(KM)"
             }
         ));
         spnlIzabraniDijelovi.setViewportView(tblIzabraniDijelovi);
@@ -258,23 +258,24 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblListaDijelova)
-                    .addGroup(pnlPomocni1Layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(lblCijenaDijela)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblKolicina)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDodajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlPomocni1Layout.createSequentialGroup()
-                        .addComponent(spnlIzabraniDijelovi, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUkloniDio))
                     .addComponent(lblIzabraniDijelovi)
-                    .addComponent(spnlLista, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnlLista, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlPomocni1Layout.createSequentialGroup()
+                        .addGroup(pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlPomocni1Layout.createSequentialGroup()
+                                .addGap(202, 202, 202)
+                                .addComponent(lblCijenaDijela)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCijenaDijela, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblKolicina)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinnerKolicina, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spnlIzabraniDijelovi, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlPomocni1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUkloniDio)
+                            .addComponent(btnDodajDio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPomocni1Layout.setVerticalGroup(
@@ -452,7 +453,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
                         .addComponent(pnlPomocni2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(pnlPodosnovniLayout.createSequentialGroup()
-                        .addComponent(pnlPomocni1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(pnlPomocni1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         pnlPodosnovniLayout.setVerticalGroup(
@@ -532,9 +533,7 @@ public class IzmijeniRadniNalogDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlOsnovni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlOsnovni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

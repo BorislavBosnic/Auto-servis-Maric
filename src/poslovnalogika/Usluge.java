@@ -164,7 +164,7 @@ public class Usluge
                 Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
                 if(DAOFactory.getDAOFactory().getRadniNalogDAO().zatvoriRadniNalog(id)){
                     JOptionPane.showMessageDialog(new JFrame(), "Uspješno zatvoren radni nalog!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-   
+                    homeForm.getBtnPrikaziRadniNalog().doClick();
                 } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Radni nalog već zatvoren!!", "Greška", JOptionPane.ERROR_MESSAGE);
 

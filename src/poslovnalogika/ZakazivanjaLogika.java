@@ -91,9 +91,9 @@ public class ZakazivanjaLogika
                 /*Integer.parseInt(datum.split("-")[0])-1900,
                 Integer.parseInt(datum.split("-")[1])-1,
                 Integer.parseInt(datum.split("-")[2])*/
-                Integer.parseInt(datum.split("\\.")[2])-1900,
+                Integer.parseInt(datum.split("\\.")[0])-1900,
                 Integer.parseInt(datum.split("\\.")[1])-1,
-                Integer.parseInt(datum.split("\\.")[0])
+                Integer.parseInt(datum.split("\\.")[2])
         );
         Time vrijemeSQL=new Time
         (

@@ -6,6 +6,7 @@
 package poslovnalogika;
 
 import autoservismaric.dialog.IzmijeniDioDialog;
+import autoservismaric.dialog.PregledProdanihDijelovaDialog;
 import autoservismaric.dialog.ProdajDioDialog;
 import autoservismaric.forms.HomeForm1;
 import static autoservismaric.forms.HomeForm1.selRedDio;
@@ -13,6 +14,7 @@ import data.dao.DAOFactory;
 import data.dto.DioDTO;
 import data.dto.DioModelVozilaDTO;
 import data.dto.ModelVozilaDTO;
+import data.dto.ProdanDioDTO;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +33,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Aco
  */
 public class DioLogika {
-    public void dodajDio(HomeForm1 form){
+
+    public DioLogika() {
+    }
+
+    
+    public void dodajDio(HomeForm1 form) {
         String sifra = "";
         String naziv = "";
         Double cijena = null;
@@ -90,7 +97,7 @@ public class DioLogika {
         model = (String) form.getCbModelDio().getSelectedItem();
         try {
             kolicina = Integer.parseInt(form.getTfKolicinaDio().getText());
-            if(kolicina < 1) {
+            if (kolicina < 1) {
                 JOptionPane jop = new JOptionPane();
                 jop.showMessageDialog(form, "Količina mora biti pozitivan broj", "Greška", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -108,50 +115,55 @@ public class DioLogika {
                 return;
             }
         }
-        if(flag) return;
-        
-        if(!stanje){
+        if (flag) {
+            return;
+        }
+
+        if (!stanje) {
             sifra += "s";
         }
-        
+
         DioDTO pom = DAOFactory.getDAOFactory().getDioDAO().getDio(sifra);
-        if(pom != null){
+        if (pom != null) {
             JOptionPane jop = new JOptionPane();
             jop.showMessageDialog(form, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        if("Svi".equals(marka)) zaSve = true;
+        if ("Svi".equals(marka)) {
+            zaSve = true;
+        }
         DioDTO noviDio = new DioDTO(sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, zaSve, marka, model);
-            DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
-            ModelVozilaDTO modVoz = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-            DioModelVozilaDTO dmv = null;
-            if (dio != null && modVoz != null) {
-                dmv = DAOFactory.getDAOFactory().getDioModelVozilaDAO().getDioModelVozila(dio.getId(),
-                        modVoz.getIdModelVozila());
-            }
+        DioDTO dio = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
+        ModelVozilaDTO modVoz = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
+        DioModelVozilaDTO dmv = null;
+        if (dio != null && modVoz != null) {
+            dmv = DAOFactory.getDAOFactory().getDioModelVozilaDAO().getDioModelVozila(dio.getId(),
+                    modVoz.getIdModelVozila());
+        }
 
-            if (dmv != null) {
-                JOptionPane jop = new JOptionPane();
-                jop.showMessageDialog(form, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+        if (dmv != null) {
+            JOptionPane jop = new JOptionPane();
+            jop.showMessageDialog(form, "Dio sa ovom šifrom već postoji.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
 
-            } else {
-                if (DAOFactory.getDAOFactory().getDioDAO().dodajDio(noviDio)) {
-                    if (modVoz == null) {
-                        DAOFactory.getDAOFactory().getModelVozilaDAO().dodajModel(new ModelVozilaDTO(marka, model));
-                    }
-                    DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
-                    ModelVozilaDTO mv = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
-                    DAOFactory.getDAOFactory().getDioModelVozilaDAO().dodajDioModelVozila(dioo.getId(), mv.getIdModelVozila());
-                    JOptionPane jop = new JOptionPane();
-                    jop.showMessageDialog(form, "Uspješno dodan dio!!!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                    DefaultTableModel dtm = (DefaultTableModel) form.getjTable().getModel();
-                    dtm.addRow(new Object[]{dioo.getId(), sifra, naziv, marka, model, godiste, gorivo, cijena, kolicina, stanje ? "Da" : "Ne"});
+        } else {
+            if (DAOFactory.getDAOFactory().getDioDAO().dodajDio(noviDio)) {
+                if (modVoz == null) {
+                    DAOFactory.getDAOFactory().getModelVozilaDAO().dodajModel(new ModelVozilaDTO(marka, model));
                 }
+                DioDTO dioo = DAOFactory.getDAOFactory().getDioDAO().dio(noviDio);
+                ModelVozilaDTO mv = DAOFactory.getDAOFactory().getModelVozilaDAO().model(marka, model);
+                DAOFactory.getDAOFactory().getDioModelVozilaDAO().dodajDioModelVozila(dioo.getId(), mv.getIdModelVozila());
+                JOptionPane jop = new JOptionPane();
+                jop.showMessageDialog(form, "Uspješno dodan dio!!!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                DefaultTableModel dtm = (DefaultTableModel) form.getjTable().getModel();
+                dtm.addRow(new Object[]{dioo.getId(), sifra, naziv, marka, model, godiste, gorivo, cijena, kolicina, stanje ? "Da" : "Ne"});
             }
-            //return true;
+        }
+        //return true;
     }
-    public void pretraziDijelove(HomeForm1 form){
-        
+
+    public void pretraziDijelove(HomeForm1 form) {
+
         String sifra = "";
         String naziv = "";
         Double cijena = null;
@@ -166,7 +178,7 @@ public class DioLogika {
 
         sifra = form.getTfSifra().getText();
         naziv = form.getTfNaziv().getText();
-        stanje=form.getCbNovo().isSelected();
+        stanje = form.getCbNovo().isSelected();
         try {
             id = Integer.parseInt(form.getTfId().getText());
         } catch (NumberFormatException e) {
@@ -191,7 +203,7 @@ public class DioLogika {
         gorivo = (String) form.getCbGorivo().getSelectedItem();
         marka = (String) form.getCbMarka().getSelectedItem();
         model = (String) form.getCbModel().getSelectedItem();
-        DioDTO dio=new DioDTO(id,sifra,naziv,gorivo,godiste,stanje,cijena,kolicina,true,marka,model);
+        DioDTO dio = new DioDTO(id, sifra, naziv, gorivo, godiste, stanje, cijena, kolicina, true, marka, model);
         ArrayList<DioDTO> dijelovi = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaBiloKojiParametar(dio);
         /*if (id != 0) {
             dijelovi.add(DAOFactory.getDAOFactory().getDioDAO().getDio(id));
@@ -255,7 +267,7 @@ public class DioLogika {
             }
         }
     }
-        
+
     public void ucitajPopupZaDijelove(HomeForm1 form) {
         JTable jTable = form.getJTable();
         JMenuItem prodaj = new JMenuItem("Prodaj");
@@ -297,7 +309,6 @@ public class DioLogika {
         form.getPopupDio().add(obrisi);
         jTable.setComponentPopupMenu(form.getPopupDio());
 
-       
         form.getPopupDio().addPopupMenuListener(new PopupMenuListener() {
 
             @Override
@@ -335,5 +346,84 @@ public class DioLogika {
 
             }
         });
+    }
+
+    public void prikazSvihProdanihDijelova(PregledProdanihDijelovaDialog parent) {
+        ArrayList<ProdanDioDTO> lista = DAOFactory.getDAOFactory().getProdanDioDAO().getSviProdaniDijelovi();
+        DefaultTableModel table = (DefaultTableModel) parent.getTblProdaniDijelovi().getModel();
+        ProdanDioDTO d=new ProdanDioDTO();
+        for (int i = 0; i < lista.size(); i++) {
+            d = lista.get(i);
+            table.addRow(new Object[]{d.getIdDio(), d.getSifra(), d.getNaziv(), d.getCijena(), d.getKolicina(), d.getDatum()});
+        }
+    }
+
+    public void traziProdanDio(PregledProdanihDijelovaDialog form) {
+        ProdanDioDTO parametri = new ProdanDioDTO();
+        //
+        String sifra = "";
+        String naziv = "";
+        Double cijena = null;
+        Integer kolicina = null;
+        Integer id = null;
+        java.sql.Date datumProdaje = null;
+
+        sifra = form.getTfSifra().getText();
+        if(!"".equals(sifra)){
+            parametri.setSifra(sifra);
+        }
+        
+        naziv=form.getTfNaziv().getText();
+        if(!"".equals(naziv)){
+            parametri.setNaziv(naziv);
+        }
+        
+        if(!"".equals(form.getTfProdajnaCijena().getText())){
+            try{
+                cijena=Double.valueOf(form.getTfProdajnaCijena().getText());
+                parametri.setCijena(cijena);
+            }catch(Exception e){
+                JOptionPane.showConfirmDialog(null,"Cijena nije u dobrom formatu.", "Problem", JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+        }
+        
+        if(!"".equals(form.getTfKolicina().getText())){
+            try{
+                kolicina=Integer.valueOf(form.getTfKolicina().getText());
+                parametri.setKolicina(kolicina);
+            }catch(Exception e){
+                JOptionPane.showConfirmDialog(null,"Količina nije u dobrom formatu.", "Problem", JOptionPane.ERROR_MESSAGE);
+                return;
+            }   
+        }
+        if(!"".equals(form.getTxtId().getText())){
+            try{
+                id=Integer.valueOf(form.getTxtId().getText());
+                parametri.setId(id);
+            }catch(Exception e){
+                JOptionPane.showConfirmDialog(null,"Id nije u dobrom formatu.", "Problem", JOptionPane.ERROR_MESSAGE);
+                return;
+            }   
+        }
+        try{
+            datumProdaje=new java.sql.Date(form.getDcDatumProdaje().getDate().getTime());
+            parametri.setDatum(datumProdaje);
+        }catch(Exception e){
+            //nista
+        }
+        
+        ArrayList<ProdanDioDTO> lista = DAOFactory.getDAOFactory().getProdanDioDAO().traziProdanDio(parametri);
+        if(lista==null){
+            JOptionPane.showMessageDialog(null, "Nema traženih rezultata.", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        DefaultTableModel table = (DefaultTableModel) form.getTblProdaniDijelovi().getModel();
+        table.setRowCount(0);
+        ProdanDioDTO d;
+        for (int i = 0; i < lista.size(); i++) {
+            d = lista.get(i);
+            table.addRow(new Object[]{d.getIdDio(), d.getSifra(), d.getNaziv(), d.getCijena(), d.getKolicina(), d.getDatum()});
+        }
     }
 }

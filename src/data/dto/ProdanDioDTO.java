@@ -12,57 +12,98 @@ import java.sql.Date;
  * @author Aco
  */
 public class ProdanDioDTO {
-    private int id;
-    private int idDio;
+    private Integer id;
+    private Integer idDio;
+    private String naziv;
     private Double cijena;
     private Integer kol;
     private Date datum;
-    
-    public ProdanDioDTO(int id, Integer idDio, Double cijena, Integer kol, Date datum){
+    private String sifra;
+
+    public ProdanDioDTO() {
+    }
+
+    public ProdanDioDTO( Integer idDio,Integer id, String sifra, String naziv, Double cijena, Integer kol, Date datum) {
+        this.id = id;
+        this.idDio = idDio;
+        this.naziv = naziv;
+        this.cijena = cijena;
+        this.kol = kol;
+        this.datum = datum;
+        this.sifra = sifra;
+    }
+
+    public ProdanDioDTO(Integer id, Integer idDio, Double cijena, Integer kol, Date datum) {
         this.id = id;
         this.idDio = idDio;
         this.cijena = cijena;
         this.kol = kol;
         this.datum = datum;
     }
-    public ProdanDioDTO(Integer idDio, Double cijena, Integer kol, Date datum){
-        this.id = 0;
+
+    public ProdanDioDTO(Integer idDio, Double cijena, Integer kol, Date datum) {
         this.idDio = idDio;
         this.cijena = cijena;
         this.kol = kol;
         this.datum = datum;
     }
-    public void setId(Integer id){
+    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
-    public void setIdDio(Integer idDio){
+
+    public Integer getIdDio() {
+        return idDio;
+    }
+
+    public void setIdDio(Integer idDio) {
         this.idDio = idDio;
     }
-    public void setCijena(Double cijena){
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public Double getCijena() {
+        return cijena;
+    }
+
+    public void setCijena(Double cijena) {
         this.cijena = cijena;
     }
-    public void setKolicina(Integer kolicina){
-        this.kol = kolicina;
+
+    public Integer getKolicina() {
+        return kol;
     }
-    public void setDatum(Date datum){
+
+    public void setKolicina(Integer kol) {
+        this.kol = kol;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
+
+    public String getSifra() {
+        return sifra;
+    }
+
+    public void setSifra(String sifra) {
+        this.sifra = sifra;
+    }
+
     
-    public Integer getId(){
-        return this.id;
-    }
-    public Integer getIdDio(){
-        return this.idDio;
-    }
-    public Double getCijena(){
-        return this.cijena;
-        
-    }
-    public Integer getKolicina(){
-        return this.kol;
-    }
-    public Date getDatum(){
-        return this.datum;
-    }
-            
 }
