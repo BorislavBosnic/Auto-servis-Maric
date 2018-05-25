@@ -124,6 +124,7 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
         jLabel153.setForeground(new java.awt.Color(255, 255, 255));
         jLabel153.setText("Funkcija:");
 
+        buttonIzmjeni.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autoservismaric/images/save.png"))); // NOI18N
         buttonIzmjeni.setText("Izmjeni");
         buttonIzmjeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +253,7 @@ public class DetaljiZaposlenogDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel156))
                     .addComponent(dateChooserDatumDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonIzmjeni)
                 .addContainerGap())
         );

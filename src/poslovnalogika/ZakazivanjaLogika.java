@@ -48,11 +48,11 @@ public class ZakazivanjaLogika
     {
         ArrayList<TerminDTO>filtriranaLista=new ArrayList<>();
         for(TerminDTO nalog:lista)
-            if("".equals(marka) || nalog.getMarka().equals(marka))
+            if("".equals(marka) || nalog.getMarka().startsWith(marka))
                 if(datum==null || (nalog.getDatum().toString().compareTo(datum.toString()))==0)
-                    if("".equals(ime) || nalog.getIme().equals(ime))
-                        if("".equals(prezime) || nalog.getPrezime().equals(prezime))
-                            if("".equals(brojTelefona) || nalog.getBrojTelefona().equals(brojTelefona))
+                    if("".equals(ime) || nalog.getIme().startsWith(ime))
+                        if("".equals(prezime) || nalog.getPrezime().startsWith(prezime))
+                            if("".equals(brojTelefona) || nalog.getBrojTelefona().startsWith(brojTelefona))
                                 filtriranaLista.add(nalog);
         terminiZaTabelu(filtriranaLista, tabela);
     }

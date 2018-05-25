@@ -137,6 +137,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Kreiranje radnog naloga(1/2)");
+        setResizable(false);
 
         panelOsnovni.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -170,6 +171,7 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         cbSvi.setBackground(new java.awt.Color(102, 153, 255));
         cbSvi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbSvi.setForeground(new java.awt.Color(240, 240, 240));
+        cbSvi.setSelected(true);
         cbSvi.setText("Svi");
         cbSvi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,9 +190,15 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         lblIme.setForeground(new java.awt.Color(255, 255, 255));
         lblIme.setText("Ime:");
 
+        tfPrezimeVozilo.setEditable(false);
+        tfPrezimeVozilo.setBackground(java.awt.Color.gray);
+
         lblPrezime.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblPrezime.setForeground(new java.awt.Color(255, 255, 255));
         lblPrezime.setText("Prezime:");
+
+        tfImeVozilo.setEditable(false);
+        tfImeVozilo.setBackground(java.awt.Color.gray);
 
         btnPrikaziSvaVozila.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnPrikaziSvaVozila.setText("Prikaži sve");
@@ -246,7 +254,6 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         rbPrivatnoLiceVozilo.setBackground(new java.awt.Color(102, 153, 255));
         rbPrivatnoLiceVozilo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rbPrivatnoLiceVozilo.setForeground(new java.awt.Color(255, 255, 255));
-        rbPrivatnoLiceVozilo.setSelected(true);
         rbPrivatnoLiceVozilo.setText("Privatno lice");
         rbPrivatnoLiceVozilo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,10 +277,10 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
             panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPretragaLayout.createSequentialGroup()
                 .addContainerGap(94, Short.MAX_VALUE)
-                .addGroup(panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelPretragaLayout.createSequentialGroup()
                         .addComponent(btnPrikaziSvaVozila, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addComponent(btnPonistiSve))
                     .addGroup(panelPretragaLayout.createSequentialGroup()
                         .addGroup(panelPretragaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,10 +389,10 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(panelPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnKreirajRadniNalog, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -396,7 +403,9 @@ public class IzaberiVoziloDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelOsnovni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelOsnovni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

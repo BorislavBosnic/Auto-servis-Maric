@@ -41,6 +41,7 @@ public class KnjigovodstvoLogika {
 
     public static void radniNaloziZaTabelu(ArrayList<RadniNalogDTO> lista, JTable tabela) {
         DefaultTableModel dtm = (DefaultTableModel) tabela.getModel();
+        System.out.println(lista.size());
         Object[][] sve = new Object[lista.size()][7];
         for (int i = 0; i < lista.size(); ++i) {
             sve[i][0] = String.valueOf(lista.get(i).getIdRadniNalog());
@@ -68,6 +69,8 @@ public class KnjigovodstvoLogika {
         String[] nazivi = {"ID", "Automobil", "Vlasnik", "Datum otvaranja", "Datum fakturisanja", "Iznos(KM)", "Plaćeno"};
         dtm.setDataVector(sve, nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tabela.getColumnModel().getColumn(6).setPreferredWidth(10);
     }
 
     public static void stavkeSaNalogaZaTabelu(JTable tabela, JTable nalozi,
@@ -89,6 +92,7 @@ public class KnjigovodstvoLogika {
         ArrayList<RadniNalogDioDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDioDAO().radniNalogDioIdRadniNalog(idRadnogNaloga);
         Object[][] sve = new Object[lista.size() + 1][5];
         double cijena = 0;
+        double cijenaDjelova=0;
         for (int i = 0; i < lista.size(); ++i) {
             int idDio = lista.get(i).getIdDio();
             sve[i][0] = String.valueOf(idDio);
@@ -100,7 +104,7 @@ public class KnjigovodstvoLogika {
             sve[i][3] = String.valueOf(lista.get(i).getCijena());
             //sve[i][4]=String.format("%.2f", (lista.get(i).getCijena()*(1.0+PDV)));
 
-            cijena += lista.get(i).getCijena() * lista.get(i).getKolicina();
+            cijenaDjelova += lista.get(i).getCijena() * lista.get(i).getKolicina();
         }
         sve[lista.size()][0] = String.valueOf(0);
         sve[lista.size()][1] = "Rad";
@@ -108,13 +112,16 @@ public class KnjigovodstvoLogika {
         sve[lista.size()][3] = String.format("%.2f", nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/);//vezano za troškove
         //sve[lista.size()][4]=String.format("%.2f", (nalog.getCijenaUsluge()/*+nalog.getTroskovi()*/)*(1.0+PDV));//vezano za troškove
         cijena += nalog.getCijenaUsluge();//vezano za troškove
+        cijena+=nalog.getTroskovi();//vezano za troskovi(tu su i djelovi)
 
         String[] nazivi = {"ID", "Naziv", "Količina", "Cijena(KM)"};
         dtm.setDataVector(sve, nazivi);
 
         Double ukupnaCijena = ((cijena) * (1 + PDV / 100));
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        if(nalog.getTroskovi()>cijenaDjelova){
+            dtm.addRow(new Object[]{"0","Dodatni troškovi","0",nalog.getTroskovi()-cijenaDjelova});
+        }
         txtBezPDV.setText(String.format("%.2f", cijena));
         txtUkupno.setText(String.format("%.2f", ukupnaCijena));
     }
@@ -181,9 +188,10 @@ public class KnjigovodstvoLogika {
             int idVozila = lista.get(i).getIdVozilo();
             int idMarkeVozila = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdModelVozila().intValue();
             sve[i][1] = DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getMarka()
-                    + DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
+                    +" "+ DAOFactory.getDAOFactory().getModelVozilaDAO().model(idMarkeVozila).getModel();
             int idKupca = DAOFactory.getDAOFactory().getVoziloDAO().vozilo(idVozila).getIdKupac();
-            if ("".equals(DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv())) {
+            String naziv=DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv();
+            if (naziv!=null && !"".equals(naziv)) {
                 sve[i][2] = DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getNaziv() + " ";
             } else {
                 sve[i][2] = DAOFactory.getDAOFactory().getKupacDAO().kupac(idKupca).getIme() + " "
@@ -202,6 +210,7 @@ public class KnjigovodstvoLogika {
         String[] nazivi = {"ID", "Automobil", "Vlasnik", "Datum otvaranja", "Datum fakturisanja", "Iznos(KM)"};
         dtm.setDataVector(sve, nazivi);
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
     }
 
     public static void neplaceneFaktureZaPocetnuStranu(ArrayList<RadniNalogDTO> lista, JTable tabela) {
@@ -217,7 +226,7 @@ public class KnjigovodstvoLogika {
 
     public static void pretraziNeplaceneFakturePoNazivu(HomeForm1 form, String naziv, String ime, String prezime) {
         KupacDTO kupac = null;
-        if (!"".equals(naziv)) {
+        if (naziv!=null && !"".equals(naziv)) {
             ArrayList<KupacDTO> kupci = DAOFactory.getDAOFactory().getKupacDAO().kupciPravni(naziv);
             if (kupci.size() > 0) {
                 kupac = kupci.get(0);

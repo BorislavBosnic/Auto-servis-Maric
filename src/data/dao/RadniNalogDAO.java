@@ -34,6 +34,8 @@ public interface RadniNalogDAO {
     public int getBrojFaktura();
 
     public ArrayList<RadniNalogDTO> getRadniNalozi();
+    
+    public ArrayList<RadniNalogDTO> getNeplaceniRadniNalozi();
 
     public ArrayList<RadniNalogDTO> getRadniNalozi(int id);
 

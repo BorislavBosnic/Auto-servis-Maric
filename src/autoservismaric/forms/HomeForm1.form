@@ -69,6 +69,12 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="AUTO-SERVIS"/>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[2896, 753]"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[2896, 753]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -1338,7 +1344,7 @@
                                     <Column editable="false" title="Iznos" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Nepla&#x107;ene fakture."/>
+                                <Property name="toolTipText" type="java.lang.String" value="Nepla&#x107;ene fakture"/>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblNeplaceneFakture.setAutoCreateRowSorter(true);">
                                   <TableColumnModel selectionModel="0">
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
@@ -1374,7 +1380,7 @@
                                   </TableColumnModel>
                                 </Property>
                                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                                  <TableHeader reorderingAllowed="false" resizingAllowed="false"/>
+                                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                                 </Property>
                               </Properties>
                               <Events>
@@ -1474,7 +1480,7 @@
                                     <Column editable="false" title="Rok" type="java.lang.String"/>
                                   </Table>
                                 </Property>
-                                <Property name="toolTipText" type="java.lang.String" value="Radni nalozi koji su pla&#x107;eni u odabranom periodu."/>
+                                <Property name="toolTipText" type="java.lang.String" value="Radni nalozi  u odabranom periodu."/>
                                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="tblAktivnosti.setAutoCreateRowSorter(true);">
                                   <TableColumnModel selectionModel="0">
                                     <Column maxWidth="-1" minWidth="-1" prefWidth="20" resizable="false">
@@ -2075,6 +2081,10 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfImeRadniNalog">
                               <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                                </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
                                 </Property>
@@ -2180,6 +2190,10 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="tfPrezimeRadniNalog">
                               <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+                                </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="14" style="0"/>
                                 </Property>
@@ -2561,6 +2575,9 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPronadjiTermin">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="0"/>
+                                </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/autoservismaric/images/search.png"/>
                                 </Property>
@@ -2582,6 +2599,9 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPonistiUnosePretraga">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="0"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Poni&#x161;ti unose"/>
                               </Properties>
                               <Events>
@@ -2770,6 +2790,9 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="btnDodajTermin">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="0"/>
+                                </Property>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/autoservismaric/images/clipboard.png"/>
                                 </Property>
@@ -2853,6 +2876,9 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="btnPonistiUnoseTermin">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="12" style="0"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="Poni&#x161;ti unose"/>
                               </Properties>
                               <Events>
@@ -4913,7 +4939,9 @@
                                           <Component id="txtPDV" min="-2" pref="100" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="194" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="42" max="32767" attributes="0"/>
                                           <Component id="jLabel161" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="txtUkupno" min="-2" pref="100" max="-2" attributes="0"/>
@@ -4924,26 +4952,29 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="pnlNaloziKnjigovodstvo" max="32767" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="btnFakturisano" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
-                                                      <Component id="btnNefakturisano" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="btnFakturisano" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                                                          <Component id="btnNefakturisano" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="btnSviNalozi" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="btnSviNalozi" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                          <Component id="btnPoDatumu" max="32767" attributes="0"/>
+                                                          <Component id="btnPoIDu" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="12" max="32767" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="txtID" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
+                                                          <Component id="dtmDatum" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                      <Component id="btnPoDatumu" max="32767" attributes="0"/>
-                                                      <Component id="btnPoIDu" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="12" max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txtID" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
-                                                      <Component id="dtmDatum" alignment="1" min="-2" pref="125" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="btnNeplaceniNalozi" min="-2" pref="151" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       </Group>
@@ -4965,7 +4996,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblRadniNalozi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Group type="102" attributes="0">
@@ -4975,18 +5006,17 @@
                                               </Group>
                                               <Component id="btnSviNalozi" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="btnPoIDu" min="-2" pref="35" max="-2" attributes="0"/>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="txtID" min="-2" pref="30" max="-2" attributes="0"/>
-                                                  <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="btnPoDatumu" pref="35" max="32767" attributes="0"/>
-                                              <Component id="dtmDatum" max="32767" attributes="0"/>
+                                          <Component id="btnNeplaceniNalozi" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="btnPoIDu" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="txtID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="btnPoDatumu" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="dtmDatum" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Component id="pnlNaloziKnjigovodstvo" min="-2" max="-2" attributes="0"/>
@@ -5012,6 +5042,7 @@
                                       <Component id="jLabel162" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="22" max="32767" attributes="0"/>
                               </Group>
@@ -5390,6 +5421,28 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="%"/>
                           </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="jButton1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Izra&#x10d;unaj&gt;&gt;"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnNeplaceniNalozi">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="12" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Nepla&#x107;eni nalozi"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNeplaceniNaloziActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

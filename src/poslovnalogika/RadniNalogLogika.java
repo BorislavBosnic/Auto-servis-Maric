@@ -76,7 +76,8 @@ public class RadniNalogLogika {
         //listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijelovi(modelVozila.getMarka(), modelVozila.getModel());
         //List<DioDTO> listaZaSvaVozila = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaSvaVozila();
 
-        listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaPonudu(modelVozila.getMarka(), modelVozila.getModel());
+        //listaDijelova = DAOFactory.getDAOFactory().getDioDAO().getDijeloviZaPonudu(modelVozila.getMarka(), modelVozila.getModel());
+        listaDijelova=DAOFactory.getDAOFactory().getDioDAO().getSviDijelovi();
         for (DioDTO d : listaDijelova) {
             Object[] rowData = {d.getNaziv(), d.getSifra(), d.getGodisteVozila(), d.getNovo() == true ? "Da" : "Ne", d.getVrstaGoriva(), d.getKolicina(), d.getTrenutnaCijena()};
             modelDijelovi.addRow(rowData);
@@ -146,16 +147,16 @@ public class RadniNalogLogika {
                 Double trenutnaCijena = Double.parseDouble(dijalog.getTfTroskovi().getText());
                 trenutnaCijena += dodajKolicinu * cijena;
                 trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
-                dijalog.getTfTroskovi().setText(trenutnaCijena.toString());
+                dijalog.getTfTroskoviDjelova().setText(trenutnaCijena.toString());
             } else {
                 Double trenutnaCijena = 0.0;
                 trenutnaCijena += dodajKolicinu * cijena;
                 trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
-                dijalog.getTfTroskovi().setText(trenutnaCijena.toString());
+                dijalog.getTfTroskoviDjelova().setText(trenutnaCijena.toString());
             }
 
             dijalog.getTabelaDijelovi().getModel().setValueAt(Integer.parseInt(dijalog.getTabelaDijelovi().getModel().getValueAt(red, 5).toString()) - dodajKolicinu, red, 5);
-            
+            dijalog.izracunajSveTroskove();
             dijalog.getSpinnerKolicina().setValue(1);
         } else {
             JOptionPane.showMessageDialog(dijalog, "Izaberite dio koji želite dodati!", "Greška", JOptionPane.OK_OPTION);
@@ -184,14 +185,15 @@ public class RadniNalogLogika {
             }
         }
 
-        Double cijena = Double.parseDouble(dijalog.getTfTroskovi().getText());
+        Double cijena = Double.parseDouble(dijalog.getTfTroskoviDjelova().getText());
         Double novaCijena = cijena - kolicina * cijenaJednogDijela;
-        dijalog.getTfTroskovi().setText(novaCijena.toString());
+        dijalog.getTfTroskoviDjelova().setText(novaCijena.toString());
 
         if (novaCijena < 0) {
-            dijalog.getTfTroskovi().setText(new String("0"));
+            dijalog.getTfTroskoviDjelova().setText(new String("0"));
         }
 
+        dijalog.izracunajSveTroskove();
         ((DefaultTableModel) dijalog.getTabelaIzabraniDijelovi().getModel()).removeRow(red);
     }
 
@@ -438,7 +440,6 @@ public class RadniNalogLogika {
             trenutnaCijena = Math.round(trenutnaCijena * 100.0) / 100.0;
             dijalog.getTfTroskovi().setText(trenutnaCijena.toString());
         }
-
         dijalog.getTabelaDijelovi().getModel().setValueAt(Integer.parseInt(dijalog.getTabelaDijelovi().getModel().getValueAt(red, 5).toString()) - dodajKolicinu, red, 5);
         dijalog.getSpinnerKolicina().setValue(1);
     }

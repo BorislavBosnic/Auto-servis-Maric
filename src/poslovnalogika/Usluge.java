@@ -44,12 +44,12 @@ import static poslovnalogika.ZakazivanjaLogika.terminiZaTabelu;
  *
  * @author nikol
  */
-public class Usluge
-{
+public class Usluge {
+
     public static HomeForm1 forma;
-    public static void inicijalisuciKod(HomeForm1 forma)
-    {
-        Usluge.forma=forma;
+
+    public static void inicijalisuciKod(HomeForm1 forma) {
+        Usluge.forma = forma;
         uslugeKnjigovodstva();
         uslugeZakazivanja();
         uslugePocetneStrane();
@@ -110,21 +110,20 @@ public class Usluge
             forma.getBtnPredracun().setEnabled(true);
         }
     }
-    
-     public static void dodajPopupMeniPretragaRadniNaloga(HomeForm1 homeForm) {
+
+    public static void dodajPopupMeniPretragaRadniNaloga(HomeForm1 homeForm) {
         opcija = -1;
         forma.setPopupMenu(new JPopupMenu());
         JMenuItem izmijeniItem = new JMenuItem("Izmijeni");
         JMenuItem izbrisiItem = new JMenuItem("Izbriši");
         JMenuItem zatvoriNalogItem = new JMenuItem("Zatvori radni nalog");
 
-
         izmijeniItem.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
-                new IzmijeniRadniNalogDialog(new JFrame(), true, id,homeForm).setVisible(true);
+                new IzmijeniRadniNalogDialog(new JFrame(), true, id, homeForm).setVisible(true);
             }
         });
         forma.getPopupMenu().add(izmijeniItem);
@@ -133,36 +132,34 @@ public class Usluge
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                   Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
-                   
-                    int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-                   
-                        
-                        DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(id);
-                        
-                        JOptionPane.showMessageDialog(new JFrame(), "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
-                            for (int i = forma.getTableRNalozi().getModel().getRowCount() - 1; i >= 0; i--) {
-                                if ((Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(i, 0).toString())) == id) {
-                                    ((DefaultTableModel) forma.getTableRNalozi().getModel()).removeRow(i);
-                                }
-                            }
-                        
+                Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
+
+                int dialogResult = JOptionPane.showConfirmDialog(new JFrame(), "Da li ste sigurni?", "Upozorenje", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+
+                    DAOFactory.getDAOFactory().getRadniNalogDAO().izbrisiRadniNalog(id);
+
+                    JOptionPane.showMessageDialog(new JFrame(), "Uspješno obrisano!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
+                    for (int i = forma.getTableRNalozi().getModel().getRowCount() - 1; i >= 0; i--) {
+                        if ((Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(i, 0).toString())) == id) {
+                            ((DefaultTableModel) forma.getTableRNalozi().getModel()).removeRow(i);
+                        }
                     }
-                    else{
-                        
-                    }
-                   
+
+                } else {
+
+                }
+
             }
         });
         forma.getPopupMenu().add(izbrisiItem);
-        
-         zatvoriNalogItem.addActionListener(new ActionListener() {
+
+        zatvoriNalogItem.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 Integer id = Integer.parseInt(forma.getTableRNalozi().getModel().getValueAt(selektovanRed, 0).toString());
-                if(DAOFactory.getDAOFactory().getRadniNalogDAO().zatvoriRadniNalog(id)){
+                if (DAOFactory.getDAOFactory().getRadniNalogDAO().zatvoriRadniNalog(id)) {
                     JOptionPane.showMessageDialog(new JFrame(), "Uspješno zatvoren radni nalog!", "Obavještenje", JOptionPane.INFORMATION_MESSAGE);
                     homeForm.getBtnPrikaziRadniNalog().doClick();
                 } else {
@@ -185,7 +182,7 @@ public class Usluge
                         int rowAtPoint = forma.getTableRNalozi().rowAtPoint(SwingUtilities.convertPoint(forma.getPopupMenu(), new Point(0, 0), forma.getTableRNalozi()));
                         selektovanRed = rowAtPoint;
                         int column = 0;
-                       //selektovanRed = forma.getTableRNalozi().getSelectedRow(); //??
+                        //selektovanRed = forma.getTableRNalozi().getSelectedRow(); //??
                         String imeKolone = forma.getTableRNalozi().getModel().getColumnName(0);
 
                         if (selektovanRed >= 0) {
@@ -242,7 +239,7 @@ public class Usluge
             public void actionPerformed(ActionEvent e) {
                 int izbor = JOptionPane.showOptionDialog(
                         new JFrame(),
-                        "Da li ste sigurni da je placeno?",
+                        "Da li ste sigurni da je plaćeno?",
                         "Da li ste sigurni?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
@@ -417,7 +414,7 @@ public class Usluge
                         new Object[]{"DA", "NE"},
                         "NE"
                 );
-                if (izbor == JOptionPane.YES_OPTION && selektovanRed>-1) {
+                if (izbor == JOptionPane.YES_OPTION && selektovanRed > -1) {
                     plati(Integer.parseInt((String) forma.getTblNeplaceneFakture().getValueAt(selektovanRed, 0)));
                 }
                 inicijalizacijaTabeleNeplacenihFaktura();
@@ -445,7 +442,6 @@ public class Usluge
             }
         });
         forma.getPopupMenu().add(fakturisiItem);*/
-
         forma.getTblNeplaceneFakture().setComponentPopupMenu(forma.getPopupMenu());
 
         forma.getPopupMenu().addPopupMenuListener(new PopupMenuListener() {
@@ -484,61 +480,61 @@ public class Usluge
             }
         });
     }
-    
-    public static void btnNefakturisanoAkcija()                                                 
-    {                                                     
+
+    public static void btnNefakturisanoAkcija() {
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         nefakturisaniRadniNalozi(lista, forma.getTblRadniNalozi());
         forma.getLblRadniNalozi().setText("Nefakturisani radni nalozi:");
     }
-    
-    public static void btnFakturisanoAkcija()                                               
-    {                                                   
+
+    public static void btnFakturisanoAkcija() {
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         fakturisaniRadniNalozi(lista, forma.getTblRadniNalozi());
         forma.getLblRadniNalozi().setText("Fakturisani radni nalozi:");
     }
-    
-    public static void btnPoIDuAkcija()                                         
-    {                                             
+
+    public static void btnNeplaceneFaktureAkcija() {
+        ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getNeplaceniRadniNalozi();
+        radniNaloziZaTabelu(lista, forma.getTblRadniNalozi());
+        forma.getLblRadniNalozi().setText("Neplaćeni radni nalozi:");
+    }
+
+    public static void btnPoIDuAkcija() {
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poIDuRadniNalozi(lista, forma.getTblRadniNalozi(), forma.getTxtID());
         forma.getLblRadniNalozi().setText("Radni nalozi:");
-    }                                        
+    }
 
-    public static void btnPoDatumuAkcija()                                            
-    {                                                
+    public static void btnPoDatumuAkcija() {
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         poDatumuRadniNalozi(lista, forma.getTblRadniNalozi(), forma.getDtmDatum());
         forma.getLblRadniNalozi().setText("Radni nalozi:");
     }
-    
-    public static void btnSviNaloziAkcija()                                            
-    {                           
+
+    public static void btnSviNaloziAkcija() {
         forma.getTxtID().setText("");
         btnPoIDuAkcija();
     }
-    
-    public static void btnPrikaziSvePredracuneAkcija()
-    {                                                        
+
+    public static void btnPrikaziSvePredracuneAkcija() {
         ArrayList<RadniNalogDTO> lista = DAOFactory.getDAOFactory().getRadniNalogDAO().getRadniNalozi();
         neplaceneFaktureZaPocetnuStranu(lista, forma.getTblNeplaceneFakture());
         if (forma.getTblNeplaceneFakture().getRowCount() > 0) {
             forma.getTblNeplaceneFakture().setRowSelectionInterval(0, 0);
         }
-    } 
-    
-    public static void btnPronadjiTerminAkcija()                                                  
-    {                                                      
+    }
+
+    public static void btnPronadjiTerminAkcija() {
         ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         Date datum = null;
         /*if (forma.getDtmDatumPretraga().getDate() == null) {
             forma.getDtmDatumPretraga().setCalendar(Calendar.getInstance());
         }*/
-        if(forma.getDtmDatumPretraga().getDate()==null)
-            datum=null;
-        else
-            datum=new Date(forma.getDtmDatumPretraga().getDate().getTime());
+        if (forma.getDtmDatumPretraga().getDate() == null) {
+            datum = null;
+        } else {
+            datum = new Date(forma.getDtmDatumPretraga().getDate().getTime());
+        }
         filtrirajTermine(
                 lista,
                 forma.getTblTermini(),
@@ -548,10 +544,9 @@ public class Usluge
                 forma.getTxtPrezimePretraga().getText(),
                 forma.getTxtBrojTelefonaPretraga().getText()
         );
-    }  
-    
-    public static void btnPonistiUnosePretragaAkcija()                                                        
-    {                                                            
+    }
+
+    public static void btnPonistiUnosePretragaAkcija() {
         forma.getTxtMarkaPretraga().setText("");
         forma.getDtmDatumPretraga().setDate(null);
         forma.getTxtImePretraga().setText("");
@@ -559,10 +554,9 @@ public class Usluge
         forma.getTxtBrojTelefonaPretraga().setText("");
         ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, forma.getTblTermini());
-    }   
-    
-    public static void btnDodajTerminAkcija()                                            
-    {                                                   
+    }
+
+    public static void btnDodajTerminAkcija() {
         if (forma.getDtmDatumTermina().getDate() == null) {
             forma.getDtmDatumTermina().setCalendar(Calendar.getInstance());
         }
@@ -579,10 +573,9 @@ public class Usluge
         ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, forma.getTblTermini());
     }
-    
-    public static void btnPonistiUnoseTerminAkcija()                
-    {                                                          
+
+    public static void btnPonistiUnoseTerminAkcija() {
         ArrayList<TerminDTO> lista = DAOFactory.getDAOFactory().getTerminDAO().sviTermini();
         terminiZaTabelu(lista, forma.getTblTermini());
-    }   
+    }
 }
