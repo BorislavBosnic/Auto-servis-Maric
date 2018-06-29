@@ -269,10 +269,11 @@ public class VoziloLogika {
 
         dijalog.getTfRegistracija().setText(vozilo.getBrojRegistracije());
         dijalog.getCbMarkaVozila().setSelectedItem(model.getMarka());
-        dijalog.getCbMarkaVozila().setSelectedItem(model.getModel());
+        dijalog.getCbModelVozila().setSelectedItem(model.getModel());
         dijalog.getTfGodiste().setText(vozilo.getGodiste().toString());
         dijalog.getTfKilovat().setText(vozilo.getKilovat().toString());
         dijalog.getTfKubikaza().setText(vozilo.getKubikaza().toString());
+        dijalog.getCbGorivo().setSelectedItem(new String(vozilo.getVrstaGoriva()));
         if (kupac.getNaziv() == null) {
             dijalog.getRbPrivatni().setSelected(true);
             dijalog.getTfVlasnikIme().setEditable(true);

@@ -120,7 +120,7 @@ public class KnjigovodstvoLogika {
         Double ukupnaCijena = ((cijena) * (1 + PDV / 100));
         tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         if(nalog.getTroskovi()>cijenaDjelova){
-            dtm.addRow(new Object[]{"0","Dodatni troškovi","0",nalog.getTroskovi()-cijenaDjelova});
+            dtm.addRow(new Object[]{"0","Dodatni troškovi","1",nalog.getTroskovi()-cijenaDjelova});
         }
         txtBezPDV.setText(String.format("%.2f", cijena));
         txtUkupno.setText(String.format("%.2f", ukupnaCijena));
